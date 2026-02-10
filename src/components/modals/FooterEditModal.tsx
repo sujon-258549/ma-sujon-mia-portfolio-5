@@ -359,18 +359,33 @@ export const FooterEditModal = ({
                           >
                             <i className="fa-solid fa-xmark text-[10px]"></i>
                           </button>
-                          <div className="flex flex-col gap-2">
-                            <Label className="text-[9px] text-slate-500 uppercase font-black">
-                              Link Name
-                            </Label>
-                            <Input
-                              value={link.name}
-                              onChange={(e) =>
-                                updateQuickLink(index, "name", e.target.value)
-                              }
-                              className="h-9 text-sm bg-black/20 border-white/5"
-                              placeholder="Link Title..."
-                            />
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="flex flex-col gap-2">
+                              <Label className="text-[9px] text-slate-500 uppercase font-black">
+                                Link Name
+                              </Label>
+                              <Input
+                                value={link.name}
+                                onChange={(e) =>
+                                  updateQuickLink(index, "name", e.target.value)
+                                }
+                                className="h-9 text-sm bg-black/20 border-white/5"
+                                placeholder="Link Title..."
+                              />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <Label className="text-[9px] text-slate-500 uppercase font-black">
+                                Link Icon (Optional)
+                              </Label>
+                              <Input
+                                value={link.icon || ""}
+                                onChange={(e) =>
+                                  updateQuickLink(index, "icon", e.target.value)
+                                }
+                                className="h-9 text-[11px] bg-black/20 border-white/5 font-mono"
+                                placeholder="fa-solid fa-link"
+                              />
+                            </div>
                           </div>
                           <div className="flex flex-col gap-2">
                             <Label className="text-[9px] text-slate-500 uppercase font-black">
@@ -480,16 +495,24 @@ export const FooterEditModal = ({
                                     e.target.value,
                                   )
                                 }
-                                className="bg-transparent border-none text-slate-300 font-bold text-sm h-7 px-0 focus-visible:ring-0"
-                                placeholder="Label (e.g. Email)"
+                                className="bg-transparent border-none text-emerald-500 font-bold text-sm h-7 px-0 focus-visible:ring-0"
+                                placeholder="e.g. Email, Phone, Address"
                               />
+                              <div className="text-[10px] text-slate-500 font-medium">
+                                {index === 0
+                                  ? "Primary Email"
+                                  : index === 1
+                                    ? "Headquarters / Location"
+                                    : `Contact Method ${index + 1}`}
+                              </div>
                             </div>
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                              <Label className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
-                                Icon Class
+                              <Label className="text-[10px] text-slate-500 uppercase tracking-widest font-bold flex items-center gap-2">
+                                <i className="fa-solid fa-icons text-emerald-500/50"></i>
+                                {item.label} Icon Class
                               </Label>
                               <Input
                                 value={item.icon}
@@ -500,8 +523,8 @@ export const FooterEditModal = ({
                                     e.target.value,
                                   )
                                 }
-                                className="bg-white/5 border-white/10 h-10 text-xs font-mono"
-                                placeholder="fa-solid fa-envelope"
+                                className="bg-white/5 border-white/10 h-10 text-xs font-mono text-emerald-400"
+                                placeholder="e.g. fa-solid fa-envelope"
                               />
                             </div>
                             <div className="space-y-2">

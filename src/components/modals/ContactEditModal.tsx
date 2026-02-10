@@ -158,12 +158,14 @@ export const ContactEditModal = ({
                       <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                         <i className={`${card.icon} text-emerald-500`}></i>
                       </div>
-                      <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                      <span className="text-[10px] text-emerald-500 uppercase font-black tracking-widest">
                         {index === 0
-                          ? "Main Contact"
-                          : index === 2
-                            ? "Location Info"
-                            : `Info Card ${index + 1}`}
+                          ? "Phone Information"
+                          : index === 1
+                            ? "Email Information"
+                            : index === 2
+                              ? "Location Information"
+                              : `Other Info ${index + 1}`}
                       </span>
                     </div>
                     <div className="space-y-3">
@@ -194,8 +196,9 @@ export const ContactEditModal = ({
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] text-slate-500 uppercase font-bold">
-                          Icon Class (FontAwesome)
+                        <Label className="text-[9px] text-slate-500 uppercase font-bold flex items-center gap-2">
+                          <i className="fa-solid fa-icons text-emerald-500/50"></i>
+                          {card.title} Icon Class
                         </Label>
                         <Input
                           value={card.icon}

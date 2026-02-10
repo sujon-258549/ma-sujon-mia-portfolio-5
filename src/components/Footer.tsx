@@ -161,7 +161,13 @@ const Footer = () => {
                     href={link.href}
                     className="text-muted-foreground hover:text-emerald-500 transition-colors text-sm cursor-pointer flex items-center gap-2 group"
                   >
-                    <span className="w-0 h-0.5 bg-emerald-500 group-hover:w-4 transition-all" />
+                    {link.icon ? (
+                      <i
+                        className={`${link.icon} text-[10px] text-emerald-500 group-hover:translate-x-1 transition-all`}
+                      />
+                    ) : (
+                      <span className="w-0 h-0.5 bg-emerald-500 group-hover:w-4 transition-all" />
+                    )}
                     {link.name}
                   </a>
                 </li>

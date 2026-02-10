@@ -57,14 +57,13 @@ const ContactSection = () => {
     >
       {/* Admin Edit Trigger */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100">
+        <div className="absolute top-8 right-8 z-30 transition-all duration-500">
           <Button
             onClick={() => setIsModalOpen(true)}
             variant="outline"
-            className="bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-full px-6 py-6 shadow-2xl backdrop-blur-md font-bold flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
+            className="w-12 h-12 bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-full shadow-2xl backdrop-blur-md flex items-center justify-center transition-all active:scale-95 cursor-pointer"
           >
-            <Settings2 className="w-5 h-5 animate-spin-slow" />
-            Edit Section
+            <i className="fa-solid fa-pen-to-square text-lg transition-transform"></i>
           </Button>
         </div>
       )}
