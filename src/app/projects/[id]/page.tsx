@@ -64,14 +64,8 @@ const mockProjects: Project[] = [
 export default function ProjectDetailsPage() {
   const params = useParams();
   const router = useRouter();
-  const [project, setProject] = useState<Project | null>(null);
-
-  useEffect(() => {
-    // Simulate fetching data based on ID
-    const found =
-      mockProjects.find((p) => p.id === params.id) || mockProjects[0];
-    setProject(found);
-  }, [params.id]);
+  const project =
+    mockProjects.find((p) => p.id === params.id) || mockProjects[0];
 
   if (!project) return null;
 

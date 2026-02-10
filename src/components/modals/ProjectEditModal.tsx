@@ -28,7 +28,6 @@ interface ProjectEditModalProps {
   onClose: () => void;
   currentData: ProjectsSectionData;
   onSave: (newData: ProjectsSectionData) => void;
-  editingProjectIndex?: number;
 }
 
 export const ProjectEditModal = ({
@@ -36,7 +35,6 @@ export const ProjectEditModal = ({
   onClose,
   currentData,
   onSave,
-  editingProjectIndex,
 }: ProjectEditModalProps) => {
   const [formData, setFormData] = useState<ProjectsSectionData>(currentData);
 
@@ -236,7 +234,7 @@ export const ProjectEditModal = ({
                     </button>
                   </div>
 
-                  <div className="p-10 border-b border-white/5 bg-linear-to-br from-emerald-500/[0.03] to-transparent">
+                  <div className="p-10 border-b border-white/5 bg-linear-to-br from-emerald-500/5 to-transparent">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                       {/* Left Side: Basic Info */}
                       <div className="lg:col-span-8 space-y-8">
