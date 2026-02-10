@@ -11,9 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Project, ProjectsSectionData } from "@/types/project";
+import { Project } from "@/types/project";
 import {
-  Plus,
   X,
   Globe,
   Github,
@@ -21,22 +20,59 @@ import {
   Rocket,
   Target,
   Code2,
+  Users,
+  Clock,
+  Plus,
+  Trash2,
+  Cpu,
+  Monitor,
+  Server,
+  Database,
+  Hammer,
 } from "lucide-react";
 
 interface ProjectEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  currentData: ProjectsSectionData;
-  onSave: (newData: ProjectsSectionData) => void;
+  project: Project | null;
+  onSave: (project: Project) => void;
+  mode: "add" | "edit";
 }
 
 export const ProjectEditModal = ({
   isOpen,
   onClose,
-  currentData,
+  project,
   onSave,
+  mode,
 }: ProjectEditModalProps) => {
-  const [formData, setFormData] = useState<ProjectsSectionData>(currentData);
+  const [formData, setFormData] = useState<Project>(() => ({
+    id: project?.id || Math.random().toString(36).substr(2, 9),
+    title: project?.title || "",
+    shortDescription: project?.shortDescription || "",
+    longDescription: project?.longDescription || "",
+    image: project?.image || "bg-gradient-to-br from-slate-900 to-slate-800",
+    thumbnail: project?.thumbnail || "",
+    tags: project?.tags || [],
+    liveUrl: project?.liveUrl || "",
+    githubUrl: project?.githubUrl || "",
+    category: project?.category || "",
+    role: project?.role || "",
+    problem: project?.problem || "",
+    plan: project?.plan || "",
+    teamMembers: project?.teamMembers || [],
+    duration: project?.duration || "",
+    features: project?.features || [],
+    technologies: project?.technologies || {
+      frontend: [],
+      backend: [],
+      database: [],
+      tools: [],
+    },
+    challenges: project?.challenges || [],
+    solutions: project?.solutions || [],
+    detailedDescriptions: project?.detailedDescriptions || [],
+  }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,522 +80,558 @@ export const ProjectEditModal = ({
     onClose();
   };
 
-  const addProject = () => {
-    const newProject: Project = {
-      id: Math.random().toString(36).substr(2, 9),
-      title: "New Project",
-      shortDescription: "Short hook for project card",
-      longDescription: "Detailed story about development process...",
-      image: "bg-gradient-to-br from-slate-900 to-slate-800",
-      thumbnail: "",
-      tags: ["React"],
-      liveUrl: "#",
-      githubUrl: "#",
-      category: "Web Development",
-      features: ["Real-time synchronization"],
-      technologies: {
-        frontend: ["React", "Tailwind"],
-        backend: ["Node.js"],
-        database: ["MongoDB"],
-      },
-      challenges: ["Scaling real-time updates"],
-      solutions: ["Optimized WebSocket handling"],
-      stats: [{ label: "Growth", value: "20%" }],
-    };
-    setFormData({
-      ...formData,
-      projects: [newProject, ...formData.projects],
-    });
-  };
-
-  const removeProject = (index: number) => {
-    const newProjects = formData.projects.filter((_, i) => i !== index);
-    setFormData({ ...formData, projects: newProjects });
-  };
-
-  const updateProject = (index: number, field: keyof Project, value: any) => {
-    const newProjects = [...formData.projects];
-    newProjects[index] = { ...newProjects[index], [field]: value };
-    setFormData({ ...formData, projects: newProjects });
-  };
-
-  const updateProjectTech = (
-    index: number,
-    techField: keyof Project["technologies"],
-    value: string[],
+  const updateField = <K extends keyof Project>(
+    field: K,
+    value: Project[K],
   ) => {
-    const newProjects = [...formData.projects];
-    newProjects[index] = {
-      ...newProjects[index],
-      technologies: { ...newProjects[index].technologies, [techField]: value },
-    };
-    setFormData({ ...formData, projects: newProjects });
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleArrayUpdate = (
-    projIdx: number,
-    field: "tags" | "features" | "challenges" | "solutions",
-    itemIdx: number,
+    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
+    index: number,
     value: string,
   ) => {
-    const newProjects = [...formData.projects];
-    const newArray = [...(newProjects[projIdx][field] as string[])];
-    newArray[itemIdx] = value;
-    newProjects[projIdx] = { ...newProjects[projIdx], [field]: newArray };
-    setFormData({ ...formData, projects: newProjects });
+    const arr = (formData[field] as string[]) || [];
+    const newArray = [...arr];
+    newArray[index] = value;
+    setFormData((prev) => ({ ...prev, [field]: newArray }));
   };
 
   const addArrayItem = (
-    projIdx: number,
-    field: "tags" | "features" | "challenges" | "solutions",
+    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
   ) => {
-    const newProjects = [...formData.projects];
-    newProjects[projIdx] = {
-      ...newProjects[projIdx],
-      [field]: [...(newProjects[projIdx][field] as string[]), ""],
-    };
-    setFormData({ ...formData, projects: newProjects });
+    const arr = (formData[field] as string[]) || [];
+    setFormData((prev) => ({
+      ...prev,
+      [field]: [...arr, ""],
+    }));
   };
 
   const removeArrayItem = (
-    projIdx: number,
-    field: "tags" | "features" | "challenges" | "solutions",
-    itemIdx: number,
+    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
+    index: number,
   ) => {
-    const newProjects = [...formData.projects];
-    newProjects[projIdx] = {
-      ...newProjects[projIdx],
-      [field]: (newProjects[projIdx][field] as string[]).filter(
-        (_, i) => i !== itemIdx,
+    const arr = (formData[field] as string[]) || [];
+    setFormData((prev) => ({
+      ...prev,
+      [field]: arr.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleTechUpdate = (
+    category: "frontend" | "backend" | "database" | "tools",
+    index: number,
+    value: string,
+  ) => {
+    const tech = { ...formData.technologies };
+    const arr = [...(tech[category] || [])];
+    arr[index] = value;
+    tech[category] = arr;
+    setFormData((prev) => ({ ...prev, technologies: tech }));
+  };
+
+  const addTechItem = (
+    category: "frontend" | "backend" | "database" | "tools",
+  ) => {
+    const tech = { ...formData.technologies };
+    tech[category] = [...(tech[category] || []), ""];
+    setFormData((prev) => ({ ...prev, technologies: tech }));
+  };
+
+  const removeTechItem = (
+    category: "frontend" | "backend" | "database" | "tools",
+    index: number,
+  ) => {
+    const tech = { ...formData.technologies };
+    tech[category] = (tech[category] || []).filter((_, i) => i !== index);
+    setFormData((prev) => ({ ...prev, technologies: tech }));
+  };
+
+  const updateDetailedDesc = (
+    index: number,
+    field: "title" | "content",
+    value: string,
+  ) => {
+    const newDescs = [...(formData.detailedDescriptions || [])];
+    newDescs[index] = { ...newDescs[index], [field]: value };
+    setFormData((prev) => ({ ...prev, detailedDescriptions: newDescs }));
+  };
+
+  const addDetailedDesc = () => {
+    setFormData((prev) => ({
+      ...prev,
+      detailedDescriptions: [
+        ...(prev.detailedDescriptions || []),
+        { title: "", content: "" },
+      ],
+    }));
+  };
+
+  const removeDetailedDesc = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      detailedDescriptions: (prev.detailedDescriptions || []).filter(
+        (_, i) => i !== index,
       ),
-    };
-    setFormData({ ...formData, projects: newProjects });
+    }));
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[95vw] w-[98vw] h-[95vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none">
-        <DialogHeader className="p-6 pb-4 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
-          <div className="flex items-center justify-between gap-4">
-            <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
-              <Code2 className="w-6 h-6" />
-              Project Portfolio Manager
-            </DialogTitle>
-            <Button
-              onClick={addProject}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-6 h-10 rounded-lg cursor-pointer transition-all active:scale-95 shadow-lg shadow-emerald-500/20"
-            >
-              <Plus className="w-4 h-4 mr-2" /> New Project
-            </Button>
-          </div>
+        <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
+          <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
+            <Code2 className="w-6 h-6" />
+            {mode === "edit" ? "Update Project Details" : "Add New Project"}
+          </DialogTitle>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
-          <form onSubmit={handleSubmit} className="py-8 space-y-12 pb-24">
-            {/* SECTION HEADER SETTINGS */}
-            <div className="bg-[#121A1C] border border-white/5 rounded-3xl p-8 space-y-8 shadow-2xl">
-              <div className="flex items-center gap-3 text-emerald-500 font-bold uppercase text-xs tracking-[0.3em]">
-                <Rocket className="w-5 h-5 animate-pulse" />
-                <span>Section Presentation</span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div className="space-y-3">
-                  <Label className="text-slate-500 uppercase text-[10px] tracking-widest font-black">
-                    Badge Text
-                  </Label>
-                  <Input
-                    value={formData.badge}
-                    onChange={(e) =>
-                      setFormData({ ...formData, badge: e.target.value })
-                    }
-                    className="bg-white/5 border-white/10 text-white h-12 focus:border-emerald-500/50"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <Label className="text-slate-500 uppercase text-[10px] tracking-widest font-black">
-                    Icon Class
-                  </Label>
-                  <Input
-                    value={formData.badgeIcon}
-                    onChange={(e) =>
-                      setFormData({ ...formData, badgeIcon: e.target.value })
-                    }
-                    className="bg-white/5 border-white/10 text-emerald-400 font-mono h-12"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <Label className="text-slate-500 uppercase text-[10px] tracking-widest font-black">
-                    Main Title
-                  </Label>
-                  <Input
-                    value={formData.title}
-                    onChange={(e) =>
-                      setFormData({ ...formData, title: e.target.value })
-                    }
-                    className="bg-white/5 border-white/10 text-white h-12"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <Label className="text-slate-500 uppercase text-[10px] tracking-widest font-black">
-                    Highlight Word
-                  </Label>
-                  <Input
-                    value={formData.titleHighlight}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        titleHighlight: e.target.value,
-                      })
-                    }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-bold h-12"
-                  />
-                </div>
-              </div>
-            </div>
+          <form onSubmit={handleSubmit} className="py-8 space-y-10 pb-24">
+            <div className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden shadow-2xl">
+              <div className="p-8 border-b border-white/5 bg-linear-to-br from-emerald-500/5 to-transparent">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                  <div className="lg:col-span-8 space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Project Name
+                        </Label>
+                        <Input
+                          value={formData.title}
+                          onChange={(e) => updateField("title", e.target.value)}
+                          className="bg-black/40 border-white/5 text-xl font-bold text-white h-14 rounded-lg"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Category
+                        </Label>
+                        <Input
+                          value={formData.category}
+                          onChange={(e) =>
+                            updateField("category", e.target.value)
+                          }
+                          className="bg-black/40 border-white/5 text-emerald-500 font-bold h-14 rounded-lg"
+                        />
+                      </div>
+                    </div>
 
-            {/* PROJECTS LIST */}
-            <div className="space-y-12">
-              {formData.projects.map((project, projIdx) => (
-                <div
-                  key={projIdx}
-                  className="bg-[#121A1C] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl relative group/card hover:border-emerald-500/20 transition-all duration-500"
-                >
-                  <div className="absolute top-6 right-6 flex gap-2 z-10">
-                    <button
-                      type="button"
-                      onClick={() => removeProject(projIdx)}
-                      className="w-12 h-12 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-2xl flex items-center justify-center transition-all cursor-pointer shadow-lg"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-
-                  <div className="p-10 border-b border-white/5 bg-linear-to-br from-emerald-500/5 to-transparent">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                      {/* Left Side: Basic Info */}
-                      <div className="lg:col-span-8 space-y-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="space-y-3">
-                            <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                              Project Name
-                            </Label>
-                            <Input
-                              value={project.title}
-                              onChange={(e) =>
-                                updateProject(projIdx, "title", e.target.value)
-                              }
-                              className="bg-black/40 border-white/5 text-xl font-bold text-white h-14 rounded-2xl focus:border-emerald-500/30"
-                            />
-                          </div>
-                          <div className="space-y-3">
-                            <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                              Category
-                            </Label>
-                            <Input
-                              value={project.category}
-                              onChange={(e) =>
-                                updateProject(
-                                  projIdx,
-                                  "category",
-                                  e.target.value,
-                                )
-                              }
-                              className="bg-black/40 border-white/5 text-emerald-500 font-bold h-14 rounded-2xl"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="space-y-3">
-                          <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                            Short Hook/Subtitle
-                          </Label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Duration
+                        </Label>
+                        <div className="relative">
+                          <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-500" />
                           <Input
-                            value={project.shortDescription}
+                            value={formData.duration}
                             onChange={(e) =>
-                              updateProject(
-                                projIdx,
-                                "shortDescription",
-                                e.target.value,
-                              )
+                              updateField("duration", e.target.value)
                             }
-                            className="bg-black/40 border-white/5 text-slate-300 h-14 rounded-2xl"
-                            placeholder="A brief catchy line for the card..."
-                          />
-                        </div>
-
-                        <div className="space-y-3">
-                          <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                            Full Project Story (For Details Page)
-                          </Label>
-                          <Textarea
-                            value={project.longDescription}
-                            onChange={(e) =>
-                              updateProject(
-                                projIdx,
-                                "longDescription",
-                                e.target.value,
-                              )
-                            }
-                            className="bg-black/40 border-white/5 text-slate-400 resize-none h-40 rounded-3xl p-6 leading-relaxed"
-                            placeholder="Write about the project's inception, development, and results..."
+                            className="bg-black/40 border-white/5 pl-12 h-14 rounded-lg"
+                            placeholder="e.g. 3 Months"
                           />
                         </div>
                       </div>
-
-                      {/* Right Side: Links & Media */}
-                      <div className="lg:col-span-4 space-y-6">
-                        <div className="bg-black/40 p-6 rounded-[2rem] border border-white/5 space-y-6">
-                          <div className="space-y-3">
-                            <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                              <Globe className="w-3 h-3" /> Live Demo URL
-                            </Label>
-                            <Input
-                              value={project.liveUrl}
-                              onChange={(e) =>
-                                updateProject(
-                                  projIdx,
-                                  "liveUrl",
-                                  e.target.value,
-                                )
-                              }
-                              className="bg-white/5 border-white/5 text-sky-400 h-11 rounded-xl font-mono text-sm"
-                            />
-                          </div>
-                          <div className="space-y-3">
-                            <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                              <Github className="w-3 h-3" /> Github Repository
-                            </Label>
-                            <Input
-                              value={project.githubUrl}
-                              onChange={(e) =>
-                                updateProject(
-                                  projIdx,
-                                  "githubUrl",
-                                  e.target.value,
-                                )
-                              }
-                              className="bg-white/5 border-white/5 text-slate-400 h-11 rounded-xl font-mono text-sm"
-                            />
-                          </div>
-                          <div className="space-y-3">
-                            <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                              Cover Gradient/Image Class
-                            </Label>
-                            <Input
-                              value={project.image}
-                              onChange={(e) =>
-                                updateProject(projIdx, "image", e.target.value)
-                              }
-                              className="bg-white/5 border-white/5 text-emerald-400 h-11 rounded-xl font-mono text-sm"
-                            />
-                          </div>
-                        </div>
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Role
+                        </Label>
+                        <Input
+                          value={formData.role || ""}
+                          onChange={(e) => updateField("role", e.target.value)}
+                          className="bg-black/40 border-white/5 text-sky-400 h-14 rounded-lg"
+                          placeholder="e.g. Lead Designer"
+                        />
                       </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        Problem Statement
+                      </Label>
+                      <Textarea
+                        value={formData.problem}
+                        onChange={(e) => updateField("problem", e.target.value)}
+                        className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                      />
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        Project Plan
+                      </Label>
+                      <Textarea
+                        value={formData.plan}
+                        onChange={(e) => updateField("plan", e.target.value)}
+                        className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                      />
                     </div>
                   </div>
 
-                  {/* ARRAY SECTIONS (TAGS, FEATURES, CHALLENGES) */}
-                  <div className="p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 bg-[#0E1416]/30">
-                    {/* Project Tags */}
-                    <div className="space-y-6">
+                  <div className="lg:col-span-4 space-y-6">
+                    <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-6">
+                      <div className="space-y-3">
+                        <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          <Globe className="w-3 h-3" /> Live Demo
+                        </Label>
+                        <Input
+                          value={formData.liveUrl}
+                          onChange={(e) =>
+                            updateField("liveUrl", e.target.value)
+                          }
+                          className="bg-white/5 border-white/5 text-sky-400 font-mono"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          <Github className="w-3 h-3" /> Code Link
+                        </Label>
+                        <Input
+                          value={formData.githubUrl}
+                          onChange={(e) =>
+                            updateField("githubUrl", e.target.value)
+                          }
+                          className="bg-white/5 border-white/5 text-slate-400 font-mono"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Cover Class
+                        </Label>
+                        <Input
+                          value={formData.image}
+                          onChange={(e) => updateField("image", e.target.value)}
+                          className="bg-white/5 border-white/5 text-emerald-400 font-mono"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-4">
                       <div className="flex items-center justify-between">
-                        <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[11px] tracking-widest">
-                          <Layers className="w-4 h-4" /> Card Tags
+                        <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[10px] tracking-widest">
+                          <Users className="w-4 h-4" /> Team Members
                         </Label>
                         <Button
                           type="button"
-                          onClick={() => addArrayItem(projIdx, "tags")}
-                          className="h-8 bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white px-3 text-[10px] font-bold rounded-lg cursor-pointer"
+                          onClick={() => addArrayItem("teamMembers")}
+                          size="sm"
+                          variant="ghost"
+                          className="h-7 text-emerald-500 hover:text-white hover:bg-emerald-500 text-[10px]"
                         >
-                          Add Tag
+                          + Add
                         </Button>
                       </div>
-                      <div className="flex flex-wrap gap-2 p-4 bg-white/5 rounded-3xl border border-white/5 min-h-[100px]">
-                        {project.tags.map((tag, tagIdx) => (
-                          <div key={tagIdx} className="relative group/idx">
+                      <div className="space-y-2">
+                        {formData.teamMembers?.map((m, i) => (
+                          <div key={i} className="flex gap-2">
                             <Input
-                              value={tag}
+                              value={m}
                               onChange={(e) =>
                                 handleArrayUpdate(
-                                  projIdx,
-                                  "tags",
-                                  tagIdx,
+                                  "teamMembers",
+                                  i,
                                   e.target.value,
                                 )
                               }
-                              className="bg-black/40 border-white/10 text-[10px] w-24 h-8 rounded-full pr-6 text-center"
-                            />
-                            <button
-                              type="button"
-                              onClick={() =>
-                                removeArrayItem(projIdx, "tags", tagIdx)
-                              }
-                              className="absolute top-1/2 -right-1 -translate-y-1/2 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/idx:opacity-100 transition-opacity cursor-pointer z-10"
-                            >
-                              <X className="w-2 h-2" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Key Features */}
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <Label className="flex items-center gap-2 text-sky-500 font-black uppercase text-[11px] tracking-widest">
-                          <Rocket className="w-4 h-4" /> Core Features
-                        </Label>
-                        <button
-                          type="button"
-                          onClick={() => addArrayItem(projIdx, "features")}
-                          className="text-[10px] font-bold text-sky-500 hover:underline cursor-pointer"
-                        >
-                          + Add Feature
-                        </button>
-                      </div>
-                      <div className="space-y-3">
-                        {project.features.map((feat, featIdx) => (
-                          <div key={featIdx} className="flex gap-2 group/item">
-                            <Input
-                              value={feat}
-                              onChange={(e) =>
-                                handleArrayUpdate(
-                                  projIdx,
-                                  "features",
-                                  featIdx,
-                                  e.target.value,
-                                )
-                              }
-                              className="bg-white/5 border-white/5 text-xs h-10 rounded-xl"
+                              className="bg-white/5 border-white/5 h-9 text-xs"
                             />
                             <Button
                               type="button"
-                              onClick={() =>
-                                removeArrayItem(projIdx, "features", featIdx)
-                              }
+                              onClick={() => removeArrayItem("teamMembers", i)}
+                              size="sm"
                               variant="ghost"
-                              className="h-10 w-10 p-0 text-red-500/50 hover:text-red-500 hover:bg-red-500/10 cursor-pointer"
+                              className="h-9 w-9 p-0 text-red-500 hover:bg-red-500/10"
                             >
-                              <X className="w-4 h-4" />
+                              <Trash2 className="w-4 h-4" />
                             </Button>
                           </div>
                         ))}
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
 
-                    {/* Challenges & Solutions */}
-                    <div className="space-y-6">
-                      <Label className="flex items-center gap-2 text-amber-500 font-black uppercase text-[11px] tracking-widest">
-                        <Target className="w-4 h-4" /> Logic & Challenges
-                      </Label>
-                      <div className="space-y-6">
-                        <div className="bg-white/5 p-5 rounded-3xl border border-white/5">
-                          <div className="flex justify-between items-center mb-3">
-                            <span className="text-[10px] uppercase font-bold text-slate-500">
-                              Challenges
-                            </span>
-                            <button
-                              onClick={() =>
-                                addArrayItem(projIdx, "challenges")
+              {/* Technologies Section - Many Options */}
+              <div className="p-8 border-b border-white/5 bg-black/10">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-10 w-1 bg-emerald-500 rounded-full" />
+                  <h3 className="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
+                    <Cpu className="w-5 h-5 text-emerald-500" />
+                    Project Technologies
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[
+                    {
+                      id: "frontend",
+                      icon: Monitor,
+                      label: "Frontend",
+                      color: "sky",
+                    },
+                    {
+                      id: "backend",
+                      icon: Server,
+                      label: "Backend",
+                      color: "emerald",
+                    },
+                    {
+                      id: "database",
+                      icon: Database,
+                      label: "Database",
+                      color: "amber",
+                    },
+                    {
+                      id: "tools",
+                      icon: Hammer,
+                      label: "Tools",
+                      color: "rose",
+                    },
+                  ].map((cat) => (
+                    <div
+                      key={cat.id}
+                      className="bg-black/30 p-5 rounded-lg border border-white/5 space-y-4"
+                    >
+                      <div className="flex items-center justify-between">
+                        <Label
+                          className={`flex items-center gap-2 text-${cat.color}-500 font-black uppercase text-[10px] tracking-widest`}
+                        >
+                          <cat.icon className="w-4 h-4" />
+                          {cat.label}
+                        </Label>
+                        <Button
+                          type="button"
+                          onClick={() => addTechItem(cat.id as any)}
+                          size="sm"
+                          variant="ghost"
+                          className={`h-6 text-${cat.color}-500 hover:text-white hover:bg-${cat.color}-500 text-[10px] px-2`}
+                        >
+                          + Add
+                        </Button>
+                      </div>
+                      <div className="space-y-2">
+                        {formData.technologies[
+                          cat.id as keyof typeof formData.technologies
+                        ]?.map((item, idx) => (
+                          <div key={idx} className="flex gap-2 group/tech">
+                            <Input
+                              value={item}
+                              onChange={(e) =>
+                                handleTechUpdate(
+                                  cat.id as any,
+                                  idx,
+                                  e.target.value,
+                                )
                               }
+                              className="bg-white/5 border-white/5 h-8 text-[10px]"
+                              placeholder={`${cat.label} item...`}
+                            />
+                            <Button
                               type="button"
-                              className="text-amber-500 text-[10px] hover:underline cursor-pointer"
+                              onClick={() => removeTechItem(cat.id as any, idx)}
+                              size="sm"
+                              variant="ghost"
+                              className="h-8 w-8 p-0 text-red-500/30 group-hover/tech:text-red-500"
                             >
-                              + Add
-                            </button>
+                              <X className="w-3 h-3" />
+                            </Button>
                           </div>
-                          <div className="space-y-2">
-                            {project.challenges?.map((c, i) => (
-                              <div key={i} className="flex gap-2">
-                                <Input
-                                  value={c}
-                                  onChange={(e) =>
-                                    handleArrayUpdate(
-                                      projIdx,
-                                      "challenges",
-                                      i,
-                                      e.target.value,
-                                    )
-                                  }
-                                  className="bg-black/20 h-8 text-[11px] border-white/5"
-                                />
-                                <button
-                                  onClick={() =>
-                                    removeArrayItem(projIdx, "challenges", i)
-                                  }
-                                  type="button"
-                                  className="text-red-500/50 cursor-pointer hover:text-red-500"
-                                >
-                                  x
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-                        <div className="bg-white/5 p-5 rounded-3xl border border-white/5">
-                          <div className="flex justify-between items-center mb-3">
-                            <span className="text-[10px] uppercase font-bold text-emerald-500">
-                              Solutions
-                            </span>
-                            <button
-                              onClick={() => addArrayItem(projIdx, "solutions")}
-                              type="button"
-                              className="text-emerald-500 text-[10px] hover:underline cursor-pointer"
-                            >
-                              + Add
-                            </button>
-                          </div>
-                          <div className="space-y-2">
-                            {project.solutions?.map((s, i) => (
-                              <div key={i} className="flex gap-2">
-                                <Input
-                                  value={s}
-                                  onChange={(e) =>
-                                    handleArrayUpdate(
-                                      projIdx,
-                                      "solutions",
-                                      i,
-                                      e.target.value,
-                                    )
-                                  }
-                                  className="bg-black/20 h-8 text-[11px] border-white/5"
-                                />
-                                <button
-                                  onClick={() =>
-                                    removeArrayItem(projIdx, "solutions", i)
-                                  }
-                                  type="button"
-                                  className="text-red-500/50 cursor-pointer hover:text-red-500"
-                                >
-                                  x
-                                </button>
-                              </div>
-                            ))}
-                          </div>
+              <div className="p-8 space-y-12">
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <Label className="flex items-center gap-2 text-sky-500 font-black uppercase text-[12px] tracking-widest">
+                      <Rocket className="w-5 h-5" /> Detailed Descriptions
+                      (Multi-Add)
+                    </Label>
+                    <Button
+                      type="button"
+                      onClick={addDetailedDesc}
+                      className="bg-sky-500/10 text-sky-500 hover:bg-sky-500 hover:text-white rounded-lg px-6"
+                    >
+                      + Add Section
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {formData.detailedDescriptions?.map((desc, i) => (
+                      <div
+                        key={i}
+                        className="bg-black/30 p-6 rounded-lg border border-white/5 relative group"
+                      >
+                        <Button
+                          type="button"
+                          onClick={() => removeDetailedDesc(i)}
+                          variant="ghost"
+                          className="absolute top-4 right-4 text-red-500/50 hover:text-red-500"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                        <div className="space-y-4">
+                          <Input
+                            value={desc.title}
+                            onChange={(e) =>
+                              updateDetailedDesc(i, "title", e.target.value)
+                            }
+                            placeholder="Section Title..."
+                            className="bg-white/5 border-white/5 font-bold"
+                          />
+                          <Textarea
+                            value={desc.content}
+                            onChange={(e) =>
+                              updateDetailedDesc(i, "content", e.target.value)
+                            }
+                            placeholder="Enter details..."
+                            className="bg-white/5 border-white/5 min-h-[120px]"
+                          />
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between">
+                      <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[10px] tracking-widest">
+                        <Layers className="w-4 h-4" /> Tech Tags
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={() => addArrayItem("tags")}
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 text-emerald-500"
+                      >
+                        + Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2 p-4 bg-black/20 rounded-lg border border-white/5 min-h-[120px]">
+                      {formData.tags.map((tag, idx) => (
+                        <div key={idx} className="relative group/tag">
+                          <Input
+                            value={tag}
+                            onChange={(e) =>
+                              handleArrayUpdate("tags", idx, e.target.value)
+                            }
+                            className="bg-white/5 border-white/10 text-[10px] w-20 h-7 rounded-full text-center pr-6"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeArrayItem("tags", idx)}
+                            className="absolute right-1 top-1/2 -translate-y-1/2 text-red-500 opacity-0 group-hover/tag:opacity-100 transition-opacity"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between">
+                      <Label className="flex items-center gap-2 text-amber-500 font-black uppercase text-[10px] tracking-widest">
+                        <Target className="w-4 h-4" /> Logic & Challenges
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={() => addArrayItem("challenges")}
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 text-amber-500"
+                      >
+                        + Add
+                      </Button>
+                    </div>
+                    <div className="space-y-3">
+                      {formData.challenges?.map((c, i) => (
+                        <div key={i} className="flex gap-2">
+                          <Input
+                            value={c}
+                            onChange={(e) =>
+                              handleArrayUpdate("challenges", i, e.target.value)
+                            }
+                            className="bg-black/20 text-xs border-white/5"
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => removeArrayItem("challenges", i)}
+                            size="sm"
+                            variant="ghost"
+                            className="text-red-500/50 hover:text-red-500"
+                          >
+                            x
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between">
+                      <Label className="flex items-center gap-2 text-sky-500 font-black uppercase text-[10px] tracking-widest">
+                        <Rocket className="w-4 h-4" /> Features
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={() => addArrayItem("features")}
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 text-sky-500"
+                      >
+                        + Add
+                      </Button>
+                    </div>
+                    <div className="space-y-3">
+                      {formData.features.map((f, i) => (
+                        <div key={i} className="flex gap-2">
+                          <Input
+                            value={f}
+                            onChange={(e) =>
+                              handleArrayUpdate("features", i, e.target.value)
+                            }
+                            className="bg-black/20 text-xs border-white/5"
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => removeArrayItem("features", i)}
+                            size="sm"
+                            variant="ghost"
+                            className="text-red-500/50 hover:text-red-500"
+                          >
+                            x
+                          </Button>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
 
-            {/* MODAL FOOTER - Consistent With Previous Modals */}
-            <div className="mt-12 p-8 border-t border-white/5 flex flex-col sm:flex-row justify-end gap-3 pb-12">
+            <div className="flex justify-end gap-3 pt-6 border-t border-white/5">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-xl font-semibold transition-all cursor-pointer"
+                className="px-8 h-12 rounded-lg font-bold border-white/10"
               >
                 Discard
               </Button>
               <Button
-                onClick={handleSubmit}
-                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-xl font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
+                type="submit"
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-12 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95"
               >
-                Save All Projects
+                {mode === "edit" ? "Update Project" : "Create Project"}
               </Button>
             </div>
           </form>

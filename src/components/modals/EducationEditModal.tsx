@@ -13,14 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { EducationItem, EducationSectionData } from "@/types/education";
-import {
-  Plus,
-  X,
-  GraduationCap,
-  Award,
-  BookOpen,
-  TrendingUp,
-} from "lucide-react";
+import { Plus, X, Award, BookOpen, TrendingUp } from "lucide-react";
 
 interface EducationEditModalProps {
   isOpen: boolean;
@@ -67,10 +60,10 @@ export const EducationEditModal = ({
     setFormData({ ...formData, education: newItems });
   };
 
-  const updateEducation = (
+  const updateEducation = <K extends keyof EducationItem>(
     index: number,
-    field: keyof EducationItem,
-    value: any,
+    field: K,
+    value: EducationItem[K],
   ) => {
     const newItems = [...formData.education];
     newItems[index] = { ...newItems[index], [field]: value };
@@ -133,7 +126,7 @@ export const EducationEditModal = ({
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
           <form onSubmit={handleSubmit} className="py-8 space-y-12 pb-24">
             {/* --- SECTION HEADER --- */}
-            <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl">
+            <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl">
               <div className="flex items-center gap-2 mb-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
                 <TrendingUp className="w-4 h-4" />
                 <span>Section Information</span>
@@ -207,7 +200,7 @@ export const EducationEditModal = ({
               {formData.education.map((edu, eduIdx) => (
                 <div
                   key={eduIdx}
-                  className={`bg-[#121A1C] border ${edu.isMain ? "border-emerald-500/30" : "border-white/5"} rounded-3xl overflow-hidden shadow-2xl relative group/card`}
+                  className={`bg-[#121A1C] border ${edu.isMain ? "border-emerald-500/30" : "border-white/5"} rounded-lg overflow-hidden shadow-2xl relative group/card`}
                 >
                   <button
                     type="button"
@@ -244,14 +237,27 @@ export const EducationEditModal = ({
                               e.target.value,
                             )
                           }
-                          className="bg-black/20 border-white/5 text-emerald-500 font-bold h-11"
+                          className="bg-black/20 border-white/5 text-emerald-500 font-bold h-11 rounded-lg"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black">
+                          Major / Department
+                        </Label>
+                        <Input
+                          value={edu.location}
+                          onChange={(e) =>
+                            updateEducation(eduIdx, "location", e.target.value)
+                          }
+                          className="bg-black/20 border-white/5 text-sky-400 font-bold h-11 rounded-lg"
+                          placeholder="e.g. Computer Science"
                         />
                       </div>
                       <div className="space-y-4 flex flex-col justify-end">
                         <div className="flex items-center gap-3 bg-black/40 p-3 rounded-lg border border-white/5 h-11">
                           <Switch
                             checked={edu.isMain}
-                            onCheckedChange={(val) =>
+                            onCheckedChange={(val: boolean) =>
                               updateEducation(eduIdx, "isMain", val)
                             }
                             className="data-[state=checked]:bg-emerald-500"
@@ -319,7 +325,7 @@ export const EducationEditModal = ({
                         onChange={(e) =>
                           updateEducation(eduIdx, "description", e.target.value)
                         }
-                        className="bg-black/20 border-white/5 text-slate-300 resize-none h-20"
+                        className="bg-black/20 border-white/5 text-slate-300 resize-none h-20 rounded-lg"
                       />
                     </div>
                   </div>
@@ -391,7 +397,7 @@ export const EducationEditModal = ({
                           <Plus className="w-3 h-3 mr-1" /> Add Course
                         </Button>
                       </div>
-                      <div className="flex flex-wrap gap-2 p-4 bg-white/5 rounded-2xl border border-white/5">
+                      <div className="flex flex-wrap gap-2 p-4 bg-white/5 rounded-lg border border-white/5">
                         {edu.courses.map((item, idx) => (
                           <div key={idx} className="relative group/course">
                             <Input
@@ -429,13 +435,13 @@ export const EducationEditModal = ({
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-xl font-semibold transition-all cursor-pointer"
+                className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-lg font-semibold transition-all cursor-pointer"
               >
                 Discard
               </Button>
               <Button
                 onClick={handleSubmit}
-                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-xl font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
               >
                 Save Education
               </Button>

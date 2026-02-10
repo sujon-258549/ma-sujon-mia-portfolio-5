@@ -9,6 +9,11 @@ export interface Project {
   liveUrl: string;
   githubUrl: string;
   category: string;
+  role?: string;
+  problem?: string;
+  plan?: string;
+  teamMembers?: string[];
+  duration?: string;
   features: string[];
   technologies: {
     frontend?: string[];
@@ -22,6 +27,10 @@ export interface Project {
   stats?: {
     label: string;
     value: string;
+  }[];
+  detailedDescriptions?: {
+    title: string;
+    content: string;
   }[];
 }
 

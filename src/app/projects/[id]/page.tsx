@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { Project } from "@/types/project";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";

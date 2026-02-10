@@ -61,10 +61,10 @@ export const ExperienceEditModal = ({
     setFormData({ ...formData, experiences: newExps });
   };
 
-  const updateExperience = (
+  const updateExperience = <K extends keyof Experience>(
     index: number,
-    field: keyof Experience,
-    value: any,
+    field: K,
+    value: Experience[K],
   ) => {
     const newExps = [...formData.experiences];
     newExps[index] = { ...newExps[index], [field]: value };
@@ -130,7 +130,7 @@ export const ExperienceEditModal = ({
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
           <form onSubmit={handleSubmit} className="py-8 space-y-12">
             {/* --- SECTION HEADER --- */}
-            <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl">
+            <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl">
               <div className="flex items-center gap-2 mb-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
                 <TrendingUp className="w-4 h-4" />
                 <span>Section Information</span>
@@ -205,7 +205,7 @@ export const ExperienceEditModal = ({
               {formData.experiences.map((exp, expIdx) => (
                 <div
                   key={expIdx}
-                  className="bg-[#121A1C] border border-white/5 rounded-3xl overflow-hidden shadow-2xl relative group/card"
+                  className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden shadow-2xl relative group/card"
                 >
                   <button
                     type="button"
@@ -291,7 +291,7 @@ export const ExperienceEditModal = ({
                       </div>
                       <div className="space-y-2">
                         <Label className="text-[10px] text-slate-500 uppercase font-black">
-                          Company Type
+                          Industry / Sector
                         </Label>
                         <Input
                           value={exp.companyType}
@@ -302,7 +302,7 @@ export const ExperienceEditModal = ({
                               e.target.value,
                             )
                           }
-                          className="bg-black/20 border-white/5 text-slate-400 h-11"
+                          className="bg-black/20 border-white/5 text-slate-400 h-11 rounded-lg"
                         />
                       </div>
                     </div>
@@ -319,7 +319,7 @@ export const ExperienceEditModal = ({
                             e.target.value,
                           )
                         }
-                        className="bg-black/20 border-white/5 text-slate-300 resize-none h-20"
+                        className="bg-black/20 border-white/5 text-slate-300 resize-none h-20 rounded-lg"
                       />
                     </div>
                   </div>
@@ -440,7 +440,7 @@ export const ExperienceEditModal = ({
                           <Plus className="w-3 h-3 mr-1" /> Add Tech
                         </Button>
                       </div>
-                      <div className="flex flex-wrap gap-3 p-4 bg-white/5 rounded-2xl border border-white/5">
+                      <div className="flex flex-wrap gap-3 p-4 bg-white/5 rounded-lg border border-white/5">
                         {exp.technologies.map((item, idx) => (
                           <div key={idx} className="relative group/tech">
                             <Input
@@ -479,13 +479,13 @@ export const ExperienceEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-xl font-semibold transition-all cursor-pointer"
+              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-lg font-semibold transition-all cursor-pointer"
             >
               Discard Changes
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-xl font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
             >
               Publish Experience
             </Button>
