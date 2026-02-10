@@ -17,11 +17,6 @@ import {
   Plus,
   Trash2,
   Settings2,
-  Code2,
-  Rocket,
-  Globe,
-  Briefcase,
-  Layout,
   User,
   Info,
   Type,
@@ -85,12 +80,18 @@ export const AboutEditModal = ({
   };
 
   const renderIcon = (iconName: string) => {
-    const IconComponent = (LucideIcons as any)[iconName];
-    return IconComponent ? (
-      <IconComponent className="w-4 h-4" />
-    ) : (
-      <Info className="w-4 h-4" />
-    );
+    // Type guard to safely access icon components from lucide-react
+    const icons = LucideIcons as Record<string, unknown>;
+    const IconComponent = icons[iconName];
+
+    // Check if it exists and is a valid component
+    if (IconComponent && typeof IconComponent === "function") {
+      const Icon = IconComponent as React.ComponentType<{ className?: string }>;
+      return <Icon className="w-4 h-4" />;
+    }
+
+    // Fallback to Info icon
+    return <Info className="w-4 h-4" />;
   };
 
   return (
@@ -197,6 +198,19 @@ export const AboutEditModal = ({
                     setFormData({ ...formData, role: e.target.value })
                   }
                   className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
+                  Profile Image URL
+                </Label>
+                <Input
+                  value={formData.image}
+                  onChange={(e) =>
+                    setFormData({ ...formData, image: e.target.value })
+                  }
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  placeholder="https://example.com/image.png"
                 />
               </div>
             </div>

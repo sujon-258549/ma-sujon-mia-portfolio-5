@@ -1,7 +1,7 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import * as LucideIcons from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
@@ -23,6 +23,7 @@ const AboutSection = () => {
     ],
     name: "Sujon Ahmed",
     role: "Full Stack Developer",
+    image: "https://i.ibb.co.com/sdBh779Q/image.png",
     highlights: [
       {
         title: "Full Stack Development",
@@ -86,29 +87,59 @@ const AboutSection = () => {
               className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
               title="Edit About Section"
             >
-               <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+              <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
             </Button>
           </div>
         )}
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-          {/* Left Side: Image & Stats Bottom */}
+          {/* Left Side: Image & Hover Content */}
           <div className="w-full lg:w-5/12 sticky top-24">
-            <div className="relative aspect-square max-w-sm mx-auto mb-8">
+            <div className="relative aspect-[4/5] max-w-sm mx-auto mb-8 group cursor-pointer">
               {/* Main Image Container */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-emerald-500/10 via-card to-[#121A1C] shadow-2xl flex items-center justify-center group">
-                <div className="relative z-10 text-center transition-transform duration-500 group-hover:scale-110">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
-                    {renderIcon("User", "w-12 h-12 text-emerald-500")}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 bg-[#1A2426] shadow-2xl">
+                {/* Profile Image */}
+                <Image
+                  src={aboutData.image}
+                  alt={aboutData.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                />
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C] via-emerald-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 transform translate-y-4 group-hover:translate-y-0 text-center">
+                  <div className="mb-4 transform -translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
+                    <h3 className="text-2xl font-bold text-white mb-1">
+                      {aboutData.name}
+                    </h3>
+                    <p className="text-emerald-500 font-medium text-sm tracking-widest uppercase">
+                      {aboutData.role}
+                    </p>
                   </div>
-                  <p className="text-emerald-500 font-bold tracking-widest text-sm uppercase">
-                    {aboutData.name}
+
+                  <div className="h-px w-12 bg-emerald-500/50 mx-auto mb-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-200" />
+
+                  <p className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-300">
+                    {aboutData.title} {aboutData.titleHighlight}
                   </p>
+
+                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-400">
+                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
+                      Innovation
+                    </span>
+                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
+                      Precision
+                    </span>
+                  </div>
                 </div>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.08),transparent_70%)]" />
+
+                {/* Decorative gradients */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent pointer-events-none" />
               </div>
+
               {/* Border Decoration */}
-              <div className="absolute -inset-3 border border-emerald-500/20 rounded-[2.5rem] -z-10 translate-x-4 translate-y-4 opacity-40" />
+              <div className="absolute -inset-3 border border-emerald-500/20 rounded-[2.5rem] -z-10 translate-x-4 translate-y-4 opacity-40 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
             </div>
 
             {/* Experience and Product Stats (Bottom of Image) */}

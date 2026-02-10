@@ -16,6 +16,7 @@ export interface AboutSectionData {
   title: string;
   titleHighlight: string;
   description: string[];
+  image: string;
   name: string;
   role: string;
   highlights: AboutHighlight[];
