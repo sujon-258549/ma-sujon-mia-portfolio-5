@@ -319,7 +319,7 @@ export const ProjectEditModal = ({
                           onClick={() => addArrayItem("teamMembers")}
                           size="sm"
                           variant="ghost"
-                          className="h-7 text-emerald-500 hover:text-white hover:bg-emerald-500 text-[10px]"
+                          className="h-7 text-emerald-500 hover:text-white hover:bg-emerald-500 text-[10px] cursor-pointer"
                         >
                           + Add
                         </Button>
@@ -343,7 +343,7 @@ export const ProjectEditModal = ({
                               onClick={() => removeArrayItem("teamMembers", i)}
                               size="sm"
                               variant="ghost"
-                              className="h-9 w-9 p-0 text-red-500 hover:bg-red-500/10"
+                              className="h-9 w-9 p-0 text-red-500 hover:bg-red-500/10 cursor-pointer"
                             >
                               <Trash2 className="w-4 h-4" />
                             </Button>
@@ -408,7 +408,7 @@ export const ProjectEditModal = ({
                           onClick={() => addTechItem(cat.id as any)}
                           size="sm"
                           variant="ghost"
-                          className={`h-6 text-${cat.color}-500 hover:text-white hover:bg-${cat.color}-500 text-[10px] px-2`}
+                          className={`h-6 text-${cat.color}-500 hover:text-white hover:bg-${cat.color}-500 text-[10px] px-2 cursor-pointer`}
                         >
                           + Add
                         </Button>
@@ -435,7 +435,7 @@ export const ProjectEditModal = ({
                               onClick={() => removeTechItem(cat.id as any, idx)}
                               size="sm"
                               variant="ghost"
-                              className="h-8 w-8 p-0 text-red-500/30 group-hover/tech:text-red-500"
+                              className="h-8 w-8 p-0 text-red-500/30 group-hover/tech:text-red-500 cursor-pointer"
                             >
                               <X className="w-3 h-3" />
                             </Button>
@@ -457,7 +457,7 @@ export const ProjectEditModal = ({
                     <Button
                       type="button"
                       onClick={addDetailedDesc}
-                      className="bg-sky-500/10 text-sky-500 hover:bg-sky-500 hover:text-white rounded-lg px-6"
+                      className="bg-sky-500/10 text-sky-500 hover:bg-sky-500 hover:text-white rounded-lg px-6 cursor-pointer"
                     >
                       + Add Section
                     </Button>
@@ -472,7 +472,7 @@ export const ProjectEditModal = ({
                           type="button"
                           onClick={() => removeDetailedDesc(i)}
                           variant="ghost"
-                          className="absolute top-4 right-4 text-red-500/50 hover:text-red-500"
+                          className="absolute top-4 right-4 text-red-500/50 hover:text-red-500 cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -510,7 +510,7 @@ export const ProjectEditModal = ({
                         onClick={() => addArrayItem("tags")}
                         size="sm"
                         variant="ghost"
-                        className="h-7 text-emerald-500"
+                        className="h-7 text-emerald-500 cursor-pointer"
                       >
                         + Add
                       </Button>
@@ -528,7 +528,7 @@ export const ProjectEditModal = ({
                           <button
                             type="button"
                             onClick={() => removeArrayItem("tags", idx)}
-                            className="absolute right-1 top-1/2 -translate-y-1/2 text-red-500 opacity-0 group-hover/tag:opacity-100 transition-opacity"
+                            className="absolute right-1 top-1/2 -translate-y-1/2 text-red-500 opacity-0 group-hover/tag:opacity-100 transition-opacity cursor-pointer"
                           >
                             <X className="w-3 h-3" />
                           </button>
@@ -547,7 +547,7 @@ export const ProjectEditModal = ({
                         onClick={() => addArrayItem("challenges")}
                         size="sm"
                         variant="ghost"
-                        className="h-7 text-amber-500"
+                        className="h-7 text-amber-500 cursor-pointer"
                       >
                         + Add
                       </Button>
@@ -567,7 +567,7 @@ export const ProjectEditModal = ({
                             onClick={() => removeArrayItem("challenges", i)}
                             size="sm"
                             variant="ghost"
-                            className="text-red-500/50 hover:text-red-500"
+                            className="text-red-500/50 hover:text-red-500 cursor-pointer"
                           >
                             x
                           </Button>
@@ -586,7 +586,7 @@ export const ProjectEditModal = ({
                         onClick={() => addArrayItem("features")}
                         size="sm"
                         variant="ghost"
-                        className="h-7 text-sky-500"
+                        className="h-7 text-sky-500 cursor-pointer"
                       >
                         + Add
                       </Button>
@@ -606,7 +606,7 @@ export const ProjectEditModal = ({
                             onClick={() => removeArrayItem("features", i)}
                             size="sm"
                             variant="ghost"
-                            className="text-red-500/50 hover:text-red-500"
+                            className="text-red-500/50 hover:text-red-500 cursor-pointer"
                           >
                             x
                           </Button>
@@ -623,13 +623,13 @@ export const ProjectEditModal = ({
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="px-8 h-12 rounded-lg font-bold border-white/10"
+                className="px-8 h-12 rounded-lg font-bold border-white/10 cursor-pointer"
               >
                 Discard
               </Button>
               <Button
                 type="submit"
-                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-12 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95"
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-12 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer"
               >
                 {mode === "edit" ? "Update Project" : "Create Project"}
               </Button>

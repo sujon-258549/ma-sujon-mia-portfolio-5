@@ -180,20 +180,27 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="section-spacing bg-[#121A1C] relative">
-      {/* Admin Quick Add */}
+      {/* Admin Quick Add - Floating Premium Aesthetic */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30">
+        <div className="absolute top-10 right-10 z-30 group">
           <Button
             onClick={() => {
               setModalMode("add");
               setEditingProject(null);
               setIsModalOpen(true);
             }}
-            className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-6 h-12 rounded-full shadow-2xl shadow-emerald-500/20 active:scale-95 cursor-pointer transition-all flex items-center gap-2"
+            className="relative bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] font-black w-12 h-12 p-0 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] active:scale-90 cursor-pointer transition-all duration-500 flex items-center justify-center border-2 border-emerald-400/50 group-hover:border-emerald-300"
           >
-            <Plus className="w-5 h-5" />
-           
+            <div className="relative">
+              <Plus className="w-8 h-8 transition-transform duration-500 group-hover:rotate-90" />
+            </div>
+
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
           </Button>
+
+          {/* Pulsing Aura Background */}
+          <div className="absolute -inset-1 bg-emerald-500/20 rounded-2xl blur-xl group-hover:bg-emerald-500/40 transition-all duration-500 -z-10" />
         </div>
       )}
 
@@ -226,7 +233,7 @@ const ProjectsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayedProjects.map((project, index) => (
             <Card
               key={index}
