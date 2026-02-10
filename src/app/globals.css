@@ -1,26 +1,190 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: rgb(var(--background) / <alpha-value>);
+  --color-foreground: rgb(var(--foreground) / <alpha-value>);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-chart-5: rgb(var(--chart-5) / <alpha-value>);
+  --color-chart-4: rgb(var(--chart-4) / <alpha-value>);
+  --color-chart-3: rgb(var(--chart-3) / <alpha-value>);
+  --color-chart-2: rgb(var(--chart-2) / <alpha-value>);
+  --color-chart-1: rgb(var(--chart-1) / <alpha-value>);
+  --color-ring: rgb(var(--ring) / <alpha-value>);
+  --color-input: rgb(var(--input) / <alpha-value>);
+  --color-border: rgb(var(--border) / <alpha-value>);
+  --color-destructive: rgb(var(--destructive) / <alpha-value>);
+  --color-accent-foreground: rgb(var(--accent-foreground) / <alpha-value>);
+  --color-accent: rgb(var(--accent) / <alpha-value>);
+  --color-muted-foreground: rgb(var(--muted-foreground) / <alpha-value>);
+  --color-muted: rgb(var(--muted) / <alpha-value>);
+  --color-secondary-foreground: rgb(
+    var(--secondary-foreground) / <alpha-value>
+  );
+  --color-secondary: rgb(var(--secondary) / <alpha-value>);
+  --color-primary-foreground: rgb(var(--primary-foreground) / <alpha-value>);
+  --color-primary: rgb(var(--primary) / <alpha-value>);
+  --color-popover-foreground: rgb(var(--popover-foreground) / <alpha-value>);
+  --color-popover: rgb(var(--popover) / <alpha-value>);
+  --color-card-foreground: rgb(var(--card-foreground) / <alpha-value>);
+  --color-card: rgb(var(--card) / <alpha-value>);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.75rem;
+  /* Professional Dark Theme with #121A1C base */
+  --background: 18 26 28; /* #121A1C */
+  --foreground: 248 250 252; /* Slate 50 */
+  --card: 23 32 35; /* Slightly lighter than bg */
+  --card-foreground: 248 250 252;
+  --popover: 23 32 35;
+  --popover-foreground: 248 250 252;
+  /* Emerald Green Primary */
+  --primary: 16 185 129; /* #10B981 - Emerald 500 */
+  --primary-foreground: 18 26 28;
+  /* Subtle secondary with slate tones */
+  --secondary: 30 41 59; /* Slate 800 */
+  --secondary-foreground: 248 250 252;
+  --muted: 30 41 59;
+  --muted-foreground: 148 163 184; /* Slate 400 */
+  /* Accent with teal undertones */
+  --accent: 20 184 166; /* Teal 500 */
+  --accent-foreground: 18 26 28;
+  --destructive: 239 68 68; /* Red 500 */
+  --destructive-foreground: 248 250 252;
+  --border: 51 65 85; /* Slate 700 */
+  --input: 51 65 85;
+  --ring: 16 185 129;
+  /* Chart colors with vibrant palette */
+  --chart-1: 16 185 129; /* Emerald */
+  --chart-2: 59 130 246; /* Blue */
+  --chart-3: 168 85 247; /* Purple */
+  --chart-4: 251 146 60; /* Orange */
+  --chart-5: 236 72 153; /* Pink */
+}
+
+.dark {
+  --background: 18 26 28;
+  --foreground: 248 250 252;
+  --card: 23 32 35;
+  --card-foreground: 248 250 252;
+  --popover: 23 32 35;
+  --popover-foreground: 248 250 252;
+  --primary: 16 185 129;
+  --primary-foreground: 18 26 28;
+  --secondary: 30 41 59;
+  --secondary-foreground: 248 250 252;
+  --muted: 30 41 59;
+  --muted-foreground: 148 163 184;
+  --accent: 20 184 166;
+  --accent-foreground: 18 26 28;
+  --destructive: 239 68 68;
+  --destructive-foreground: 248 250 252;
+  --border: 51 65 85;
+  --input: 51 65 85;
+  --ring: 16 185 129;
+  --chart-1: 16 185 129;
+  --chart-2: 59 130 246;
+  --chart-3: 168 85 247;
+  --chart-4: 251 146 60;
+  --chart-5: 236 72 153;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Robust fix for UI jumping when Shadcn/Radix modal opens */
+  body[data-radix-scroll-lock] {
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight mb-4 text-emerald-400;
+  }
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-slate-100;
+  }
+  h4 {
+    @apply text-xl md:text-2xl font-semibold tracking-tight mb-2 text-slate-200;
+  }
+  h5 {
+    @apply text-lg font-medium tracking-tight mb-2 text-slate-300;
+  }
+  h6 {
+    @apply text-base font-medium tracking-tight mb-1 text-slate-400;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.main-container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem; /* px-6 equivalent */
+  padding-right: 1.5rem;
+}
+
+/* Responsive section spacing - less gap on mobile */
+.section-spacing {
+  padding-top: 3rem; /* py-12 on mobile */
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 5rem; /* py-20 on desktop */
+    padding-bottom: 5rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }

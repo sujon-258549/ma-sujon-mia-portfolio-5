@@ -1,0 +1,213 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Code2,
+  Terminal,
+  Cpu,
+  Phone,
+  Facebook,
+  MessageCircle,
+  Download,
+  Send,
+} from "lucide-react";
+
+const HeroSection = () => {
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [delta, setDelta] = useState(150);
+  const toRotate = [
+    "Full Stack Developer",
+    "UI/UX Enthusiast",
+    "Tech Renovator",
+  ];
+
+  const tick = () => {
+    const i = loopNum % toRotate.length;
+    const fullText = toRotate[i];
+    const updatedText = isDeleting
+      ? fullText.substring(0, text.length - 1)
+      : fullText.substring(0, text.length + 1);
+
+    setText(updatedText);
+
+    if (isDeleting) {
+      setDelta((prevDelta) => prevDelta / 2);
+    }
+
+    if (!isDeleting && updatedText === fullText) {
+      setIsDeleting(true);
+      setDelta(2000); // Wait before deleting
+    } else if (isDeleting && updatedText === "") {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+      setDelta(150); // Reset typing speed
+    } else {
+      // Normal typing speed
+      if (isDeleting) {
+        setDelta(50);
+      } else {
+        setDelta(150);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const ticker = setInterval(() => {
+      tick();
+    }, delta);
+
+    return () => {
+      clearInterval(ticker);
+    };
+  }, [text, delta]);
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#121A1C] pb-20 pt-40">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 w-full h-full bg-[#121A1C]">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <div className="absolute top-0 inset-x-0 h-px w-full bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] opacity-20 animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] opacity-20 animate-pulse" />
+      </div>
+
+      <div className="main-container relative z-10 w-full">
+        <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-4">
+          {/* Main Headline */}
+          <h1 className="animate-fade-in-up text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+            Hi, I&apos;m <span className="text-emerald-500">Sujon</span>
+            <br />
+            <span className="text-3xl md:text-5xl mt-2 block text-slate-300">
+              {text}
+              <span className="animate-pulse text-emerald-500">|</span>
+            </span>
+          </h1>
+
+          {/* Subheading */}
+          <p className="animate-fade-in-up delay-100 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Transforming ideas into scalable and high-performance web
+            applications. Specialized in building modern digital experiences
+            with <span className="text-emerald-400 font-medium">React</span>,{" "}
+            <span className="text-emerald-400 font-medium">Next.js</span>, and{" "}
+            <span className="text-emerald-400 font-medium">Node.js</span>.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="animate-fade-in-up delay-200 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Button className="h-10 px-8 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+              Hire Me
+              <Send className="ml-2 w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              Download CV
+              <Download className="ml-2 w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Tech Stack Indicators */}
+          <div className="animate-fade-in-up delay-300 mt-12 pt-8 border-t border-white/5 w-full max-w-2xl">
+            <p className="text-sm text-slate-500 mb-4 tracking-wider font-medium">
+              Tech Stack
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+              <div className="flex flex-col items-center gap-2 group">
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
+                  <Code2 className="w-6 h-6 text-slate-300 group-hover:text-emerald-400" />
+                </div>
+                <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">
+                  Frontend
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-2 group">
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
+                  <Terminal className="w-6 h-6 text-slate-300 group-hover:text-emerald-400" />
+                </div>
+                <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">
+                  Backend
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-2 group">
+                <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
+                  <Cpu className="w-6 h-6 text-slate-300 group-hover:text-emerald-400" />
+                </div>
+                <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">
+                  System
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sticky Social Links Side Bar */}
+          <div className="fixed left-4 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-3 z-50">
+            {/* Vertical Line Top */}
+            <div className="h-16 w-px bg-gradient-to-t from-emerald-500/50 to-transparent mx-auto mb-2" />
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a
+              href="mailto:sujon@example.com"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="Email"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
+            <a
+              href="tel:+1234567890"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="Phone"
+            >
+              <Phone className="w-4 h-4" />
+            </a>
+            <a
+              href="https://wa.me/1234567890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="WhatsApp"
+            >
+              <MessageCircle className="w-4 h-4" />
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+              title="Facebook"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+
+            {/* Vertical Line */}
+            <div className="h-16 w-px bg-gradient-to-b from-emerald-500/50 to-transparent mx-auto mt-2" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
