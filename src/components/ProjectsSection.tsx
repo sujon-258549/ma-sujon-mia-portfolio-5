@@ -9,17 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  ExternalLink,
-  Github,
-  ArrowRight,
-  ChevronDown,
-  ChevronUp,
-  Plus,
-  Rocket,
-  Eye,
-  Trophy,
-} from "lucide-react";
 import Link from "next/link";
 import { isAdminAuthorized } from "@/lib/auth";
 import { ProjectsSectionData, Project } from "@/types/project";
@@ -192,7 +181,7 @@ const ProjectsSection = () => {
             className="relative bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] font-black w-12 h-12 p-0 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] active:scale-90 cursor-pointer transition-all duration-500 flex items-center justify-center border-2 border-emerald-400/50 group-hover:border-emerald-300"
           >
             <div className="relative">
-              <Plus className="w-8 h-8 transition-transform duration-500 group-hover:rotate-90" />
+              <i className="fa-solid fa-plus text-2xl transition-transform duration-500 group-hover:rotate-90"></i>
             </div>
 
             {/* Glossy Overlay */}
@@ -208,7 +197,7 @@ const ProjectsSection = () => {
         <div className="text-center mb-16 relative">
           {/* 90+ Projects Completed Badge */}
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#172023] border border-emerald-500/20 px-4 py-2 rounded-full shadow-2xl">
-            <Trophy className="w-4 h-4 text-emerald-500" />
+            <i className="fa-solid fa-trophy text-base text-emerald-500"></i>
             <span className="text-xs font-black text-white uppercase tracking-tighter">
               <span className="text-emerald-500">90+</span> Projects Completed
             </span>
@@ -262,7 +251,7 @@ const ProjectsSection = () => {
                     href={`/projects/${project.id || index}`}
                     className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 text-white font-bold gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all"
                   >
-                    <Eye className="w-5 h-5" />
+                    <i className="fa-solid fa-eye text-lg"></i>
                     View Case Study
                   </Link>
                 </div>
@@ -270,7 +259,7 @@ const ProjectsSection = () => {
 
               <CardHeader className="p-6">
                 <div className="flex items-center gap-2 mb-3 text-[10px] uppercase font-black text-emerald-500 tracking-widest">
-                  <Rocket className="w-3 h-3" />
+                  <i className="fa-solid fa-rocket text-xs"></i>
                   {project.category || "Development"}
                 </div>
                 <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
@@ -299,7 +288,7 @@ const ProjectsSection = () => {
                   target="_blank"
                   className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2.5 rounded-lg hover:bg-emerald-400 transition-all active:scale-95"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   Live Demo
                 </Link>
                 <Link
@@ -307,7 +296,7 @@ const ProjectsSection = () => {
                   target="_blank"
                   className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-2.5 rounded-lg hover:bg-white/10 transition-all active:scale-95"
                 >
-                  <Github className="w-3.5 h-3.5" />
+                  <i className="fa-brands fa-github text-sm"></i>
                   View Code
                 </Link>
               </CardFooter>
@@ -324,12 +313,12 @@ const ProjectsSection = () => {
               {showAll ? (
                 <>
                   Minimize Portfolio
-                  <ChevronUp className="w-5 h-5 ml-2 group-hover:-translate-y-1 transition-transform" />
+                  <i className="fa-solid fa-chevron-up text-lg ml-2 group-hover:-translate-y-1 transition-transform"></i>
                 </>
               ) : (
                 <>
                   View Full Portfolio
-                  <ChevronDown className="w-5 h-4 ml-2 group-hover:translate-y-1 transition-transform" />
+                  <i className="fa-solid fa-chevron-down text-base ml-2 group-hover:translate-y-1 transition-transform"></i>
                 </>
               )}
             </Button>
