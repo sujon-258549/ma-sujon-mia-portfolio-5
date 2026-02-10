@@ -63,7 +63,7 @@ export const SkillEditModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-2xl">
+      <DialogContent className="sm:max-w-[500px] bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-lg">
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl">
           <DialogTitle className="text-xl font-bold flex items-center gap-3 text-emerald-500">
             <Wand2 className="w-5 h-5" />
