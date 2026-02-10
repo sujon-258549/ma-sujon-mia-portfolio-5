@@ -12,24 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Project } from "@/types/project";
-import {
-  X,
-  Globe,
-  Github,
-  Layers,
-  Rocket,
-  Target,
-  Code2,
-  Users,
-  Clock,
-  Plus,
-  Trash2,
-  Cpu,
-  Monitor,
-  Server,
-  Database,
-  Hammer,
-} from "lucide-react";
 
 interface ProjectEditModalProps {
   isOpen: boolean;
@@ -182,7 +164,7 @@ export const ProjectEditModal = ({
       <DialogContent className="sm:max-w-[95vw] w-[98vw] h-[95vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-lg">
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
           <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
-            <Code2 className="w-6 h-6" />
+            <i className="fa-solid fa-code text-xl"></i>
             {mode === "edit" ? "Update Project Details" : "Add New Project"}
           </DialogTitle>
         </DialogHeader>
@@ -224,7 +206,7 @@ export const ProjectEditModal = ({
                           Duration
                         </Label>
                         <div className="relative">
-                          <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-500" />
+                          <i className="fa-solid fa-clock absolute left-4 top-1/2 -translate-y-1/2 text-base text-emerald-500"></i>
                           <Input
                             value={formData.duration}
                             onChange={(e) =>
@@ -275,7 +257,8 @@ export const ProjectEditModal = ({
                     <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-6">
                       <div className="space-y-3">
                         <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                          <Globe className="w-3 h-3" /> Live Demo
+                          <i className="fa-solid fa-globe text-xs"></i> Live
+                          Demo
                         </Label>
                         <Input
                           value={formData.liveUrl}
@@ -287,7 +270,8 @@ export const ProjectEditModal = ({
                       </div>
                       <div className="space-y-3">
                         <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                          <Github className="w-3 h-3" /> Code Link
+                          <i className="fa-brands fa-github text-xs"></i> Code
+                          Link
                         </Label>
                         <Input
                           value={formData.githubUrl}
@@ -312,7 +296,8 @@ export const ProjectEditModal = ({
                     <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-4">
                       <div className="flex items-center justify-between">
                         <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[10px] tracking-widest">
-                          <Users className="w-4 h-4" /> Team Members
+                          <i className="fa-solid fa-users text-base"></i> Team
+                          Members
                         </Label>
                         <Button
                           type="button"
@@ -345,7 +330,7 @@ export const ProjectEditModal = ({
                               variant="ghost"
                               className="h-9 w-9 p-0 text-red-500 hover:bg-red-500/10 cursor-pointer"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <i className="fa-solid fa-trash text-sm"></i>
                             </Button>
                           </div>
                         ))}
@@ -360,7 +345,7 @@ export const ProjectEditModal = ({
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-10 w-1 bg-emerald-500 rounded-full" />
                   <h3 className="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
-                    <Cpu className="w-5 h-5 text-emerald-500" />
+                    <i className="fa-solid fa-microchip text-lg text-emerald-500"></i>
                     Project Technologies
                   </h3>
                 </div>
@@ -369,25 +354,21 @@ export const ProjectEditModal = ({
                   {[
                     {
                       id: "frontend",
-                      icon: Monitor,
                       label: "Frontend",
                       color: "sky",
                     },
                     {
                       id: "backend",
-                      icon: Server,
                       label: "Backend",
                       color: "emerald",
                     },
                     {
                       id: "database",
-                      icon: Database,
                       label: "Database",
                       color: "amber",
                     },
                     {
                       id: "tools",
-                      icon: Hammer,
                       label: "Tools",
                       color: "rose",
                     },
@@ -400,7 +381,9 @@ export const ProjectEditModal = ({
                         <Label
                           className={`flex items-center gap-2 text-${cat.color}-500 font-black uppercase text-[10px] tracking-widest`}
                         >
-                          <cat.icon className="w-4 h-4" />
+                          <i
+                            className={`fa-solid ${cat.id === "frontend" ? "fa-desktop" : cat.id === "backend" ? "fa-server" : cat.id === "database" ? "fa-database" : "fa-hammer"} text-base`}
+                          ></i>
                           {cat.label}
                         </Label>
                         <Button
@@ -437,7 +420,7 @@ export const ProjectEditModal = ({
                               variant="ghost"
                               className="h-8 w-8 p-0 text-red-500/30 group-hover/tech:text-red-500 cursor-pointer"
                             >
-                              <X className="w-3 h-3" />
+                              <i className="fa-solid fa-xmark text-xs"></i>
                             </Button>
                           </div>
                         ))}
@@ -451,8 +434,8 @@ export const ProjectEditModal = ({
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <Label className="flex items-center gap-2 text-sky-500 font-black uppercase text-[12px] tracking-widest">
-                      <Rocket className="w-5 h-5" /> Detailed Descriptions
-                      (Multi-Add)
+                      <i className="fa-solid fa-rocket text-lg"></i> Detailed
+                      Descriptions (Multi-Add)
                     </Label>
                     <Button
                       type="button"
@@ -474,7 +457,7 @@ export const ProjectEditModal = ({
                           variant="ghost"
                           className="absolute top-4 right-4 text-red-500/50 hover:text-red-500 cursor-pointer"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <i className="fa-solid fa-trash text-base"></i>
                         </Button>
                         <div className="space-y-4">
                           <Input
@@ -503,7 +486,8 @@ export const ProjectEditModal = ({
                   <div className="space-y-5">
                     <div className="flex items-center justify-between">
                       <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[10px] tracking-widest">
-                        <Layers className="w-4 h-4" /> Tech Tags
+                        <i className="fa-solid fa-layer-group text-base"></i>{" "}
+                        Tech Tags
                       </Label>
                       <Button
                         type="button"
@@ -530,7 +514,7 @@ export const ProjectEditModal = ({
                             onClick={() => removeArrayItem("tags", idx)}
                             className="absolute right-1 top-1/2 -translate-y-1/2 text-red-500 opacity-0 group-hover/tag:opacity-100 transition-opacity cursor-pointer"
                           >
-                            <X className="w-3 h-3" />
+                            <i className="fa-solid fa-xmark text-xs"></i>
                           </button>
                         </div>
                       ))}
@@ -540,7 +524,8 @@ export const ProjectEditModal = ({
                   <div className="space-y-5">
                     <div className="flex items-center justify-between">
                       <Label className="flex items-center gap-2 text-amber-500 font-black uppercase text-[10px] tracking-widest">
-                        <Target className="w-4 h-4" /> Logic & Challenges
+                        <i className="fa-solid fa-bullseye text-base"></i> Logic
+                        & Challenges
                       </Label>
                       <Button
                         type="button"
@@ -579,7 +564,8 @@ export const ProjectEditModal = ({
                   <div className="space-y-5">
                     <div className="flex items-center justify-between">
                       <Label className="flex items-center gap-2 text-sky-500 font-black uppercase text-[10px] tracking-widest">
-                        <Rocket className="w-4 h-4" /> Features
+                        <i className="fa-solid fa-rocket text-base"></i>{" "}
+                        Features
                       </Label>
                       <Button
                         type="button"

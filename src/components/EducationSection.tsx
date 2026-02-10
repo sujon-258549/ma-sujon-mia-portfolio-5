@@ -1,6 +1,5 @@
 "use client";
 
-import { Award, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { EducationSectionData } from "@/types/education";
@@ -152,7 +151,7 @@ const EducationSection = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 px-5 py-2 rounded-xl font-bold shadow-xl shadow-emerald-500/5 self-start">
-                    <Award className="w-5 h-5" />
+                    <i className="fa-solid fa-award text-lg"></i>
                     <span>{edu.grade}</span>
                   </div>
                 </div>
@@ -165,7 +164,7 @@ const EducationSection = () => {
               <div className="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 bg-[#121A1C]/50">
                 <div>
                   <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">
-                    <Award className="w-4 h-4 text-emerald-500" />
+                    <i className="fa-solid fa-award text-base text-emerald-500"></i>
                     Achievements
                   </h4>
                   <div className="space-y-3">
@@ -186,7 +185,7 @@ const EducationSection = () => {
                 {edu.courses.length > 0 && (
                   <div>
                     <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">
-                      <BookOpen className="w-4 h-4 text-sky-500" />
+                      <i className="fa-solid fa-book-open text-base text-sky-500"></i>
                       Key Coursework
                     </h4>
                     <div className="flex flex-wrap gap-2">

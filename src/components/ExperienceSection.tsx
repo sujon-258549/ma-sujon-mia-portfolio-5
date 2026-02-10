@@ -1,6 +1,5 @@
 "use client";
 
-import { Calendar, MapPin, TrendingUp, Code2, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { ExperienceSectionData } from "@/types/experience";
