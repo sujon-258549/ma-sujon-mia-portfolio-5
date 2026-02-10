@@ -94,15 +94,15 @@ const Footer = () => {
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Admin Edit Button - Positioned to the top right of the footer section */}
-      {/* {isAuthorized && ( */}
-      <button
-        onClick={() => setIsEditModalOpen(true)}
-        className="absolute top-8 right-8 w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full shadow-lg shadow-emerald-500/5 backdrop-blur-md z-50 flex items-center justify-center transition-all cursor-pointer active:scale-95 group hover:bg-emerald-500 hover:text-[#0E1416]"
-        title="Edit Footer Content"
-      >
-        <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
-      </button>
-      {/* )} */}
+      {isAuthorized && (
+        <button
+          onClick={() => setIsEditModalOpen(true)}
+          className="absolute top-8 right-8 w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full shadow-lg shadow-emerald-500/5 backdrop-blur-md z-50 flex items-center justify-center transition-all cursor-pointer active:scale-95 group hover:bg-emerald-500 hover:text-[#0E1416]"
+          title="Edit Footer Content"
+        >
+          <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+        </button>
+      )}
 
       <div className="main-container relative z-10">
         {/* Main Footer Content */}

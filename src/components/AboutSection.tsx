@@ -78,20 +78,20 @@ const AboutSection = () => {
       {/* Subtle Background Glow */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[120px] -z-1" />
 
-      <div className="main-container relative z-10 px-6">
-        {/* Admin Edit Button */}
-        {isAuthorized && (
-          <div className="absolute top-0 right-6 z-50">
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
-              title="Edit About Section"
-            >
-              <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
-            </Button>
-          </div>
-        )}
+      {/* Admin Edit Button */}
+      {isAuthorized && (
+        <div className="absolute top-8 right-8 z-30">
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
+            title="Edit About Section"
+          >
+            <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+          </Button>
+        </div>
+      )}
 
+      <div className="main-container relative z-10 px-6">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           {/* Left Side: Image & Hover Content */}
           <div className="w-full lg:w-5/12 sticky top-24">
