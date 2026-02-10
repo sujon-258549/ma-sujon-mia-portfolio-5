@@ -81,18 +81,6 @@ const Header = () => {
     "Contact",
   ];
 
-  const renderIcon = (iconName: string, className: string = "w-4 h-4") => {
-    const icons = LucideIcons as Record<string, unknown>;
-    const IconComponent = icons[iconName];
-
-    if (IconComponent && typeof IconComponent === "function") {
-      const Icon = IconComponent as React.ComponentType<{ className?: string }>;
-      return <Icon className={className} />;
-    }
-
-    return <LucideIcons.Download className={className} />;
-  };
-
   const handleSave = (newData: HeaderData) => {
     setHeaderData(newData);
     console.log("Saved Header Data:", newData);
@@ -150,7 +138,7 @@ const Header = () => {
               className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {headerData.buttons.secondary.text}
-              {renderIcon(headerData.buttons.secondary.icon, "ml-2 w-4 h-4")}
+              <i className={`${headerData.buttons.secondary.icon} ml-2`}></i>
             </Button>
 
             <Button
@@ -160,7 +148,7 @@ const Header = () => {
               }
             >
               {headerData.buttons.primary.text}
-              {renderIcon(headerData.buttons.primary.icon, "ml-2 w-4 h-4")}
+              <i className={`${headerData.buttons.primary.icon} ml-2`}></i>
             </Button>
           </div>
 
@@ -170,9 +158,9 @@ const Header = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6" />
+              <i className="fa-solid fa-xmark text-xl"></i>
             ) : (
-              <Menu className="w-6 h-6" />
+              <i className="fa-solid fa-bars text-xl"></i>
             )}
           </button>
         </div>
@@ -205,7 +193,7 @@ const Header = () => {
               className="w-full h-10 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg transition-all active:scale-95 cursor-pointer"
             >
               {headerData.buttons.secondary.text}
-              {renderIcon(headerData.buttons.secondary.icon, "ml-2 w-4 h-4")}
+              <i className={`${headerData.buttons.secondary.icon} ml-2`}></i>
             </Button>
             <Button
               className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all active:scale-95 cursor-pointer"
@@ -215,7 +203,7 @@ const Header = () => {
               }}
             >
               {headerData.buttons.primary.text}
-              {renderIcon(headerData.buttons.primary.icon, "ml-2 w-4 h-4")}
+              <i className={`${headerData.buttons.primary.icon} ml-2`}></i>
             </Button>
           </div>
         </div>

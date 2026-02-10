@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import * as LucideIcons from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { SkillsSectionEditModal } from "./modals/SkillsSectionEditModal";
 import { SkillsSectionData } from "@/types/skill";
@@ -19,7 +18,7 @@ const SkillsSection = () => {
       {
         id: "1",
         title: "Frontend Development",
-        icon: "Code2",
+        icon: "fa-solid fa-code",
         skills: [
           "React",
           "Next.js",
@@ -35,7 +34,7 @@ const SkillsSection = () => {
       {
         id: "2",
         title: "Backend Development",
-        icon: "Server",
+        icon: "fa-solid fa-server",
         skills: [
           "Node.js",
           "Express.js",
@@ -50,7 +49,7 @@ const SkillsSection = () => {
       {
         id: "3",
         title: "DevOps & AWS",
-        icon: "Globe",
+        icon: "fa-solid fa-globe",
         skills: [
           "Docker",
           "AWS EC2",
@@ -64,7 +63,7 @@ const SkillsSection = () => {
       {
         id: "4",
         title: "Tools & Technologies",
-        icon: "Terminal",
+        icon: "fa-solid fa-terminal",
         skills: [
           "VS Code",
           "Postman",
@@ -85,12 +84,6 @@ const SkillsSection = () => {
     };
     checkAuth();
   }, []);
-
-  const renderIcon = (iconName: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Icon = (LucideIcons as any)[iconName] || LucideIcons.Code2;
-    return <Icon className="w-8 h-8 text-emerald-500" />;
-  };
 
   const handleSaveSection = (newData: SkillsSectionData) => {
     setSkillsData(newData);
@@ -131,7 +124,9 @@ const SkillsSection = () => {
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                    {renderIcon(category.icon)}
+                    <i
+                      className={`${category.icon} text-3xl text-emerald-500`}
+                    ></i>
                   </div>
                   <h3>{category.title}</h3>
                 </div>

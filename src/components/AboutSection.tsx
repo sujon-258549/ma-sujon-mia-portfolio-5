@@ -1,9 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import * as LucideIcons from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { AboutSectionData } from "@/types/about";
 import { AboutEditModal } from "./modals/AboutEditModal";
@@ -13,7 +11,7 @@ const AboutSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutData, setAboutData] = useState<AboutSectionData>({
     badge: "Professional Overview",
-    badgeIcon: "Sparkles",
+    badgeIcon: "fa-solid fa-sparkles",
     title: "Driven by Innovation & Technical",
     titleHighlight: "Precision",
     description: [
@@ -28,22 +26,26 @@ const AboutSection = () => {
       {
         title: "Full Stack Development",
         desc: "Building seamless web applications with React, Next.js, and Node.js.",
-        icon: "Code2",
+        icon: "fa-solid fa-code",
       },
       {
         title: "Optimized Performance",
         desc: "Creating high-speed, scalable digital solutions for better UX.",
-        icon: "Rocket",
+        icon: "fa-solid fa-rocket",
       },
       {
         title: "Global Standards",
         desc: "Adhering to modern coding practices and clean architecture.",
-        icon: "Globe",
+        icon: "fa-solid fa-globe",
       },
     ],
     stats: [
-      { label: "Experience", value: "5+ Years", icon: "Briefcase" },
-      { label: "Products", value: "50+ Projects", icon: "Layout" },
+      { label: "Experience", value: "5+ Years", icon: "fa-solid fa-briefcase" },
+      {
+        label: "Products",
+        value: "50+ Projects",
+        icon: "fa-solid fa-layer-group",
+      },
     ],
   });
 
@@ -54,15 +56,6 @@ const AboutSection = () => {
     };
     checkAuth();
   }, []);
-
-  const renderIcon = (
-    iconName: string,
-    className: string = "w-5 h-5 text-emerald-500",
-  ) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Icon = (LucideIcons as any)[iconName] || LucideIcons.Info;
-    return <Icon className={className} />;
-  };
 
   const handleSave = (newData: AboutSectionData) => {
     setAboutData(newData);
@@ -150,7 +143,7 @@ const AboutSection = () => {
                   className="bg-white/5 border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                    {renderIcon(stat.icon)}
+                    <i className={`${stat.icon} text-emerald-500`}></i>
                   </div>
                   <span className="text-xl font-bold text-white">
                     {stat.value}
@@ -166,7 +159,9 @@ const AboutSection = () => {
           {/* Right Side: Expanded Content */}
           <div className="w-full lg:w-7/12 pt-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-              {renderIcon(aboutData.badgeIcon, "w-3.5 h-3.5 text-emerald-500")}
+              <i
+                className={`${aboutData.badgeIcon} text-sm text-emerald-500`}
+              ></i>
               <span className="text-[11px] font-extrabold text-emerald-500 uppercase tracking-widest">
                 {aboutData.badge}
               </span>
@@ -189,7 +184,7 @@ const AboutSection = () => {
               {aboutData.highlights.map((item, idx) => (
                 <div key={idx} className="flex gap-4 items-start group">
                   <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover:border-emerald-500/50 transition-all">
-                    {renderIcon(item.icon)}
+                    <i className={`${item.icon} text-emerald-500`}></i>
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-slate-100 mb-1 group-hover:text-emerald-500 transition-colors">

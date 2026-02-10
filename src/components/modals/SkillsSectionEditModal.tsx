@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SkillCategory, SkillsSectionData } from "@/types/skill";
-import { Plus, Trash2, Settings2 } from "lucide-react";
 
 interface SkillsSectionEditModalProps {
   isOpen: boolean;
@@ -48,7 +47,7 @@ export const SkillsSectionEditModal = ({
     const newCategory: SkillCategory = {
       id: Math.random().toString(36).substr(2, 9),
       title: "New Category",
-      icon: "Code2",
+      icon: "fa-solid fa-code",
       skills: ["New Skill"],
     };
     setFormData({
@@ -92,7 +91,7 @@ export const SkillsSectionEditModal = ({
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
-              <Settings2 className="w-6 h-6" />
+              <i className="fa-solid fa-gear text-xl"></i>
               Manage Skills Section
             </DialogTitle>
           </div>
@@ -163,7 +162,7 @@ export const SkillsSectionEditModal = ({
                 size="sm"
                 className="h-8 text-xs bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg px-3 cursor-pointer"
               >
-                <Plus className="w-4 h-4 mr-2" /> Add Category
+                <i className="fa-solid fa-plus text-sm mr-2"></i> Add Category
               </Button>
             </div>
 
@@ -178,7 +177,7 @@ export const SkillsSectionEditModal = ({
                     onClick={() => removeCategory(catIndex)}
                     className="absolute -top-3 -right-3 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10 cursor-pointer"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <i className="fa-solid fa-trash text-sm"></i>
                   </button>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
@@ -204,7 +203,7 @@ export const SkillsSectionEditModal = ({
                           updateCategory(catIndex, "icon", e.target.value)
                         }
                         className="bg-black/40 border-white/5 h-11 rounded-lg focus:ring-emerald-500/20 text-xs font-mono"
-                        placeholder="Code2, Server, Globe, etc."
+                        placeholder="fa-solid fa-code"
                       />
                     </div>
                   </div>
@@ -221,7 +220,8 @@ export const SkillsSectionEditModal = ({
                         size="sm"
                         className="h-6 text-[10px] text-emerald-500 hover:bg-emerald-500/10 rounded px-2 cursor-pointer"
                       >
-                        <Plus className="w-3 h-3 mr-1" /> Add Skill
+                        <i className="fa-solid fa-plus text-xs mr-1"></i> Add
+                        Skill
                       </Button>
                     </div>
 
@@ -250,7 +250,7 @@ export const SkillsSectionEditModal = ({
                             }
                             className="text-slate-600 hover:text-red-500 p-0.5 cursor-pointer"
                           >
-                            <Trash2 className="w-3 h-3" />
+                            <i className="fa-solid fa-trash text-xs"></i>
                           </button>
                         </div>
                       ))}
