@@ -388,7 +388,15 @@ export const ProjectEditModal = ({
                         </Label>
                         <Button
                           type="button"
-                          onClick={() => addTechItem(cat.id as any)}
+                          onClick={() =>
+                            addTechItem(
+                              cat.id as
+                                | "frontend"
+                                | "backend"
+                                | "database"
+                                | "tools",
+                            )
+                          }
                           size="sm"
                           variant="ghost"
                           className={`h-6 text-${cat.color}-500 hover:text-white hover:bg-${cat.color}-500 text-[10px] px-2 cursor-pointer`}
@@ -405,7 +413,11 @@ export const ProjectEditModal = ({
                               value={item}
                               onChange={(e) =>
                                 handleTechUpdate(
-                                  cat.id as any,
+                                  cat.id as
+                                    | "frontend"
+                                    | "backend"
+                                    | "database"
+                                    | "tools",
                                   idx,
                                   e.target.value,
                                 )
@@ -415,7 +427,16 @@ export const ProjectEditModal = ({
                             />
                             <Button
                               type="button"
-                              onClick={() => removeTechItem(cat.id as any, idx)}
+                              onClick={() =>
+                                removeTechItem(
+                                  cat.id as
+                                    | "frontend"
+                                    | "backend"
+                                    | "database"
+                                    | "tools",
+                                  idx,
+                                )
+                              }
                               size="sm"
                               variant="ghost"
                               className="h-8 w-8 p-0 text-red-500/30 group-hover/tech:text-red-500 cursor-pointer"

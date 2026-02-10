@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SkillCategory } from "@/types/skill";
-import { Code2, Plus, Trash2, X, Wand2 } from "lucide-react";
 
 interface SkillEditModalProps {
   isOpen: boolean;
@@ -66,7 +65,7 @@ export const SkillEditModal = ({
       <DialogContent className="sm:max-w-[500px] bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-lg">
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl">
           <DialogTitle className="text-xl font-bold flex items-center gap-3 text-emerald-500">
-            <Wand2 className="w-5 h-5" />
+            <i className="fa-solid fa-wand-magic-sparkles text-lg"></i>
             {mode === "edit" ? "Update Skill Category" : "Add Skill Category"}
           </DialogTitle>
         </DialogHeader>
@@ -114,7 +113,7 @@ export const SkillEditModal = ({
                   size="sm"
                   className="h-7 text-emerald-500 hover:text-white hover:bg-emerald-500 text-[10px] px-2 cursor-pointer"
                 >
-                  <Plus className="w-3 h-3 mr-1" /> Add Skill
+                  <i className="fa-solid fa-plus text-xs mr-1"></i> Add Skill
                 </Button>
               </div>
 
@@ -134,7 +133,7 @@ export const SkillEditModal = ({
                       size="sm"
                       className="h-10 w-10 p-0 text-red-500/30 group-hover:text-red-500 hover:bg-red-500/10 cursor-pointer"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <i className="fa-solid fa-trash text-sm"></i>
                     </Button>
                   </div>
                 ))}

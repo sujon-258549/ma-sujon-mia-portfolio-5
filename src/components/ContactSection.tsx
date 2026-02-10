@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Send, Settings2 } from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { ContactEditModal } from "./modals/ContactEditModal";
 import { ContactSectionData } from "@/types/contact";
@@ -145,7 +144,7 @@ const ContactSection = () => {
                 />
               </div>
               <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer">
-                <Send className="w-5 h-5 mr-3" />
+                <i className="fa-solid fa-paper-plane text-lg mr-3"></i>
                 Send Message
               </Button>
             </form>
