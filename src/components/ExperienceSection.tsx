@@ -137,11 +137,11 @@ const ExperienceSection = () => {
 
                         <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
                           <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                            <MapPin className="w-3.5 h-3.5 text-emerald-500/70" />
+                            <i className="fa-solid fa-location-dot text-xs text-emerald-500/70"></i>
                             <span>{exp.location}</span>
                           </div>
                           <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                            <Calendar className="w-3.5 h-3.5 text-emerald-500/70" />
+                            <i className="fa-solid fa-calendar text-xs text-emerald-500/70"></i>
                             <span>{exp.period}</span>
                           </div>
                           <div className="px-3 py-1 bg-emerald-500/5 text-emerald-500 rounded-full border border-emerald-500/10 font-medium">
@@ -167,7 +167,7 @@ const ExperienceSection = () => {
                 {/* Key Achievements */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-4 h-4 text-emerald-500" />
+                    <i className="fa-solid fa-arrow-trend-up text-base text-emerald-500"></i>
                     <h4 className="text-sm font-black text-slate-200 uppercase tracking-widest">
                       Key Achievements
                     </h4>
@@ -190,7 +190,7 @@ const ExperienceSection = () => {
                 {/* Responsibilities */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Users className="w-4 h-4 text-sky-500" />
+                    <i className="fa-solid fa-users text-base text-sky-500"></i>
                     <h4 className="text-sm font-black text-slate-200 uppercase tracking-widest">
                       Core Responsibilities
                     </h4>
@@ -213,7 +213,7 @@ const ExperienceSection = () => {
                 {/* Technologies */}
                 <div className="lg:col-span-2 space-y-4 pt-4 border-t border-white/5">
                   <div className="flex items-center gap-2 mb-2">
-                    <Code2 className="w-4 h-4 text-amber-500" />
+                    <i className="fa-solid fa-code text-base text-amber-500"></i>
                     <h4 className="text-sm font-black text-slate-200 uppercase tracking-widest">
                       Tech Stack Used
                     </h4>
