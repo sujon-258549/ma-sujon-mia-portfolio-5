@@ -81,37 +81,37 @@ const HeroSection = () => {
     checkAuth();
   }, []);
 
-  const tick = () => {
-    const i = loopNum % heroData.rotatingTexts.length;
-    const fullText = heroData.rotatingTexts[i];
-    const updatedText = isDeleting
-      ? fullText.substring(0, text.length - 1)
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta((prevDelta) => prevDelta / 2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(2000); // Wait before deleting
-    } else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(150); // Reset typing speed
-    } else {
-      // Normal typing speed
-      if (isDeleting) {
-        setDelta(50);
-      } else {
-        setDelta(150);
-      }
-    }
-  };
-
   useEffect(() => {
+    const tick = () => {
+      const i = loopNum % heroData.rotatingTexts.length;
+      const fullText = heroData.rotatingTexts[i];
+      const updatedText = isDeleting
+        ? fullText.substring(0, text.length - 1)
+        : fullText.substring(0, text.length + 1);
+
+      setText(updatedText);
+
+      if (isDeleting) {
+        setDelta((prevDelta) => prevDelta / 2);
+      }
+
+      if (!isDeleting && updatedText === fullText) {
+        setIsDeleting(true);
+        setDelta(2000); // Wait before deleting
+      } else if (isDeleting && updatedText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+        setDelta(150); // Reset typing speed
+      } else {
+        // Normal typing speed
+        if (isDeleting) {
+          setDelta(50);
+        } else {
+          setDelta(150);
+        }
+      }
+    };
+
     const ticker = setInterval(() => {
       tick();
     }, delta);
@@ -119,7 +119,7 @@ const HeroSection = () => {
     return () => {
       clearInterval(ticker);
     };
-  }, [text, delta, tick]);
+  }, [text, delta, isDeleting, loopNum, heroData.rotatingTexts]);
 
   const handleSave = (newData: HeroSectionData) => {
     setHeroData(newData);
