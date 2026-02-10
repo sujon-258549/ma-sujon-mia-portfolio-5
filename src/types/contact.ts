@@ -6,6 +6,7 @@ export interface ContactInfo {
 
 export interface ContactSectionData {
   badge: string;
+  badgeIcon: string;
   title: string;
   titleColor: string;
   contactCards: ContactInfo[];

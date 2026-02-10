@@ -59,7 +59,7 @@ export const ContactEditModal = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label className="text-slate-400 uppercase text-[10px] tracking-widest font-bold">
-                  Section Badge
+                  Section Badge Text
                 </Label>
                 <Input
                   value={formData.badge}
@@ -67,6 +67,19 @@ export const ContactEditModal = ({
                     setFormData({ ...formData, badge: e.target.value })
                   }
                   className="bg-white/5 border-white/10 text-white"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-slate-400 uppercase text-[10px] tracking-widest font-bold">
+                  Section Badge Icon (FontAwesome)
+                </Label>
+                <Input
+                  value={formData.badgeIcon}
+                  onChange={(e) =>
+                    setFormData({ ...formData, badgeIcon: e.target.value })
+                  }
+                  className="bg-white/5 border-white/10 text-emerald-400 font-mono"
+                  placeholder="fa-solid fa-paper-plane"
                 />
               </div>
               <div className="space-y-2">
@@ -98,8 +111,8 @@ export const ContactEditModal = ({
             {/* Contact Cards */}
             <div className="space-y-4">
               <Label className="text-emerald-500 uppercase text-xs tracking-[0.2em] font-black block mb-4">
-                <i className="fa-solid fa-address-card mr-2"></i> Information
-                Cards
+                <i className="fa-solid fa-address-card mr-2"></i> Contact
+                Information Cards
               </Label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {formData.contactCards.map((card, index) => (
@@ -108,17 +121,21 @@ export const ContactEditModal = ({
                     className="bg-[#121A1C] border border-white/5 rounded-2xl p-5 space-y-4"
                   >
                     <div className="flex items-center gap-3 border-b border-white/5 pb-3">
-                      <i
-                        className={`fa-solid ${card.icon} text-emerald-500`}
-                      ></i>
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                        <i className={`${card.icon} text-emerald-500`}></i>
+                      </div>
                       <span className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                        Card {index + 1}
+                        {index === 0
+                          ? "Main Contact"
+                          : index === 2
+                            ? "Location Info"
+                            : `Info Card ${index + 1}`}
                       </span>
                     </div>
                     <div className="space-y-3">
                       <div className="space-y-1">
-                        <Label className="text-[9px] text-slate-500 uppercase">
-                          Title
+                        <Label className="text-[9px] text-slate-500 uppercase font-bold">
+                          Label
                         </Label>
                         <Input
                           value={card.title}
@@ -126,11 +143,12 @@ export const ContactEditModal = ({
                             updateCard(index, "title", e.target.value)
                           }
                           className="h-9 bg-black/20 border-white/5 text-sm"
+                          placeholder="e.g. Phone, Email, Address"
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] text-slate-500 uppercase">
-                          Value / Subtext
+                        <Label className="text-[9px] text-slate-500 uppercase font-bold">
+                          Content / Value
                         </Label>
                         <Input
                           value={card.value}
@@ -138,19 +156,20 @@ export const ContactEditModal = ({
                             updateCard(index, "value", e.target.value)
                           }
                           className="h-9 bg-black/20 border-white/5 text-sm"
+                          placeholder="e.g. +123 456 789"
                         />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] text-slate-500 uppercase">
-                          FontAwesome Icon Class
+                        <Label className="text-[9px] text-slate-500 uppercase font-bold">
+                          Icon Class (FontAwesome)
                         </Label>
                         <Input
                           value={card.icon}
                           onChange={(e) =>
                             updateCard(index, "icon", e.target.value)
                           }
-                          className="h-9 bg-black/20 border-white/5 text-[10px] font-mono"
-                          placeholder="fa-phone"
+                          className="h-9 bg-black/40 border-white/10 text-[10px] font-mono text-emerald-400"
+                          placeholder="fa-solid fa-phone"
                         />
                       </div>
                     </div>

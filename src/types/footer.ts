@@ -10,10 +10,15 @@ export interface QuickLink {
   href: string;
 }
 
+export interface ContactItem {
+  icon: string;
+  value: string;
+  href?: string;
+  label: string;
+}
+
 export interface FooterData {
   description: string;
-  email: string;
-  location: string;
   logo: string;
   contactTitle: string;
   linksTitle: string;
@@ -21,4 +26,5 @@ export interface FooterData {
   craftedBy: string;
   socialLinks: SocialLink[];
   quickLinks: QuickLink[];
+  contactItems: ContactItem[];
 }

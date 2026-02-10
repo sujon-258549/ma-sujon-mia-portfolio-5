@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-import { FooterData, SocialLink, QuickLink } from "@/types/footer";
+import { FooterData, SocialLink, QuickLink, ContactItem } from "@/types/footer";
+import Image from "next/image";
 
 interface FooterEditModalProps {
   isOpen: boolean;
@@ -66,6 +67,67 @@ export const FooterEditModal = ({
     setFormData({ ...formData, quickLinks: newLinks });
   };
 
+  const addSocialLink = () => {
+    const newLink: SocialLink = {
+      label: "New Platform",
+      faIcon: "fa-solid fa-link",
+      href: "https://",
+      color: "hover:bg-emerald-500",
+    };
+    setFormData({
+      ...formData,
+      socialLinks: [...formData.socialLinks, newLink],
+    });
+  };
+
+  const removeSocialLink = (index: number) => {
+    const newLinks = formData.socialLinks.filter((_, i) => i !== index);
+    setFormData({ ...formData, socialLinks: newLinks });
+  };
+
+  const addQuickLink = () => {
+    const newLink: QuickLink = {
+      name: "New Link",
+      href: "#",
+    };
+    setFormData({
+      ...formData,
+      quickLinks: [...formData.quickLinks, newLink],
+    });
+  };
+
+  const removeQuickLink = (index: number) => {
+    const newLinks = formData.quickLinks.filter((_, i) => i !== index);
+    setFormData({ ...formData, quickLinks: newLinks });
+  };
+
+  const updateContactItem = (
+    index: number,
+    field: keyof ContactItem,
+    value: string,
+  ) => {
+    const newItems = [...formData.contactItems];
+    newItems[index] = { ...newItems[index], [field]: value };
+    setFormData({ ...formData, contactItems: newItems });
+  };
+
+  const addContactItem = () => {
+    const newItem: ContactItem = {
+      label: "Support",
+      value: "info@example.com",
+      icon: "fa-solid fa-envelope",
+    };
+    setFormData({
+      ...formData,
+      contactItems: [...formData.contactItems, newItem],
+    });
+  };
+
+  const removeContactItem = (index: number) => {
+    const newItems = formData.contactItems.filter((_, i) => i !== index);
+    setFormData({ ...formData, contactItems: newItems });
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[95vw] w-[98vw] h-[95vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none">
@@ -100,10 +162,13 @@ export const FooterEditModal = ({
                     </Label>
                     <div className="flex flex-col gap-4">
                       <div className="relative w-full h-32 bg-black/40 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden p-4 group">
-                        <img
+                        <Image
                           src={formData.logo}
                           alt="Preview"
+                          width={150}
+                          height={60}
                           className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform"
+                          unoptimized
                         />
                       </div>
                       <div className="grid grid-cols-1 gap-3">
@@ -146,63 +211,75 @@ export const FooterEditModal = ({
 
                   {/* Socials Group */}
                   <div className="space-y-4 pt-6 border-t border-white/5">
-                    <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
-                      <i className="fa-solid fa-share-nodes text-emerald-500/70"></i>{" "}
-                      Social Presence
-                    </Label>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
+                        <i className="fa-solid fa-share-nodes text-emerald-500/70"></i>{" "}
+                        Social Presence
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={addSocialLink}
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                      >
+                        <i className="fa-solid fa-plus mr-1"></i> Add
+                      </Button>
+                    </div>
                     <div className="grid grid-cols-1 gap-3">
-                      {formData.socialLinks.map((link, index) => (
+                      {formData.socialLinks.map((social, index) => (
                         <div
-                          key={index}
-                          className="flex flex-col gap-3 p-4 bg-white/5 rounded-xl border border-white/5 group hover:border-emerald-500/30 transition-colors"
+                          key={`social-${index}`}
+                          className="flex flex-col gap-4 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-300 relative group/social"
                         >
-                          <div className="flex items-center justify-between gap-3">
-                            <div className="flex items-center gap-2">
-                              <i
-                                className={`${link.faIcon} text-emerald-500 w-5`}
-                              ></i>
-                              <Input
-                                value={link.label}
-                                onChange={(e) =>
-                                  updateSocialLink(
-                                    index,
-                                    "label",
-                                    e.target.value,
-                                  )
-                                }
-                                className="h-6 w-24 bg-transparent border-none text-[10px] text-slate-500 font-bold uppercase tracking-widest p-0 focus-visible:ring-0"
-                                placeholder="Platform..."
-                              />
-                            </div>
-                            <div className="flex items-center gap-2 bg-black/20 rounded-md px-2 py-1">
-                              <Label className="text-[8px] text-slate-600 uppercase font-black">
-                                Icon Code
-                              </Label>
-                              <Input
-                                value={link.faIcon}
-                                onChange={(e) =>
-                                  updateSocialLink(
-                                    index,
-                                    "faIcon",
-                                    e.target.value,
-                                  )
-                                }
-                                className="h-6 w-28 bg-transparent border-none text-[9px] font-mono p-0 focus-visible:ring-0"
-                                placeholder="fa-brands fa-github"
-                              />
-                            </div>
+                          <button
+                            type="button"
+                            onClick={() => removeSocialLink(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/social:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                          >
+                            <i className="fa-solid fa-xmark text-[10px]"></i>
+                          </button>
+                          <div className="flex flex-col gap-2">
+                            <Label className="text-[9px] text-slate-500 uppercase font-bold ml-1 tracking-widest">
+                              Platform Name
+                            </Label>
+                            <Input
+                              value={social.label}
+                              onChange={(e) =>
+                                updateSocialLink(index, "label", e.target.value)
+                              }
+                              className="h-10 text-sm bg-black/20 border-white/5 focus:border-emerald-500/50"
+                              placeholder="e.g. GitHub"
+                            />
                           </div>
-                          <div className="space-y-1">
-                            <Label className="text-[9px] text-slate-600 uppercase font-black ml-1">
+                          <div className="flex flex-col gap-2">
+                            <Label className="text-[9px] text-slate-500 uppercase font-bold ml-1 tracking-widest">
+                              Icon Class
+                            </Label>
+                            <Input
+                              value={social.faIcon}
+                              onChange={(e) =>
+                                updateSocialLink(
+                                  index,
+                                  "faIcon",
+                                  e.target.value,
+                                )
+                              }
+                              className="h-10 text-[11px] bg-black/40 border-white/10 focus:border-emerald-500/50 font-mono"
+                              placeholder="fa-brands fa-github"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <Label className="text-[9px] text-slate-500 uppercase font-bold ml-1 tracking-widest">
                               Profile URL
                             </Label>
                             <Input
-                              value={link.href}
+                              value={social.href}
                               onChange={(e) =>
                                 updateSocialLink(index, "href", e.target.value)
                               }
-                              className="h-9 text-[11px] bg-black/40 border-white/10 focus:border-emerald-500/50 transition-all font-mono"
-                              placeholder="https://..."
+                              className="h-10 text-[11px] bg-black/40 border-white/10 focus:border-emerald-500/50 font-mono"
+                              placeholder="https://github.com/..."
                             />
                           </div>
                         </div>
@@ -234,15 +311,33 @@ export const FooterEditModal = ({
                   </div>
 
                   <div className="space-y-4 pt-6 border-t border-white/5">
-                    <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
-                      Navigation Links
-                    </Label>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Navigation Links
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={addQuickLink}
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                      >
+                        <i className="fa-solid fa-plus mr-1"></i> Add Link
+                      </Button>
+                    </div>
                     <div className="space-y-3">
                       {formData.quickLinks.map((link, index) => (
                         <div
-                          key={index}
-                          className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-3 hover:border-emerald-500/30 transition-colors"
+                          key={`link-${index}`}
+                          className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-3 hover:border-emerald-500/30 transition-colors relative group/link"
                         >
+                          <button
+                            type="button"
+                            onClick={() => removeQuickLink(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/link:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                          >
+                            <i className="fa-solid fa-xmark text-[10px]"></i>
+                          </button>
                           <div className="flex flex-col gap-2">
                             <Label className="text-[9px] text-slate-500 uppercase font-black">
                               Link Name
@@ -301,41 +396,108 @@ export const FooterEditModal = ({
                   </div>
 
                   <div className="space-y-8 pt-8 border-t border-white/5">
-                    <div className="space-y-6">
-                      <div className="space-y-3">
-                        <Label className="text-slate-300 font-semibold flex items-center gap-3 text-sm">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                            <i className="fa-solid fa-envelope text-emerald-500"></i>
-                          </div>
-                          Support Email
-                        </Label>
-                        <Input
-                          value={formData.email}
-                          onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
-                          }
-                          className="bg-white/5 border-white/10 h-11 text-emerald-400 font-medium"
-                        />
-                      </div>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Contact Items
+                      </Label>
+                      <Button
+                        type="button"
+                        onClick={addContactItem}
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                      >
+                        <i className="fa-solid fa-plus mr-1"></i> Add Item
+                      </Button>
+                    </div>
 
-                      <div className="space-y-3 pt-2">
-                        <Label className="text-slate-300 font-semibold flex items-center gap-3 text-sm">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                            <i className="fa-solid fa-location-dot text-emerald-500"></i>
+                    <div className="space-y-6">
+                      {formData.contactItems.map((item, index) => (
+                        <div
+                          key={`contact-${index}`}
+                          className="space-y-4 p-4 bg-white/5 rounded-xl border border-white/5 relative group/contact"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => removeContactItem(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/contact:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                          >
+                            <i className="fa-solid fa-xmark text-[10px]"></i>
+                          </button>
+
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                              <i
+                                className={`${item.icon || "fa-solid fa-envelope"} text-emerald-500 text-lg`}
+                              ></i>
+                            </div>
+                            <div className="flex-1">
+                              <Input
+                                value={item.label}
+                                onChange={(e) =>
+                                  updateContactItem(
+                                    index,
+                                    "label",
+                                    e.target.value,
+                                  )
+                                }
+                                className="bg-transparent border-none text-slate-300 font-bold text-sm h-7 px-0 focus-visible:ring-0"
+                                placeholder="Label (e.g. Email)"
+                              />
+                            </div>
                           </div>
-                          Physical Office
-                        </Label>
-                        <Input
-                          value={formData.location}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              location: e.target.value,
-                            })
-                          }
-                          className="bg-white/5 border-white/10 h-11"
-                        />
-                      </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                                Icon Class
+                              </Label>
+                              <Input
+                                value={item.icon}
+                                onChange={(e) =>
+                                  updateContactItem(
+                                    index,
+                                    "icon",
+                                    e.target.value,
+                                  )
+                                }
+                                className="bg-white/5 border-white/10 h-10 text-xs font-mono"
+                                placeholder="fa-solid fa-envelope"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                                Value / Content
+                              </Label>
+                              <Input
+                                value={item.value}
+                                onChange={(e) =>
+                                  updateContactItem(
+                                    index,
+                                    "value",
+                                    e.target.value,
+                                  )
+                                }
+                                className="bg-white/5 border-white/10 h-10 text-emerald-400 font-medium"
+                                placeholder="Content..."
+                              />
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                              Link (Optional)
+                            </Label>
+                            <Input
+                              value={item.href || ""}
+                              onChange={(e) =>
+                                updateContactItem(index, "href", e.target.value)
+                              }
+                              className="bg-white/5 border-white/10 h-10 text-xs font-mono"
+                              placeholder="mailto:... or tel:..."
+                            />
+                          </div>
+                        </div>
+                      ))}
                     </div>
 
                     <div className="mt-12 p-5 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 text-xs text-emerald-500/70 leading-relaxed italic relative overflow-hidden group">

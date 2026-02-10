@@ -15,26 +15,35 @@ const ContactSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    setIsAuthorized(isAdminAuthorized());
+    // Check authorization on mount
+    // Wrap in setTimeout to avoid synchronous setState cascading render warning
+    const timeoutId = setTimeout(() => {
+      const authStatus = isAdminAuthorized();
+      setIsAuthorized(authStatus);
+      console.log("Contact Section Authorization Status:", authStatus);
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const [contactData, setContactData] = useState<ContactSectionData>({
     badge: "Contact Me",
+    badgeIcon: "fa-solid fa-paper-plane",
     title: "Let's Work",
     titleColor: "Together",
     contactCards: [
       {
-        icon: "fa-phone",
+        icon: "fa-solid fa-phone",
         title: "Phone",
         value: "+123 456 7890",
       },
       {
-        icon: "fa-envelope",
+        icon: "fa-solid fa-envelope",
         title: "Email",
         value: "sujon@example.com",
       },
       {
-        icon: "fa-location-dot",
+        icon: "fa-solid fa-location-dot",
         title: "Address",
         value: "Dhaka, Bangladesh",
       },
@@ -64,13 +73,20 @@ const ContactSection = () => {
         <div className="flex flex-col lg:flex-row gap-12 max-w-7xl mx-auto">
           {/* Left: Form */}
           <div className="w-full lg:w-[60%]">
-            <h5>{contactData.badge}</h5>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
+              <i
+                className={`${contactData.badgeIcon} text-[10px] text-emerald-500`}
+              ></i>
+              <span className="text-[11px] font-extrabold text-emerald-500 uppercase tracking-widest">
+                {contactData.badge}
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
               {contactData.title}{" "}
               <span className="text-emerald-500">{contactData.titleColor}</span>
             </h2>
 
-            <form className="space-y-6">
+            <form className="space-y-6 mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -141,15 +157,17 @@ const ContactSection = () => {
             {contactData.contactCards.map((card, idx) => (
               <Card
                 key={idx}
-                className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300"
+                className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group/card"
               >
                 <CardContent className="flex items-center gap-4 p-4">
-                  <div className="p-3 bg-emerald-500/10 rounded-full text-emerald-500">
-                    <i className={`fa-solid ${card.icon} text-lg`}></i>
+                  <div className="p-3 bg-emerald-500/10 rounded-full text-emerald-500 group-hover/card:scale-110 transition-transform">
+                    <i className={`${card.icon} text-lg`}></i>
                   </div>
                   <div>
-                    <h4 className="text-slate-100">{card.title}</h4>
-                    <p className="text-slate-400">{card.value}</p>
+                    <h4 className="text-slate-100 font-bold">{card.title}</h4>
+                    <p className="text-slate-400 text-sm whitespace-pre-line">
+                      {card.value}
+                    </p>
                   </div>
                 </CardContent>
               </Card>

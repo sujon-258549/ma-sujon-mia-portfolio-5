@@ -15,8 +15,6 @@ const Footer = () => {
   const [footerData, setFooterData] = useState<FooterData>({
     description:
       "Crafting digital experiences with clean code and modern design. Transforming ideas into reality through innovative web solutions.",
-    email: "sujon258549@gmail.com",
-    location: "Dhaka, Bangladesh",
     logo: "https://i.ibb.co.com/r22rB4k4/logo.webp",
     contactTitle: "Get In Touch",
     linksTitle: "Quick Links",
@@ -53,6 +51,19 @@ const Footer = () => {
       { name: "My Skills", href: "#skills" },
       { name: "Education", href: "#education" },
       { name: "Experience", href: "#experience" },
+    ],
+    contactItems: [
+      {
+        label: "Email",
+        value: "sujon258549@gmail.com",
+        icon: "fa-solid fa-envelope",
+        href: "mailto:sujon258549@gmail.com",
+      },
+      {
+        label: "Location",
+        value: "Dhaka, Bangladesh",
+        icon: "fa-solid fa-location-dot",
+      },
     ],
   });
 
@@ -159,20 +170,26 @@ const Footer = () => {
               {footerData.contactTitle || "Get In Touch"}
             </h4>
             <div className="space-y-4 text-sm">
-              <div className="flex items-center gap-3 text-muted-foreground group">
-                <i className="fa-solid fa-envelope w-5 text-emerald-500 group-hover:scale-110 transition-transform"></i>
-                <a
-                  href={`mailto:${footerData.email}`}
-                  className="hover:text-emerald-500 transition-colors cursor-pointer"
+              {footerData.contactItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-3 text-muted-foreground group"
                 >
-                  {footerData.email}
-                </a>
-              </div>
-
-              <div className="flex items-center gap-3 text-muted-foreground group">
-                <i className="fa-solid fa-location-dot w-5 text-emerald-500 group-hover:scale-110 transition-transform"></i>
-                <p>{footerData.location}</p>
-              </div>
+                  <i
+                    className={`${item.icon || "fa-solid fa-circle-info"} w-5 text-emerald-500 group-hover:scale-110 transition-transform`}
+                  ></i>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="hover:text-emerald-500 transition-colors cursor-pointer"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p>{item.value}</p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
