@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import * as LucideIcons from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { HeroSectionData } from "@/types/hero";
 import { HeroEditModal } from "./modals/HeroEditModal";
@@ -31,28 +30,46 @@ const HeroSection = () => {
       primary: {
         text: "Hire Me",
         link: "#contact",
+        icon: "fa-solid fa-paper-plane",
       },
       secondary: {
         text: "Download CV",
         link: "/cv.pdf",
+        icon: "fa-solid fa-download",
       },
     },
     techStack: [
-      { name: "Frontend", icon: "Code2" },
-      { name: "Backend", icon: "Terminal" },
-      { name: "System", icon: "Cpu" },
+      { name: "Frontend", icon: "fa-solid fa-code" },
+      { name: "Backend", icon: "fa-solid fa-terminal" },
+      { name: "System", icon: "fa-solid fa-microchip" },
     ],
     socialLinks: [
-      { platform: "GitHub", url: "https://github.com", icon: "Github" },
-      { platform: "LinkedIn", url: "https://linkedin.com", icon: "Linkedin" },
-      { platform: "Email", url: "mailto:sujon@example.com", icon: "Mail" },
-      { platform: "Phone", url: "tel:+1234567890", icon: "Phone" },
+      {
+        platform: "GitHub",
+        url: "https://github.com",
+        icon: "fa-brands fa-github",
+      },
+      {
+        platform: "LinkedIn",
+        url: "https://linkedin.com",
+        icon: "fa-brands fa-linkedin-in",
+      },
+      {
+        platform: "Email",
+        url: "mailto:sujon@example.com",
+        icon: "fa-solid fa-envelope",
+      },
+      { platform: "Phone", url: "tel:+1234567890", icon: "fa-solid fa-phone" },
       {
         platform: "WhatsApp",
         url: "https://wa.me/1234567890",
-        icon: "MessageCircle",
+        icon: "fa-brands fa-whatsapp",
       },
-      { platform: "Facebook", url: "https://facebook.com", icon: "Facebook" },
+      {
+        platform: "Facebook",
+        url: "https://facebook.com",
+        icon: "fa-brands fa-facebook-f",
+      },
     ],
   });
 
@@ -102,19 +119,7 @@ const HeroSection = () => {
     return () => {
       clearInterval(ticker);
     };
-  }, [text, delta]);
-
-  const renderIcon = (iconName: string, className: string = "w-6 h-6") => {
-    const icons = LucideIcons as Record<string, unknown>;
-    const IconComponent = icons[iconName];
-
-    if (IconComponent && typeof IconComponent === "function") {
-      const Icon = IconComponent as React.ComponentType<{ className?: string }>;
-      return <Icon className={className} />;
-    }
-
-    return <LucideIcons.Code2 className={className} />;
-  };
+  }, [text, delta, tick]);
 
   const handleSave = (newData: HeroSectionData) => {
     setHeroData(newData);
@@ -134,13 +139,13 @@ const HeroSection = () => {
 
       {/* Admin Edit Button */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30">
+        <div className="absolute top-32 right-8 z-30">
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
+            className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
             title="Edit Hero Section"
           >
-            <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+            <i className="fa-solid fa-pen-to-square text-base"></i>
           </Button>
         </div>
       )}
@@ -180,7 +185,7 @@ const HeroSection = () => {
               className="h-10 px-8 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {heroData.buttons.primary.text}
-              {renderIcon("Send", "ml-2 w-4 h-4")}
+              <i className={`${heroData.buttons.primary.icon} ml-2`}></i>
             </Button>
             <Button
               variant="outline"
@@ -190,7 +195,7 @@ const HeroSection = () => {
               className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {heroData.buttons.secondary.text}
-              {renderIcon("Download", "ml-2 w-4 h-4")}
+              <i className={`${heroData.buttons.secondary.icon} ml-2`}></i>
             </Button>
           </div>
 
@@ -206,10 +211,9 @@ const HeroSection = () => {
                   className="flex flex-col items-center gap-2 group"
                 >
                   <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
-                    {renderIcon(
-                      stack.icon,
-                      "w-6 h-6 text-slate-300 group-hover:text-emerald-400",
-                    )}
+                    <i
+                      className={`${stack.icon} text-xl text-slate-300 group-hover:text-emerald-400`}
+                    ></i>
                   </div>
                   <span className="text-xs text-slate-500 group-hover:text-emerald-400 transition-colors">
                     {stack.name}
@@ -236,7 +240,7 @@ const HeroSection = () => {
                 className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
                 title={link.platform}
               >
-                {renderIcon(link.icon, "w-4 h-4")}
+                <i className={`${link.icon} text-base`}></i>
               </a>
             ))}
 

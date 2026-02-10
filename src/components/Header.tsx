@@ -2,12 +2,43 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Download, Send } from "lucide-react";
 import Image from "next/image";
+import { isAdminAuthorized } from "@/lib/auth";
+import { HeaderData } from "@/types/header";
+import { HeaderEditModal } from "./modals/HeaderEditModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [headerData, setHeaderData] = useState<HeaderData>({
+    logo: "/logo.png",
+    logoAlt: "Sujon Logo",
+    logoWidth: 200,
+    logoHeight: 50,
+    buttons: {
+      primary: {
+        text: "Hire Me",
+        link: "#contact",
+        icon: "fa-solid fa-paper-plane",
+      },
+      secondary: {
+        text: "Resume",
+        link: "/resume.pdf",
+        icon: "fa-solid fa-download",
+      },
+    },
+  });
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const authStatus = isAdminAuthorized();
+      setIsAuthorized(authStatus);
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,19 +81,35 @@ const Header = () => {
     "Contact",
   ];
 
+  const renderIcon = (iconName: string, className: string = "w-4 h-4") => {
+    const icons = LucideIcons as Record<string, unknown>;
+    const IconComponent = icons[iconName];
+
+    if (IconComponent && typeof IconComponent === "function") {
+      const Icon = IconComponent as React.ComponentType<{ className?: string }>;
+      return <Icon className={className} />;
+    }
+
+    return <LucideIcons.Download className={className} />;
+  };
+
+  const handleSave = (newData: HeaderData) => {
+    setHeaderData(newData);
+    console.log("Saved Header Data:", newData);
+  };
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-300">
       <div className="main-container px-6 py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
             <Image
-              src="/logo.png"
-              alt="Sujon Logo"
-              width={200}
-              height={102}
-              className="w-[200px] h-[50px] object-contain"
+              src={headerData.logo}
+              alt={headerData.logoAlt}
+              width={headerData.logoWidth}
+              height={headerData.logoHeight}
+              className={`w-[${headerData.logoWidth}px] h-[${headerData.logoHeight}px] object-contain`}
             />
-          
           </a>
 
           {/* Desktop Navigation */}
@@ -83,20 +130,37 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            {/* Admin Edit Button */}
+            {isAuthorized && (
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                variant="outline"
+                className="h-10 w-10 p-0 bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg transition-all cursor-pointer"
+                title="Edit Header"
+              >
+                <i className="fa-solid fa-pen-to-square text-sm"></i>
+              </Button>
+            )}
+
             <Button
               variant="outline"
+              onClick={() =>
+                (window.location.href = headerData.buttons.secondary.link)
+              }
               className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
-              Resume
-              <Download className="ml-2 w-4 h-4" />
+              {headerData.buttons.secondary.text}
+              {renderIcon(headerData.buttons.secondary.icon, "ml-2 w-4 h-4")}
             </Button>
 
             <Button
               className="h-10 px-8 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-              onClick={() => (window.location.href = "#contact")}
+              onClick={() =>
+                (window.location.href = headerData.buttons.primary.link)
+              }
             >
-              Hire Me
-              <Send className="ml-2 w-4 h-4" />
+              {headerData.buttons.primary.text}
+              {renderIcon(headerData.buttons.primary.icon, "ml-2 w-4 h-4")}
             </Button>
           </div>
 
@@ -134,24 +198,35 @@ const Header = () => {
           <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
             <Button
               variant="outline"
+              onClick={() => {
+                setIsMenuOpen(false);
+                window.location.href = headerData.buttons.secondary.link;
+              }}
               className="w-full h-10 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg transition-all active:scale-95 cursor-pointer"
             >
-              Resume
-              <Download className="ml-2 w-4 h-4" />
+              {headerData.buttons.secondary.text}
+              {renderIcon(headerData.buttons.secondary.icon, "ml-2 w-4 h-4")}
             </Button>
             <Button
               className="w-full h-10 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all active:scale-95 cursor-pointer"
               onClick={() => {
                 setIsMenuOpen(false);
-                window.location.href = "#contact";
+                window.location.href = headerData.buttons.primary.link;
               }}
             >
-              Hire Me
-              <Send className="ml-2 w-4 h-4" />
+              {headerData.buttons.primary.text}
+              {renderIcon(headerData.buttons.primary.icon, "ml-2 w-4 h-4")}
             </Button>
           </div>
         </div>
       )}
+
+      <HeaderEditModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentData={headerData}
+        onSave={handleSave}
+      />
     </nav>
   );
 };

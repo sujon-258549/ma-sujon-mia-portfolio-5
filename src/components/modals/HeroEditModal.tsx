@@ -335,6 +335,28 @@ export const HeroEditModal = ({
                     className="bg-black/40 border-none h-10 text-xs"
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                    Icon (Font Awesome)
+                  </Label>
+                  <Input
+                    value={formData.buttons.primary.icon}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        buttons: {
+                          ...formData.buttons,
+                          primary: {
+                            ...formData.buttons.primary,
+                            icon: e.target.value,
+                          },
+                        },
+                      })
+                    }
+                    className="bg-black/40 border-none h-10 text-xs font-mono"
+                    placeholder="fa-solid fa-paper-plane"
+                  />
+                </div>
               </div>
               <div className="space-y-4">
                 <h4 className="text-sm font-bold text-sky-500">
@@ -382,6 +404,28 @@ export const HeroEditModal = ({
                     className="bg-black/40 border-none h-10 text-xs"
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                    Icon (Font Awesome)
+                  </Label>
+                  <Input
+                    value={formData.buttons.secondary.icon}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        buttons: {
+                          ...formData.buttons,
+                          secondary: {
+                            ...formData.buttons.secondary,
+                            icon: e.target.value,
+                          },
+                        },
+                      })
+                    }
+                    className="bg-black/40 border-none h-10 text-xs font-mono"
+                    placeholder="fa-solid fa-download"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -422,7 +466,7 @@ export const HeroEditModal = ({
                   </div>
                   <div className="space-y-2">
                     <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                      Icon (Lucide)
+                      Icon (Font Awesome)
                     </Label>
                     <Input
                       value={stack.icon}
@@ -430,6 +474,7 @@ export const HeroEditModal = ({
                         updateTechStack(idx, "icon", e.target.value)
                       }
                       className="bg-black/40 border-none h-10 text-xs font-mono"
+                      placeholder="fa-solid fa-code"
                     />
                   </div>
                   <button
@@ -493,7 +538,7 @@ export const HeroEditModal = ({
                   </div>
                   <div className="space-y-2">
                     <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                      Icon (Lucide)
+                      Icon (Font Awesome)
                     </Label>
                     <Input
                       value={link.icon}
@@ -501,7 +546,7 @@ export const HeroEditModal = ({
                         updateSocialLink(idx, "icon", e.target.value)
                       }
                       className="bg-black/40 border-none h-10 text-xs font-mono"
-                      placeholder="Github"
+                      placeholder="fa-brands fa-github"
                     />
                   </div>
                   <button
