@@ -176,7 +176,7 @@ const ProjectsSection = () => {
 
   const displayedProjects = showAll
     ? sectionData.projects
-    : sectionData.projects.slice(0, 5);
+    : sectionData.projects.slice(0, 3);
 
   return (
     <section id="projects" className="section-spacing bg-[#121A1C] relative">
@@ -192,7 +192,7 @@ const ProjectsSection = () => {
             className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-6 h-12 rounded-full shadow-2xl shadow-emerald-500/20 active:scale-95 cursor-pointer transition-all flex items-center gap-2"
           >
             <Plus className="w-5 h-5" />
-            <span className="hidden sm:inline">New Project</span>
+           
           </Button>
         </div>
       )}
@@ -312,7 +312,7 @@ const ProjectsSection = () => {
           <div className="text-center mt-16">
             <Button
               onClick={() => setShowAll(!showAll)}
-              className="bg-[#172023] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white rounded-lg px-12 h-14 font-bold shadow-xl transition-all group"
+              className="bg-[#172023] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white rounded-lg px-12 h-12 cursor-pointer font-bold shadow-xl transition-all group"
             >
               {showAll ? (
                 <>
@@ -322,7 +322,7 @@ const ProjectsSection = () => {
               ) : (
                 <>
                   View Full Portfolio
-                  <ChevronDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
+                  <ChevronDown className="w-5 h-4 ml-2 group-hover:translate-y-1 transition-transform" />
                 </>
               )}
             </Button>
