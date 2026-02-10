@@ -262,7 +262,7 @@ export const SkillsSectionEditModal = ({
           </div>
         </div>
 
-        <div className="p-6 border-t border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl flex justify-end gap-3 rounded-b-2xl">
+        <div className="p-6 border-t border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl flex justify-end gap-3 sticky bottom-0 z-20">
           <Button
             type="button"
             variant="outline"

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { isAdminAuthorized } from "@/lib/auth";
 import { SkillsSectionEditModal } from "./modals/SkillsSectionEditModal";
@@ -104,10 +103,10 @@ const SkillsSection = () => {
         <div className="absolute top-10 right-10 z-30 group">
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 group-hover:rotate-180 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center p-0"
+            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center p-0"
             title="Edit Skills Section"
           >
-            <Plus className="w-7 h-7" />
+            <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
           </Button>
           <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur group-hover:bg-emerald-500/30 transition-all duration-500 -z-10" />
         </div>
