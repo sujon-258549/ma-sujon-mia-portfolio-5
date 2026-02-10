@@ -145,7 +145,7 @@ export const ContactEditModal = ({
                 {formData.contactCards.map((card, index) => (
                   <div
                     key={index}
-                    className="bg-[#121A1C] border border-white/5 rounded-2xl p-5 space-y-4 relative group/card"
+                    className="bg-[#121A1C] border border-white/5 rounded-lg p-5 space-y-4 relative group/card"
                   >
                     <button
                       type="button"

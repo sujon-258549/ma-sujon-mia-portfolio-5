@@ -84,7 +84,7 @@ export const SkillEditModal = ({
                     setFormData({ ...formData, title: e.target.value })
                   }
                   placeholder="e.g. Frontend Development"
-                  className="bg-black/40 border-white/5 h-12 rounded-xl focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -97,7 +97,7 @@ export const SkillEditModal = ({
                     setFormData({ ...formData, icon: e.target.value })
                   }
                   placeholder="Code2, Server, etc."
-                  className="bg-black/40 border-white/5 h-12 rounded-xl focus:ring-emerald-500/20 text-sm font-mono"
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm font-mono"
                 />
               </div>
             </div>
@@ -139,7 +139,7 @@ export const SkillEditModal = ({
                   </div>
                 ))}
                 {formData.skills.length === 0 && (
-                  <div className="text-center py-8 border-2 border-dashed border-white/5 rounded-xl text-slate-500 text-xs italic">
+                  <div className="text-center py-8 border-2 border-dashed border-white/5 rounded-lg text-slate-500 text-xs italic">
                     No skills added yet. Add your first skill!
                   </div>
                 )}
@@ -152,13 +152,13 @@ export const SkillEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-6 h-11 rounded-xl font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
+              className="px-6 h-11 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
             >
               Discard
             </Button>
             <Button
               type="submit"
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
             >
               {mode === "edit" ? "Update Category" : "Save Category"}
             </Button>

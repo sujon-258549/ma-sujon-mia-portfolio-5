@@ -106,7 +106,7 @@ export const SkillsSectionEditModal = ({
               Section Header
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-2xl border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Section Badge
@@ -116,7 +116,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badge: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-xl focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="e.g. My Skills"
                 />
               </div>
@@ -129,7 +129,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-xl focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="e.g. Showcasing My"
                 />
               </div>
@@ -142,7 +142,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleHighlight: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-xl focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
                   placeholder="e.g. Expertise"
                 />
               </div>
@@ -171,7 +171,7 @@ export const SkillsSectionEditModal = ({
               {formData.categories.map((category, catIndex) => (
                 <div
                   key={category.id}
-                  className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300 shadow-xl"
+                  className="bg-[#121A1C] border border-white/5 rounded-lg p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300 shadow-xl"
                 >
                   <button
                     type="button"
@@ -191,7 +191,7 @@ export const SkillsSectionEditModal = ({
                         onChange={(e) =>
                           updateCategory(catIndex, "title", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 h-11 rounded-xl focus:ring-emerald-500/20 text-sm font-bold"
+                        className="bg-black/40 border-white/5 h-11 rounded-lg focus:ring-emerald-500/20 text-sm font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -203,7 +203,7 @@ export const SkillsSectionEditModal = ({
                         onChange={(e) =>
                           updateCategory(catIndex, "icon", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 h-11 rounded-xl focus:ring-emerald-500/20 text-xs font-mono"
+                        className="bg-black/40 border-white/5 h-11 rounded-lg focus:ring-emerald-500/20 text-xs font-mono"
                         placeholder="Code2, Server, Globe, etc."
                       />
                     </div>
@@ -260,23 +260,22 @@ export const SkillsSectionEditModal = ({
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="p-6 border-t border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl flex justify-end gap-3">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={onClose}
-            className="px-6 h-11 rounded-xl font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
-          >
-            Discard
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
-          >
-            Apply Changes
-          </Button>
+          <div className="pt-10 border-t border-emerald-500/10 flex justify-end gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="px-6 h-11 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
+            >
+              Discard
+            </Button>
+            <Button
+              onClick={handleSubmit}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
+            >
+              Apply Changes
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

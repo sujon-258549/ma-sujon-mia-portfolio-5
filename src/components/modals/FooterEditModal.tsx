@@ -153,7 +153,7 @@ export const FooterEditModal = ({
                   <span>Column 1: Brand & Socials</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl">
+                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl">
                   {/* Logo */}
                   <div className="space-y-4">
                     <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
@@ -161,7 +161,7 @@ export const FooterEditModal = ({
                       Brand Logo
                     </Label>
                     <div className="flex flex-col gap-4">
-                      <div className="relative w-full h-32 bg-black/40 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden p-4 group">
+                      <div className="relative w-full h-32 bg-black/40 rounded-lg border border-white/10 flex items-center justify-center overflow-hidden p-4 group">
                         <Image
                           src={formData.logo}
                           alt="Preview"
@@ -230,7 +230,7 @@ export const FooterEditModal = ({
                       {formData.socialLinks.map((social, index) => (
                         <div
                           key={`social-${index}`}
-                          className="flex flex-col gap-4 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-300 relative group/social"
+                          className="flex flex-col gap-4 p-4 bg-white/5 rounded-lg border border-white/5 hover:border-emerald-500/30 transition-all duration-300 relative group/social"
                         >
                           <button
                             type="button"
@@ -296,7 +296,7 @@ export const FooterEditModal = ({
                   <span>Column 2: Resources</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl flex-1">
+                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl flex-1">
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
@@ -350,7 +350,7 @@ export const FooterEditModal = ({
                       {formData.quickLinks.map((link, index) => (
                         <div
                           key={`link-${index}`}
-                          className="p-4 bg-white/5 rounded-xl border border-white/5 space-y-3 hover:border-emerald-500/30 transition-colors relative group/link"
+                          className="p-4 bg-white/5 rounded-lg border border-white/5 space-y-3 hover:border-emerald-500/30 transition-colors relative group/link"
                         >
                           <button
                             type="button"
@@ -414,7 +414,7 @@ export const FooterEditModal = ({
                   <span>Column 3: Contact Details</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl flex-1">
+                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl flex-1">
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
@@ -469,7 +469,7 @@ export const FooterEditModal = ({
                       {formData.contactItems.map((item, index) => (
                         <div
                           key={`contact-${index}`}
-                          className="space-y-4 p-4 bg-white/5 rounded-xl border border-white/5 relative group/contact"
+                          className="space-y-4 p-4 bg-white/5 rounded-lg border border-white/5 relative group/contact"
                         >
                           <button
                             type="button"
@@ -480,7 +480,7 @@ export const FooterEditModal = ({
                           </button>
 
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                               <i
                                 className={`${item.icon || "fa-solid fa-envelope"} text-emerald-500 text-lg`}
                               ></i>
@@ -562,7 +562,7 @@ export const FooterEditModal = ({
                       ))}
                     </div>
 
-                    <div className="mt-12 p-5 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 text-xs text-emerald-500/70 leading-relaxed italic relative overflow-hidden group">
+                    <div className="mt-12 p-5 bg-emerald-500/5 rounded-lg border border-emerald-500/10 text-xs text-emerald-500/70 leading-relaxed italic relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/5 rounded-full blur-xl group-hover:bg-emerald-500/10 transition-colors" />
                       <div className="relative z-10">
                         <i className="fa-solid fa-circle-info mr-2 text-emerald-500"></i>
@@ -582,7 +582,7 @@ export const FooterEditModal = ({
                 <i className="fa-solid fa-window-minimize"></i>
                 <span>Bottom Bar: Legal & Credits</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 shadow-xl">
+              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
