@@ -17,7 +17,9 @@ const Footer = () => {
       "Crafting digital experiences with clean code and modern design. Transforming ideas into reality through innovative web solutions.",
     logo: "https://i.ibb.co.com/r22rB4k4/logo.webp",
     contactTitle: "Get In Touch",
+    contactTitleIcon: "fa-solid fa-paper-plane",
     linksTitle: "Quick Links",
+    linksTitleIcon: "fa-solid fa-link",
     copyrightText: "Sujon.dev. All rights reserved.",
     craftedBy: "Crafted with",
     socialLinks: [
@@ -147,6 +149,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-base font-bold text-foreground flex items-center gap-2">
               <div className="w-1 h-5 bg-emerald-500 rounded-full" />
+              <i
+                className={`${footerData.linksTitleIcon || "fa-solid fa-link"} text-emerald-500 text-xs`}
+              ></i>
               {footerData.linksTitle || "Quick Links"}
             </h4>
             <ul className="space-y-3">
@@ -167,6 +172,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-base font-bold text-foreground flex items-center gap-2">
               <div className="w-1 h-5 bg-emerald-500 rounded-full" />
+              <i
+                className={`${footerData.contactTitleIcon || "fa-solid fa-paper-plane"} text-emerald-500 text-xs`}
+              ></i>
               {footerData.contactTitle || "Get In Touch"}
             </h4>
             <div className="space-y-4 text-sm">

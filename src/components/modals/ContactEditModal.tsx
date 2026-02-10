@@ -43,6 +43,23 @@ export const ContactEditModal = ({
     setFormData({ ...formData, contactCards: newCards });
   };
 
+  const addCard = () => {
+    const newCard: ContactInfo = {
+      icon: "fa-solid fa-circle-info",
+      title: "New Label",
+      value: "Details here...",
+    };
+    setFormData({
+      ...formData,
+      contactCards: [...formData.contactCards, newCard],
+    });
+  };
+
+  const removeCard = (index: number) => {
+    const newCards = formData.contactCards.filter((_, i) => i !== index);
+    setFormData({ ...formData, contactCards: newCards });
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[90vw] w-[95vw] h-[90vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none">
@@ -108,18 +125,35 @@ export const ContactEditModal = ({
               </div>
             </div>
 
-            {/* Contact Cards */}
             <div className="space-y-4">
-              <Label className="text-emerald-500 uppercase text-xs tracking-[0.2em] font-black block mb-4">
-                <i className="fa-solid fa-address-card mr-2"></i> Contact
-                Information Cards
-              </Label>
+              <div className="flex items-center justify-between mb-4">
+                <Label className="text-emerald-500 uppercase text-xs tracking-[0.2em] font-black">
+                  <i className="fa-solid fa-address-card mr-2"></i> Contact
+                  Information Cards
+                </Label>
+                <Button
+                  type="button"
+                  onClick={addCard}
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2 cursor-pointer transition-all"
+                >
+                  <i className="fa-solid fa-plus mr-1"></i> Add Card
+                </Button>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {formData.contactCards.map((card, index) => (
                   <div
                     key={index}
-                    className="bg-[#121A1C] border border-white/5 rounded-2xl p-5 space-y-4"
+                    className="bg-[#121A1C] border border-white/5 rounded-2xl p-5 space-y-4 relative group/card"
                   >
+                    <button
+                      type="button"
+                      onClick={() => removeCard(index)}
+                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10 cursor-pointer"
+                    >
+                      <i className="fa-solid fa-xmark text-[10px]"></i>
+                    </button>
                     <div className="flex items-center gap-3 border-b border-white/5 pb-3">
                       <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                         <i className={`${card.icon} text-emerald-500`}></i>
@@ -184,13 +218,13 @@ export const ContactEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all"
+              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all cursor-pointer"
             >
               Discard Changes
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-8 h-11 rounded-lg font-bold shadow-xl shadow-emerald-500/20"
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-8 h-11 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer"
             >
               Publish Changes
             </Button>

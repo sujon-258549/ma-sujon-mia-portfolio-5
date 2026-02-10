@@ -61,7 +61,7 @@ const ContactSection = () => {
           <Button
             onClick={() => setIsModalOpen(true)}
             variant="outline"
-            className="bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-full px-6 py-6 shadow-2xl backdrop-blur-md font-bold flex items-center gap-3 transition-all active:scale-95"
+            className="bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-full px-6 py-6 shadow-2xl backdrop-blur-md font-bold flex items-center gap-3 transition-all active:scale-95 cursor-pointer"
           >
             <Settings2 className="w-5 h-5 animate-spin-slow" />
             Edit Section
@@ -145,7 +145,7 @@ const ContactSection = () => {
                   className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50 resize-none header-none"
                 />
               </div>
-              <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10">
+              <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer">
                 <Send className="w-5 h-5 mr-3" />
                 Send Message
               </Button>

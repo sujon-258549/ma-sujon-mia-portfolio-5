@@ -221,7 +221,7 @@ export const FooterEditModal = ({
                         onClick={addSocialLink}
                         variant="ghost"
                         size="sm"
-                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2 cursor-pointer transition-all"
                       >
                         <i className="fa-solid fa-plus mr-1"></i> Add
                       </Button>
@@ -235,7 +235,7 @@ export const FooterEditModal = ({
                           <button
                             type="button"
                             onClick={() => removeSocialLink(index)}
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/social:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/social:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10 cursor-pointer"
                           >
                             <i className="fa-solid fa-xmark text-[10px]"></i>
                           </button>
@@ -297,17 +297,38 @@ export const FooterEditModal = ({
                 </div>
 
                 <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl flex-1">
-                  <div className="space-y-2">
-                    <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
-                      Heading Title
-                    </Label>
-                    <Input
-                      value={formData.linksTitle}
-                      onChange={(e) =>
-                        setFormData({ ...formData, linksTitle: e.target.value })
-                      }
-                      className="bg-white/5 border-white/10 text-emerald-500 font-bold"
-                    />
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Heading Title
+                      </Label>
+                      <Input
+                        value={formData.linksTitle}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            linksTitle: e.target.value,
+                          })
+                        }
+                        className="bg-white/5 border-white/10 text-emerald-500 font-bold"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Heading Icon (FontAwesome)
+                      </Label>
+                      <Input
+                        value={formData.linksTitleIcon}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            linksTitleIcon: e.target.value,
+                          })
+                        }
+                        className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs"
+                        placeholder="fa-solid fa-link"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-4 pt-6 border-t border-white/5">
@@ -320,7 +341,7 @@ export const FooterEditModal = ({
                         onClick={addQuickLink}
                         variant="ghost"
                         size="sm"
-                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2 cursor-pointer transition-all"
                       >
                         <i className="fa-solid fa-plus mr-1"></i> Add Link
                       </Button>
@@ -334,7 +355,7 @@ export const FooterEditModal = ({
                           <button
                             type="button"
                             onClick={() => removeQuickLink(index)}
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/link:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/link:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10 cursor-pointer"
                           >
                             <i className="fa-solid fa-xmark text-[10px]"></i>
                           </button>
@@ -379,20 +400,38 @@ export const FooterEditModal = ({
                 </div>
 
                 <div className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 space-y-6 shadow-xl flex-1">
-                  <div className="space-y-2">
-                    <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
-                      Heading Title
-                    </Label>
-                    <Input
-                      value={formData.contactTitle}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          contactTitle: e.target.value,
-                        })
-                      }
-                      className="bg-white/5 border-white/10 text-emerald-500 font-bold"
-                    />
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Heading Title
+                      </Label>
+                      <Input
+                        value={formData.contactTitle}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            contactTitle: e.target.value,
+                          })
+                        }
+                        className="bg-white/5 border-white/10 text-emerald-500 font-bold"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
+                        Heading Icon (FontAwesome)
+                      </Label>
+                      <Input
+                        value={formData.contactTitleIcon}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            contactTitleIcon: e.target.value,
+                          })
+                        }
+                        className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs"
+                        placeholder="fa-solid fa-paper-plane"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-8 pt-8 border-t border-white/5">
@@ -405,7 +444,7 @@ export const FooterEditModal = ({
                         onClick={addContactItem}
                         variant="ghost"
                         size="sm"
-                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2"
+                        className="h-7 text-[10px] bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-md px-2 cursor-pointer transition-all"
                       >
                         <i className="fa-solid fa-plus mr-1"></i> Add Item
                       </Button>
@@ -420,7 +459,7 @@ export const FooterEditModal = ({
                           <button
                             type="button"
                             onClick={() => removeContactItem(index)}
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/contact:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10"
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover/contact:opacity-100 transition-opacity shadow-lg hover:bg-red-600 z-10 cursor-pointer"
                           >
                             <i className="fa-solid fa-xmark text-[10px]"></i>
                           </button>
@@ -567,13 +606,13 @@ export const FooterEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1"
+              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1 cursor-pointer"
             >
               Discard Changes
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2"
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2 cursor-pointer"
             >
               Publish Changes
             </Button>
