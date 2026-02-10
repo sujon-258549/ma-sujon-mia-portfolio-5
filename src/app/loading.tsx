@@ -4,7 +4,7 @@ export default function Loading() {
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse delay-700" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse [animation-delay:700ms]" />
       </div>
 
       {/* Loading Content */}
@@ -16,7 +16,7 @@ export default function Loading() {
 
           {/* Inner Ring */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-500 animate-spin-reverse" />
+            <div className="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-500 animate-[spin_1.5s_linear_infinite_reverse]" />
           </div>
 
           {/* Center Dot */}
@@ -37,42 +37,9 @@ export default function Loading() {
 
         {/* Progress Bar */}
         <div className="w-64 h-1 bg-white/5 rounded-full overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 animate-progress" />
+          <div className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 animate-[shimmer_1.5s_ease-in-out_infinite]" />
         </div>
       </div>
-
-      {/* Custom Animations */}
-      <style jsx>{`
-        @keyframes spin-reverse {
-          from {
-            transform: rotate(360deg);
-          }
-          to {
-            transform: rotate(0deg);
-          }
-        }
-
-        @keyframes progress {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        .animate-spin-reverse {
-          animation: spin-reverse 1.5s linear infinite;
-        }
-
-        .animate-progress {
-          animation: progress 1.5s ease-in-out infinite;
-        }
-
-        .delay-700 {
-          animation-delay: 700ms;
-        }
-      `}</style>
     </div>
   );
 }
