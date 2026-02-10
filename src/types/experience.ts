@@ -6,6 +6,7 @@ export interface Experience {
   period: string;
   duration: string;
   type: string;
+  icon?: string; // FontAwesome icon
   description: string;
   achievements: string[];
   responsibilities: string[];
