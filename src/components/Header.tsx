@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { isAdminAuthorized } from "@/lib/auth";
 import { HeaderData } from "@/types/header";
 import { HeaderEditModal } from "./modals/HeaderEditModal";
+import { useAuth, isAdminAuthorized } from "@/lib/auth";
 
 const Header = () => {
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
       setIsAuthorized(authStatus);
     };
     checkAuth();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,6 +131,19 @@ const Header = () => {
               </Button>
             )}
 
+            {/* Logout Button */}
+            {user && (
+              <Button
+                onClick={logout}
+                variant="outline"
+                className="h-10 px-4 bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all cursor-pointer"
+                title="Logout"
+              >
+                <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                Logout
+              </Button>
+            )}
+
             <Button
               variant="outline"
               onClick={() =>
@@ -184,6 +198,21 @@ const Header = () => {
             </a>
           ))}
           <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+            {/* Mobile Logout Button */}
+            {user && (
+              <Button
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  logout();
+                }}
+                variant="outline"
+                className="w-full h-10 bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white font-medium rounded-lg transition-all active:scale-95 cursor-pointer"
+              >
+                <i className="fa-solid fa-right-from-bracket mr-2"></i>
+                Logout
+              </Button>
+            )}
+
             <Button
               variant="outline"
               onClick={() => {

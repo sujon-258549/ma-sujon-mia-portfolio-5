@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { AuthResponse, User } from "@/types/auth";
 
 const BASE_URL =
@@ -37,8 +38,16 @@ export const authService = {
    */
   setAuthData: (token: string, user?: User) => {
     localStorage.setItem("token", token);
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+    try {
+      const decodedUser = jwtDecode<User>(token);
+      // Use provided user or fallback to decoded data from token
+      const userData = user || decodedUser;
+      localStorage.setItem("user", JSON.stringify(userData));
+    } catch (error) {
+      console.error("Failed to decode token:", error);
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+      }
     }
   },
 
@@ -69,5 +78,41 @@ export const authService = {
       return user ? JSON.parse(user) : null;
     }
     return null;
+  },
+  /**
+   * Get current user profile from backend
+   */
+  getMe: async (): Promise<User> => {
+    try {
+      const token = authService.getToken();
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      const response = await fetch(`${BASE_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch user profile");
+      }
+
+      // If data is wrapped in a 'data' property, extract it
+      const user = data.data || data;
+      return user;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error(
+        "An unexpected error occurred while fetching user profile",
+      );
+    }
   },
 };

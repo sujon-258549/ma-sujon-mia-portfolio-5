@@ -1,15 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function NotFound() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#0E1416] flex items-center justify-center relative overflow-hidden">
       {/* Animated Background */}
@@ -20,11 +13,7 @@ export default function NotFound() {
       </div>
 
       {/* Content */}
-      <div
-        className={`relative z-10 max-w-2xl mx-auto px-6 text-center transition-all duration-1000 ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
+      <div className="relative z-10 max-w-2xl mx-auto px-6 text-center animate-fade-in-up">
         {/* 404 Number */}
         <div className="relative mb-8">
           <h1 className="text-[150px] md:text-[200px] font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-cyan-500 to-emerald-500 leading-none select-none">
@@ -51,7 +40,7 @@ export default function NotFound() {
         </h2>
         <p className="text-slate-400 text-lg mb-8 leading-relaxed">
           Oops! The page you,re looking for seems to have wandered off into the
-          digital void. Do,'t worry, even the best explorers get lost sometimes.
+          digital void. Don,t worry, even the best explorers get lost sometimes.
         </p>
 
         {/* Action Buttons */}

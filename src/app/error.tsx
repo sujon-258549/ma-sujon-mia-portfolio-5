@@ -17,16 +17,19 @@ export default function Error({
   >([]);
 
   useEffect(() => {
-    setMounted(true);
-    console.error("Error occurred:", error);
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+      // Generate random particles on client side only to avoid hydration mismatch
+      const newParticles = [...Array(8)].map((_, i) => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        delay: `${i * 200}ms`,
+      }));
+      setParticles(newParticles);
+    });
 
-    // Generate random particles on client side only to avoid hydration mismatch
-    const newParticles = [...Array(8)].map((_, i) => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      delay: `${i * 200}ms`,
-    }));
-    setParticles(newParticles);
+    console.error("Error occurred:", error);
+    return () => cancelAnimationFrame(frame);
   }, [error]);
 
   useEffect(() => {
