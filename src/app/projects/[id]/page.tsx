@@ -86,11 +86,11 @@ export default function ProjectDetailsPage() {
           {/* Hero Header */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6 font-mono text-xs uppercase tracking-widest text-emerald-500 font-black">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6 font-mono text-xs uppercase tracking-widest text-emerald-500 font-black">
                 <Rocket className="w-3 h-3" />
                 {project.category}
               </div>
-              <h1 className="text-4xl md:text-7xl font-black mb-6 leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-[1.1]">
                 {project.title}
               </h1>
               <p className="text-slate-400 text-xl md:text-2xl leading-relaxed mb-10 italic border-l-4 border-emerald-500/50 pl-6">
@@ -98,13 +98,13 @@ export default function ProjectDetailsPage() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-8 h-14 rounded-2xl shadow-xl shadow-emerald-500/10 transition-all active:scale-95 cursor-pointer">
+                <Button className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-10 h-10 rounded-lg shadow-xl shadow-emerald-500/10 transition-all active:scale-95 cursor-pointer">
                   <Globe className="w-5 h-5 mr-3" />
                   Live Demo
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold px-8 h-14 rounded-2xl transition-all cursor-pointer"
+                  className="border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold px-10 h-10 rounded-lg transition-all cursor-pointer"
                 >
                   <Github className="w-5 h-5 mr-3" />
                   Source Code
@@ -113,16 +113,16 @@ export default function ProjectDetailsPage() {
             </div>
 
             <div
-              className={`aspect-video ${project.image} rounded-[2.5rem] border border-white/10 shadow-3xl flex items-center justify-center p-1 relative overflow-hidden group`}
+              className={`aspect-video ${project.image} rounded-lg border border-white/10 shadow-3xl flex items-center justify-center p-1 relative overflow-hidden group`}
             >
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />
               <Code2 className="w-20 h-20 text-white/20 group-hover:scale-125 group-hover:text-emerald-500/30 transition-all duration-700" />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-8 space-y-20">
+            <div className="lg:col-span-8 space-y-10">
               {/* About Section */}
               <section>
                 <h2 className="text-3xl font-bold mb-8 flex items-center gap-4">
@@ -135,7 +135,7 @@ export default function ProjectDetailsPage() {
               </section>
 
               {/* Key Features */}
-              <section className="bg-slate-900/40 border border-white/5 rounded-[3rem] p-10 md:p-16">
+              <section className="bg-slate-900/40 border border-white/5 rounded-lg p-4 md:p-6">
                 <h2 className="text-3xl font-bold mb-10 flex items-center gap-4">
                   <Rocket className="w-8 h-8 text-sky-500" />
                   Key Features
@@ -144,7 +144,7 @@ export default function ProjectDetailsPage() {
                   {project.features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-4 p-5 bg-white/5 rounded-2xl border border-white/5 hover:border-emerald-500/20 transition-all"
+                      className="flex items-start gap-4 p-5 bg-white/5 rounded-lg border border-white/5 hover:border-emerald-500/20 transition-all"
                     >
                       <ShieldCheck className="w-6 h-6 text-emerald-500 shrink-0" />
                       <span className="text-slate-200">{feature}</span>
@@ -154,7 +154,7 @@ export default function ProjectDetailsPage() {
               </section>
 
               {/* Challenges & Solutions */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <section className="space-y-6">
                   <h3 className="text-xl font-bold text-amber-500 flex items-center gap-3">
                     <Target className="w-5 h-5" />
@@ -164,7 +164,7 @@ export default function ProjectDetailsPage() {
                     {project.challenges?.map((c, i) => (
                       <div
                         key={i}
-                        className="flex gap-4 p-4 bg-red-500/5 rounded-2xl border border-red-500/10 text-slate-400 text-sm italic"
+                        className="flex gap-4 p-4 bg-red-500/5 rounded-lg border border-red-500/10 text-slate-400 text-sm italic"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
                         {c}
@@ -181,7 +181,7 @@ export default function ProjectDetailsPage() {
                     {project.solutions?.map((s, i) => (
                       <div
                         key={i}
-                        className="flex gap-4 p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10 text-slate-400 text-sm"
+                        className="flex gap-4 p-4 bg-emerald-500/5 rounded-lg border border-emerald-500/10 text-slate-400 text-sm"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                         {s}
@@ -194,7 +194,7 @@ export default function ProjectDetailsPage() {
 
             {/* Sidebar Stats & Tech */}
             <div className="lg:col-span-4 space-y-10">
-              <div className="bg-[#172023] border border-white/5 rounded-[2.5rem] p-8 space-y-10 sticky top-32">
+              <div className="bg-[#172023] border border-white/5 rounded-lg p-8 space-y-10 sticky top-32">
                 {/* Tech Stack */}
                 <div className="space-y-6">
                   <h4 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-slate-500 border-b border-white/5 pb-4">
@@ -205,7 +205,7 @@ export default function ProjectDetailsPage() {
                     {project.tags.map((tag, i) => (
                       <span
                         key={i}
-                        className="px-4 py-2 bg-black/40 text-emerald-500 border border-emerald-500/20 rounded-xl text-xs font-bold"
+                        className="px-4 py-2 bg-black/40 text-emerald-500 border border-emerald-500/20 rounded-lg text-xs font-bold"
                       >
                         {tag}
                       </span>
@@ -218,7 +218,7 @@ export default function ProjectDetailsPage() {
                   {project.stats?.map((stat, i) => (
                     <div
                       key={i}
-                      className="p-6 bg-black/40 rounded-3xl border border-white/5 text-center"
+                      className="p-6 bg-black/40 rounded-lg border border-white/5 text-center"
                     >
                       <div className="text-2xl font-black text-white mb-1">
                         {stat.value}
@@ -231,7 +231,7 @@ export default function ProjectDetailsPage() {
                 </div>
 
                 <Link href={project.liveUrl} target="_blank" className="block">
-                  <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold h-14 rounded-2xl group cursor-pointer transition-all">
+                  <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold h-10 rounded-lg group cursor-pointer transition-all">
                     Visit Live Site
                     <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
