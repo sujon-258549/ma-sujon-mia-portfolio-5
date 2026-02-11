@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -30,8 +30,15 @@ export const FooterEditModal = ({
 }: FooterEditModalProps) => {
   const [formData, setFormData] = useState<FooterData>(currentData);
 
+  useEffect(() => {
+    if (isOpen) {
+      console.log("Current Footer Data (Modal Opened):", currentData);
+    }
+  }, [isOpen, currentData]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Final Footer Data to Save:", {formData});
     onSave(formData);
     onClose();
   };
