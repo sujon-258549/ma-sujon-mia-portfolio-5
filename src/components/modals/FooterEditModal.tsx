@@ -11,9 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
+import { toast } from "sonner";
 import { FooterData, SocialLink, QuickLink, ContactItem } from "@/types/footer";
 import Image from "next/image";
+import { dynamicContentService } from "@/services/dynamicContentService";
 
 interface FooterEditModalProps {
   isOpen: boolean;
@@ -36,10 +37,24 @@ export const FooterEditModal = ({
     }
   }, [isOpen, currentData]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Final Footer Data to Save:", {formData});
     onSave(formData);
+
+    const update ={
+      ...formData,
+      type:"footer"
+    }
+    try {
+
+      console.log('footer data', update)
+      const res = await dynamicContentService.upsertContent(update);
+      if(res.success){
+        toast.success("Footer updated successfully!");
+      }
+    } catch (error) {
+      
+    }
     onClose();
   };
 

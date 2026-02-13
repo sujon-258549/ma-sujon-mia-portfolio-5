@@ -19,6 +19,7 @@ export interface ContactItem {
 }
 
 export interface FooterData {
+  type?: string;
   description: string;
   logo: string;
   contactTitle: string;

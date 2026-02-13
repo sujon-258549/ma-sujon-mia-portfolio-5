@@ -34,6 +34,7 @@ export const ProjectEditModal = ({
     shortDescription: project?.shortDescription || "",
     longDescription: project?.longDescription || "",
     image: project?.image || "bg-gradient-to-br from-slate-900 to-slate-800",
+    imageName: project?.imageName || "",
     thumbnail: project?.thumbnail || "",
     tags: project?.tags || [],
     liveUrl: project?.liveUrl || "",
@@ -42,23 +43,43 @@ export const ProjectEditModal = ({
     role: project?.role || "",
     problem: project?.problem || "",
     plan: project?.plan || "",
-    teamMembers: project?.teamMembers || [],
+    teamMembers:
+      project?.teamMembers && project.teamMembers.length > 0
+        ? project.teamMembers
+        : [""],
     duration: project?.duration || "",
-    features: project?.features || [],
+    features:
+      project?.features && project.features.length > 0
+        ? project.features
+        : [""],
     technologies: project?.technologies || {
       frontend: [],
       backend: [],
       database: [],
       tools: [],
     },
-    challenges: project?.challenges || [],
-    solutions: project?.solutions || [],
+    challenges:
+      project?.challenges && project.challenges.length > 0
+        ? project.challenges
+        : [""],
+    solutions:
+      project?.solutions && project.solutions.length > 0
+        ? project.solutions
+        : [{ text: "", image: "" }],
+    gallery:
+      project?.gallery && project.gallery.length > 0 ? project.gallery : [""],
+    stats:
+      project?.stats && project.stats.length > 0
+        ? project.stats
+        : [{ label: "", value: "" }],
     detailedDescriptions: project?.detailedDescriptions || [],
   }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+
+    console.log("updateData", formData);
     onClose();
   };
 
@@ -70,7 +91,7 @@ export const ProjectEditModal = ({
   };
 
   const handleArrayUpdate = (
-    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
+    field: "tags" | "features" | "challenges" | "teamMembers",
     index: number,
     value: string,
   ) => {
@@ -81,7 +102,7 @@ export const ProjectEditModal = ({
   };
 
   const addArrayItem = (
-    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
+    field: "tags" | "features" | "challenges" | "teamMembers",
   ) => {
     const arr = (formData[field] as string[]) || [];
     setFormData((prev) => ({
@@ -91,13 +112,38 @@ export const ProjectEditModal = ({
   };
 
   const removeArrayItem = (
-    field: "tags" | "features" | "challenges" | "solutions" | "teamMembers",
+    field: "tags" | "features" | "challenges" | "teamMembers",
     index: number,
   ) => {
     const arr = (formData[field] as string[]) || [];
     setFormData((prev) => ({
       ...prev,
       [field]: arr.filter((_, i) => i !== index),
+    }));
+  };
+
+  // Solution handlers (object array: {text, image})
+  const addSolution = () => {
+    setFormData((prev) => ({
+      ...prev,
+      solutions: [...(prev.solutions || []), { text: "", image: "" }],
+    }));
+  };
+
+  const updateSolution = (
+    index: number,
+    field: "text" | "image",
+    value: string,
+  ) => {
+    const newSolutions = [...(formData.solutions || [])];
+    newSolutions[index] = { ...newSolutions[index], [field]: value };
+    setFormData((prev) => ({ ...prev, solutions: newSolutions }));
+  };
+
+  const removeSolution = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      solutions: (prev.solutions || []).filter((_, i) => i !== index),
     }));
   };
 
@@ -156,6 +202,52 @@ export const ProjectEditModal = ({
       detailedDescriptions: (prev.detailedDescriptions || []).filter(
         (_, i) => i !== index,
       ),
+    }));
+  };
+
+  // Gallery handlers
+  const addGalleryItem = () => {
+    setFormData((prev) => ({
+      ...prev,
+      gallery: [...(prev.gallery || []), ""],
+    }));
+  };
+
+  const updateGalleryItem = (index: number, value: string) => {
+    const newGallery = [...(formData.gallery || [])];
+    newGallery[index] = value;
+    setFormData((prev) => ({ ...prev, gallery: newGallery }));
+  };
+
+  const removeGalleryItem = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      gallery: (prev.gallery || []).filter((_, i) => i !== index),
+    }));
+  };
+
+  // Stats handlers
+  const addStat = () => {
+    setFormData((prev) => ({
+      ...prev,
+      stats: [...(prev.stats || []), { label: "", value: "" }],
+    }));
+  };
+
+  const updateStat = (
+    index: number,
+    field: "label" | "value",
+    value: string,
+  ) => {
+    const newStats = [...(formData.stats || [])];
+    newStats[index] = { ...newStats[index], [field]: value };
+    setFormData((prev) => ({ ...prev, stats: newStats }));
+  };
+
+  const removeStat = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      stats: (prev.stats || []).filter((_, i) => i !== index),
     }));
   };
 
@@ -232,12 +324,41 @@ export const ProjectEditModal = ({
 
                     <div className="space-y-3">
                       <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        Short Description
+                      </Label>
+                      <Textarea
+                        value={formData.shortDescription}
+                        onChange={(e) =>
+                          updateField("shortDescription", e.target.value)
+                        }
+                        className="bg-black/40 border-white/5 text-slate-300 min-h-[80px] rounded-lg"
+                        placeholder="Brief one-liner about the project..."
+                      />
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        Long Description
+                      </Label>
+                      <Textarea
+                        value={formData.longDescription}
+                        onChange={(e) =>
+                          updateField("longDescription", e.target.value)
+                        }
+                        className="bg-black/40 border-white/5 text-slate-300 min-h-[120px] rounded-lg"
+                        placeholder="Detailed description of the project..."
+                      />
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
                         Problem Statement
                       </Label>
                       <Textarea
                         value={formData.problem}
                         onChange={(e) => updateField("problem", e.target.value)}
                         className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                        placeholder="What problem does this project solve?"
                       />
                     </div>
 
@@ -249,6 +370,7 @@ export const ProjectEditModal = ({
                         value={formData.plan}
                         onChange={(e) => updateField("plan", e.target.value)}
                         className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                        placeholder="How was the project planned and executed?"
                       />
                     </div>
                   </div>
@@ -283,12 +405,39 @@ export const ProjectEditModal = ({
                       </div>
                       <div className="space-y-3">
                         <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
-                          Cover Class
+                          Image Name / Alt Text
+                        </Label>
+                        <Input
+                          value={formData.imageName || ""}
+                          onChange={(e) =>
+                            updateField("imageName", e.target.value)
+                          }
+                          className="bg-white/5 border-white/5 text-white"
+                          placeholder="e.g. E-Commerce Dashboard Preview"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Cover Class / Image URL
                         </Label>
                         <Input
                           value={formData.image}
                           onChange={(e) => updateField("image", e.target.value)}
                           className="bg-white/5 border-white/5 text-emerald-400 font-mono"
+                          placeholder="bg-gradient-to-br from-... or image URL"
+                        />
+                      </div>
+                      <div className="space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          Thumbnail URL
+                        </Label>
+                        <Input
+                          value={formData.thumbnail}
+                          onChange={(e) =>
+                            updateField("thumbnail", e.target.value)
+                          }
+                          className="bg-white/5 border-white/5 text-sky-400 font-mono"
+                          placeholder="https://... thumbnail image"
                         />
                       </div>
                     </div>
@@ -620,6 +769,171 @@ export const ProjectEditModal = ({
                         </div>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* Solutions Section */}
+                <div className="mt-10 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <Label className="flex items-center gap-2 text-green-500 font-black uppercase text-[10px] tracking-widest">
+                      <i className="fa-solid fa-lightbulb text-base"></i>{" "}
+                      Solutions
+                    </Label>
+                    <Button
+                      type="button"
+                      onClick={addSolution}
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 text-green-500 cursor-pointer"
+                    >
+                      + Add
+                    </Button>
+                  </div>
+                  <div className="space-y-4">
+                    {formData.solutions?.map((sol, i) => (
+                      <div
+                        key={i}
+                        className="bg-black/30 p-4 rounded-lg border border-white/5 space-y-3 relative group/sol hover:border-green-500/20 transition-all"
+                      >
+                        <Button
+                          type="button"
+                          onClick={() => removeSolution(i)}
+                          variant="ghost"
+                          className="absolute top-2 right-2 text-red-500/30 group-hover/sol:text-red-500 h-7 w-7 p-0 cursor-pointer"
+                        >
+                          <i className="fa-solid fa-xmark text-xs"></i>
+                        </Button>
+                        <div className="space-y-2">
+                          <Label className="text-[9px] text-slate-500 uppercase font-bold tracking-widest">
+                            Solution Text
+                          </Label>
+                          <Input
+                            value={sol.text}
+                            onChange={(e) =>
+                              updateSolution(i, "text", e.target.value)
+                            }
+                            className="bg-white/5 border-white/5 h-9 text-xs"
+                            placeholder="Solution description..."
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-[9px] text-slate-500 uppercase font-bold tracking-widest flex items-center gap-1">
+                            <i className="fa-solid fa-image text-green-500/50"></i>
+                            Solution Image URL
+                          </Label>
+                          <Input
+                            value={sol.image || ""}
+                            onChange={(e) =>
+                              updateSolution(i, "image", e.target.value)
+                            }
+                            className="bg-white/5 border-white/5 h-9 text-xs font-mono text-green-400"
+                            placeholder="https://... solution image"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gallery Section */}
+                <div className="mt-10 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <Label className="flex items-center gap-2 text-purple-500 font-black uppercase text-[10px] tracking-widest">
+                      <i className="fa-solid fa-images text-base"></i> Gallery
+                      Images
+                    </Label>
+                    <Button
+                      type="button"
+                      onClick={addGalleryItem}
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 text-purple-500 cursor-pointer"
+                    >
+                      + Add
+                    </Button>
+                  </div>
+                  <div className="space-y-3">
+                    {formData.gallery?.map((img, i) => (
+                      <div key={i} className="flex gap-2">
+                        <Input
+                          value={img}
+                          onChange={(e) => updateGalleryItem(i, e.target.value)}
+                          className="bg-black/20 text-xs border-white/5 font-mono"
+                          placeholder="Image URL..."
+                        />
+                        <Button
+                          type="button"
+                          onClick={() => removeGalleryItem(i)}
+                          size="sm"
+                          variant="ghost"
+                          className="text-red-500/50 hover:text-red-500 cursor-pointer"
+                        >
+                          x
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Stats Section */}
+                <div className="mt-10 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <Label className="flex items-center gap-2 text-rose-500 font-black uppercase text-[10px] tracking-widest">
+                      <i className="fa-solid fa-chart-bar text-base"></i>{" "}
+                      Project Stats
+                    </Label>
+                    <Button
+                      type="button"
+                      onClick={addStat}
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 text-rose-500 cursor-pointer"
+                    >
+                      + Add Stat
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {formData.stats?.map((stat, i) => (
+                      <div
+                        key={i}
+                        className="bg-black/30 p-4 rounded-lg border border-white/5 space-y-3 relative group/stat"
+                      >
+                        <Button
+                          type="button"
+                          onClick={() => removeStat(i)}
+                          variant="ghost"
+                          className="absolute top-2 right-2 text-red-500/30 group-hover/stat:text-red-500 h-7 w-7 p-0 cursor-pointer"
+                        >
+                          <i className="fa-solid fa-xmark text-xs"></i>
+                        </Button>
+                        <div className="space-y-2">
+                          <Label className="text-[9px] text-slate-500 uppercase font-bold tracking-widest">
+                            Label
+                          </Label>
+                          <Input
+                            value={stat.label}
+                            onChange={(e) =>
+                              updateStat(i, "label", e.target.value)
+                            }
+                            className="bg-white/5 border-white/5 h-9 text-xs"
+                            placeholder="e.g. Users, Downloads"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="text-[9px] text-slate-500 uppercase font-bold tracking-widest">
+                            Value
+                          </Label>
+                          <Input
+                            value={stat.value}
+                            onChange={(e) =>
+                              updateStat(i, "value", e.target.value)
+                            }
+                            className="bg-white/5 border-white/5 h-9 text-xs text-rose-400 font-bold"
+                            placeholder="e.g. 10K+, 99%"
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

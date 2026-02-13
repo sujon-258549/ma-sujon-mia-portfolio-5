@@ -6,6 +6,8 @@ import Image from "next/image";
 import { isAdminAuthorized } from "@/lib/auth";
 import { FooterEditModal } from "./modals/FooterEditModal";
 import { FooterData } from "@/types/footer";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 const Footer = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -265,8 +267,7 @@ const Footer = () => {
         currentData={footerData}
         onSave={(newData) => {
           setFooterData(newData);
-          // In a real app, you'd call an API here to update the DB
-          console.log("Saving footer data to DB...", newData);
+          toast.success("Footer updated locally!");
         }}
       />
     </footer>

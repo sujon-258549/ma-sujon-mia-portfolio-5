@@ -100,6 +100,9 @@ export const authService = {
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error("Unauthorized");
+        }
         throw new Error(data.message || "Failed to fetch user profile");
       }
 

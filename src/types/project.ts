@@ -4,6 +4,7 @@ export interface Project {
   shortDescription: string;
   longDescription: string;
   image: string; // Gradient class or image URL
+  imageName?: string; // Image alt text / descriptive name
   thumbnail: string;
   tags: string[];
   liveUrl: string;
@@ -22,7 +23,10 @@ export interface Project {
     tools?: string[];
   };
   challenges?: string[];
-  solutions?: string[];
+  solutions?: {
+    text: string;
+    image?: string;
+  }[];
   gallery?: string[];
   stats?: {
     label: string;

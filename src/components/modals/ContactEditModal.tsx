@@ -1,6 +1,7 @@
-"use client";
+  "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ContactSectionData, ContactInfo } from "@/types/contact";
+import { dynamicContentService } from "@/services/dynamicContentService";
 
 interface ContactEditModalProps {
   isOpen: boolean;
@@ -27,9 +29,21 @@ export const ContactEditModal = ({
 }: ContactEditModalProps) => {
   const [formData, setFormData] = useState<ContactSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updatedData = {
+      ...formData,
+      type:"contact"
+    }
+   try {
+    const response = await dynamicContentService.upsertContent(updatedData);
+    console.log("Response", response);
+    toast.success("Contact section updated successfully");
+   } catch (error) {
+    console.log("Error", error);
+    toast.error("Failed to update contact section");
+   }
     onClose();
   };
 

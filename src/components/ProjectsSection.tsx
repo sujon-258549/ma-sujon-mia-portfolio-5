@@ -13,6 +13,10 @@ import Link from "next/link";
 import { isAdminAuthorized } from "@/lib/auth";
 import { ProjectsSectionData, Project } from "@/types/project";
 import { ProjectEditModal } from "./modals/ProjectEditModal";
+import {
+  ProjectSectionHeaderEditModal,
+  ProjectSectionHeaderData,
+} from "./modals/ProjectSectionHeaderEditModal";
 
 const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
@@ -20,6 +24,7 @@ const ProjectsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [isHeaderModalOpen, setIsHeaderModalOpen] = useState(false);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -27,6 +32,8 @@ const ProjectsSection = () => {
     }, 0);
     return () => clearTimeout(timeoutId);
   }, []);
+
+  const [completedCount, setCompletedCount] = useState("90+");
 
   const [sectionData, setSectionData] = useState<ProjectsSectionData>({
     badge: "Featured Projects",
@@ -147,20 +154,52 @@ const ProjectsSection = () => {
     ],
   });
 
-  const handleSaveProject = (newProject: Project) => {
-    if (modalMode === "edit") {
-      setSectionData((prev) => ({
-        ...prev,
-        projects: prev.projects.map((p) =>
-          p.id === newProject.id ? newProject : p,
-        ),
-      }));
-    } else {
-      setSectionData((prev) => ({
-        ...prev,
-        projects: [newProject, ...prev.projects],
-      }));
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const savedData = localStorage.getItem("projectsSectionData");
+    if (savedData) {
+      try {
+        setSectionData(JSON.parse(savedData));
+      } catch (e) {
+        console.error("Failed to parse saved projects data", e);
+      }
     }
+  }, []);
+
+  const handleSaveProject = (newProject: Project) => {
+    setSectionData((prev) => {
+      let newData: ProjectsSectionData;
+
+      if (modalMode === "edit") {
+        newData = {
+          ...prev,
+          projects: prev.projects.map((p) =>
+            p.id === newProject.id ? newProject : p,
+          ),
+        };
+      } else {
+        newData = {
+          ...prev,
+          projects: [newProject, ...prev.projects],
+        };
+      }
+
+      // Save to localStorage
+      localStorage.setItem("projectsSectionData", JSON.stringify(newData));
+      return newData;
+    });
+  };
+
+  const handleSaveHeader = (data: ProjectSectionHeaderData) => {
+    setSectionData((prev) => ({
+      ...prev,
+      badge: data.badge,
+      badgeIcon: data.badgeIcon,
+      title: data.title,
+      titleHighlight: data.titleHighlight,
+      description: data.description,
+    }));
+    setCompletedCount(data.completedCount);
   };
 
   const displayedProjects = showAll
@@ -194,12 +233,23 @@ const ProjectsSection = () => {
       )}
 
       <div className="main-container">
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-16 relative group/header">
+          {/* Admin Header Edit Button */}
+          {isAuthorized && (
+            <button
+              onClick={() => setIsHeaderModalOpen(true)}
+              className="absolute top-0 right-0 z-20 w-9 h-9 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90 opacity-0 group-hover/header:opacity-100"
+            >
+              <i className="fa-solid fa-pen-to-square text-xs"></i>
+            </button>
+          )}
+
           {/* 90+ Projects Completed Badge */}
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#172023] border border-emerald-500/20 px-4 py-2 rounded-full shadow-2xl">
             <i className="fa-solid fa-trophy text-base text-emerald-500"></i>
             <span className="text-xs font-black text-white uppercase tracking-tighter">
-              <span className="text-emerald-500">90+</span> Projects Completed
+              <span className="text-emerald-500">{completedCount}</span>{" "}
+              Projects Completed
             </span>
           </div>
 
@@ -333,6 +383,20 @@ const ProjectsSection = () => {
         project={editingProject}
         onSave={handleSaveProject}
         mode={modalMode}
+      />
+
+      <ProjectSectionHeaderEditModal
+        isOpen={isHeaderModalOpen}
+        onClose={() => setIsHeaderModalOpen(false)}
+        currentData={{
+          badge: sectionData.badge,
+          badgeIcon: sectionData.badgeIcon,
+          title: sectionData.title,
+          titleHighlight: sectionData.titleHighlight,
+          description: sectionData.description,
+          completedCount: completedCount,
+        }}
+        onSave={handleSaveHeader}
       />
     </section>
   );

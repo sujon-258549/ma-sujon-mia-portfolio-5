@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { User } from "@/types/auth";
 import { authService } from "@/lib/authService";
 import { useRouter } from "next/navigation";
@@ -16,7 +22,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,17 +34,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     try {
       const storedToken = authService.getToken();
+      const storedUser = authService.getUser();
+
       if (storedToken) {
-        const userData = await authService.getMe();
-        setUser(userData);
-        setToken(storedToken);
+        // Optimistically set user from local storage
+        if (storedUser) {
+          setUser(storedUser);
+          setToken(storedToken);
+        }
+
+        // background verify
+        try {
+          const userData = await authService.getMe();
+          setUser(userData);
+          setToken(storedToken);
+        } catch (apiError) {
+          console.error("API verification failed:", apiError);
+          // Only logout if it's strictly an auth error, otherwise keep stored session
+          // Assuming the API returns specific error messages or we can infer it
+          if (
+            apiError instanceof Error &&
+            (apiError.message.includes("Unauthorized") ||
+              apiError.message.includes("jwt expired") ||
+              apiError.message.includes("No token"))
+          ) {
+            authService.logout();
+            setUser(null);
+            setToken(null);
+          } else {
+            // Keep the optimistic user state for network errors or other issues
+            console.warn("Keeping stored session despite API error");
+          }
+        }
       } else {
         setUser(null);
         setToken(null);
       }
     } catch (error) {
       console.error("Auth initialization error:", error);
-      // If profile fetch fails, token might be invalid/expired
       authService.logout();
       setUser(null);
       setToken(null);
@@ -98,4 +133,3 @@ export const isAdminAuthorized = () => {
   const token = localStorage.getItem("token");
   return !!token;
 };
-

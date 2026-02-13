@@ -8,10 +8,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { isAdminAuthorized } from "@/lib/auth";
 import { ContactEditModal } from "./modals/ContactEditModal";
 import { ContactSectionData } from "@/types/contact";
+import { toast } from "sonner";
+import { contactMessageService } from "@/services/contactMessageService";
 
 const ContactSection = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Check authorization on mount
@@ -49,6 +52,38 @@ const ContactSection = () => {
     ],
   });
 
+  const [formPayload, setFormPayload] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await contactMessageService.sendMessage(formPayload);
+      if (res.success) {
+        toast.success("Message sent successfully!");
+        setFormPayload({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to send message",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -84,7 +119,7 @@ const ContactSection = () => {
               <span className="text-emerald-500">{contactData.titleColor}</span>
             </h2>
 
-            <form className="space-y-6 mt-8">
+            <form onSubmit={handleFormSubmit} className="space-y-6 mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -96,7 +131,12 @@ const ContactSection = () => {
                   <Input
                     id="name"
                     type="text"
+                    value={formPayload.name}
+                    onChange={(e) =>
+                      setFormPayload({ ...formPayload, name: e.target.value })
+                    }
                     placeholder="John Doe"
+                    required
                     className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50"
                   />
                 </div>
@@ -110,25 +150,59 @@ const ContactSection = () => {
                   <Input
                     id="email"
                     type="email"
+                    value={formPayload.email}
+                    onChange={(e) =>
+                      setFormPayload({ ...formPayload, email: e.target.value })
+                    }
                     placeholder="john@example.com"
                     className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50"
                   />
                 </div>
               </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-slate-400 mb-2"
-                >
-                  Subject
-                </label>
-                <Input
-                  id="subject"
-                  type="text"
-                  placeholder="Project Inquiry"
-                  className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50"
-                />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-slate-400 mb-2"
+                  >
+                    Phone
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formPayload.phone}
+                    onChange={(e) =>
+                      setFormPayload({ ...formPayload, phone: e.target.value })
+                    }
+                    placeholder="+123 456 7890"
+                    className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-slate-400 mb-2"
+                  >
+                    Subject
+                  </label>
+                  <Input
+                    id="subject"
+                    type="text"
+                    value={formPayload.subject}
+                    onChange={(e) =>
+                      setFormPayload({
+                        ...formPayload,
+                        subject: e.target.value,
+                      })
+                    }
+                    placeholder="Project Inquiry"
+                    required
+                    className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50"
+                  />
+                </div>
               </div>
+
               <div>
                 <label
                   htmlFor="message"
@@ -138,14 +212,25 @@ const ContactSection = () => {
                 </label>
                 <Textarea
                   id="message"
+                  value={formPayload.message}
+                  onChange={(e) =>
+                    setFormPayload({ ...formPayload, message: e.target.value })
+                  }
                   placeholder="Tell me about your project..."
                   rows={6}
+                  required
                   className="bg-[#172023] border-emerald-500/15 text-slate-100 placeholder:text-slate-500 focus-visible:ring-emerald-500/50 resize-none header-none"
                 />
               </div>
-              <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer">
-                <i className="fa-solid fa-paper-plane text-lg mr-3"></i>
-                Send Message
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                <i
+                  className={`${isSubmitting ? "fa-solid fa-spinner animate-spin" : "fa-solid fa-paper-plane"} text-lg mr-3`}
+                ></i>
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>
