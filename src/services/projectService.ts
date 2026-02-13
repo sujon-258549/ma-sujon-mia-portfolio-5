@@ -67,7 +67,7 @@ export const projectService = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
         body: JSON.stringify(projectData),
       });
@@ -97,7 +97,7 @@ export const projectService = {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
         body: JSON.stringify(projectData),
       });
@@ -126,7 +126,7 @@ export const projectService = {
       const response = await fetch(`${BASE_URL}/projects/${id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       });
 

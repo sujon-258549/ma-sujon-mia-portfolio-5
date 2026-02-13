@@ -7,7 +7,7 @@ export const dynamicContentService = {
   /**
    * Upsert dynamic content
    */
-  upsertContent: async (data: Record<string, any>) => {
+  upsertContent: async (data: Record<string, unknown>) => {
     try {
       const token = authService.getToken();
       if (!token) {

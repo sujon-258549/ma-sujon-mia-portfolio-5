@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { HeroSectionData } from "@/types/hero";
 import { HeroEditModal } from "./modals/HeroEditModal";
 
 const HeroSection = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -72,14 +72,6 @@ const HeroSection = () => {
       },
     ],
   });
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-    };
-    checkAuth();
-  }, []);
 
   useEffect(() => {
     const tick = () => {

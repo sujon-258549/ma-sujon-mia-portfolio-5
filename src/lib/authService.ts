@@ -92,7 +92,7 @@ export const authService = {
       const response = await fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
           "Content-Type": "application/json",
         },
       });

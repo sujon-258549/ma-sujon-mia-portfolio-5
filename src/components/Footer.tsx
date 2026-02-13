@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Heart, ArrowUp } from "lucide-react";
 import Image from "next/image";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { FooterEditModal } from "./modals/FooterEditModal";
 import { FooterData } from "@/types/footer";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 
 const Footer = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Dynamic Footer Data
@@ -70,18 +70,6 @@ const Footer = () => {
       },
     ],
   });
-
-  useEffect(() => {
-    // Check authorization on mount and when token changes
-    // Wrap in setTimeout to avoid synchronous setState cascading render warning
-    const timeoutId = setTimeout(() => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-      console.log("Footer Authorization Status:", authStatus);
-    }, 0);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

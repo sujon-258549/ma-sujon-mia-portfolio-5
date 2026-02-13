@@ -1,21 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useState } from "react";
+import { useIsAuthorized } from "@/lib/auth";
 import { ExperienceSectionData } from "@/types/experience";
 import { ExperienceEditModal } from "./modals/ExperienceEditModal";
 import { Button } from "./ui/button";
 
 const ExperienceSection = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsAuthorized(isAdminAuthorized());
-    }, 0);
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   const [sectionData, setSectionData] = useState<ExperienceSectionData>({
     badge: "Professional Journey",

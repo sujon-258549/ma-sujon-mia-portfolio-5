@@ -1,21 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useState } from "react";
+import { useIsAuthorized } from "@/lib/auth";
 import { EducationSectionData } from "@/types/education";
 import { EducationEditModal } from "./modals/EducationEditModal";
 import { Button } from "./ui/button";
 
 const EducationSection = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsAuthorized(isAdminAuthorized());
-    }, 0);
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   const [sectionData, setSectionData] = useState<EducationSectionData>({
     badge: "Academic Background",

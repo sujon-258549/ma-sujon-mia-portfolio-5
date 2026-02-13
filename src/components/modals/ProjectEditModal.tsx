@@ -12,12 +12,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Project } from "@/types/project";
+import { projectService } from "@/services/projectService";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 interface ProjectEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   project: Project | null;
-  onSave: (project: Project) => void;
+  onSuccess: (project: Project, mode: "add" | "edit") => void;
   mode: "add" | "edit";
 }
 
@@ -25,10 +28,12 @@ export const ProjectEditModal = ({
   isOpen,
   onClose,
   project,
-  onSave,
+  onSuccess,
   mode,
 }: ProjectEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Project>(() => ({
+    _id: project?._id,
     id: project?.id || Math.random().toString(36).substr(2, 9),
     title: project?.title || "",
     shortDescription: project?.shortDescription || "",
@@ -90,12 +95,43 @@ export const ProjectEditModal = ({
     detailedDescriptions: project?.detailedDescriptions || [],
   }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
 
-    console.log("updateData", formData);
-    onClose();
+    try {
+      let savedProject: Project;
+      const projectId = formData._id || formData.id;
+
+      if (mode === "edit" && projectId) {
+        // Strip out IDs from the update payload as they go in URL params
+        const {
+          _id: _unused_id,
+          id: _unused_alt_id,
+          ...updatePayload
+        } = formData as any;
+        savedProject = await projectService.updateProject(
+          projectId,
+          updatePayload,
+        );
+        toast.success("Project updated successfully!");
+      } else {
+        savedProject = await projectService.createProject(formData);
+        toast.success("Project created successfully!");
+      }
+
+      onSuccess(savedProject, mode);
+      onClose();
+    } catch (error) {
+      console.error("Failed to save project:", error);
+      const errorMessage =
+        error instanceof Error
+          ? (error as any).error || error.message
+          : "Failed to save project";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const updateField = <K extends keyof Project>(
@@ -965,9 +1001,19 @@ export const ProjectEditModal = ({
               </Button>
               <Button
                 type="submit"
-                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-12 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer"
+                disabled={isLoading}
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-12 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {mode === "edit" ? "Update Project" : "Create Project"}
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : mode === "edit" ? (
+                  "Update Project"
+                ) : (
+                  "Create Project"
+                )}
               </Button>
             </div>
           </form>

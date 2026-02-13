@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 export interface ProjectSectionHeaderData {
   badge: string;
@@ -37,9 +39,23 @@ export const ProjectSectionHeaderEditModal = ({
   const [formData, setFormData] =
     useState<ProjectSectionHeaderData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+
+    const updateData = {
+      ...formData,
+      type: "project-section-header",
+    };
+    try {
+      console.log("footer data", updateData);
+      const res = await dynamicContentService.upsertContent(updateData);
+      if (res.success) {
+        toast.success("Footer updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Footer updated failed!");
+    }
     onClose();
   };
 

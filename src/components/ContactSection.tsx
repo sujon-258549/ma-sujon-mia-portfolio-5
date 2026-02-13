@@ -1,27 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAuth } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { ContactEditModal } from "./modals/ContactEditModal";
 import { ContactSectionData } from "@/types/contact";
 import { toast } from "sonner";
 import { contactMessageService } from "@/services/contactMessageService";
 
 const ContactSection = () => {
-  const { user } = useAuth();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const hasToken =
-      typeof window !== "undefined" && !!localStorage.getItem("token");
-    setIsAuthorized(!!user || hasToken);
-  }, [user]);
 
   const [contactData, setContactData] = useState<ContactSectionData>({
     badge: "Contact Me",

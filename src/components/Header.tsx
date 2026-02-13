@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { HeaderData } from "@/types/header";
 import { HeaderEditModal } from "./modals/HeaderEditModal";
-import { useAuth, isAdminAuthorized } from "@/lib/auth";
+import { useAuth, useIsAuthorized } from "@/lib/auth";
 
 const Header = () => {
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [headerData, setHeaderData] = useState<HeaderData>({
@@ -32,14 +32,6 @@ const Header = () => {
       },
     },
   });
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-    };
-    checkAuth();
-  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {

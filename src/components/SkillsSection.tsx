@@ -1,14 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { SkillsSectionEditModal } from "./modals/SkillsSectionEditModal";
 import { SkillsSectionData } from "@/types/skill";
 
 const SkillsSection = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [skillsData, setSkillsData] = useState<SkillsSectionData>({
     badge: "My Skills",
@@ -76,14 +76,6 @@ const SkillsSection = () => {
       },
     ],
   });
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-    };
-    checkAuth();
-  }, []);
 
   const handleSaveSection = (newData: SkillsSectionData) => {
     setSkillsData(newData);

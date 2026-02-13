@@ -1,13 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { AboutSectionData } from "@/types/about";
 import { AboutEditModal } from "./modals/AboutEditModal";
 
 const AboutSection = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutData, setAboutData] = useState<AboutSectionData>({
     badge: "Professional Overview",
@@ -48,14 +48,6 @@ const AboutSection = () => {
       },
     ],
   });
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-    };
-    checkAuth();
-  }, []);
 
   const handleSave = (newData: AboutSectionData) => {
     setAboutData(newData);

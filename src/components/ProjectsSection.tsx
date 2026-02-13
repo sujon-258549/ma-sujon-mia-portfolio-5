@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { projectService } from "@/services/projectService";
 import { toast } from "sonner";
-import { useAuth } from "@/lib/auth";
+import { useIsAuthorized } from "@/lib/auth";
 import { ProjectsSectionData, Project } from "@/types/project";
 import { ProjectEditModal } from "./modals/ProjectEditModal";
 import {
@@ -21,22 +21,12 @@ import {
 } from "./modals/ProjectSectionHeaderEditModal";
 
 const ProjectsSection = () => {
-  const { user } = useAuth();
+  const isAuthorized = useIsAuthorized();
   const [showAll, setShowAll] = useState(false);
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [isHeaderModalOpen, setIsHeaderModalOpen] = useState(false);
-  const [isLoadingProjects, setIsLoadingProjects] = useState(false);
-
-  useEffect(() => {
-    // Check both context and localStorage for immediate presence
-    const hasToken =
-      typeof window !== "undefined" && !!localStorage.getItem("token");
-    const authStatus = !!user || hasToken;
-    setIsAuthorized(authStatus);
-  }, [user]);
 
   const [completedCount, setCompletedCount] = useState("90+");
 
@@ -53,7 +43,6 @@ const ProjectsSection = () => {
   // Load data from Backend on mount
   useEffect(() => {
     const fetchProjects = async () => {
-      setIsLoadingProjects(true);
       try {
         const data = await projectService.getAllProjects();
         setSectionData((prev) => ({
@@ -73,61 +62,56 @@ const ProjectsSection = () => {
             console.error("Failed to parse saved projects data", e);
           }
         }
-      } finally {
-        setIsLoadingProjects(false);
       }
     };
     fetchProjects();
   }, []);
 
-  const handleSaveProject = async (newProject: Project) => {
+  const handleDeleteProject = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this project?"))
+      return;
+
     try {
-      let savedProject: Project;
+      await projectService.deleteProject(id);
+      toast.success("Project deleted successfully!");
+      setSectionData((prev) => ({
+        ...prev,
+        projects: prev.projects.filter((p) => p._id !== id && p.id !== id),
+      }));
+    } catch (error) {
+      console.error("Failed to delete project:", error);
+      const errorMessage =
+        error instanceof Error
+          ? (error as { error?: string }).error || error.message
+          : "Failed to delete project";
+      toast.error(errorMessage);
+    }
+  };
 
-      if (modalMode === "edit" && newProject.id) {
-        savedProject = await projectService.updateProject(
-          newProject.id,
-          newProject,
+  const handleSuccess = (savedProject: Project, mode: "add" | "edit") => {
+    setSectionData((prev) => {
+      let updatedProjects: Project[];
+      if (mode === "edit") {
+        updatedProjects = prev.projects.map((p) =>
+          (p._id && p._id === savedProject._id) ||
+          (p.id && p.id === savedProject.id)
+            ? savedProject
+            : p,
         );
-        toast.success("Project updated successfully!");
-
-        setSectionData((prev) => ({
-          ...prev,
-          projects: prev.projects.map((p) =>
-            p.id === savedProject.id ? savedProject : p,
-          ),
-        }));
       } else {
-        savedProject = await projectService.createProject(newProject);
-        toast.success("Project created successfully!");
-
-        setSectionData((prev) => ({
-          ...prev,
-          projects: [savedProject, ...prev.projects],
-        }));
+        updatedProjects = [savedProject, ...prev.projects];
       }
 
+      const newData = {
+        ...prev,
+        projects: updatedProjects,
+      };
+
       // Sync with localStorage as backup
-      localStorage.setItem(
-        "projectsSectionData",
-        JSON.stringify({
-          ...sectionData,
-          projects:
-            modalMode === "edit"
-              ? sectionData.projects.map((p) =>
-                  p.id === savedProject.id ? savedProject : p,
-                )
-              : [savedProject, ...sectionData.projects],
-        }),
-      );
-    } catch (error) {
-      console.error("Failed to save project:", error);
-      toast.error(
-        error instanceof Error
-          ? (error as any).error || error.message
-          : "Failed to save project",
-      );
-    }
+      localStorage.setItem("projectsSectionData", JSON.stringify(newData));
+
+      return newData;
+    });
   };
 
   const handleSaveHeader = (data: ProjectSectionHeaderData) => {
@@ -222,19 +206,33 @@ const ProjectsSection = () => {
               key={index}
               className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative"
             >
-              {/* Admin Individual Edit Button */}
+              {/* Admin Individual Edit/Delete Buttons */}
               {isAuthorized && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setModalMode("edit");
-                    setEditingProject(project);
-                    setIsModalOpen(true);
-                  }}
-                  className="absolute top-4 right-4 z-20 w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
-                >
-                  <i className="fa-solid fa-pen-to-square text-xs"></i>
-                </button>
+                <div className="absolute top-4 right-4 z-20 flex gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setModalMode("edit");
+                      setEditingProject(project);
+                      setIsModalOpen(true);
+                    }}
+                    className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                    title="Edit Project"
+                  >
+                    <i className="fa-solid fa-pen-to-square text-xs"></i>
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const projectId = project._id || project.id;
+                      if (projectId) handleDeleteProject(projectId);
+                    }}
+                    className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                    title="Delete Project"
+                  >
+                    <i className="fa-solid fa-trash-can text-xs"></i>
+                  </button>
+                </div>
               )}
 
               {/* Image Container */}
@@ -265,15 +263,21 @@ const ProjectsSection = () => {
               </CardHeader>
 
               <div className="px-6 flex flex-wrap gap-2 mb-6">
-                {project.tags.slice(0, 3).map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="outline"
-                    className="bg-white/5 border-white/5 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
+                {Array.isArray(project.tags) &&
+                  project.tags
+                    .filter(
+                      (tag) => typeof tag === "string" && tag.trim() !== "",
+                    )
+                    .slice(0, 3)
+                    .map((tag, idx) => (
+                      <Badge
+                        key={`${tag}-${idx}`}
+                        variant="outline"
+                        className="bg-white/5 border-white/5 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
               </div>
 
               <CardFooter className="p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
@@ -321,11 +325,11 @@ const ProjectsSection = () => {
       </div>
 
       <ProjectEditModal
-        key={`${editingProject?.id || "new"}-${isModalOpen}`}
+        key={`${editingProject?._id || editingProject?.id || "new"}-${isModalOpen}`}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         project={editingProject}
-        onSave={handleSaveProject}
+        onSuccess={handleSuccess}
         mode={modalMode}
       />
 

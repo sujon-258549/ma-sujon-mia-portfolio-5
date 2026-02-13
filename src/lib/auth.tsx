@@ -133,3 +133,23 @@ export const isAdminAuthorized = () => {
   const token = localStorage.getItem("token");
   return !!token;
 };
+
+/**
+ * Hook to check if the user is authorized.
+ * Handles hydration to avoid mismatch warnings.
+ */
+export const useIsAuthorized = () => {
+  const { user } = useAuth();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (!mounted) return false;
+
+  return !!user || isAdminAuthorized();
+};

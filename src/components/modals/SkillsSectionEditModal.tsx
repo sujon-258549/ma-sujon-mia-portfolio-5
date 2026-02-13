@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SkillCategory, SkillsSectionData } from "@/types/skill";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 interface SkillsSectionEditModalProps {
   isOpen: boolean;
@@ -27,9 +29,21 @@ export const SkillsSectionEditModal = ({
 }: SkillsSectionEditModalProps) => {
   const [formData, setFormData] = useState<SkillsSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "skills",
+    };
+    try {
+      const res = await dynamicContentService.upsertContent(updateData);
+      if(res.success){
+        toast.success("Footer updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Footer updated failed!");
+    }
     onClose();
   };
 

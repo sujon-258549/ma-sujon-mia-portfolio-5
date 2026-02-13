@@ -34,9 +34,14 @@ export const SkillEditModal = ({
     skills: category?.skills || [],
   }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "skills",
+    };
+    console.log("skills", updateData);
     onClose();
   };
 
