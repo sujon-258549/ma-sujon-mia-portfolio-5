@@ -10,7 +10,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { isAdminAuthorized } from "@/lib/auth";
+import { projectService } from "@/services/projectService";
+import { toast } from "sonner";
+import { useAuth } from "@/lib/auth";
 import { ProjectsSectionData, Project } from "@/types/project";
 import { ProjectEditModal } from "./modals/ProjectEditModal";
 import {
@@ -19,19 +21,22 @@ import {
 } from "./modals/ProjectSectionHeaderEditModal";
 
 const ProjectsSection = () => {
+  const { user } = useAuth();
   const [showAll, setShowAll] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [isHeaderModalOpen, setIsHeaderModalOpen] = useState(false);
+  const [isLoadingProjects, setIsLoadingProjects] = useState(false);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsAuthorized(isAdminAuthorized());
-    }, 0);
-    return () => clearTimeout(timeoutId);
-  }, []);
+    // Check both context and localStorage for immediate presence
+    const hasToken =
+      typeof window !== "undefined" && !!localStorage.getItem("token");
+    const authStatus = !!user || hasToken;
+    setIsAuthorized(authStatus);
+  }, [user]);
 
   const [completedCount, setCompletedCount] = useState("90+");
 
@@ -42,163 +47,102 @@ const ProjectsSection = () => {
     titleHighlight: "Works",
     description:
       "Explore a selection of my recently completed projects, ranging from focused experiments to full-scale applications.",
-    projects: [
-      {
-        id: "1",
-        title: "E-Commerce Platform",
-        shortDescription:
-          "A full-featured online store with cart, checkout, and admin dashboard.",
-        longDescription:
-          "A comprehensive e-commerce solution focused on scalability and conversion optimization.",
-        image: "bg-gradient-to-br from-emerald-900 to-slate-900",
-        thumbnail: "",
-        tags: ["Next.js", "TypeScript", "Prisma", "Stripe"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "Web Application",
-        role: "Lead Developer",
-        duration: "3 Months",
-        features: ["Secure Checkout", "Inventory Management"],
-        technologies: { frontend: ["React", "Tailwind", "Redux"] },
-      },
-      {
-        id: "2",
-        title: "Meta Tasker",
-        shortDescription:
-          "Collaborative project management tool with real-time updates.",
-        longDescription:
-          "Real-time task management system for modern remote teams.",
-        image: "bg-gradient-to-br from-teal-900 to-slate-900",
-        thumbnail: "",
-        tags: ["React", "Firebase", "Tailwind"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "Productivity",
-        role: "Full Stack Developer",
-        duration: "2 Months",
-        features: ["Real-time Sync", "Team Chat"],
-        technologies: { frontend: ["React", "Firebase"] },
-      },
-      {
-        id: "3",
-        title: "AI Image SaaS",
-        shortDescription:
-          "Generation of artistic images using stable diffusion API.",
-        longDescription:
-          "A modern SaaS platform for AI-powered image generation and editing.",
-        image: "bg-gradient-to-br from-indigo-900 to-slate-900",
-        thumbnail: "",
-        tags: ["Next.js", "OpenAI", "Tailwind"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "Artificial Intelligence",
-        role: "AI Engineer",
-        duration: "1.5 Months",
-        features: ["Image Generation", "Gallery Sync"],
-        technologies: { frontend: ["Next.js", "Clerk"] },
-      },
-      {
-        id: "4",
-        title: "Fitness Tracker App",
-        shortDescription:
-          "Mobile-first web app for tracking workouts and nutrition.",
-        longDescription:
-          "Comprehensive fitness companion for health enthusiasts.",
-        image: "bg-gradient-to-br from-rose-900 to-slate-900",
-        thumbnail: "",
-        tags: ["React Native", "Node.js", "MongoDB"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "Health & Fitness",
-        role: "Lead Developer",
-        duration: "4 Months",
-        features: ["Workout Plans", "Calorie Counter"],
-        technologies: { frontend: ["React Native", "Expo"] },
-      },
-      {
-        id: "5",
-        title: "Crypto Dashboard",
-        shortDescription:
-          "Real-time cryptocurrency analytics and wallet tracker.",
-        longDescription:
-          "Advanced trading tools and market insights for crypto investors.",
-        image: "bg-gradient-to-br from-amber-900 to-slate-900",
-        thumbnail: "",
-        tags: ["Vue.js", "Web3.js", "D3.js"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "FinTech",
-        role: "Vue Developer",
-        duration: "2.5 Months",
-        features: ["Price Alerts", "Portfolio Tracking"],
-        technologies: { frontend: ["Vue.js", "Chart.js"] },
-      },
-      {
-        id: "6",
-        title: "Social Media Platform",
-        shortDescription:
-          "Connecting professionals through interest-based networking.",
-        longDescription:
-          "A niche social network for highly specific professional groups.",
-        image: "bg-gradient-to-br from-blue-900 to-slate-900",
-        thumbnail: "",
-        tags: ["Laravel", "MySQL", "Inertia.js"],
-        liveUrl: "#",
-        githubUrl: "#",
-        category: "Social Networking",
-        role: "Backend Lead",
-        duration: "6 Months",
-        features: ["Interest Groups", "Direct Messaging"],
-        technologies: { frontend: ["React", "Inertia"] },
-      },
-    ],
+    projects: [],
   });
 
-  // Load data from localStorage on mount
+  // Load data from Backend on mount
   useEffect(() => {
-    const savedData = localStorage.getItem("projectsSectionData");
-    if (savedData) {
+    const fetchProjects = async () => {
+      setIsLoadingProjects(true);
       try {
-        setSectionData(JSON.parse(savedData));
-      } catch (e) {
-        console.error("Failed to parse saved projects data", e);
+        const data = await projectService.getAllProjects();
+        setSectionData((prev) => ({
+          ...prev,
+          projects: data,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+        toast.error("Failed to load projects from server");
+
+        // Fallback to localStorage if server fails
+        const savedData = localStorage.getItem("projectsSectionData");
+        if (savedData) {
+          try {
+            setSectionData(JSON.parse(savedData));
+          } catch (e) {
+            console.error("Failed to parse saved projects data", e);
+          }
+        }
+      } finally {
+        setIsLoadingProjects(false);
       }
-    }
+    };
+    fetchProjects();
   }, []);
 
-  const handleSaveProject = (newProject: Project) => {
-    setSectionData((prev) => {
-      let newData: ProjectsSectionData;
+  const handleSaveProject = async (newProject: Project) => {
+    try {
+      let savedProject: Project;
 
-      if (modalMode === "edit") {
-        newData = {
+      if (modalMode === "edit" && newProject.id) {
+        savedProject = await projectService.updateProject(
+          newProject.id,
+          newProject,
+        );
+        toast.success("Project updated successfully!");
+
+        setSectionData((prev) => ({
           ...prev,
           projects: prev.projects.map((p) =>
-            p.id === newProject.id ? newProject : p,
+            p.id === savedProject.id ? savedProject : p,
           ),
-        };
+        }));
       } else {
-        newData = {
+        savedProject = await projectService.createProject(newProject);
+        toast.success("Project created successfully!");
+
+        setSectionData((prev) => ({
           ...prev,
-          projects: [newProject, ...prev.projects],
-        };
+          projects: [savedProject, ...prev.projects],
+        }));
       }
 
-      // Save to localStorage
-      localStorage.setItem("projectsSectionData", JSON.stringify(newData));
-      return newData;
-    });
+      // Sync with localStorage as backup
+      localStorage.setItem(
+        "projectsSectionData",
+        JSON.stringify({
+          ...sectionData,
+          projects:
+            modalMode === "edit"
+              ? sectionData.projects.map((p) =>
+                  p.id === savedProject.id ? savedProject : p,
+                )
+              : [savedProject, ...sectionData.projects],
+        }),
+      );
+    } catch (error) {
+      console.error("Failed to save project:", error);
+      toast.error(
+        error instanceof Error
+          ? (error as any).error || error.message
+          : "Failed to save project",
+      );
+    }
   };
 
   const handleSaveHeader = (data: ProjectSectionHeaderData) => {
-    setSectionData((prev) => ({
-      ...prev,
-      badge: data.badge,
-      badgeIcon: data.badgeIcon,
-      title: data.title,
-      titleHighlight: data.titleHighlight,
-      description: data.description,
-    }));
+    setSectionData((prev) => {
+      const newData = {
+        ...prev,
+        badge: data.badge,
+        badgeIcon: data.badgeIcon,
+        title: data.title,
+        titleHighlight: data.titleHighlight,
+        description: data.description,
+      };
+      localStorage.setItem("projectsSectionData", JSON.stringify(newData));
+      return newData;
+    });
     setCompletedCount(data.completedCount);
   };
 

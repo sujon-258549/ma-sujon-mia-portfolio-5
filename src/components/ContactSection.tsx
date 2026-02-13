@@ -5,28 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { isAdminAuthorized } from "@/lib/auth";
+import { useAuth } from "@/lib/auth";
 import { ContactEditModal } from "./modals/ContactEditModal";
 import { ContactSectionData } from "@/types/contact";
 import { toast } from "sonner";
 import { contactMessageService } from "@/services/contactMessageService";
 
 const ContactSection = () => {
+  const { user } = useAuth();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Check authorization on mount
-    // Wrap in setTimeout to avoid synchronous setState cascading render warning
-    const timeoutId = setTimeout(() => {
-      const authStatus = isAdminAuthorized();
-      setIsAuthorized(authStatus);
-      console.log("Contact Section Authorization Status:", authStatus);
-    }, 0);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
+    const hasToken =
+      typeof window !== "undefined" && !!localStorage.getItem("token");
+    setIsAuthorized(!!user || hasToken);
+  }, [user]);
 
   const [contactData, setContactData] = useState<ContactSectionData>({
     badge: "Contact Me",

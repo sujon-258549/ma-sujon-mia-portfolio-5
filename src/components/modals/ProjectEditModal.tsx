@@ -52,11 +52,26 @@ export const ProjectEditModal = ({
       project?.features && project.features.length > 0
         ? project.features
         : [""],
-    technologies: project?.technologies || {
-      frontend: [],
-      backend: [],
-      database: [],
-      tools: [],
+    technologies: {
+      frontend:
+        project?.technologies?.frontend &&
+        project.technologies.frontend.length > 0
+          ? project.technologies.frontend
+          : [""],
+      backend:
+        project?.technologies?.backend &&
+        project.technologies.backend.length > 0
+          ? project.technologies.backend
+          : [""],
+      database:
+        project?.technologies?.database &&
+        project.technologies.database.length > 0
+          ? project.technologies.database
+          : [""],
+      tools:
+        project?.technologies?.tools && project.technologies.tools.length > 0
+          ? project.technologies.tools
+          : [""],
     },
     challenges:
       project?.challenges && project.challenges.length > 0
