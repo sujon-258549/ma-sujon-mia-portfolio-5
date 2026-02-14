@@ -11,7 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { HeaderData } from "@/types/header";
-import { Settings2, Image as ImageIcon, Link as LinkIcon } from "lucide-react";
+import {
+  Settings2,
+  Image as ImageIcon,
+  Link as LinkIcon,
+  Menu,
+  Plus,
+  Trash2,
+} from "lucide-react";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 interface HeaderEditModalProps {
   isOpen: boolean;
@@ -28,9 +37,47 @@ export const HeaderEditModal = ({
 }: HeaderEditModalProps) => {
   const [formData, setFormData] = useState<HeaderData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const addNavLink = () => {
+    setFormData({
+      ...formData,
+      navLinks: [...(formData.navLinks || []), { text: "", link: "" }],
+    });
+  };
+
+  const updateNavLink = (
+    index: number,
+    field: "text" | "link",
+    value: string,
+  ) => {
+    const newLinks = [...(formData.navLinks || [])];
+    newLinks[index] = { ...newLinks[index], [field]: value };
+    setFormData({ ...formData, navLinks: newLinks });
+  };
+
+  const removeNavLink = (index: number) => {
+    setFormData({
+      ...formData,
+      navLinks: formData.navLinks.filter((_, i) => i !== index),
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "header",
+    };
+    console.log("update section", updateData);
+    try {
+      const res = await dynamicContentService.upsertContent(updateData);
+      if (res.success) {
+        toast.success("Header updated successfully!");
+      }
+    } catch (error: any) {
+      console.error("Failed to fetch header data:", error);
+      toast.error("Header updated failed!");
+    }
     onClose();
   };
 
@@ -67,6 +114,26 @@ export const HeaderEditModal = ({
                   className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="/logo.png or https://..."
                 />
+
+                {/* Logo Preview */}
+                {formData.logo && (
+                  <div className="mt-4 p-4 bg-black/30 rounded-lg border border-white/5 flex flex-col items-center gap-2">
+                    <p className="text-[10px] text-slate-500 uppercase font-black self-start tracking-widest">
+                      Preview
+                    </p>
+                    <div className="relative group/preview mt-2 p-2 bg-white/5 rounded-xl border border-emerald-500/20">
+                      <img
+                        src={formData.logo}
+                        alt="Logo Preview"
+                        className="max-w-full h-auto max-h-[80px] object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://placehold.co/200x50?text=Invalid+Image+URL";
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -273,6 +340,66 @@ export const HeaderEditModal = ({
                   />
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Navigation Links Section */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
+                <Menu className="w-4 h-4" />
+                Navigation Links
+              </div>
+              <Button
+                onClick={addNavLink}
+                variant="ghost"
+                size="sm"
+                className="h-8 text-xs bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg px-3"
+              >
+                <Plus className="w-4 h-4 mr-2" /> Add Link
+              </Button>
+            </div>
+
+            <div className="space-y-4">
+              {(formData.navLinks || []).map((link, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4 relative group"
+                >
+                  <div className="space-y-2">
+                    <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                      Link Text
+                    </Label>
+                    <Input
+                      value={link.text}
+                      onChange={(e) =>
+                        updateNavLink(idx, "text", e.target.value)
+                      }
+                      className="bg-black/40 border-none h-10 text-xs text-white"
+                      placeholder="About"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                      URL / Anchor
+                    </Label>
+                    <Input
+                      value={link.link}
+                      onChange={(e) =>
+                        updateNavLink(idx, "link", e.target.value)
+                      }
+                      className="bg-black/40 border-none h-10 text-xs text-white"
+                      placeholder="#about"
+                    />
+                  </div>
+                  <button
+                    onClick={() => removeNavLink(idx)}
+                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
 

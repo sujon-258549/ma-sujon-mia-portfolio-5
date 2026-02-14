@@ -52,8 +52,8 @@ export const FooterEditModal = ({
       if(res.success){
         toast.success("Footer updated successfully!");
       }
-    } catch (error) {
-      
+    } catch (error: any) {
+      toast.error("Footer updated failed!");
     }
     onClose();
   };

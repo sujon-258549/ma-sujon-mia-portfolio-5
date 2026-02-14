@@ -102,7 +102,7 @@ const Footer = () => {
             <div className="relative">
               <div className="flex items-center gap-3 mb-3">
                 <Image
-                  src={footerData.logo}
+                  src={footerData.logo || '/logo.png'}
                   alt="Sujon Logo"
                   width={200}
                   height={100}

@@ -25,6 +25,8 @@ import {
   Award,
 } from "lucide-react";
 import * as LucideIcons from "lucide-react";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 interface AboutEditModalProps {
   isOpen: boolean;
@@ -41,9 +43,21 @@ export const AboutEditModal = ({
 }: AboutEditModalProps) => {
   const [formData, setFormData] = useState<AboutSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "about",
+    };
+    try {
+      const res = await dynamicContentService.upsertContent(updateData);
+      if(res.success){
+        toast.success("About updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("About updated failed!");
+    }
     onClose();
   };
 

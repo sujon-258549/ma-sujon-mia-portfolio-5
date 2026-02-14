@@ -22,6 +22,8 @@ import {
   Code2,
   Share2,
 } from "lucide-react";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 interface HeroEditModalProps {
   isOpen: boolean;
@@ -38,9 +40,22 @@ export const HeroEditModal = ({
 }: HeroEditModalProps) => {
   const [formData, setFormData] = useState<HeroSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "hero",
+    };
+    try {
+      console.log('update section', updateData)
+      const res = await dynamicContentService.upsertContent(updateData);
+      if(res.success){
+        toast.success("Hero updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Hero updated failed!");
+    }
     onClose();
   };
 

@@ -109,7 +109,7 @@ export const ProjectEditModal = ({
           _id: _unused_id,
           id: _unused_alt_id,
           ...updatePayload
-        } = formData as any;
+        } = formData as Partial<Project>;
         savedProject = await projectService.updateProject(
           projectId,
           updatePayload,
@@ -126,7 +126,7 @@ export const ProjectEditModal = ({
       console.error("Failed to save project:", error);
       const errorMessage =
         error instanceof Error
-          ? (error as any).error || error.message
+          ? (error as { error?: string }).error || error.message
           : "Failed to save project";
       toast.error(errorMessage);
     } finally {

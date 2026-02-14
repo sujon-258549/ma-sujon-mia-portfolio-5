@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Experience, ExperienceSectionData } from "@/types/experience";
 import { Plus, X, TrendingUp, Users, Code2 } from "lucide-react";
+import { toast } from "sonner";
+import { dynamicContentService } from "@/services/dynamicContentService";
 
 interface ExperienceEditModalProps {
   isOpen: boolean;
@@ -29,9 +31,22 @@ export const ExperienceEditModal = ({
 }: ExperienceEditModalProps) => {
   const [formData, setFormData] = useState<ExperienceSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "experience",
+    };
+    console.log('update section', updateData)
+    try {
+      const res = await dynamicContentService.upsertContent(updateData);
+      if(res.success){
+        toast.success("Experience updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Experience updated failed!");
+    }
     onClose();
   };
 

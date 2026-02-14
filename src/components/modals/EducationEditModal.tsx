@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { EducationItem, EducationSectionData } from "@/types/education";
 import { Plus, X, Award, BookOpen, TrendingUp } from "lucide-react";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { toast } from "sonner";
 
 interface EducationEditModalProps {
   isOpen: boolean;
@@ -30,9 +32,22 @@ export const EducationEditModal = ({
 }: EducationEditModalProps) => {
   const [formData, setFormData] = useState<EducationSectionData>(currentData);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+    const updateData = {
+      ...formData,
+      type: "education",
+    };
+    console.log('update section', updateData)
+    try {
+      const res = await dynamicContentService.upsertContent(updateData);
+      if(res.success){
+        toast.success("Education updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Education updated failed!");
+    }
     onClose();
   };
 

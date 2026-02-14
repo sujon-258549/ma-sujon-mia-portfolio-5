@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { dynamicContentService } from "@/services/dynamicContentService";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { HeaderData } from "@/types/header";
@@ -15,10 +16,18 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [headerData, setHeaderData] = useState<HeaderData>({
-    logo: "/logo.png",
+    logo: "https://i.ibb.co.com/r22rB4k4/logo.webp",
     logoAlt: "Sujon Logo",
     logoWidth: 200,
     logoHeight: 50,
+    navLinks: [
+      { text: "About", link: "#about" },
+      { text: "Skills", link: "#skills" },
+      { text: "Education", link: "#education" },
+      { text: "Experience", link: "#experience" },
+      { text: "Projects", link: "#projects" },
+      { text: "Contact", link: "#contact" },
+    ],
     buttons: {
       primary: {
         text: "Hire Me",
@@ -32,6 +41,24 @@ const Header = () => {
       },
     },
   });
+
+  useEffect(() => {
+    const fetchHeaderData = async () => {
+      try {
+        const data = await dynamicContentService.getContent("header");
+        if (data) {
+          setHeaderData((prev) => ({
+            ...prev, // Keep current state as baseline
+            ...data,
+            navLinks: data.navLinks || prev.navLinks || [],
+          }));
+        }
+      } catch (error) {
+        console.error("Failed to fetch header data:", error);
+      }
+    };
+    fetchHeaderData();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,15 +92,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    "About",
-    "Skills",
-    "Education",
-    "Experience",
-    "Projects",
-    "Contact",
-  ];
-
   const handleSave = (newData: HeaderData) => {
     setHeaderData(newData);
     console.log("Saved Header Data:", newData);
@@ -85,27 +103,31 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
             <Image
-              src={headerData.logo}
+              src={headerData.logo || "/logo.png"}
               alt={headerData.logoAlt}
               width={headerData.logoWidth}
               height={headerData.logoHeight}
-              className={`w-[${headerData.logoWidth}px] h-[${headerData.logoHeight}px] object-contain`}
+              style={{
+                width: `${headerData.logoWidth}px`,
+                height: `${headerData.logoHeight}px`,
+              }}
+              className="object-contain"
             />
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((item) => (
+            {(headerData.navLinks || []).map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.text}
+                href={item.link}
                 className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
-                  activeSection === item.toLowerCase()
+                  activeSection === item.text.toLowerCase()
                     ? "text-emerald-500"
                     : "text-muted-foreground"
                 }`}
               >
-                {item}
+                {item.text}
               </a>
             ))}
           </div>
@@ -175,18 +197,18 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-[#1C2629] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 shadow-xl">
-          {navLinks.map((item) => (
+          {(headerData.navLinks || []).map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.text}
+              href={item.link}
               className={`text-lg font-medium py-2 transition-colors ${
-                activeSection === item.toLowerCase()
+                activeSection === item.text.toLowerCase()
                   ? "text-emerald-500"
                   : "text-foreground hover:text-emerald-400"
               }`}
               onClick={() => setIsMenuOpen(false)}
             >
-              {item}
+              {item.text}
             </a>
           ))}
           <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
@@ -231,6 +253,7 @@ const Header = () => {
       )}
 
       <HeaderEditModal
+        key={isModalOpen ? "header-open" : "header-closed"}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         currentData={headerData}
