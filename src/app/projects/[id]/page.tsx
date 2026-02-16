@@ -55,36 +55,56 @@ export default function ProjectDetailsPage() {
         <main className="pt-32 pb-20 px-4 md:px-0">
           <div className="main-container max-w-6xl mx-auto">
             {/* Skeleton Back button */}
-            <div className="h-4 w-32 bg-white/5 rounded-full mb-12 animate-pulse"></div>
+            <div className="h-4 w-36 bg-white/5 rounded-full mb-12 animate-pulse"></div>
 
             {/* Skeleton Hero */}
             <div className="space-y-12 mb-20 animate-pulse">
               <div className="space-y-6 max-w-3xl">
-                <div className="h-6 w-40 bg-emerald-500/10 rounded-full"></div>
-                <div className="h-16 w-3/4 bg-white/10 rounded-2xl"></div>
-                <div className="h-20 w-full bg-white/5 rounded-2xl"></div>
+                <div className="h-6 w-44 bg-emerald-500/10 rounded-full"></div>
+                <div className="h-10 md:h-14 w-3/4 bg-white/10 rounded-xl"></div>
+                <div className="h-14 w-full bg-white/5 rounded-xl"></div>
               </div>
-              <div className="aspect-[21/9] w-full bg-[#121A1C] rounded-3xl border border-white/5"></div>
+
+              {/* Image Skeleton with internal button skeletons */}
+              <div className="relative aspect-[21/9] w-full bg-[#121A1C] rounded-2xl border border-white/5 flex items-end p-8">
+                <div className="flex gap-4">
+                  <div className="h-10 w-36 bg-white/10 rounded-full"></div>
+                  <div className="h-10 w-32 bg-white/5 rounded-full border border-white/5"></div>
+                </div>
+              </div>
             </div>
 
             {/* Skeleton Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 animate-pulse">
               <div className="lg:col-span-8 space-y-16">
+                {/* Narrative Skeleton */}
                 <div className="space-y-6">
-                  <div className="h-4 w-48 bg-white/5 rounded-full"></div>
+                  <div className="h-3 w-40 bg-emerald-500/10 rounded-full"></div>
                   <div className="space-y-4">
-                    <div className="h-4 w-full bg-white/5 rounded-lg"></div>
-                    <div className="h-4 w-5/6 bg-white/5 rounded-lg"></div>
-                    <div className="h-4 w-4/5 bg-white/5 rounded-lg"></div>
+                    <div className="h-4 w-full bg-white/5 rounded-full"></div>
+                    <div className="h-4 w-full bg-white/5 rounded-full"></div>
+                    <div className="h-4 w-2/3 bg-white/5 rounded-full"></div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="h-40 bg-white/5 rounded-3xl"></div>
-                  <div className="h-40 bg-white/5 rounded-3xl"></div>
+
+                {/* Cards Skeleton */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="h-48 bg-[#121A1C] rounded-2xl border border-white/5"></div>
+                  <div className="h-48 bg-[#121A1C] rounded-2xl border border-white/5"></div>
                 </div>
               </div>
+
+              {/* Sidebar Skeleton */}
               <div className="lg:col-span-4">
-                <div className="h-96 bg-[#121A1C] rounded-3xl border border-white/5"></div>
+                <div className="h-[500px] bg-[#121A1C] rounded-3xl border border-white/5 p-8 space-y-8">
+                  <div className="h-4 w-24 bg-white/5 rounded-full"></div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="h-10 bg-white/5 rounded-xl"></div>
+                    <div className="h-10 bg-white/5 rounded-xl"></div>
+                  </div>
+                  <div className="h-32 bg-white/5 rounded-xl"></div>
+                  <div className="h-12 w-full bg-emerald-500/20 rounded-2xl"></div>
+                </div>
               </div>
             </div>
           </div>
