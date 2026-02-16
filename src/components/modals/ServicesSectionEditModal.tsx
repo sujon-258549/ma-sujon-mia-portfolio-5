@@ -157,7 +157,7 @@ export const ServicesSectionEditModal = ({
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1 text-emerald-500">
+                <Label className="text-[10px] text-emerald-500/80 uppercase font-black tracking-widest ml-1">
                   Highlight
                 </Label>
                 <Input

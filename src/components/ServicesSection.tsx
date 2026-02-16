@@ -96,13 +96,13 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {servicesData.services.map((service) => (
             <div
               key={service.id}
-              className="group relative p-8 rounded-3xl bg-[#121A1C] border border-white/5 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
+              className="group relative p-8 rounded-xl bg-[#121A1C] border border-emerald-500/20 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
             >
-              <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+              <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
 
               <div className="relative z-10">
                 <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-[#0E1416] transition-all duration-500 shadow-lg shadow-emerald-500/5">

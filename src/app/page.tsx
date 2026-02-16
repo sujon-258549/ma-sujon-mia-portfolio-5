@@ -50,9 +50,6 @@ export default async function Home() {
       {/* Skills Section */}
       <SkillsSection initialData={skillsContent} />
 
-      {/* Services Section */}
-      <ServicesSection initialData={servicesContent} />
-
       {/* Projects Section */}
       <ProjectsSection projects={projects} />
 
@@ -61,6 +58,9 @@ export default async function Home() {
 
       {/* Experience Section */}
       <ExperienceSection initialData={experienceContent} />
+
+      {/* Services Section */}
+      <ServicesSection initialData={servicesContent} />
 
       {/* Contact Section */}
       <ContactSection initialData={contactContent} />

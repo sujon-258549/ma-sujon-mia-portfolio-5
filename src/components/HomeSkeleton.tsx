@@ -77,6 +77,32 @@ export default function HomeSkeleton() {
           </div>
         </div>
 
+        {/* Services Preview */}
+        <div className="space-y-16">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="h-6 w-32 bg-white/5 rounded-full"></div>
+            <div className="h-12 w-64 bg-white/10 rounded-xl"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="h-80 bg-[#121A1C] rounded-3xl border border-white/5 p-8 space-y-8"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-white/5"></div>
+                <div className="space-y-4">
+                  <div className="h-6 w-3/4 bg-white/10 rounded-lg"></div>
+                  <div className="h-20 w-full bg-white/5 rounded-lg"></div>
+                </div>
+                <div className="pt-4 space-y-2">
+                  <div className="h-2 w-1/2 bg-white/5 rounded-full"></div>
+                  <div className="h-2 w-1/3 bg-white/5 rounded-full"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Projects Preview */}
         <div className="space-y-16">
           <div className="flex flex-col items-center space-y-4">
