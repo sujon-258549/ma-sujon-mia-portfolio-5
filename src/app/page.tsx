@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
+import ServicesSection from "@/components/ServicesSection";
 import EducationSection from "@/components/EducationSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -16,6 +17,7 @@ export default async function Home() {
     heroContent,
     aboutContent,
     skillsContent,
+    servicesContent,
     educationContent,
     experienceContent,
     contactContent,
@@ -25,6 +27,7 @@ export default async function Home() {
     dynamicContentService.getContent("hero").catch(() => null),
     dynamicContentService.getContent("about").catch(() => null),
     dynamicContentService.getContent("skills").catch(() => null),
+    dynamicContentService.getContent("services").catch(() => null),
     dynamicContentService.getContent("education").catch(() => null),
     dynamicContentService.getContent("experience").catch(() => null),
     dynamicContentService.getContent("contact").catch(() => null),
@@ -46,6 +49,9 @@ export default async function Home() {
 
       {/* Skills Section */}
       <SkillsSection initialData={skillsContent} />
+
+      {/* Services Section */}
+      <ServicesSection initialData={servicesContent} />
 
       {/* Projects Section */}
       <ProjectsSection projects={projects} />
