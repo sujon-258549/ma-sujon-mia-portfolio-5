@@ -21,6 +21,7 @@ import {
   Link as LinkIcon,
   Code2,
   Share2,
+  Loader2,
 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
@@ -38,25 +39,31 @@ export const HeroEditModal = ({
   currentData,
   onSave,
 }: HeroEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<HeroSectionData>(currentData);
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "hero",
     };
     try {
-      console.log('update section', updateData)
+      console.log("update section", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
-      if(res.success){
+      if (res.success) {
         toast.success("Hero updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Hero updated failed!");
+    } catch (error) {
+      console.error("Hero update error:", error);
+      toast.error("Hero update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   // Rotating Texts Management
@@ -587,9 +594,17 @@ export const HeroEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Update Section
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Update Section"
+              )}
             </Button>
           </div>
         </div>

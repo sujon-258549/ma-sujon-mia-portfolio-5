@@ -7,10 +7,15 @@ import { useIsAuthorized } from "@/lib/auth";
 import { SkillsSectionEditModal } from "./modals/SkillsSectionEditModal";
 import { SkillsSectionData } from "@/types/skill";
 
-const SkillsSection = () => {
+interface SkillsSectionProps {
+  initialData?: SkillsSectionData | null;
+}
+
+const SkillsSection = ({ initialData }: SkillsSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [skillsData, setSkillsData] = useState<SkillsSectionData>({
+
+  const defaultData: SkillsSectionData = {
     badge: "My Skills",
     title: "Showcasing My",
     titleHighlight: "Expertise",
@@ -75,7 +80,11 @@ const SkillsSection = () => {
         ],
       },
     ],
-  });
+  };
+
+  const [skillsData, setSkillsData] = useState<SkillsSectionData>(
+    initialData || defaultData,
+  );
 
   const handleSaveSection = (newData: SkillsSectionData) => {
     setSkillsData(newData);
@@ -88,7 +97,7 @@ const SkillsSection = () => {
         <div className="absolute top-10 right-10 z-30 group">
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center p-0"
+            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
             title="Edit Skills Section"
           >
             <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>

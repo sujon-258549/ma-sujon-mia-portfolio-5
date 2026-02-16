@@ -6,10 +6,15 @@ import { useIsAuthorized } from "@/lib/auth";
 import { AboutSectionData } from "@/types/about";
 import { AboutEditModal } from "./modals/AboutEditModal";
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  initialData?: AboutSectionData | null;
+}
+
+const AboutSection = ({ initialData }: AboutSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [aboutData, setAboutData] = useState<AboutSectionData>({
+
+  const defaultData: AboutSectionData = {
     badge: "Professional Overview",
     badgeIcon: "fa-solid fa-sparkles",
     title: "Driven by Innovation & Technical",
@@ -47,100 +52,109 @@ const AboutSection = () => {
         icon: "fa-solid fa-layer-group",
       },
     ],
-  });
+  };
+
+  const [aboutData, setAboutData] = useState<AboutSectionData>(
+    initialData || defaultData,
+  );
 
   const handleSave = (newData: AboutSectionData) => {
     setAboutData(newData);
-    // In a real app, you would save to a database here
     console.log("Saved About Data:", newData);
   };
 
   return (
     <section
       id="about"
-      className="bg-[#121A1C] relative overflow-hidden py-16 md:py-24"
+      className="bg-[#121A1C] relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
     >
-      {/* Subtle Background Glow */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[120px] -z-1" />
+      {/* ── Background Glows ── */}
+      <div className="absolute top-0 right-0 w-60 h-60 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-emerald-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-72 sm:h-72 bg-teal-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Admin Edit Button */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30">
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-30">
           <Button
             onClick={() => setIsModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
             title="Edit About Section"
           >
-            <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+            <i className="fa-solid fa-pen-to-square text-base sm:text-lg" />
           </Button>
         </div>
       )}
 
-      <div className="main-container relative z-10 px-6">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-          {/* Left Side: Image & Hover Content */}
-          <div className="w-full lg:w-5/12 sticky top-24">
-            <div className="relative aspect-[4/5] max-w-sm mx-auto mb-8 group cursor-pointer">
+      <div className="main-container relative z-10">
+        <div className="flex flex-col lg:flex-row gap-8 md:gap-10 lg:gap-14 items-start">
+          {/* ─────────── Left Column: Image & Stats ─────────── */}
+          <div className="w-full lg:w-5/12 lg:sticky lg:top-24">
+            {/* Profile Image Card */}
+            <div className="relative aspect-[4/5] max-w-full md:max-w-sm lg:max-w-full mx-auto mb-6 sm:mb-8 group cursor-pointer">
+              {/* Subtle Glow Behind Image */}
+              <div className="absolute -inset-1 rounded-2xl sm:rounded-3xl bg-emerald-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
               {/* Main Image Container */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 bg-[#1A2426] shadow-2xl">
-                {/* Profile Image */}
+              <div className="absolute inset-0 rounded-xl sm:rounded-3xl overflow-hidden border border-white/[0.08] bg-[#1A2426] shadow-2xl transition-shadow duration-700">
                 <Image
                   src={aboutData.image}
                   alt={aboutData.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 384px, (max-width: 1024px) 384px, 40vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                 />
 
+                {/* Permanent Bottom Gradient (always visible) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C]/30 via-transparent to-transparent pointer-events-none" />
+
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C] via-emerald-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 transform translate-y-4 group-hover:translate-y-0 text-center">
-                  <div className="mb-4 transform -translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
-                    <h3 className="text-2xl font-bold text-white mb-1">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C] via-emerald-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-5 sm:p-6 md:p-8 transform translate-y-4 group-hover:translate-y-0 text-center">
+                  <div className="mb-3 sm:mb-4 transform -translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
                       {aboutData.name}
                     </h3>
-                    <p className="text-emerald-500 font-medium text-sm tracking-widest uppercase">
+                    <p className="text-emerald-500 font-medium text-xs sm:text-sm tracking-widest uppercase">
                       {aboutData.role}
                     </p>
                   </div>
 
-                  <div className="h-px w-12 bg-emerald-500/50 mx-auto mb-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-200" />
+                  <div className="h-px w-10 sm:w-12 bg-emerald-500/50 mx-auto mb-3 sm:mb-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-200" />
 
-                  <p className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-300">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-300">
                     {aboutData.title} {aboutData.titleHighlight}
                   </p>
 
-                  <div className="flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-400">
-                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
+                  <div className="flex justify-center gap-2 sm:gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-[400ms]">
+                    <span className="px-2.5 sm:px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] sm:text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
                       Innovation
                     </span>
-                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
+                    <span className="px-2.5 sm:px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] sm:text-[10px] text-emerald-500 font-bold uppercase tracking-tighter">
                       Precision
                     </span>
                   </div>
                 </div>
 
-                {/* Decorative gradients */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent pointer-events-none" />
+                {/* Decorative corner gradient */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.07] via-transparent to-transparent pointer-events-none" />
               </div>
-
-              {/* Border Decoration */}
-              <div className="absolute -inset-3 border border-emerald-500/20 rounded-[2.5rem] -z-10 translate-x-4 translate-y-4 opacity-40 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
             </div>
 
-            {/* Experience and Product Stats (Bottom of Image) */}
-            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-10! md:mt-16! max-w-full  sm:max-w-xs md:max-w-sm lg:max-w-full mx-auto">
               {aboutData.stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-lg p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 transition-colors group"
+                  className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all duration-300 group/stat"
                 >
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                    <i className={`${stat.icon} text-emerald-500`}></i>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-1.5 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300">
+                    <i
+                      className={`${stat.icon} text-emerald-500 text-sm sm:text-base`}
+                    />
                   </div>
-                  <span className="text-xl font-bold text-white">
+                  <span className="text-lg sm:text-xl font-bold text-white leading-tight">
                     {stat.value}
                   </span>
-                  <span className="text-[11px] text-slate-500 uppercase font-bold tracking-wider">
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 uppercase font-bold tracking-wider mt-0.5">
                     {stat.label}
                   </span>
                 </div>
@@ -148,38 +162,53 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right Side: Expanded Content */}
-          <div className="w-full lg:w-7/12 pt-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
+          {/* ─────────── Right Column: Content ─────────── */}
+          <div className="w-full lg:w-7/12 pt-2 sm:pt-4">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-4 sm:mb-6">
               <i
-                className={`${aboutData.badgeIcon} text-sm text-emerald-500`}
-              ></i>
-              <span className="text-[11px] font-extrabold text-emerald-500 uppercase tracking-widest">
+                className={`${aboutData.badgeIcon} text-xs sm:text-sm text-emerald-500`}
+              />
+              <span className="text-[10px] sm:text-[11px] font-extrabold text-emerald-500 uppercase tracking-widest">
                 {aboutData.badge}
               </span>
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+            {/* Title */}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 sm:mb-6 md:mb-8 leading-tight">
               {aboutData.title}{" "}
               <span className="text-emerald-500">
                 {aboutData.titleHighlight}
               </span>
             </h2>
 
-            <div className="space-y-6 text-slate-400 text-lg leading-relaxed mb-10">
+            {/* Decorative Separator */}
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
+              <div className="h-[2px] w-8 sm:w-12 bg-gradient-to-r from-emerald-500 to-emerald-500/0 rounded-full" />
+              <div className="h-1 w-1 rounded-full bg-emerald-500/60" />
+            </div>
+
+            {/* Description Paragraphs */}
+            <div className="space-y-4 sm:space-y-5 md:space-y-6 text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10">
               {aboutData.description.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-6 border-t border-white/10">
+            {/* Highlights Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-5 sm:pt-6 border-t border-white/10">
               {aboutData.highlights.map((item, idx) => (
-                <div key={idx} className="flex gap-4 items-start group">
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover:border-emerald-500/50 transition-all">
-                    <i className={`${item.icon} text-emerald-500`}></i>
+                <div
+                  key={idx}
+                  className="flex gap-3 sm:gap-4 items-start group/highlight p-3 sm:p-4 rounded-xl hover:bg-white/[0.03] transition-all duration-300"
+                >
+                  <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover/highlight:border-emerald-500/50 group-hover/highlight:bg-emerald-500/15 transition-all duration-300">
+                    <i
+                      className={`${item.icon} text-emerald-500 text-sm sm:text-base`}
+                    />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-100 mb-1 group-hover:text-emerald-500 transition-colors">
+                    <h4 className="text-sm font-bold text-slate-100 mb-0.5 sm:mb-1 group-hover/highlight:text-emerald-500 transition-colors duration-300">
                       {item.title}
                     </h4>
                     <p className="text-slate-500 text-xs leading-snug">

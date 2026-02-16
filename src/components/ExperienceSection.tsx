@@ -6,11 +6,15 @@ import { ExperienceSectionData } from "@/types/experience";
 import { ExperienceEditModal } from "./modals/ExperienceEditModal";
 import { Button } from "./ui/button";
 
-const ExperienceSection = () => {
+interface ExperienceSectionProps {
+  initialData?: ExperienceSectionData | null;
+}
+
+const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [sectionData, setSectionData] = useState<ExperienceSectionData>({
+  const defaultData: ExperienceSectionData = {
     badge: "Professional Journey",
     badgeIcon: "fa-solid fa-briefcase",
     title: "Work",
@@ -60,7 +64,11 @@ const ExperienceSection = () => {
         ],
       },
     ],
-  });
+  };
+
+  const [sectionData, setSectionData] = useState<ExperienceSectionData>(
+    initialData || defaultData,
+  );
 
   return (
     <section
@@ -101,7 +109,7 @@ const ExperienceSection = () => {
         </div>
 
         {/* Experience Cards */}
-        <div className="max-w-5xl mx-auto space-y-4 md:space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {sectionData.experiences.map((exp, index) => (
             <div
               key={index}

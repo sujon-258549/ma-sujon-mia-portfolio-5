@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { EducationItem, EducationSectionData } from "@/types/education";
-import { Plus, X, Award, BookOpen, TrendingUp } from "lucide-react";
+import { Plus, X, Award, BookOpen, TrendingUp, Loader2 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 
@@ -30,25 +30,31 @@ export const EducationEditModal = ({
   currentData,
   onSave,
 }: EducationEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<EducationSectionData>(currentData);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "education",
     };
-    console.log('update section', updateData)
+    console.log("update section", updateData);
     try {
       const res = await dynamicContentService.upsertContent(updateData);
-      if(res.success){
+      if (res.success) {
         toast.success("Education updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Education updated failed!");
+    } catch (error) {
+      console.error("Education update error:", error);
+      toast.error("Education update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const addEducation = () => {
@@ -456,9 +462,17 @@ export const EducationEditModal = ({
               </Button>
               <Button
                 onClick={handleSubmit}
-                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
+                disabled={isLoading}
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Save Education
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  "Save Education"
+                )}
               </Button>
             </div>
           </form>

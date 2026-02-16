@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ export const SkillEditModal = ({
   onSave,
   mode,
 }: SkillEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SkillCategory>(() => ({
     id: category?.id || Math.random().toString(36).substr(2, 9),
     title: category?.title || "",
@@ -36,13 +38,21 @@ export const SkillEditModal = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
-    const updateData = {
-      ...formData,
-      type: "skills",
-    };
-    console.log("skills", updateData);
-    onClose();
+    setIsLoading(true);
+
+    try {
+      const updateData = {
+        ...formData,
+        type: "skills",
+      };
+      console.log("skills", updateData);
+      onSave(formData);
+      onClose();
+    } catch (error) {
+      console.error("Skill category update failure:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const addSkill = () => {
@@ -162,9 +172,19 @@ export const SkillEditModal = ({
             </Button>
             <Button
               type="submit"
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {mode === "edit" ? "Update Category" : "Save Category"}
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                  Saving...
+                </>
+              ) : mode === "edit" ? (
+                "Update Category"
+              ) : (
+                "Save Category"
+              )}
             </Button>
           </div>
         </form>

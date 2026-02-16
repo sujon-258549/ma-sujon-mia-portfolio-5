@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
 import { useState } from "react";
 import { toast } from "sonner";
@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ContactSectionData, ContactInfo } from "@/types/contact";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { Loader2 } from "lucide-react";
 
 interface ContactEditModalProps {
   isOpen: boolean;
@@ -27,24 +28,31 @@ export const ContactEditModal = ({
   currentData,
   onSave,
 }: ContactEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<ContactSectionData>(currentData);
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updatedData = {
       ...formData,
-      type:"contact"
+      type: "contact",
+    };
+    try {
+      const response = await dynamicContentService.upsertContent(updatedData);
+      console.log("Response", response);
+      if (response.success) {
+        toast.success("Contact section updated successfully");
+        onSave(formData);
+        onClose();
+      }
+    } catch (error) {
+      console.error("Contact update error:", error);
+      toast.error("Failed to update contact section");
+    } finally {
+      setIsLoading(false);
     }
-   try {
-    const response = await dynamicContentService.upsertContent(updatedData);
-    console.log("Response", response);
-    toast.success("Contact section updated successfully");
-   } catch (error) {
-    console.log("Error", error);
-    toast.error("Failed to update contact section");
-   }
-    onClose();
   };
 
   const updateCard = (
@@ -169,7 +177,7 @@ export const ContactEditModal = ({
                       <i className="fa-solid fa-xmark text-[10px]"></i>
                     </button>
                     <div className="flex items-center gap-3 border-b border-white/5 pb-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                      <div className="w-10 h-10 shrink-0 flex items-center justify-center rounded-lg bg-emerald-500/10">
                         <i className={`${card.icon} text-emerald-500`}></i>
                       </div>
                       <span className="text-[10px] text-emerald-500 uppercase font-black tracking-widest">
@@ -241,9 +249,17 @@ export const ContactEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-8 h-11 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-8 h-11 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Publish Changes
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Publish Changes"
+              )}
             </Button>
           </div>
         </div>

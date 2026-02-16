@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Experience, ExperienceSectionData } from "@/types/experience";
-import { Plus, X, TrendingUp, Users, Code2 } from "lucide-react";
+import { Plus, X, TrendingUp, Users, Code2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { dynamicContentService } from "@/services/dynamicContentService";
 
@@ -29,25 +29,31 @@ export const ExperienceEditModal = ({
   currentData,
   onSave,
 }: ExperienceEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<ExperienceSectionData>(currentData);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "experience",
     };
-    console.log('update section', updateData)
+    console.log("update section", updateData);
     try {
       const res = await dynamicContentService.upsertContent(updateData);
-      if(res.success){
+      if (res.success) {
         toast.success("Experience updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Experience updated failed!");
+    } catch (error) {
+      console.error("Experience update error:", error);
+      toast.error("Experience update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const addExperience = () => {
@@ -500,9 +506,17 @@ export const ExperienceEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] px-10 h-12 rounded-lg font-bold shadow-xl shadow-emerald-500/20 cursor-pointer active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Publish Experience
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Publish Experience"
+              )}
             </Button>
           </div>
         </div>

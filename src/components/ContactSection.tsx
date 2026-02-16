@@ -11,12 +11,16 @@ import { ContactSectionData } from "@/types/contact";
 import { toast } from "sonner";
 import { contactMessageService } from "@/services/contactMessageService";
 
-const ContactSection = () => {
+interface ContactSectionProps {
+  initialData?: ContactSectionData | null;
+}
+
+const ContactSection = ({ initialData }: ContactSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [contactData, setContactData] = useState<ContactSectionData>({
+  const defaultData: ContactSectionData = {
     badge: "Contact Me",
     badgeIcon: "fa-solid fa-paper-plane",
     title: "Let's Work",
@@ -38,7 +42,11 @@ const ContactSection = () => {
         value: "Dhaka, Bangladesh",
       },
     ],
-  });
+  };
+
+  const [contactData, setContactData] = useState<ContactSectionData>(
+    initialData || defaultData,
+  );
 
   const [formPayload, setFormPayload] = useState({
     name: "",
@@ -231,7 +239,7 @@ const ContactSection = () => {
                 className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group/card"
               >
                 <CardContent className="flex items-center gap-4 p-4">
-                  <div className="p-3 bg-emerald-500/10 rounded-full text-emerald-500 group-hover/card:scale-110 transition-transform">
+                  <div className="w-12 h-12 shrink-0 flex items-center justify-center bg-emerald-500/10 rounded-full text-emerald-500 group-hover/card:scale-110 transition-transform shadow-lg shadow-emerald-500/5">
                     <i className={`${card.icon} text-lg`}></i>
                   </div>
                   <div>

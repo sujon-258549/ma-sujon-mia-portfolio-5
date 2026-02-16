@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export interface ProjectSectionHeaderData {
   badge: string;
@@ -36,12 +37,13 @@ export const ProjectSectionHeaderEditModal = ({
   currentData,
   onSave,
 }: ProjectSectionHeaderEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] =
     useState<ProjectSectionHeaderData>(currentData);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
 
     const updateData = {
       ...formData,
@@ -51,12 +53,16 @@ export const ProjectSectionHeaderEditModal = ({
       console.log("footer data", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
-        toast.success("Footer updated successfully!");
+        toast.success("Project Section Header updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Footer updated failed!");
+    } catch (error) {
+      console.error("Project Section Header update failure:", error);
+      toast.error("Project Section Header update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   return (
@@ -297,9 +303,17 @@ export const ProjectSectionHeaderEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Publish Changes
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Publish Changes"
+              )}
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Github,
   Globe,
@@ -8,235 +9,444 @@ import {
   Rocket,
   Target,
   ShieldCheck,
-  Layers,
   ChevronRight,
   Code2,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { Project } from "@/types/project";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-// This would usually come from an API or shared state
-const mockProjects: Project[] = [
-  {
-    id: "1",
-    title: "E-Commerce Platform",
-    shortDescription:
-      "A full-featured online store with cart, checkout, and admin dashboard.",
-    longDescription:
-      "This e-commerce platform was built to handle high-traffic retail scenarios. It features a robust product management system, integrated payment gateways with Stripe, and a real-time analytics dashboard for store owners. The project focused on performance optimization and user psychological factors to increase conversion rates.",
-    image: "bg-gradient-to-br from-emerald-900 to-slate-900",
-    thumbnail: "",
-    tags: ["Next.js", "TypeScript", "Prisma", "Stripe", "Tailwind"],
-    liveUrl: "#",
-    githubUrl: "#",
-    category: "Web Application",
-    features: [
-      "Dynamic Cart Management with Persistent State",
-      "Stripe Integration with Webhooks for Secure Payments",
-      "Full CRUD Admin Panel for Inventory Control",
-      "Responsive Product Filtering and Search",
-      "User Authentication and Order History",
-    ],
-    technologies: {
-      frontend: ["Next.js 14", "React Query", "Tailwind CSS"],
-      backend: ["Node.js", "Next Auth"],
-      database: ["PostgreSQL", "Prisma ORM"],
-    },
-    challenges: [
-      "Managing complex checkout states and stock synchronization",
-      "Implementing secure payment workflows with multi-step validation",
-    ],
-    solutions: [
-      "Used Zustand for lightweight client state management",
-      "Implemented server-side validation for all price-related calculations",
-    ],
-    stats: [
-      { label: "Load Time", value: "< 1.2s" },
-      { label: "SEO Score", value: "98/100" },
-    ],
-  },
-];
+import { projectService } from "@/services/projectService";
 
 export default function ProjectDetailsPage() {
   const params = useParams();
   const router = useRouter();
-  const project =
-    mockProjects.find((p) => p.id === params.id) || mockProjects[0];
+  const [project, setProject] = useState<Project | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!project) return null;
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setIsLoading(true);
+        const data = await projectService.getProjectById(params.id as string);
+        setProject(data);
+      } catch (err) {
+        console.error("Failed to fetch project:", err);
+        setError("Project not found or failed to load.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  return (
-    <div className="min-h-screen bg-[#0E1416] text-white">
-      <Header />
+    if (params.id) {
+      fetchProject();
+    }
+  }, [params.id]);
 
-      <main className="pt-32 pb-20 px-4 md:px-0">
-        <div className="main-container">
-          {/* Back Button */}
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-emerald-500 hover:text-emerald-400 font-bold mb-10 transition-all group cursor-pointer"
-          >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            Back to Projects
-          </button>
+  // Loading State
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0E1416] text-white">
+        <Header />
+        <main className="pt-32 pb-20 px-4 md:px-0">
+          <div className="main-container max-w-6xl mx-auto">
+            {/* Skeleton Back button */}
+            <div className="h-4 w-32 bg-white/5 rounded-full mb-12 animate-pulse"></div>
 
-          {/* Hero Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6 font-mono text-xs uppercase tracking-widest text-emerald-500 font-black">
-                <Rocket className="w-3 h-3" />
-                {project.category}
+            {/* Skeleton Hero */}
+            <div className="space-y-12 mb-20 animate-pulse">
+              <div className="space-y-6 max-w-3xl">
+                <div className="h-6 w-40 bg-emerald-500/10 rounded-full"></div>
+                <div className="h-16 w-3/4 bg-white/10 rounded-2xl"></div>
+                <div className="h-20 w-full bg-white/5 rounded-2xl"></div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-[1.1]">
-                {project.title}
-              </h1>
-              <p className="text-slate-400 text-xl md:text-2xl leading-relaxed mb-10 italic border-l-4 border-emerald-500/50 pl-6">
-                {project.shortDescription}
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Button className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-10 h-10 rounded-lg shadow-xl shadow-emerald-500/10 transition-all active:scale-95 cursor-pointer">
-                  <Globe className="w-5 h-5 mr-3" />
-                  Live Demo
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold px-10 h-10 rounded-lg transition-all cursor-pointer"
-                >
-                  <Github className="w-5 h-5 mr-3" />
-                  Source Code
-                </Button>
-              </div>
+              <div className="aspect-[21/9] w-full bg-[#121A1C] rounded-3xl border border-white/5"></div>
             </div>
 
-            <div
-              className={`aspect-video ${project.image} rounded-lg border border-white/10 shadow-3xl flex items-center justify-center p-1 relative overflow-hidden group`}
+            {/* Skeleton Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 animate-pulse">
+              <div className="lg:col-span-8 space-y-16">
+                <div className="space-y-6">
+                  <div className="h-4 w-48 bg-white/5 rounded-full"></div>
+                  <div className="space-y-4">
+                    <div className="h-4 w-full bg-white/5 rounded-lg"></div>
+                    <div className="h-4 w-5/6 bg-white/5 rounded-lg"></div>
+                    <div className="h-4 w-4/5 bg-white/5 rounded-lg"></div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="h-40 bg-white/5 rounded-3xl"></div>
+                  <div className="h-40 bg-white/5 rounded-3xl"></div>
+                </div>
+              </div>
+              <div className="lg:col-span-4">
+                <div className="h-96 bg-[#121A1C] rounded-3xl border border-white/5"></div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Error State
+  if (error || !project) {
+    return (
+      <div className="min-h-screen bg-[#0E1416] text-white">
+        <Header />
+        <main className="pt-32 pb-20 px-4 md:px-0">
+          <div className="main-container text-center py-20">
+            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+              <i className="fa-solid fa-triangle-exclamation text-4xl text-red-500"></i>
+            </div>
+            <h1 className="text-3xl font-bold mb-4">Project Not Found</h1>
+            <p className="text-slate-400 text-lg mb-8 max-w-md mx-auto">
+              {error ||
+                "The project you're looking for doesn't exist or has been removed."}
+            </p>
+            <Button
+              onClick={() => router.push("/#projects")}
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-8 h-12 rounded-lg cursor-pointer"
             >
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />
-              <Code2 className="w-20 h-20 text-white/20 group-hover:scale-125 group-hover:text-emerald-500/30 transition-all duration-700" />
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back to Projects
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const allTechTags = [
+    ...(project.technologies?.frontend || []),
+    ...(project.technologies?.backend || []),
+    ...(project.technologies?.database || []),
+    ...(project.technologies?.tools || []),
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#0E1416] text-white selection:bg-emerald-500/30">
+      <Header />
+
+      <main className="pt-32 pb-32 px-4 md:px-0">
+        <div className="main-container max-w-6xl mx-auto">
+          {/* Back Navigation */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-slate-500 hover:text-emerald-400 font-bold mb-12 transition-all group cursor-pointer text-sm tracking-widest uppercase"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            Back to Catalog
+          </button>
+
+          {/* ─── Minimal Hero Header ─── */}
+          <div className="space-y-12 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="space-y-6 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-500 font-black">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                {project.category || "Project Case Study"}
+              </div>
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.05]">
+                {project.title}
+              </h1>
+              <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                {project.shortDescription}
+              </p>
+            </div>
+
+            {/* Smart Hero Image */}
+            <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-white/5 shadow-3xl group bg-[#121A1C]">
+              {project.image && !project.image.startsWith("bg-") ? (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-1000"
+                  unoptimized
+                />
+              ) : (
+                <div
+                  className={`w-full h-full ${project.image || "bg-gradient-to-br from-emerald-950/50 to-slate-950"} flex items-center justify-center`}
+                >
+                  <Code2 className="w-24 h-24 text-white/5 group-hover:text-emerald-500/10 transition-all duration-700" />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0E1416] via-transparent to-transparent opacity-60" />
+
+              {/* Floating Live Link Overlay */}
+              <div className="absolute bottom-8 left-8 right-8 flex flex-wrap gap-4 items-center justify-between pointer-events-none">
+                <div className="flex gap-4 pointer-events-auto">
+                  <Link href={project.liveUrl} target="_blank">
+                    <Button className="bg-white text-[#0E1416] hover:bg-emerald-500 hover:text-white font-black px-6 h-12 rounded-full shadow-2xl transition-all active:scale-95 cursor-pointer group/btn">
+                      <Globe className="w-4 h-4 mr-2" />
+                      Live Experience
+                      <ArrowLeft className="w-4 h-4 ml-2 rotate-180 opacity-60 group-hover/btn:rotate-[225deg] transition-transform" />
+                    </Button>
+                  </Link>
+                  <Link href={project.githubUrl} target="_blank">
+                    <Button className="bg-[#0E1416]/80 backdrop-blur-md text-white border border-white/10 hover:bg-white hover:text-[#0E1416] font-black px-6 h-12 rounded-full transition-all cursor-pointer">
+                      <Github className="w-4 h-4 mr-2" />
+                      Repository
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-8 space-y-10">
-              {/* About Section */}
-              <section>
-                <h2 className="text-3xl font-bold mb-8 flex items-center gap-4">
-                  <div className="w-8 h-1 bg-emerald-500 rounded-full" />
-                  The Story
-                </h2>
-                <div className="text-slate-400 text-lg leading-loose space-y-6">
-                  {project.longDescription}
+          {/* ─── Modern Grid Layout ─── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            {/* Left Content — The Narrative */}
+            <div className="lg:col-span-8 space-y-20">
+              {/* Narrative Section */}
+              <section className="space-y-6">
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-500/60 flex items-center gap-3">
+                  <div className="w-10 h-[1px] bg-emerald-500/30" />
+                  01. Project Narrative
+                </h3>
+                <div className="text-slate-100 text-lg md:text-xl leading-relaxed space-y-6 font-medium selection:bg-emerald-500/40">
+                  {project.longDescription?.split("\n").map((para, i) => (
+                    <p key={i} className="last:mb-0">
+                      {para}
+                    </p>
+                  )) || <p>{project.shortDescription}</p>}
                 </div>
               </section>
 
-              {/* Key Features */}
-              <section className="bg-slate-900/40 border border-white/5 rounded-lg p-4 md:p-6">
-                <h2 className="text-3xl font-bold mb-10 flex items-center gap-4">
-                  <Rocket className="w-8 h-8 text-sky-500" />
-                  Key Features
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-bold">
-                  {project.features.map((feature, i) => (
+              {/* Strategy & Problem Section */}
+              {(project.problem || project.plan) && (
+                <section className="space-y-8 animate-in fade-in duration-1000">
+                  <h3 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-500/60 flex items-center gap-3">
+                    <div className="w-10 h-[1px] bg-emerald-500/30" />
+                    02. Strategy & Challenges
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-medium">
+                    {project.problem && (
+                      <div className="p-8 rounded-2xl bg-[#121A1C] border border-white/5 space-y-4">
+                        <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
+                          <Target className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-white font-bold">The Challenge</h4>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                          {project.problem}
+                        </p>
+                      </div>
+                    )}
+                    {project.plan && (
+                      <div className="p-8 rounded-2xl bg-[#121A1C] border border-white/5 space-y-4">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                          <Rocket className="w-5 h-5" />
+                        </div>
+                        <h4 className="text-white font-bold">The Solution</h4>
+                        <p className="text-slate-400 text-sm leading-relaxed">
+                          {project.plan}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )}
+
+              {/* Features Grid */}
+              {project.features && project.features.length > 0 && (
+                <section className="space-y-8">
+                  <h3 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-500/60 flex items-center gap-3">
+                    <div className="w-10 h-[1px] bg-emerald-500/30" />
+                    03. Core Capabilities
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {project.features.map((feature, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-4 p-5 bg-[#121A1C] border border-white/5 rounded-xl hover:border-emerald-500/30 transition-all group/feat"
+                      >
+                        <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
+                        <span className="text-slate-300 text-sm font-bold tracking-tight">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Gallery — Unified Image Style */}
+              <section className="space-y-8">
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-500/60 flex items-center gap-3">
+                  <div className="w-10 h-[1px] bg-emerald-500/30" />
+                  04. Interface Design
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[1, 2].map((i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-4 p-5 bg-white/5 rounded-lg border border-white/5 hover:border-emerald-500/20 transition-all"
+                      className="relative aspect-video rounded-2xl overflow-hidden border border-white/5 group/gallery bg-[#121A1C]"
                     >
-                      <ShieldCheck className="w-6 h-6 text-emerald-500 shrink-0" />
-                      <span className="text-slate-200">{feature}</span>
+                      {project.image && !project.image.startsWith("bg-") ? (
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} view ${i}`}
+                          fill
+                          className="object-cover opacity-80 group-hover/gallery:opacity-100 group-hover/gallery:scale-105 transition-all duration-700"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-emerald-950/50 to-slate-950 flex items-center justify-center">
+                          <Code2 className="w-12 h-12 text-white/5" />
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
               </section>
-
-              {/* Challenges & Solutions */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <section className="space-y-6">
-                  <h3 className="text-xl font-bold text-amber-500 flex items-center gap-3">
-                    <Target className="w-5 h-5" />
-                    Challenges
-                  </h3>
-                  <div className="space-y-4">
-                    {project.challenges?.map((c, i) => (
-                      <div
-                        key={i}
-                        className="flex gap-4 p-4 bg-red-500/5 rounded-lg border border-red-500/10 text-slate-400 text-sm italic"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
-                        {c}
-                      </div>
-                    ))}
-                  </div>
-                </section>
-                <section className="space-y-6">
-                  <h3 className="text-xl font-bold text-emerald-500 flex items-center gap-3">
-                    <ShieldCheck className="w-5 h-5" />
-                    Solutions
-                  </h3>
-                  <div className="space-y-4">
-                    {project.solutions?.map((s, i) => (
-                      <div
-                        key={i}
-                        className="flex gap-4 p-4 bg-emerald-500/5 rounded-lg border border-emerald-500/10 text-slate-400 text-sm"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
-                        {s}
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </div>
             </div>
 
-            {/* Sidebar Stats & Tech */}
-            <div className="lg:col-span-4 space-y-10">
-              <div className="bg-[#172023] border border-white/5 rounded-lg p-8 space-y-10 sticky top-32">
-                {/* Tech Stack */}
-                <div className="space-y-6">
-                  <h4 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-slate-500 border-b border-white/5 pb-4">
-                    <Layers className="w-4 h-4" />
-                    Tech Stack
+            {/* Right Sidebar — Project Intelligence */}
+            <div className="lg:col-span-4 space-y-8">
+              <aside className="sticky top-32 space-y-6">
+                {/* Project Brief Card */}
+                <div className="bg-[#121A1C] border border-white/5 rounded-3xl p-8 space-y-8 shadow-2xl">
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 border-b border-white/5 pb-4">
+                    Project Intel
                   </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-4 py-2 bg-black/40 text-emerald-500 border border-emerald-500/20 rounded-lg text-xs font-bold"
+
+                  {/* Quick Info Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {project.role && (
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-emerald-500/60">
+                          My Role
+                        </p>
+                        <p className="text-sm font-bold text-white">
+                          {project.role}
+                        </p>
+                      </div>
+                    )}
+                    {project.duration && (
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-emerald-500/60">
+                          Duration
+                        </p>
+                        <p className="text-sm font-bold text-white">
+                          {project.duration}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Smart Tech Stack Labels */}
+                  {allTechTags.length > 0 && (
+                    <div className="space-y-4">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
+                        Infrastructure
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {allTechTags.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1.5 bg-white/5 text-white border border-white/5 rounded-lg text-[10px] font-black uppercase tracking-wider"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Impact Stats */}
+                  {project.stats && project.stats.length > 0 && (
+                    <div className="space-y-4 pt-4 border-t border-white/5">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-emerald-500">
+                        Key Metrics
+                      </p>
+                      <div className="grid grid-cols-1 gap-3">
+                        {project.stats.map((stat, i) => (
+                          <div
+                            key={i}
+                            className="flex justify-between items-center p-3 bg-white/[0.02] rounded-xl border border-white/5"
+                          >
+                            <span className="text-[11px] font-bold text-slate-400">
+                              {stat.label}
+                            </span>
+                            <span className="text-sm font-black text-emerald-500">
+                              {stat.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Team */}
+                  {project.teamMembers && project.teamMembers.length > 0 && (
+                    <div className="space-y-4 pt-4 border-t border-white/5">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
+                        Collaboration
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.teamMembers.map((member, i) => (
+                          <div
+                            key={i}
+                            className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-[10px] font-black text-emerald-500"
+                            title={member}
+                          >
+                            {member.charAt(0).toUpperCase()}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Action Group */}
+                  <div className="space-y-3 pt-6">
+                    <Link
+                      href={project.liveUrl}
+                      target="_blank"
+                      className="block"
+                    >
+                      <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-black h-12 rounded-2xl group cursor-pointer transition-all">
+                        View Live Site
+                        <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform" />
+                      </Button>
+                    </Link>
+                    <Link
+                      href={project.githubUrl}
+                      target="_blank"
+                      className="block"
+                    >
+                      <Button
+                        variant="ghost"
+                        className="w-full text-slate-400 hover:text-white hover:bg-white/5 font-bold h-12 rounded-2xl transition-all"
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        <Github className="w-4 h-4 mr-2" />
+                        Explore Source
+                      </Button>
+                    </Link>
                   </div>
                 </div>
 
-                {/* Impact / Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  {project.stats?.map((stat, i) => (
-                    <div
-                      key={i}
-                      className="p-6 bg-black/40 rounded-lg border border-white/5 text-center"
-                    >
-                      <div className="text-2xl font-black text-white mb-1">
-                        {stat.value}
-                      </div>
-                      <div className="text-[10px] text-slate-500 uppercase tracking-widest">
-                        {stat.label}
-                      </div>
-                    </div>
-                  ))}
+                {/* Next Steps / Contact Card */}
+                <div className="p-8 rounded-3xl bg-emerald-500/5 border border-emerald-500/10 text-center space-y-4">
+                  <h5 className="font-bold text-white">
+                    Interested in this project?
+                  </h5>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Let&apos;s discuss how we can build something similar for
+                    your business.
+                  </p>
+                  <Link href="/#contact" className="inline-block pt-2">
+                    <span className="text-xs font-black uppercase tracking-widest text-emerald-500 hover:text-emerald-400 cursor-pointer flex items-center gap-2">
+                      Start a Conversation <ChevronRight className="w-4 h-4" />
+                    </span>
+                  </Link>
                 </div>
-
-                <Link href={project.liveUrl} target="_blank" className="block">
-                  <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold h-10 rounded-lg group cursor-pointer transition-all">
-                    Visit Live Site
-                    <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </div>
+              </aside>
             </div>
           </div>
         </div>

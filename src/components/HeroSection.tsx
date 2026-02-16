@@ -6,7 +6,11 @@ import { useIsAuthorized } from "@/lib/auth";
 import { HeroSectionData } from "@/types/hero";
 import { HeroEditModal } from "./modals/HeroEditModal";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  initialData?: HeroSectionData | null;
+}
+
+const HeroSection = ({ initialData }: HeroSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [text, setText] = useState("");
@@ -14,7 +18,7 @@ const HeroSection = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [delta, setDelta] = useState(150);
 
-  const [heroData, setHeroData] = useState<HeroSectionData>({
+  const defaultData: HeroSectionData = {
     greeting: "Hi, I'm",
     name: "Sujon",
     nameHighlight: "Sujon",
@@ -71,7 +75,11 @@ const HeroSection = () => {
         icon: "fa-brands fa-facebook-f",
       },
     ],
-  });
+  };
+
+  const [heroData, setHeroData] = useState<HeroSectionData>(
+    initialData || defaultData,
+  );
 
   useEffect(() => {
     const tick = () => {

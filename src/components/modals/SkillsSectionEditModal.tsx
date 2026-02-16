@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { SkillCategory, SkillsSectionData } from "@/types/skill";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 interface SkillsSectionEditModalProps {
   isOpen: boolean;
@@ -27,24 +28,30 @@ export const SkillsSectionEditModal = ({
   currentData,
   onSave,
 }: SkillsSectionEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SkillsSectionData>(currentData);
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "skills",
     };
     try {
       const res = await dynamicContentService.upsertContent(updateData);
-      if(res.success){
-        toast.success("Footer updated successfully!");
+      if (res.success) {
+        toast.success("Skills section updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Footer updated failed!");
+    } catch (error) {
+      console.error("Skills update error:", error);
+      toast.error("Skills section update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const updateCategory = <K extends keyof SkillCategory>(
@@ -285,9 +292,17 @@ export const SkillsSectionEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-8 h-11 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer text-xs disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Apply Changes
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Apply Changes"
+              )}
             </Button>
           </div>
         </div>

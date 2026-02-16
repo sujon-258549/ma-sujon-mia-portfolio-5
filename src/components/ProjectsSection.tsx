@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -20,7 +20,40 @@ import {
   ProjectSectionHeaderData,
 } from "./modals/ProjectSectionHeaderEditModal";
 
-const ProjectsSection = () => {
+interface ProjectsSectionProps {
+  projects?: Project[];
+}
+
+// Helper: get a valid image URL from project data
+const getProjectImage = (project: Project): string | null => {
+  // Check if image field is a valid URL
+  if (
+    project.image &&
+    (project.image.startsWith("http") || project.image.startsWith("/"))
+  ) {
+    return project.image;
+  }
+  // Fallback to first gallery image
+  if (
+    project.gallery &&
+    project.gallery.length > 0 &&
+    project.gallery[0].startsWith("http")
+  ) {
+    return project.gallery[0];
+  }
+  // Fallback to thumbnail
+  if (
+    project.thumbnail &&
+    (project.thumbnail.startsWith("http") || project.thumbnail.startsWith("/"))
+  ) {
+    return project.thumbnail;
+  }
+  return null;
+};
+
+const ProjectsSection = ({
+  projects: initialProjects,
+}: ProjectsSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [showAll, setShowAll] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,35 +70,8 @@ const ProjectsSection = () => {
     titleHighlight: "Works",
     description:
       "Explore a selection of my recently completed projects, ranging from focused experiments to full-scale applications.",
-    projects: [],
+    projects: initialProjects || [],
   });
-
-  // Load data from Backend on mount
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const data = await projectService.getAllProjects();
-        setSectionData((prev) => ({
-          ...prev,
-          projects: data,
-        }));
-      } catch (error) {
-        console.error("Failed to fetch projects:", error);
-        toast.error("Failed to load projects from server");
-
-        // Fallback to localStorage if server fails
-        const savedData = localStorage.getItem("projectsSectionData");
-        if (savedData) {
-          try {
-            setSectionData(JSON.parse(savedData));
-          } catch (e) {
-            console.error("Failed to parse saved projects data", e);
-          }
-        }
-      }
-    };
-    fetchProjects();
-  }, []);
 
   const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this project?"))
@@ -204,7 +210,7 @@ const ProjectsSection = () => {
           {displayedProjects.map((project, index) => (
             <Card
               key={index}
-              className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative"
+              className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0"
             >
               {/* Admin Individual Edit/Delete Buttons */}
               {isAuthorized && (
@@ -236,18 +242,34 @@ const ProjectsSection = () => {
               )}
 
               {/* Image Container */}
-              <div className={`h-56 ${project.image} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
-                  <Link
-                    href={`/projects/${project.id || index}`}
-                    className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 text-white font-bold gap-2 hover:bg-emerald-500 hover:border-emerald-500 transition-all"
-                  >
-                    <i className="fa-solid fa-eye text-lg"></i>
-                    View Case Study
-                  </Link>
-                </div>
-              </div>
+              {(() => {
+                const imgUrl = getProjectImage(project);
+                return (
+                  <div className="h-64 relative overflow-hidden bg-[#172023]">
+                    {imgUrl ? (
+                      <img
+                        src={imgUrl}
+                        alt={project.title}
+                        className="w-full h-[200%] object-cover object-top group-hover:translate-y-[-50%] transition-transform duration-[3s] ease-in-out"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-linear-to-br from-emerald-900 to-slate-900 flex items-center justify-center">
+                        <i className="fa-solid fa-code text-4xl text-white/20"></i>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
+                      <Link
+                        href={`/projects/${project._id || project.id || index}`}
+                        className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
+                      >
+                        <i className="fa-solid fa-eye text-lg"></i>
+                        View Case Study
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })()}
 
               <CardHeader className="p-6">
                 <div className="flex items-center gap-2 mb-3 text-[10px] uppercase font-black text-emerald-500 tracking-widest">
@@ -268,7 +290,7 @@ const ProjectsSection = () => {
                     .filter(
                       (tag) => typeof tag === "string" && tag.trim() !== "",
                     )
-                    .slice(0, 3)
+                    .slice(0, 9)
                     .map((tag, idx) => (
                       <Badge
                         key={`${tag}-${idx}`}
@@ -284,7 +306,7 @@ const ProjectsSection = () => {
                 <Link
                   href={project.liveUrl}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2.5 rounded-lg hover:bg-emerald-400 transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2 rounded-lg hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
                 >
                   <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   Live Demo

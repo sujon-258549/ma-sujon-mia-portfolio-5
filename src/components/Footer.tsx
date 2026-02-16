@@ -6,15 +6,17 @@ import Image from "next/image";
 import { useIsAuthorized } from "@/lib/auth";
 import { FooterEditModal } from "./modals/FooterEditModal";
 import { FooterData } from "@/types/footer";
-import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 
-const Footer = () => {
+interface FooterProps {
+  initialData?: FooterData | null;
+}
+
+const Footer = ({ initialData }: FooterProps) => {
   const isAuthorized = useIsAuthorized();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Dynamic Footer Data
-  const [footerData, setFooterData] = useState<FooterData>({
+  const defaultData: FooterData = {
     description:
       "Crafting digital experiences with clean code and modern design. Transforming ideas into reality through innovative web solutions.",
     logo: "https://i.ibb.co.com/r22rB4k4/logo.webp",
@@ -69,7 +71,11 @@ const Footer = () => {
         icon: "fa-solid fa-location-dot",
       },
     ],
-  });
+  };
+
+  const [footerData, setFooterData] = useState<FooterData>(
+    initialData || defaultData,
+  );
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -102,7 +108,7 @@ const Footer = () => {
             <div className="relative">
               <div className="flex items-center gap-3 mb-3">
                 <Image
-                  src={footerData.logo || '/logo.png'}
+                  src={footerData.logo || "/logo.png"}
                   alt="Sujon Logo"
                   width={200}
                   height={100}

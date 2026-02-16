@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { FooterData, SocialLink, QuickLink, ContactItem } from "@/types/footer";
 import Image from "next/image";
+import { Loader2 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 
 interface FooterEditModalProps {
@@ -29,6 +30,7 @@ export const FooterEditModal = ({
   currentData,
   onSave,
 }: FooterEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FooterData>(currentData);
 
   useEffect(() => {
@@ -37,25 +39,28 @@ export const FooterEditModal = ({
     }
   }, [isOpen, currentData]);
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
 
-    const update ={
+    const update = {
       ...formData,
-      type:"footer"
-    }
+      type: "footer",
+    };
     try {
-
-      console.log('footer data', update)
+      console.log("footer data", update);
       const res = await dynamicContentService.upsertContent(update);
-      if(res.success){
+      if (res.success) {
         toast.success("Footer updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("Footer updated failed!");
+    } catch (error) {
+      console.error("Footer update error:", error);
+      toast.error("Footer update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -657,9 +662,17 @@ export const FooterEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] shadow-xl shadow-emerald-500/20 px-8 h-11 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 order-1 sm:order-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Publish Changes
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Publish Changes"
+              )}
             </Button>
           </div>
         </div>

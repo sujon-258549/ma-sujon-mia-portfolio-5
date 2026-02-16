@@ -6,11 +6,15 @@ import { EducationSectionData } from "@/types/education";
 import { EducationEditModal } from "./modals/EducationEditModal";
 import { Button } from "./ui/button";
 
-const EducationSection = () => {
+interface EducationSectionProps {
+  initialData?: EducationSectionData | null;
+}
+
+const EducationSection = ({ initialData }: EducationSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [sectionData, setSectionData] = useState<EducationSectionData>({
+  const defaultData: EducationSectionData = {
     badge: "Academic Background",
     badgeIcon: "fa-solid fa-graduation-cap",
     title: "Educational",
@@ -64,7 +68,11 @@ const EducationSection = () => {
         icon: "fa-solid fa-laptop-code",
       },
     ],
-  });
+  };
+
+  const [sectionData, setSectionData] = useState<EducationSectionData>(
+    initialData || defaultData,
+  );
 
   const mainEducation = sectionData.education.filter((edu) => edu.isMain);
   const secondaryEducation = sectionData.education.filter((edu) => !edu.isMain);
@@ -108,7 +116,7 @@ const EducationSection = () => {
         </div>
 
         {/* Education Cards */}
-        <div className="max-w-5xl mx-auto space-y-8">
+        <div className="space-y-8">
           {/* Main Cards */}
           {mainEducation.map((edu, index) => (
             <div
@@ -199,7 +207,7 @@ const EducationSection = () => {
 
           {/* Secondary Cards Grid */}
           {secondaryEducation.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-6 mt-12">
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
               {secondaryEducation.map((edu, index) => (
                 <div
                   key={index}

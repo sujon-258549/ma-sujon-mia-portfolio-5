@@ -18,6 +18,7 @@ import {
   Menu,
   Plus,
   Trash2,
+  Loader2,
 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
@@ -35,6 +36,7 @@ export const HeaderEditModal = ({
   currentData,
   onSave,
 }: HeaderEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<HeaderData>(currentData);
 
   const addNavLink = () => {
@@ -63,7 +65,8 @@ export const HeaderEditModal = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "header",
@@ -73,12 +76,15 @@ export const HeaderEditModal = ({
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
         toast.success("Header updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      console.error("Failed to fetch header data:", error);
-      toast.error("Header updated failed!");
+    } catch (error) {
+      console.error("Header update error:", error);
+      toast.error("Header update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   return (
@@ -415,9 +421,17 @@ export const HeaderEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Update Header
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Update Header"
+              )}
             </Button>
           </div>
         </div>

@@ -1,21 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { dynamicContentService } from "@/services/dynamicContentService";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { HeaderData } from "@/types/header";
 import { HeaderEditModal } from "./modals/HeaderEditModal";
 import { useAuth, useIsAuthorized } from "@/lib/auth";
 
-const Header = () => {
+interface HeaderProps {
+  initialData?: HeaderData | null;
+}
+
+const Header = ({ initialData }: HeaderProps) => {
   const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const isAuthorized = useIsAuthorized();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [headerData, setHeaderData] = useState<HeaderData>({
+  const defaultData: HeaderData = {
     logo: "https://i.ibb.co.com/r22rB4k4/logo.webp",
     logoAlt: "Sujon Logo",
     logoWidth: 200,
@@ -40,25 +43,11 @@ const Header = () => {
         icon: "fa-solid fa-download",
       },
     },
-  });
+  };
 
-  useEffect(() => {
-    const fetchHeaderData = async () => {
-      try {
-        const data = await dynamicContentService.getContent("header");
-        if (data) {
-          setHeaderData((prev) => ({
-            ...prev, // Keep current state as baseline
-            ...data,
-            navLinks: data.navLinks || prev.navLinks || [],
-          }));
-        }
-      } catch (error) {
-        console.error("Failed to fetch header data:", error);
-      }
-    };
-    fetchHeaderData();
-  }, []);
+  const [headerData, setHeaderData] = useState<HeaderData>(
+    initialData || defaultData,
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,7 +88,7 @@ const Header = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-300">
-      <div className="main-container px-6 py-4">
+      <div className="main-container py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
             <Image

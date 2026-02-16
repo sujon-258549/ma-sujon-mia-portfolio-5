@@ -23,6 +23,7 @@ import {
   FileText,
   BarChart3,
   Award,
+  Loader2,
 } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
@@ -41,24 +42,30 @@ export const AboutEditModal = ({
   currentData,
   onSave,
 }: AboutEditModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<AboutSectionData>(currentData);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
     const updateData = {
       ...formData,
       type: "about",
     };
     try {
       const res = await dynamicContentService.upsertContent(updateData);
-      if(res.success){
+      if (res.success) {
         toast.success("About updated successfully!");
+        onSave(formData);
+        onClose();
       }
-    } catch (error: any) {
-      toast.error("About updated failed!");
+    } catch (error) {
+      console.error("About update error:", error);
+      toast.error("About update failed!");
+    } finally {
+      setIsLoading(false);
     }
-    onClose();
   };
 
   const updateParagraph = (index: number, value: string) => {
@@ -395,9 +402,17 @@ export const AboutEditModal = ({
             </Button>
             <Button
               onClick={handleSubmit}
-              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer"
+              disabled={isLoading}
+              className="bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] px-10 h-12 rounded-lg font-black shadow-xl shadow-emerald-500/20 active:scale-95 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Update Section
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                "Update Section"
+              )}
             </Button>
           </div>
         </div>

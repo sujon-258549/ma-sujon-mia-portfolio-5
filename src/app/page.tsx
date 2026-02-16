@@ -7,36 +7,60 @@ import EducationSection from "@/components/EducationSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
+import { dynamicContentService } from "@/services/dynamicContentService";
+import { projectService } from "@/services/projectService";
 
-export default function Home() {
+export default async function Home() {
+  const [
+    headerContent,
+    heroContent,
+    aboutContent,
+    skillsContent,
+    educationContent,
+    experienceContent,
+    contactContent,
+    footerContent,
+  ] = await Promise.all([
+    dynamicContentService.getContent("header").catch(() => null),
+    dynamicContentService.getContent("hero").catch(() => null),
+    dynamicContentService.getContent("about").catch(() => null),
+    dynamicContentService.getContent("skills").catch(() => null),
+    dynamicContentService.getContent("education").catch(() => null),
+    dynamicContentService.getContent("experience").catch(() => null),
+    dynamicContentService.getContent("contact").catch(() => null),
+    dynamicContentService.getContent("footer").catch(() => null),
+  ]);
+
+  const projects = await projectService.getAllProjects().catch(() => []);
+
   return (
     <div className="min-h-screen bg-[#121A1C]">
       {/* Navigation */}
-      <Header />
+      <Header initialData={headerContent} />
 
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection initialData={heroContent} />
 
       {/* About Section */}
-      <AboutSection />
+      <AboutSection initialData={aboutContent} />
 
       {/* Skills Section */}
-      <SkillsSection />
+      <SkillsSection initialData={skillsContent} />
 
       {/* Projects Section */}
-      <ProjectsSection />
+      <ProjectsSection projects={projects} />
 
       {/* Education Section */}
-      <EducationSection />
+      <EducationSection initialData={educationContent} />
 
       {/* Experience Section */}
-      <ExperienceSection />
+      <ExperienceSection initialData={experienceContent} />
 
       {/* Contact Section */}
-      <ContactSection />
+      <ContactSection initialData={contactContent} />
 
       {/* Footer */}
-      <Footer />
+      <Footer initialData={footerContent} />
     </div>
   );
 }
