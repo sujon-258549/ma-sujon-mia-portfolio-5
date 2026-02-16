@@ -79,7 +79,7 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
             className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
             title="Edit Services"
           >
-            <i className="fa-solid fa-wand-magic-sparkles text-lg"></i>
+              <i className="fa-solid fa-pen-to-square text-lg transition-transform"></i>
           </Button>
           <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur group-hover:bg-emerald-500/30 transition-all duration-500 -z-10" />
         </div>

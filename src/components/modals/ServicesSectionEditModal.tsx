@@ -41,6 +41,7 @@ export const ServicesSectionEditModal = ({
       type: "services",
     };
     try {
+      console.log(updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
         toast.success("Services section updated successfully!");
@@ -295,7 +296,7 @@ export const ServicesSectionEditModal = ({
           <Button
             onClick={handleSubmit}
             disabled={isLoading}
-            className="h-11 px-10 bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-black rounded-xl shadow-xl shadow-emerald-500/20 text-xs transition-all disabled:opacity-50"
+            className="h-11 px-10 cursor-pointer bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-black rounded-xl shadow-xl shadow-emerald-500/20 text-xs transition-all disabled:opacity-50"
           >
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
