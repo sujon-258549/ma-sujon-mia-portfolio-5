@@ -162,27 +162,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
               </div>
 
               {/* Body */}
-              <div className="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 bg-[#121A1C]/50">
-                <div>
-                  <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">
-                    <i className="fa-solid fa-award text-base text-emerald-500"></i>
-                    Achievements
-                  </h4>
-                  <div className="space-y-3">
-                    {edu.highlights.map((highlight, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
-                        <span className="text-sm text-slate-300">
-                          {highlight}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
+              <div className="p-6 md:p-10 flex flex-col gap-8 bg-[#121A1C]/50">
                 {edu.courses.length > 0 && (
                   <div>
                     <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">
@@ -201,6 +181,26 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                     </div>
                   </div>
                 )}
+
+                <div>
+                  <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">
+                    <i className="fa-solid fa-award text-base text-emerald-500"></i>
+                    Achievements
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {edu.highlights.map((highlight, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5 h-full"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                        <span className="text-sm text-slate-300">
+                          {highlight}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
