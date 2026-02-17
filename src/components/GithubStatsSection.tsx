@@ -2,6 +2,9 @@
 
 import { GitHubCalendar } from "react-github-calendar";
 import Link from "next/link";
+import React from "react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 const GithubStatsSection = () => {
   // TODO: Replace with your actual GitHub username.
@@ -33,11 +36,25 @@ const GithubStatsSection = () => {
             fontSize={12}
             blockSize={10}
             blockMargin={4}
+            renderBlock={(block, activity) =>
+              React.cloneElement(block, {
+                "data-tooltip-id": "github-tooltip",
+                "data-tooltip-content": `${activity.count} contributions on ${activity.date}`,
+              })
+            }
             style={{
               color: "#c9d1d9",
             }}
             theme={{
               dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+            }}
+          />
+          <Tooltip
+            id="github-tooltip"
+            style={{
+              fontSize: "12px",
+              padding: "8px 12px",
+              borderRadius: "6px",
             }}
           />
         </div>
@@ -46,14 +63,14 @@ const GithubStatsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="border border-[#30363d] rounded-md bg-[#0d1117] p-4 flex justify-center items-center h-44 hover:border-[#58a6ff]/50 transition-colors">
             <img
-              src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=dark&bg_color=0d1117&hide_border=true&count_private=true&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9`}
+              src={`https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=${username}&theme=github_dark`}
               alt="GitHub Stats"
               className="h-full object-contain"
             />
           </div>
           <div className="border border-[#30363d] rounded-md bg-[#0d1117] p-4 flex justify-center items-center h-44 hover:border-[#58a6ff]/50 transition-colors">
             <img
-              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=dark&bg_color=0d1117&hide_border=true&title_color=58a6ff&text_color=c9d1d9`}
+              src={`https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${username}&theme=github_dark`}
               alt="Top Languages"
               className="h-full object-contain"
             />
