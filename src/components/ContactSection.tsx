@@ -34,7 +34,7 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
       {
         icon: "fa-solid fa-envelope",
         title: "Email",
-        value: "sujon@example.com",
+        value: "sujon258549@gmail.com",
       },
       {
         icon: "fa-solid fa-location-dot",

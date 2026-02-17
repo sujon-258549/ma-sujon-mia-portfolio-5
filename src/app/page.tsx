@@ -22,6 +22,7 @@ export default async function Home() {
     experienceContent,
     contactContent,
     footerContent,
+    projectSectionHeaderContent,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -32,6 +33,7 @@ export default async function Home() {
     dynamicContentService.getContent("experience").catch(() => null),
     dynamicContentService.getContent("contact").catch(() => null),
     dynamicContentService.getContent("footer").catch(() => null),
+    dynamicContentService.getContent("project-section-header").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -51,7 +53,7 @@ export default async function Home() {
       <SkillsSection initialData={skillsContent} />
 
       {/* Projects Section */}
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={projects} initialData={projectSectionHeaderContent}/>
 
       {/* Education Section */}
       <EducationSection initialData={educationContent} />

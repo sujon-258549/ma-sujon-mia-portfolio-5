@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ServiceItem, ServicesSectionData } from "@/types/service";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
-import { Loader2, Plus, Trash2, Wand2 } from "lucide-react";
+import { Edit, Loader2, Plus, Trash2, Wand2 } from "lucide-react";
 
 interface ServicesSectionEditModalProps {
   isOpen: boolean;
@@ -301,7 +301,7 @@ export const ServicesSectionEditModal = ({
             {isLoading ? (
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
             ) : (
-              <Wand2 className="w-4 h-4 mr-2" />
+              <Edit className="w-4 h-4 mr-2" />
             )}
             Publish Section
           </Button>

@@ -60,7 +60,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
       },
       {
         platform: "Email",
-        url: "mailto:sujon@example.com",
+        url: "mailto:sujon258549@gmail.com",
         icon: "fa-solid fa-envelope",
       },
       { platform: "Phone", url: "tel:+1234567890", icon: "fa-solid fa-phone" },
@@ -237,7 +237,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
                 title={link.platform}
               >
                 <i className={`${link.icon} text-base`}></i>

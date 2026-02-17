@@ -169,7 +169,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
               <i
                 className={`${aboutData.badgeIcon} text-xs sm:text-sm text-emerald-500`}
               />
-              <span className="text-[10px] sm:text-[11px] font-extrabold text-emerald-500 uppercase tracking-widest">
+              <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-500 uppercase tracking-widest">
                 {aboutData.badge}
               </span>
             </div>

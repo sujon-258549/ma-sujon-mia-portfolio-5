@@ -94,6 +94,27 @@ export const AboutEditModal = ({
     setFormData({ ...formData, highlights: newHighlights });
   };
 
+  const addHighlight = () => {
+    setFormData({
+      ...formData,
+      highlights: [
+        ...formData.highlights,
+        {
+          title: "New Highlight",
+          desc: "New highlight description",
+          icon: "fa-solid fa-sparkles",
+        },
+      ],
+    });
+  };
+
+  const removeHighlight = (index: number) => {
+    setFormData({
+      ...formData,
+      highlights: formData.highlights.filter((_, i) => i !== index),
+    });
+  };
+
   const updateStat = (index: number, field: string, value: string) => {
     const newStats = [...formData.stats];
     newStats[index] = { ...newStats[index], [field]: value };
@@ -311,7 +332,7 @@ export const AboutEditModal = ({
                     </div>
                     <div className="space-y-2 col-span-2">
                       <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                        Icon (Lucide)
+                        Icon (FontAwesome class)
                       </Label>
                       <div className="flex gap-3">
                         <Input
@@ -333,16 +354,33 @@ export const AboutEditModal = ({
 
             {/* Highlights */}
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em] mb-4">
-                <Award className="w-4 h-4" />
-                Key Highlights
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
+                  <Award className="w-4 h-4" />
+                  Key Highlights
+                </div>
+                <Button
+                  onClick={addHighlight}
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 text-xs bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-lg px-3"
+                >
+                  <Plus className="w-4 h-4 mr-2" /> Add Highlight
+                </Button>
               </div>
               <div className="space-y-4">
                 {formData.highlights.map((item, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#121A1C] p-4 rounded-lg border border-white/5 space-y-4"
+                    className="bg-[#121A1C] p-4 rounded-lg border border-white/5 space-y-4 relative group"
                   >
+                    <button
+                      type="button"
+                      onClick={() => removeHighlight(idx)}
+                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 z-10 hover:bg-red-600 transition-all"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
                     <div className="space-y-2">
                       <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
                         Title
@@ -369,7 +407,7 @@ export const AboutEditModal = ({
                     </div>
                     <div className="space-y-2">
                       <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                        Icon (Lucide)
+                        Icon (FontAwesome class)
                       </Label>
                       <div className="flex gap-3">
                         <Input

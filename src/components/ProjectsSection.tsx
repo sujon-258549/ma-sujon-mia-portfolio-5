@@ -22,6 +22,7 @@ import {
 
 interface ProjectsSectionProps {
   projects?: Project[];
+  initialData?: ProjectSectionHeaderData | null;
 }
 
 // Helper: get a valid image URL from project data
@@ -53,6 +54,7 @@ const getProjectImage = (project: Project): string | null => {
 
 const ProjectsSection = ({
   projects: initialProjects,
+  initialData,
 }: ProjectsSectionProps) => {
   const isAuthorized = useIsAuthorized();
   const [showAll, setShowAll] = useState(false);
@@ -61,14 +63,17 @@ const ProjectsSection = ({
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [isHeaderModalOpen, setIsHeaderModalOpen] = useState(false);
 
-  const [completedCount, setCompletedCount] = useState("90+");
+  const [completedCount, setCompletedCount] = useState(
+    initialData?.completedCount || "20+",
+  );
 
   const [sectionData, setSectionData] = useState<ProjectsSectionData>({
-    badge: "Featured Projects",
-    badgeIcon: "fa-solid fa-rocket",
-    title: "My Creative",
-    titleHighlight: "Works",
+    badge: initialData?.badge || "Featured Projects",
+    badgeIcon: initialData?.badgeIcon || "fa-solid fa-rocket",
+    title: initialData?.title || "My Creative",
+    titleHighlight: initialData?.titleHighlight || "Works",
     description:
+      initialData?.description ||
       "Explore a selection of my recently completed projects, ranging from focused experiments to full-scale applications.",
     projects: initialProjects || [],
   });
@@ -181,7 +186,7 @@ const ProjectsSection = ({
           {/* 90+ Projects Completed Badge */}
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#172023] border border-emerald-500/20 px-4 py-2 rounded-full shadow-2xl">
             <i className="fa-solid fa-trophy text-base text-emerald-500"></i>
-            <span className="text-xs font-black text-white uppercase tracking-tighter">
+            <span className="text-xs font-semibold text-white uppercase tracking-tighter">
               <span className="text-emerald-500">{completedCount}</span>{" "}
               Projects Completed
             </span>

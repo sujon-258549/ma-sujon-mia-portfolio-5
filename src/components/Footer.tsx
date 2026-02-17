@@ -128,7 +128,9 @@ const Footer = ({ initialData }: FooterProps) => {
                   <a
                     key={index}
                     href={social.href}
-                    target="_blank"
+                    target={
+                      social.href?.startsWith("mailto:") ? "_self" : "_blank"
+                    }
                     rel="noopener noreferrer"
                     aria-label={social.label}
                     className={`w-11 h-11 rounded-lg bg-card border border-emerald-500/20 flex items-center justify-center text-muted-foreground hover:text-white hover:border-emerald-500/50 transition-all cursor-pointer group ${social.color}`}
@@ -185,18 +187,23 @@ const Footer = ({ initialData }: FooterProps) => {
                   key={index}
                   className="flex items-center gap-3 text-muted-foreground group"
                 >
-                  <i
-                    className={`${item.icon || "fa-solid fa-circle-info"} w-5 text-emerald-500 group-hover:scale-110 transition-transform`}
-                  ></i>
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="hover:text-emerald-500 transition-colors cursor-pointer"
+                      className="flex items-center gap-3 hover:text-emerald-500 transition-colors cursor-pointer group"
                     >
-                      {item.value}
+                      <i
+                        className={`${item.icon || "fa-solid fa-circle-info"} w-5 text-emerald-500 group-hover:scale-110 transition-transform`}
+                      ></i>
+                      <span>{item.value}</span>
                     </a>
                   ) : (
-                    <p>{item.value}</p>
+                    <div className="flex items-center gap-3">
+                      <i
+                        className={`${item.icon || "fa-solid fa-circle-info"} w-5 text-emerald-500 group-hover:scale-110 transition-transform`}
+                      ></i>
+                      <p>{item.value}</p>
+                    </div>
                   )}
                 </div>
               ))}

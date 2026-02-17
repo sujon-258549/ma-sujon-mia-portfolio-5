@@ -100,7 +100,7 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
           {servicesData.services.map((service) => (
             <div
               key={service.id}
-              className="group relative p-8 rounded-xl bg-[#121A1C] border border-emerald-500/20 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
+              className="group relative p-8 rounded-xl bg-[#121A1C] border border-emerald-500/10 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
             >
               <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
 
