@@ -22,4 +22,5 @@ export interface HeaderData {
     secondary: HeaderButton;
   };
   isActive?: boolean;
+  isSideOpen?: boolean;
 }

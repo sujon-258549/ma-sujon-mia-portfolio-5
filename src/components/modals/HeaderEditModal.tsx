@@ -41,6 +41,7 @@ export const HeaderEditModal = ({
   const [formData, setFormData] = useState<HeaderData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    isSideOpen: currentData.isSideOpen ?? true,
   });
 
   const addNavLink = () => {
@@ -103,23 +104,45 @@ export const HeaderEditModal = ({
               <Settings2 className="w-6 h-6 animate-spin-slow" />
               Customize Header
             </DialogTitle>
-            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                Header Status:
-              </span>
-              <div className="flex items-center gap-2">
-                <Switch
-                  checked={formData.isActive}
-                  onCheckedChange={(checked) =>
-                    setFormData({ ...formData, isActive: checked })
-                  }
-                  className="data-[state=checked]:bg-emerald-500 scale-75"
-                />
-                <span
-                  className={`text-[10px] font-black uppercase tracking-widest ${formData.isActive ? "text-emerald-500" : "text-slate-500"}`}
-                >
-                  {formData.isActive ? "Active" : "Hidden"}
+            <div className="flex items-center gap-6 mr-8">
+              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Side Nav:
                 </span>
+                <div className="flex items-center gap-2">
+                  <Switch
+                    checked={formData.isSideOpen !== false}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, isSideOpen: checked })
+                    }
+                    className="data-[state=checked]:bg-emerald-500 scale-75"
+                  />
+                  <span
+                    className={`text-[10px] font-black uppercase tracking-widest ${formData.isSideOpen !== false ? "text-emerald-500" : "text-slate-500"}`}
+                  >
+                    {formData.isSideOpen !== false ? "Visible" : "Hidden"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Header:
+                </span>
+                <div className="flex items-center gap-2">
+                  <Switch
+                    checked={formData.isActive}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, isActive: checked })
+                    }
+                    className="data-[state=checked]:bg-emerald-500 scale-75"
+                  />
+                  <span
+                    className={`text-[10px] font-black uppercase tracking-widest ${formData.isActive ? "text-emerald-500" : "text-slate-500"}`}
+                  >
+                    {formData.isActive ? "Active" : "Hidden"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
