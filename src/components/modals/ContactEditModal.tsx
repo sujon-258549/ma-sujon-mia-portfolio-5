@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { ContactSectionData, ContactInfo } from "@/types/contact";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { Loader2 } from "lucide-react";
+import { revalidateData } from "@/app/actions";
 
 interface ContactEditModalProps {
   isOpen: boolean;
@@ -47,6 +48,8 @@ export const ContactEditModal = ({
       const response = await dynamicContentService.upsertContent(updatedData);
       console.log("Response", response);
       if (response.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Contact section updated successfully");
         onSave(formData);
         onClose();

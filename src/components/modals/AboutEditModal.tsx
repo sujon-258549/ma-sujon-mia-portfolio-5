@@ -29,6 +29,7 @@ import {
 import * as LucideIcons from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { revalidateData } from "@/app/actions";
 
 interface AboutEditModalProps {
   isOpen: boolean;
@@ -69,6 +70,8 @@ export const AboutEditModal = ({
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("About updated successfully!");
         onSave(formData);
         onClose();
