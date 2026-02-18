@@ -83,7 +83,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
   return (
     <section
       id="education"
-      className={`section-spacing bg-[#121A1C] relative px-4 md:px-0 transition-all duration-300 ${!sectionData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
+      className={`section-spacing bg-[#121A1C] relative  transition-all duration-300 ${!sectionData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Admin Edit Trigger */}
       {isAuthorized && (
@@ -136,7 +136,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="p-4 bg-emerald-500/10 rounded-2xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform w-14 h-14 flex items-center justify-center">
+                      <div className="p-4 hidden md:flex bg-emerald-500/10 rounded-2xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform w-14 h-14 flex items-center justify-center">
                         <i
                           className={`${edu.icon || "fa-solid fa-graduation-cap"} text-2xl text-emerald-500`}
                         ></i>

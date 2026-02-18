@@ -353,7 +353,7 @@ const ProjectsSection = ({
                 <Link
                   href={project.liveUrl}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2 rounded-xl hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-[11px] rounded-md hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
                 >
                   <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   Live Demo
@@ -361,7 +361,7 @@ const ProjectsSection = ({
                 <Link
                   href={project.githubUrl}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-2.5 rounded-xl hover:bg-white/10 transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-[11px] rounded-md hover:bg-white/10 transition-all active:scale-95"
                 >
                   <i className="fa-brands fa-github text-sm"></i>
                   View Code

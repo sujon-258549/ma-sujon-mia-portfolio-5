@@ -153,11 +153,11 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
             <div className="absolute inset-0 bg-emerald-500 w-full h-full -translate-y-full animate-[flow_3s_infinite_linear] opacity-50" />
           </div>
 
-          <div className="space-y-12 md:space-y-24 relative">
+          <div className="space-y-6 md:space-y-10 relative">
             {sectionData.steps.map((step, index) => (
               <div
                 key={step.id}
-                className={`workflow-step opacity-0 translate-y-10 transition-all duration-1000 ease-out flex flex-col md:flex-row items-center gap-8 md:gap-0 relative`}
+                className={`workflow-step opacity-0 translate-y-10 transition-all duration-1000 ease-out flex flex-col md:flex-row items-center gap-6 md:gap-0 relative`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Left Side */}
