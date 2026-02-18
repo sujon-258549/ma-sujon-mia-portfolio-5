@@ -15,6 +15,7 @@ import { ServiceItem, ServicesSectionData } from "@/types/service";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Edit, Loader2, Plus, Trash2, Wand2 } from "lucide-react";
+import { revalidateData } from "@/app/actions";
 import { Switch } from "@/components/ui/switch";
 
 interface ServicesSectionEditModalProps {
@@ -48,6 +49,8 @@ export const ServicesSectionEditModal = ({
       console.log(updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Services section updated successfully!");
         onSave(formData);
         onClose();
