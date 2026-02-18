@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +37,16 @@ export const WorkflowSectionEditModal = ({
     steps: currentData.steps || [],
   });
 
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...currentData,
+        isActive: currentData.isActive ?? true,
+        steps: currentData.steps || [],
+      });
+    }
+  }, [isOpen, currentData]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -47,7 +57,7 @@ export const WorkflowSectionEditModal = ({
     };
 
     try {
-      console.log('workflow', updateData)
+      console.log("workflow", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
         toast.success("Workflow Section updated successfully!");

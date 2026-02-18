@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -48,6 +48,15 @@ export const AboutEditModal = ({
     ...currentData,
     isActive: currentData.isActive ?? true,
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...currentData,
+        isActive: currentData.isActive ?? true,
+      });
+    }
+  }, [isOpen, currentData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
