@@ -66,7 +66,7 @@ export const UserDropdown = () => {
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute right-0 top-full mt-2 w-56 bg-[#1C2629] border border-white/10 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-[9999]">
+          <div className="absolute right-0 top-full mt-2 w-56 bg-[#1C2629] border border-white/10 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
             <div className="px-4 py-3 border-b border-white/5">
               <p className="text-sm font-bold text-white truncate">
                 {user.name}

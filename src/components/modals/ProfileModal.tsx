@@ -81,7 +81,7 @@ export const ProfileModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[425px] bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
+      <DialogContent className="sm:max-w-2xl bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
         <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
           <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-white">
             <UserIcon className="w-5 h-5 text-emerald-500" />

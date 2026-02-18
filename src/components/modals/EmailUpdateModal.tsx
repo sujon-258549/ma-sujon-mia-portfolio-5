@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { authService } from "@/lib/authService";
 import { toast } from "sonner";
-import { Loader2, X, Mail, CheckCircle2, ArrowRight } from "lucide-react";
+import { Loader2, Mail, CheckCircle2, ArrowRight } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
 interface EmailUpdateModalProps {
@@ -66,7 +66,7 @@ export const EmailUpdateModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[425px] bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
+      <DialogContent className="sm:max-w-lg bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
         <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
           <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-emerald-500">
             <Mail className="w-5 h-5" />
