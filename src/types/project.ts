@@ -37,9 +37,11 @@ export interface Project {
     title: string;
     content: string;
   }[];
+  isActive?: boolean;
 }
 
 export interface ProjectsSectionData {
+  isActive?: boolean;
   badge: string;
   badgeIcon: string;
   title: string;

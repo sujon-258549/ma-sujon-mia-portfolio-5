@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useIsAuthorized } from "@/lib/auth";
 import { AboutSectionData } from "@/types/about";
 import { AboutEditModal } from "./modals/AboutEditModal";
@@ -63,14 +64,26 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
     console.log("Saved About Data:", newData);
   };
 
+  // If section is inactive and not admin, hide entirely
+  if (!aboutData.isActive && !isAuthorized) return null;
+
   return (
     <section
       id="about"
-      className="bg-[#121A1C] relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
+      className={`bg-[#121A1C] relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 ${!aboutData.isActive ? "opacity-60 grayscale-[0.5]" : ""}`}
     >
       {/* ── Background Glows ── */}
       <div className="absolute top-0 right-0 w-60 h-60 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-emerald-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-72 sm:h-72 bg-teal-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Admin Indicators */}
+      {!aboutData.isActive && isAuthorized && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+          <Badge className="bg-red-500/20 text-red-500 border-red-500/50 uppercase text-[9px] font-black tracking-widest px-4 py-1">
+            About Section Hidden from Public
+          </Badge>
+        </div>
+      )}
 
       {/* Admin Edit Button */}
       {isAuthorized && (
@@ -90,12 +103,12 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
           {/* ─────────── Left Column: Image & Stats ─────────── */}
           <div className="w-full lg:w-5/12 lg:sticky lg:top-24">
             {/* Profile Image Card */}
-            <div className="relative aspect-[4/5] max-w-full md:max-w-sm lg:max-w-full mx-auto mb-6 sm:mb-8 group cursor-pointer">
+            <div className="relative aspect-4/5 max-w-full md:max-w-sm lg:max-w-full mx-auto mb-6 sm:mb-8 group cursor-pointer">
               {/* Subtle Glow Behind Image */}
               <div className="absolute -inset-1 rounded-2xl sm:rounded-3xl bg-emerald-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
               {/* Main Image Container */}
-              <div className="absolute inset-0 rounded-xl sm:rounded-3xl overflow-hidden border border-white/[0.08] bg-[#1A2426] shadow-2xl transition-shadow duration-700">
+              <div className="absolute inset-0 rounded-xl sm:rounded-3xl overflow-hidden border border-white/8 bg-[#1A2426] shadow-2xl transition-shadow duration-700">
                 <Image
                   src={aboutData.image}
                   alt={aboutData.name}
@@ -105,10 +118,10 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
                 />
 
                 {/* Permanent Bottom Gradient (always visible) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C]/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#121A1C]/30 via-transparent to-transparent pointer-events-none" />
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#121A1C] via-emerald-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-5 sm:p-6 md:p-8 transform translate-y-4 group-hover:translate-y-0 text-center">
+                <div className="absolute inset-0 bg-linear-to-t from-[#121A1C] via-emerald-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-5 sm:p-6 md:p-8 transform translate-y-4 group-hover:translate-y-0 text-center">
                   <div className="mb-3 sm:mb-4 transform -translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
                       {aboutData.name}
@@ -135,7 +148,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
                 </div>
 
                 {/* Decorative corner gradient */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.07] via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-tr from-emerald-500/7 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -184,7 +197,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
 
             {/* Decorative Separator */}
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
-              <div className="h-[2px] w-8 sm:w-12 bg-gradient-to-r from-emerald-500 to-emerald-500/0 rounded-full" />
+              <div className="h-0.5 w-8 sm:w-12 bg-linear-to-r from-emerald-500 to-emerald-500/0 rounded-full" />
               <div className="h-1 w-1 rounded-full bg-emerald-500/60" />
             </div>
 
@@ -200,7 +213,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
               {aboutData.highlights.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex gap-3 sm:gap-4 items-start group/highlight p-3 sm:p-4 rounded-xl hover:bg-white/[0.03] transition-all duration-300"
+                  className="flex gap-3 sm:gap-4 items-start group/highlight p-3 sm:p-4 rounded-xl hover:bg-white/3 transition-all duration-300"
                 >
                   <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover/highlight:border-emerald-500/50 group-hover/highlight:bg-emerald-500/15 transition-all duration-300">
                     <i

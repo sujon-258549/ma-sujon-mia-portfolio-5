@@ -91,8 +91,22 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
     setIsModalOpen(false);
   };
 
+  // If section is inactive and not admin, hide entirely
+  if (!skillsData.isActive && !isAuthorized) return null;
+
   return (
-    <section id="skills" className="section-spacing bg-[#121A1C] relative">
+    <section
+      id="skills"
+      className={`section-spacing bg-[#121A1C] relative ${!skillsData.isActive ? "opacity-60 grayscale-[0.5]" : ""}`}
+    >
+      {!skillsData.isActive && isAuthorized && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+          <Badge className="bg-red-500/20 text-red-500 border-red-500/50 uppercase text-[9px] font-black tracking-widest px-4 py-1">
+            Section Hidden from Public
+          </Badge>
+        </div>
+      )}
+
       {isAuthorized && (
         <div className="absolute top-10 right-10 z-30 group">
           <Button

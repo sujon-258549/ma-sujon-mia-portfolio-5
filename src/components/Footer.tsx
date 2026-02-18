@@ -57,6 +57,7 @@ const Footer = ({ initialData }: FooterProps) => {
       { name: "My Skills", href: "#skills" },
       { name: "Education", href: "#education" },
       { name: "Experience", href: "#experience" },
+      { name: "Blog", href: "#blog" },
     ],
     contactItems: [
       {
@@ -86,7 +87,7 @@ const Footer = ({ initialData }: FooterProps) => {
   return (
     <footer className="bg-[#0E1416] border-t border-emerald-500/20 relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Admin Edit Button - Positioned to the top right of the footer section */}

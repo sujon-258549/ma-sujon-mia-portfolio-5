@@ -21,4 +21,5 @@ export interface AboutSectionData {
   role: string;
   highlights: AboutHighlight[];
   stats: AboutStat[];
+  isActive?: boolean;
 }

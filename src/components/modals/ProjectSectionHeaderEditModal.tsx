@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -22,6 +23,7 @@ export interface ProjectSectionHeaderData {
   titleHighlight: string;
   description: string;
   completedCount: string;
+  isActive?: boolean;
 }
 
 interface ProjectSectionHeaderEditModalProps {
@@ -38,8 +40,10 @@ export const ProjectSectionHeaderEditModal = ({
   onSave,
 }: ProjectSectionHeaderEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] =
-    useState<ProjectSectionHeaderData>(currentData);
+  const [formData, setFormData] = useState<ProjectSectionHeaderData>({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,8 +78,24 @@ export const ProjectSectionHeaderEditModal = ({
               <div className="w-2 h-8 bg-emerald-500 rounded-full" />
               Edit Project Section Header
             </DialogTitle>
-            <div className="text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-widest font-medium">
-              Admin Interface
+            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                Visibility:
+              </span>
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={formData.isActive}
+                  onCheckedChange={(checked) =>
+                    setFormData({ ...formData, isActive: checked })
+                  }
+                  className="data-[state=checked]:bg-emerald-500"
+                />
+                <span
+                  className={`text-[10px] font-black uppercase tracking-widest ${formData.isActive ? "text-emerald-500" : "text-slate-500"}`}
+                >
+                  {formData.isActive ? "Visible" : "Hidden"}
+                </span>
+              </div>
             </div>
           </div>
         </DialogHeader>

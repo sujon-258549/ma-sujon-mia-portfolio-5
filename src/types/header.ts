@@ -19,4 +19,5 @@ export interface HeaderData {
     primary: HeaderButton;
     secondary: HeaderButton;
   };
+  isActive?: boolean;
 }

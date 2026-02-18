@@ -67,7 +67,7 @@ const ProjectsSection = ({
     initialData?.completedCount || "20+",
   );
 
-  const [sectionData, setSectionData] = useState<ProjectsSectionData>({
+  const [sectionData, setSectionData] = useState<ProjectsSectionData>(() => ({
     badge: initialData?.badge || "Featured Projects",
     badgeIcon: initialData?.badgeIcon || "fa-solid fa-rocket",
     title: initialData?.title || "My Creative",
@@ -76,7 +76,8 @@ const ProjectsSection = ({
       initialData?.description ||
       "Explore a selection of my recently completed projects, ranging from focused experiments to full-scale applications.",
     projects: initialProjects || [],
-  });
+    isActive: initialData?.isActive ?? true,
+  }));
 
   const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this project?"))
@@ -134,6 +135,7 @@ const ProjectsSection = ({
         title: data.title,
         titleHighlight: data.titleHighlight,
         description: data.description,
+        isActive: data.isActive ?? prev.isActive,
       };
       localStorage.setItem("projectsSectionData", JSON.stringify(newData));
       return newData;
@@ -141,12 +143,21 @@ const ProjectsSection = ({
     setCompletedCount(data.completedCount);
   };
 
-  const displayedProjects = showAll
+  const filteredProjects = isAuthorized
     ? sectionData.projects
-    : sectionData.projects.slice(0, 3);
+    : sectionData.projects.filter((p) => p.isActive !== false);
+
+  const displayedProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, 3);
+
+  if (!sectionData.isActive && !isAuthorized) return null;
 
   return (
-    <section id="projects" className="section-spacing bg-[#121A1C] relative">
+    <section
+      id="projects"
+      className={`section-spacing bg-[#121A1C] relative ${!sectionData.isActive ? "opacity-60 grayscale-[0.5]" : ""}`}
+    >
       {/* Admin Quick Add - Floating Premium Aesthetic */}
       {isAuthorized && (
         <div className="absolute top-10 right-10 z-30 group">
@@ -168,6 +179,14 @@ const ProjectsSection = ({
 
           {/* Pulsing Aura Background */}
           <div className="absolute -inset-1 bg-emerald-500/20 rounded-2xl blur-xl group-hover:bg-emerald-500/40 transition-all duration-500 -z-10" />
+        </div>
+      )}
+
+      {!sectionData.isActive && isAuthorized && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+          <Badge className="bg-red-500/20 text-red-500 border-red-500/50 uppercase text-[9px] font-black tracking-widest px-4 py-1">
+            Section Hidden from Public
+          </Badge>
         </div>
       )}
 
@@ -215,7 +234,7 @@ const ProjectsSection = ({
           {displayedProjects.map((project, index) => (
             <Card
               key={index}
-              className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0"
+              className={`bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0 ${project.isActive === false ? "border-dashed border-red-500/30" : ""}`}
             >
               {/* Admin Individual Edit/Delete Buttons */}
               {isAuthorized && (
@@ -243,6 +262,14 @@ const ProjectsSection = ({
                   >
                     <i className="fa-solid fa-trash-can text-xs"></i>
                   </button>
+                </div>
+              )}
+
+              {project.isActive === false && isAuthorized && (
+                <div className="absolute top-4 left-4 z-40">
+                  <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
+                    Draft
+                  </Badge>
                 </div>
               )}
 
@@ -329,7 +356,7 @@ const ProjectsSection = ({
           ))}
         </div>
 
-        {sectionData.projects.length > 5 && (
+        {filteredProjects.length > 5 && (
           <div className="text-center mt-16">
             <Button
               onClick={() => setShowAll(!showAll)}
@@ -370,6 +397,7 @@ const ProjectsSection = ({
           titleHighlight: sectionData.titleHighlight,
           description: sectionData.description,
           completedCount: completedCount,
+          isActive: sectionData.isActive,
         }}
         onSave={handleSaveHeader}
       />

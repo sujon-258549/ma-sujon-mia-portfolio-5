@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 import { AboutSectionData } from "@/types/about";
 import {
   Sparkles,
@@ -43,7 +44,10 @@ export const AboutEditModal = ({
   onSave,
 }: AboutEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<AboutSectionData>(currentData);
+  const [formData, setFormData] = useState<AboutSectionData>({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,6 +149,25 @@ export const AboutEditModal = ({
               <Settings2 className="w-6 h-6 animate-spin-slow" />
               Customize About Section
             </DialogTitle>
+            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                Section Status:
+              </span>
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={formData.isActive}
+                  onCheckedChange={(checked) =>
+                    setFormData({ ...formData, isActive: checked })
+                  }
+                  className="data-[state=checked]:bg-emerald-500 scale-75"
+                />
+                <span
+                  className={`text-[10px] font-black uppercase tracking-widest ${formData.isActive ? "text-emerald-500" : "text-slate-500"}`}
+                >
+                  {formData.isActive ? "Active" : "Hidden"}
+                </span>
+              </div>
+            </div>
           </div>
         </DialogHeader>
 

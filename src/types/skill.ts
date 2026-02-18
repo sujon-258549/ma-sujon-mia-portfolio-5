@@ -10,4 +10,5 @@ export interface SkillsSectionData {
   titleHighlight: string;
   badge: string;
   categories: SkillCategory[];
+  isActive?: boolean;
 }

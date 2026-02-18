@@ -7,6 +7,7 @@ import ServicesSection from "@/components/ServicesSection";
 import EducationSection from "@/components/EducationSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
@@ -23,6 +24,7 @@ export default async function Home() {
     contactContent,
     footerContent,
     projectSectionHeaderContent,
+    blogContent,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -36,6 +38,7 @@ export default async function Home() {
     dynamicContentService
       .getContent("project-section-header")
       .catch(() => null),
+    dynamicContentService.getContent("blog").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -71,6 +74,9 @@ export default async function Home() {
 
       {/* Services Section */}
       <ServicesSection initialData={servicesContent} />
+
+      {/* Blog Section */}
+      <BlogSection initialData={blogContent} />
 
       {/* Contact Section */}
       <ContactSection initialData={contactContent} />

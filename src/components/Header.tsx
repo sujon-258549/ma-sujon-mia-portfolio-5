@@ -31,6 +31,7 @@ const Header = ({ initialData }: HeaderProps) => {
       { text: "Experience", link: "#experience" },
       { text: "Projects", link: "#projects" },
       { text: "Contact", link: "#contact" },
+      { text: "Blog", link: "#blog" },
     ],
     buttons: {
       primary: {
@@ -46,9 +47,10 @@ const Header = ({ initialData }: HeaderProps) => {
     },
   };
 
-  const [headerData, setHeaderData] = useState<HeaderData>(
-    initialData || defaultData,
-  );
+  const [headerData, setHeaderData] = useState<HeaderData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +60,7 @@ const Header = ({ initialData }: HeaderProps) => {
         "education",
         "experience",
         "projects",
+        "blog",
         "contact",
       ];
       const scrollPosition = window.scrollY + 100;
@@ -87,9 +90,18 @@ const Header = ({ initialData }: HeaderProps) => {
     console.log("Saved Header Data:", newData);
   };
 
+  if (!headerData.isActive && !isAuthorized) return null;
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-300">
-      <div className="main-container py-4">
+    <nav
+      className={`fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300 ${!headerData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
+    >
+      <div className="main-container py-4 relative">
+        {!headerData.isActive && isAuthorized && (
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-red-500 text-[8px] font-black px-2 py-0.5 rounded-b uppercase tracking-widest leading-none pointer-events-none">
+            Header Hidden from Public
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
