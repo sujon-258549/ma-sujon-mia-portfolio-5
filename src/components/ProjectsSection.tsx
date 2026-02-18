@@ -156,7 +156,7 @@ const ProjectsSection = ({
 
   const displayedProjects = showAll
     ? filteredProjects
-    : filteredProjects.slice(0, 3);
+    : filteredProjects.slice(0, 6);
 
   if (!sectionData.isActive && !isAuthorized) return null;
 
@@ -371,11 +371,11 @@ const ProjectsSection = ({
           ))}
         </div>
 
-        {(filteredProjects.length > 3 || showAll) && (
+        {(filteredProjects.length > 6 || showAll) && (
           <div className="flex items-center justify-center gap-6 mt-16">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group relative inline-flex items-center gap-4 px-12 py-4 bg-emerald-500 text-black font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:bg-emerald-400 shadow-2xl shadow-emerald-500/20 cursor-pointer active:scale-95 h-14"
+              className="group relative inline-flex items-center gap-4 px-8 py-3 bg-emerald-500 text-black font-bold text-[16px] overflow-hidden rounded-xl transition-all hover:bg-emerald-400 shadow-2xl shadow-emerald-500/20 cursor-pointer active:scale-95 h-14"
             >
               <span>
                 {showAll ? "Minimize Portfolio" : "View Full Portfolio"}

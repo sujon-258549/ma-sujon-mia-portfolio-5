@@ -9,6 +9,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
+import WorkflowSection from "@/components/WorkflowSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
 import { blogService } from "@/services/blogService";
@@ -19,6 +20,7 @@ export default async function Home() {
     heroContent,
     aboutContent,
     skillsContent,
+    workflowContent,
     servicesContent,
     educationContent,
     experienceContent,
@@ -31,6 +33,7 @@ export default async function Home() {
     dynamicContentService.getContent("hero").catch(() => null),
     dynamicContentService.getContent("about").catch(() => null),
     dynamicContentService.getContent("skills").catch(() => null),
+    dynamicContentService.getContent("workflow").catch(() => null),
     dynamicContentService.getContent("services").catch(() => null),
     dynamicContentService.getContent("education").catch(() => null),
     dynamicContentService.getContent("experience").catch(() => null),
@@ -62,8 +65,10 @@ export default async function Home() {
       {/* About Section */}
       <AboutSection initialData={aboutContent} />
 
-      {/* Skills Section */}
+      {/* SkillsSection */}
       <SkillsSection initialData={skillsContent} />
+
+      {/* Workflow Section */}
 
       {/* Projects Section */}
       <ProjectsSection
@@ -71,6 +76,7 @@ export default async function Home() {
         initialData={projectSectionHeaderContent}
       />
 
+      <WorkflowSection initialData={workflowContent} />
       {/* Education Section */}
       <EducationSection initialData={educationContent} />
 
