@@ -38,9 +38,13 @@ export const EmailUpdateModal = ({
       await authService.requestEmailUpdate(newEmail);
       toast.success("OTP sent to your new email address");
       setStep(2);
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
-      toast.error(error.message || "Failed to request email update");
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to request email update";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -50,13 +54,15 @@ export const EmailUpdateModal = ({
     e.preventDefault();
     setLoading(true);
     try {
+      // Step 2: Verify OTP (email is NOT sent in body, as requested)
       await authService.verifyEmailUpdate(otp);
       toast.success("Email updated successfully! Please login again.");
       onClose();
       logout();
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
-      toast.error(error.message || "Invalid OTP");
+      const message = error instanceof Error ? error.message : "Invalid OTP";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

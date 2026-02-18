@@ -105,6 +105,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    cursor: pointer;
+  }
+
   html {
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
