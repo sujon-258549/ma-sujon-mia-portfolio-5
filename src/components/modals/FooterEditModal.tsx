@@ -17,6 +17,7 @@ import { FooterData, SocialLink, QuickLink, ContactItem } from "@/types/footer";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { revalidateData } from "@/app/actions";
 
 interface FooterEditModalProps {
   isOpen: boolean;
@@ -55,6 +56,8 @@ export const FooterEditModal = ({
       console.log("footer data", update);
       const res = await dynamicContentService.upsertContent(update);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Footer updated successfully!");
         onSave(formData);
         onClose();

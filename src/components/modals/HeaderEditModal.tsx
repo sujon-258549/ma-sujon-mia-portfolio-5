@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { revalidateData } from "@/app/actions";
 
 interface HeaderEditModalProps {
   isOpen: boolean;
@@ -84,6 +85,8 @@ export const HeaderEditModal = ({
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Header updated successfully!");
         onSave(formData);
         onClose();

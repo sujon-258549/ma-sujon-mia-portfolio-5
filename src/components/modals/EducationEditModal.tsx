@@ -16,6 +16,7 @@ import { EducationItem, EducationSectionData } from "@/types/education";
 import { Plus, X, Award, BookOpen, TrendingUp, Loader2 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { revalidateData } from "@/app/actions";
 
 interface EducationEditModalProps {
   isOpen: boolean;
@@ -57,6 +58,8 @@ export const EducationEditModal = ({
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Education updated successfully!");
         onSave(formData);
         onClose();

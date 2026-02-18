@@ -16,6 +16,7 @@ import { Experience, ExperienceSectionData } from "@/types/experience";
 import { Plus, X, TrendingUp, Users, Code2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { revalidateData } from "@/app/actions";
 
 interface ExperienceEditModalProps {
   isOpen: boolean;
@@ -57,6 +58,8 @@ export const ExperienceEditModal = ({
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Experience updated successfully!");
         onSave(formData);
         onClose();
