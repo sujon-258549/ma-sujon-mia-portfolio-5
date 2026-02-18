@@ -46,7 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             : [],
       },
     };
-  } catch (error) {
+  } catch (err) {
+    console.error("Metadata fetch error:", err);
     return {
       title: "Project Details | Portfolio",
       description: "View project details on my portfolio.",
@@ -56,19 +57,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailsPage({ params }: Props) {
   const { id } = await params;
+  let project = null;
 
   try {
-    const project = await projectService.getProjectById(id);
-
-    if (!project) {
-      return <ProjectNotFound />;
-    }
-
-    return <ProjectDetailsClient project={project} />;
+    project = await projectService.getProjectById(id);
   } catch (error) {
     console.error("Failed to fetch project:", error);
     return <ProjectNotFound error="Failed to load project details." />;
   }
+
+  if (!project) {
+    return <ProjectNotFound />;
+  }
+
+  return <ProjectDetailsClient project={project} />;
 }
 
 function ProjectNotFound({ error }: { error?: string }) {
@@ -86,7 +88,7 @@ function ProjectNotFound({ error }: { error?: string }) {
               "The project you're looking for doesn't exist or has been removed."}
           </p>
           <Link href="/#projects">
-            <Button className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-8 h-12 rounded-lg cursor-pointer">
+            <Button className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-8 h-12 rounded-xl cursor-pointer">
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Projects
             </Button>
