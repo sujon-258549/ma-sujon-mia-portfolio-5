@@ -307,7 +307,7 @@ const ProjectsSection = ({
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
                       <Link
-                        href={`/projects/${project._id || project.id || index}`}
+                        href={`/projects/${project.slug || project._id || project.id || index}`}
                         className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
                       >
                         <i className="fa-solid fa-eye text-lg"></i>

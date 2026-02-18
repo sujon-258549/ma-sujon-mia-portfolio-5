@@ -303,7 +303,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
                   </div>
                 </div>
 
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug || post.id || post._id}`}>
                   <h3 className="text-xl font-bold text-white mb-3 leading-[1.3] group-hover:text-emerald-400 transition-colors">
                     {post.title}
                   </h3>

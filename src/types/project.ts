@@ -2,6 +2,7 @@ export interface Project {
   _id?: string;
   id?: string;
   sl?: string;
+  slug?: string;
   title: string;
   shortDescription: string;
   longDescription: string;

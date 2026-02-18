@@ -56,6 +56,41 @@ export const projectService = {
   },
 
   /**
+   * Get a single project by Slug
+   */
+  getProjectBySlug: async (slug: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}/projects/${slug}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Fallback: try to find by slug in all projects if direct endpoint fails or if ID was expected
+        // This is useful if the backend only supports ID-based lookup on this route or strict slug route separation
+        try {
+          const allProjects = await projectService.getAllProjects();
+          const project = allProjects.find((p: Project) => p.slug === slug);
+          if (project) return project;
+        } catch (fallbackError) {
+          console.error("Fallback lookup failed", fallbackError);
+        }
+
+        throw new Error(data.message || "Failed to fetch project");
+      }
+
+      return data.data || data;
+    } catch (error) {
+      if (error instanceof Error) throw error;
+      throw new Error("An unexpected error occurred while fetching project");
+    }
+  },
+
+  /**
    * Create a new project (Admin only)
    */
   createProject: async (projectData: Partial<Project>) => {

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
 
   try {
-    const project = await projectService.getProjectById(id);
+    const project = await projectService.getProjectBySlug(id);
 
     if (!project) {
       return {
@@ -60,7 +60,7 @@ export default async function ProjectDetailsPage({ params }: Props) {
   let project = null;
 
   try {
-    project = await projectService.getProjectById(id);
+    project = await projectService.getProjectBySlug(id);
   } catch (error) {
     console.error("Failed to fetch project:", error);
     return <ProjectNotFound error="Failed to load project details." />;
