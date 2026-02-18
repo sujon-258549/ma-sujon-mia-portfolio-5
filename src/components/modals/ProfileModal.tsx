@@ -38,19 +38,42 @@ export const ProfileModal = ({
 }: ProfileModalProps) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    photo: "",
-    bio: "",
+    name: user?.name || "",
+    photo: user?.photo || "",
+    bio: user?.bio || "",
   });
 
+  console.log("ProfileModal user prop:", user);
+
   useEffect(() => {
-    if (isOpen && user) {
-      setFormData({
-        name: user.name || "",
-        photo: user.photo || "",
-        bio: user.bio || "",
-      });
-    }
+    const fetchUserData = async () => {
+      if (isOpen) {
+        // First try to set from props if available
+        if (user) {
+          setFormData({
+            name: user.name || "",
+            photo: user.photo || "",
+            bio: user.bio || "",
+          });
+        }
+
+        // Then fetch fresh data from API to ensure we have the latest (including bio, etc.)
+        try {
+          const freshUser = await authService.getMe();
+          if (freshUser) {
+            setFormData({
+              name: freshUser.name || "",
+              photo: freshUser.photo || "",
+              bio: freshUser.bio || "",
+            });
+          }
+        } catch (error) {
+          console.error("Failed to fetch latest user profile:", error);
+        }
+      }
+    };
+
+    fetchUserData();
   }, [isOpen, user]);
 
   const handleChange = (

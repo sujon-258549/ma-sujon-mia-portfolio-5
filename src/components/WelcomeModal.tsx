@@ -85,15 +85,16 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
     const alreadyShown = sessionStorage.getItem(STORAGE_KEY);
 
     // If admin, we allow reopening via the floating button, but initial auto-show logic remains
-    if (alreadyShown && !isAuthorized) return;
+    if (alreadyShown) return;
     if (!data.isActive && !isAuthorized) return;
 
     // Initial delayed show
     const showTimer = setTimeout(() => {
       if (!isManuallyClosed && !isEditOpen) {
         setIsVisible(true);
+        sessionStorage.setItem(STORAGE_KEY, "true");
+
         if (!isAuthorized) {
-          sessionStorage.setItem(STORAGE_KEY, "true");
           // Auto-close only for non-admins
           const closeTimer = setTimeout(() => handleClose(), AUTO_CLOSE_DELAY);
           return () => clearTimeout(closeTimer);
