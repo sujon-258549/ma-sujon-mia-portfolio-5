@@ -378,6 +378,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
       />
 
       <BlogPostEditModal
+        key={`${editingPost?._id || "new"}-${isPostModalOpen}`}
         isOpen={isPostModalOpen}
         onClose={() => setIsPostModalOpen(false)}
         post={editingPost}

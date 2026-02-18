@@ -37,6 +37,7 @@ export const ProjectEditModal = ({
     _id: project?._id,
     id: project?.id || Math.random().toString(36).substr(2, 9),
     sl: project?.sl || "",
+    slug: project?.slug || "",
     title: project?.title || "",
     shortDescription: project?.shortDescription || "",
     longDescription: project?.longDescription || "",
@@ -361,7 +362,18 @@ export const ProjectEditModal = ({
                         </Label>
                         <Input
                           value={formData.title}
-                          onChange={(e) => updateField("title", e.target.value)}
+                          onChange={(e) => {
+                            const newTitle = e.target.value;
+                            updateField("title", newTitle);
+                            if (mode === "add") {
+                              const slug = newTitle
+                                .toLowerCase()
+                                .replace(/[^\w\s-]/g, "")
+                                .replace(/[\s_-]+/g, "-")
+                                .replace(/^-+|-+$/g, "");
+                              updateField("slug", slug);
+                            }
+                          }}
                           className="bg-black/40 border-white/5 text-lg font-bold text-white h-14 rounded-lg"
                         />
                       </div>
@@ -377,6 +389,18 @@ export const ProjectEditModal = ({
                           className="bg-black/40 border-white/5 text-emerald-500 font-bold h-14 rounded-lg"
                         />
                       </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                        Project Slug
+                      </Label>
+                      <Input
+                        value={formData.slug || ""}
+                        onChange={(e) => updateField("slug", e.target.value)}
+                        className="bg-black/40 border-white/5 text-slate-400 font-mono h-14 rounded-lg"
+                        placeholder="project-title-slug"
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

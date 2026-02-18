@@ -10,6 +10,16 @@ interface ChangePasswordModalProps {
   onClose: () => void;
 }
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 export const ChangePasswordModal = ({
   isOpen,
   onClose,
@@ -46,9 +56,6 @@ export const ChangePasswordModal = ({
         toast.success("Password changed successfully");
         setFormData({ oldPassword: "", newPassword: "", confirmPassword: "" });
         onClose();
-        // Force reload to ensure everything is synced or just let the auth context handle it?
-        // Ideally auth context should pick up the change or we might need to refresh user.
-        // For now, simple close is fine as token is updated in storage.
       }
     } catch (error: any) {
       console.error(error);
@@ -61,20 +68,14 @@ export const ChangePasswordModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-      <div className="w-full max-w-md bg-[#0E1416] border border-white/10 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 text-white">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5">
-          <h2 className="text-lg font-semibold flex items-center gap-2 text-emerald-500">
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="sm:max-w-[425px] bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
+        <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
+          <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-emerald-500">
             <Lock className="w-5 h-5" />
             Change Password
-          </h2>
-          <button
-            onClick={onClose}
-            className="p-2 -mr-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
+          </DialogTitle>
+        </DialogHeader>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           <div className="space-y-4">
@@ -83,12 +84,12 @@ export const ChangePasswordModal = ({
               <label className="text-sm font-medium text-slate-400 flex items-center gap-2">
                 <Key className="w-4 h-4" /> Current Password
               </label>
-              <input
+              <Input
                 type="password"
                 name="oldPassword"
                 value={formData.oldPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all placeholder:text-slate-600"
+                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Enter current password"
                 required
               />
@@ -99,12 +100,12 @@ export const ChangePasswordModal = ({
               <label className="text-sm font-medium text-slate-400 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" /> New Password
               </label>
-              <input
+              <Input
                 type="password"
                 name="newPassword"
                 value={formData.newPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all placeholder:text-slate-600"
+                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Enter new password"
                 required
                 minLength={6}
@@ -116,12 +117,12 @@ export const ChangePasswordModal = ({
               <label className="text-sm font-medium text-slate-400 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" /> Confirm New Password
               </label>
-              <input
+              <Input
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-lg focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 outline-none transition-all placeholder:text-slate-600"
+                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Confirm new password"
                 required
                 minLength={6}
@@ -136,25 +137,26 @@ export const ChangePasswordModal = ({
             </p>
           </div>
 
-          <div className="flex justify-end gap-3 pt-2">
-            <button
+          <DialogFooter className="border-t border-white/10 pt-4 gap-2 sm:gap-0">
+            <Button
               type="button"
+              variant="ghost"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              className="text-slate-400 hover:text-white hover:bg-white/5"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 rounded-lg text-sm font-medium bg-emerald-500 text-black hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+              className="bg-emerald-500 text-black hover:bg-emerald-400 font-medium"
             >
-              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+              {loading && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
               Update Password
-            </button>
-          </div>
+            </Button>
+          </DialogFooter>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
