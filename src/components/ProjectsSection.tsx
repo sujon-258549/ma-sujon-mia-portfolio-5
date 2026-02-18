@@ -356,24 +356,21 @@ const ProjectsSection = ({
           ))}
         </div>
 
-        {filteredProjects.length > 5 && (
-          <div className="text-center mt-16">
-            <Button
+        {(filteredProjects.length > 3 || showAll) && (
+          <div className="flex items-center justify-center gap-6 mt-16">
+            <button
               onClick={() => setShowAll(!showAll)}
-              className="bg-[#172023] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white rounded-xl px-12 h-12 cursor-pointer font-bold shadow-xl transition-all group"
+              className="group relative inline-flex items-center gap-4 px-12 py-4 bg-emerald-500 text-black font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:bg-emerald-400 shadow-2xl shadow-emerald-500/20 cursor-pointer active:scale-95 h-14"
             >
-              {showAll ? (
-                <>
-                  Minimize Portfolio
-                  <i className="fa-solid fa-chevron-up text-lg ml-2 group-hover:-translate-y-1 transition-transform"></i>
-                </>
-              ) : (
-                <>
-                  View Full Portfolio
-                  <i className="fa-solid fa-chevron-down text-base ml-2 group-hover:translate-y-1 transition-transform"></i>
-                </>
-              )}
-            </Button>
+              <span>
+                {showAll ? "Minimize Portfolio" : "View Full Portfolio"}
+              </span>
+              <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center transition-all">
+                <i
+                  className={`fa-solid fa-arrow-right text-sm transition-transform duration-500 ${showAll ? "rotate-270" : "rotate-0 group-hover:translate-x-1"}`}
+                ></i>
+              </div>
+            </button>
           </div>
         )}
       </div>
