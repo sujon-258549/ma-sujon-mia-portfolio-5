@@ -188,3 +188,22 @@
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
+
+/* Review Slider — auto-play progress bar */
+@keyframes progress-bar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-progress-bar {
+  animation: progress-bar linear forwards;
+}
+
+/* Review slider card — prevent layout shift on mobile */
+.review-slider-card {
+  will-change: transform, opacity;
+}

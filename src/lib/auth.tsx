@@ -37,32 +37,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const storedUser = authService.getUser();
 
       if (storedToken) {
-        // Optimistically set user from local storage
+        // Always set user from localStorage first so logout button is visible
         if (storedUser) {
           setUser(storedUser);
           setToken(storedToken);
+        } else {
+          // At minimum, set a placeholder so the logout button shows
+          setToken(storedToken);
         }
 
-        // background verify
+        // Background verify with the API
         try {
           const userData = await authService.getMe();
           setUser(userData);
           setToken(storedToken);
         } catch (apiError) {
           console.error("API verification failed:", apiError);
-          // Only logout if it's strictly an auth error, otherwise keep stored session
-          // Assuming the API returns specific error messages or we can infer it
+          // Only clear session on explicit 401/403 Unauthorized errors
           if (
             apiError instanceof Error &&
-            (apiError.message.includes("Unauthorized") ||
-              apiError.message.includes("jwt expired") ||
-              apiError.message.includes("No token"))
+            (apiError.message === "Unauthorized" ||
+              apiError.message.includes("jwt expired"))
           ) {
             authService.logout();
             setUser(null);
             setToken(null);
           } else {
-            // Keep the optimistic user state for network errors or other issues
+            // Keep the optimistic user state for network errors, server errors, etc.
             console.warn("Keeping stored session despite API error");
           }
         }
@@ -72,7 +73,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     } catch (error) {
       console.error("Auth initialization error:", error);
-      authService.logout();
       setUser(null);
       setToken(null);
     } finally {

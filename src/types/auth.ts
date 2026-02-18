@@ -4,6 +4,8 @@ export interface User {
   name: string;
   email: string;
   role: string;
+  photo?: string;
+  bio?: string;
 }
 
 export interface AuthResponse {

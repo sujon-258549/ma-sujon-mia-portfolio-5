@@ -109,10 +109,10 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
       {isAuthorized && (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="absolute top-10 right-10 z-50 w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-white/10"
+          className="absolute top-4 right-4 sm:top-10 sm:right-10 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-white/10"
           title="Edit Section"
         >
-          <Settings2 className="w-5 h-5" />
+          <Settings2 className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       )}
 
@@ -125,7 +125,8 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
       )}
 
       <div className="main-container relative z-10">
-        <div className="text-center mb-20 max-w-3xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -135,42 +136,81 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-white leading-tight">
             {sectionData.title}{" "}
             <span className="text-emerald-500">
               {sectionData.titleHighlight}
             </span>
           </h2>
 
-          <p className="text-slate-400 text-lg leading-relaxed">
+          <p className="text-slate-400 text-base md:text-lg leading-relaxed">
             {sectionData.description}
           </p>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Connecting Line */}
-          <div className="absolute left-[19px] md:left-1/2 top-0 bottom-0 w-0.5 bg-white/5 md:-translate-x-1/2 rounded-full overflow-hidden">
+        {/* ── MOBILE: Vertical card list (< md) ── */}
+        <div className="block md:hidden relative px-4">
+          {/* Vertical line */}
+          <div className="absolute left-[31px] top-0 bottom-0 w-0.5 bg-white/5 rounded-full overflow-hidden">
             <div className="absolute inset-0 bg-emerald-500 w-full h-full -translate-y-full animate-[flow_3s_infinite_linear] opacity-50" />
           </div>
 
-          <div className="space-y-6 md:space-y-10 relative">
+          <div className="space-y-6">
             {sectionData.steps.map((step, index) => (
               <div
                 key={step.id}
-                className={`workflow-step opacity-0 translate-y-10 transition-all duration-1000 ease-out flex flex-col md:flex-row items-center gap-6 md:gap-0 relative`}
+                className="workflow-step opacity-0 translate-y-10 transition-all duration-700 ease-out flex items-start gap-4"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Step node */}
+                <div className="shrink-0 w-[26px] flex flex-col items-center mt-1 relative z-10">
+                  <div className="w-[26px] h-[26px] rounded-full bg-[#0E1416] border-2 border-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.4)] flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  </div>
+                </div>
+
+                {/* Card */}
+                <div className="flex-1 bg-[#121A1C] border border-white/5 rounded-xl p-4 hover:border-emerald-500/20 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                      <i className={`${step.icon} text-emerald-500 text-sm`} />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-widest block">
+                        Step {step.stepNumber}
+                      </span>
+                      <h3 className="text-white font-bold text-base leading-tight">
+                        {step.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── DESKTOP: Alternating timeline (≥ md) ── */}
+        <div className="hidden md:block relative max-w-5xl mx-auto">
+          {/* Connecting Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/5 -translate-x-1/2 rounded-full overflow-hidden">
+            <div className="absolute inset-0 bg-emerald-500 w-full h-full -translate-y-full animate-[flow_3s_infinite_linear] opacity-50" />
+          </div>
+
+          <div className="space-y-10 relative">
+            {sectionData.steps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`workflow-step opacity-0 translate-y-10 transition-all duration-1000 ease-out flex items-center gap-0 relative`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Left Side */}
-                <div className="flex-1 w-full md:w-1/2 md:px-12 flex justify-end">
-                  {/* If index is even (0, 2, 4), Show Image (or Card if no image). If odd, Show Text. */}
-
-                  {/* LOGIC: 
-                      Even Index: Left = Image/Visual, Right = Text content
-                      Odd Index: Left = Text content, Right = Image/Visual
-                  */}
-
+                <div className="flex-1 w-1/2 px-12 flex justify-end">
                   {index % 2 === 0 ? (
-                    // Even Index LEFT SIDE -> Displays VISUAL (Icon/Image)
+                    // Even: Visual on left
                     <div className="w-full relative group">
                       {step.image ? (
                         <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
@@ -180,13 +220,11 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                             alt={step.title}
                             className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
                           />
-                          {/* Floating Icon */}
                           <div className="absolute bottom-4 right-4 z-20 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md flex items-center justify-center text-emerald-500 border border-emerald-500/30 shadow-lg">
                             <i className={`${step.icon} text-xl`}></i>
                           </div>
                         </div>
                       ) : (
-                        // No Image Fallback - Big Icon Card
                         <div className="h-64 rounded-2xl bg-[#121A1C] border border-white/5 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
                           <div className="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors duration-500" />
                           <i
@@ -201,7 +239,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                       )}
                     </div>
                   ) : (
-                    // Odd Index LEFT SIDE -> Displays CONTENT
+                    // Odd: Text on left
                     <div className="w-full text-right">
                       <span className="text-6xl font-black text-white/5 block mb-2 -mr-1">
                         {step.stepNumber}
@@ -217,17 +255,16 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                 </div>
 
                 {/* Center Node */}
-                <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 flex items-center justify-center z-10 hidden md:flex">
+                <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 flex items-center justify-center z-10">
                   <div className="w-4 h-4 rounded-full bg-[#0E1416] border-[3px] border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)] relative z-10">
                     <div className="absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-20" />
                   </div>
-                  <div className="absolute inset-0 rounded-full border border-white/5 bg-[#0E1416] -z-10 scale-0 transition-transform duration-500 group-hover:scale-100" />
                 </div>
 
                 {/* Right Side */}
-                <div className="flex-1 w-full md:w-1/2 md:px-12">
+                <div className="flex-1 w-1/2 px-12">
                   {index % 2 !== 0 ? (
-                    // Odd Index RIGHT SIDE -> Displays VISUAL
+                    // Odd: Visual on right
                     <div className="w-full relative group">
                       {step.image ? (
                         <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
@@ -237,13 +274,11 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                             alt={step.title}
                             className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
                           />
-                          {/* Floating Icon */}
                           <div className="absolute bottom-4 left-4 z-20 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md flex items-center justify-center text-emerald-500 border border-emerald-500/30 shadow-lg">
                             <i className={`${step.icon} text-xl`}></i>
                           </div>
                         </div>
                       ) : (
-                        // No Image Fallback - Big Icon Card
                         <div className="h-64 rounded-2xl bg-[#121A1C] border border-white/5 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
                           <div className="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors duration-500" />
                           <i
@@ -258,7 +293,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                       )}
                     </div>
                   ) : (
-                    // Even Index RIGHT SIDE -> Displays CONTENT
+                    // Even: Text on right
                     <div className="w-full text-left">
                       <span className="text-6xl font-black text-white/5 block mb-2 -ml-1">
                         {step.stepNumber}

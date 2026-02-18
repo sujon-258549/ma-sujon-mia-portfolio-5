@@ -10,9 +10,13 @@ import ProjectsSection from "@/components/ProjectsSection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import WorkflowSection from "@/components/WorkflowSection";
+import ReviewSection from "@/components/ReviewSection";
+import { WelcomeModal } from "@/components/WelcomeModal";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
 import { blogService } from "@/services/blogService";
+import { serverAuth } from "@/services/serverAuth";
+import { reviewService } from "@/services/reviewService";
 
 export default async function Home() {
   const [
@@ -28,6 +32,9 @@ export default async function Home() {
     footerContent,
     projectSectionHeaderContent,
     blogHeaderData,
+    reviewContent,
+    reviews,
+    welcomeModalContent,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -43,6 +50,9 @@ export default async function Home() {
       .getContent("project-section-header")
       .catch(() => null),
     dynamicContentService.getContent("blog_header").catch(() => null),
+    dynamicContentService.getContent("review_section_header").catch(() => null),
+    reviewService.getAllReviews().catch(() => []),
+    dynamicContentService.getContent("welcome_modal").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -54,49 +64,80 @@ export default async function Home() {
     posts: blogPosts,
   };
 
+  const authData = await serverAuth.getUser();
+  const role = authData?.role === "admin";
+
   return (
     <div className="min-h-screen bg-[#121A1C]">
       {/* Navigation */}
       <Header initialData={headerContent} />
 
       {/* Hero Section */}
-      <HeroSection initialData={heroContent} />
+      {(role || heroContent?.isActive) && (
+        <HeroSection initialData={heroContent} />
+      )}
 
       {/* About Section */}
-      <AboutSection initialData={aboutContent} />
+      {(role || aboutContent?.isActive) && (
+        <AboutSection initialData={aboutContent} />
+      )}
 
       {/* SkillsSection */}
-      <SkillsSection initialData={skillsContent} />
+      {(role || skillsContent?.isActive) && (
+        <SkillsSection initialData={skillsContent} />
+      )}
 
       {/* Workflow Section */}
 
       {/* Projects Section */}
-      <ProjectsSection
-        projects={projects}
-        initialData={projectSectionHeaderContent}
-      />
+      {(role || projectSectionHeaderContent?.isActive) && (
+        <ProjectsSection
+          projects={projects}
+          initialData={projectSectionHeaderContent}
+        />
+      )}
 
-      <WorkflowSection initialData={workflowContent} />
+      {(role || workflowContent?.isActive) && (
+        <WorkflowSection initialData={workflowContent} />
+      )}
       {/* Education Section */}
-      <EducationSection initialData={educationContent} />
+      {(role || educationContent?.isActive) && (
+        <EducationSection initialData={educationContent} />
+      )}
 
       {/* Experience Section */}
-      <ExperienceSection initialData={experienceContent} />
+      {(role || experienceContent?.isActive) && (
+        <ExperienceSection initialData={experienceContent} />
+      )}
 
       {/* GitHub Stats Section */}
       {/* <GithubStatsSection /> */}
 
       {/* Services Section */}
-      <ServicesSection initialData={servicesContent} />
+      {(role || servicesContent?.isActive) && (
+        <ServicesSection initialData={servicesContent} />
+      )}
 
       {/* Blog Section */}
-      <BlogSection initialData={blogContent} />
+      {(role || blogHeaderData?.isActive) && (
+        <BlogSection initialData={blogContent} />
+      )}
+
+      {/* Review Section */}
+      {(role || reviewContent?.isActive) && (
+        <ReviewSection headerData={reviewContent} reviews={reviews} />
+      )}
 
       {/* Contact Section */}
-      <ContactSection initialData={contactContent} />
+      {(role || contactContent?.isActive) && (
+        <ContactSection initialData={contactContent} />
+      )}
 
       {/* Footer */}
       <Footer initialData={footerContent} />
+
+      {/* Welcome Modal — shows 2s after load, once per session */}
+      <WelcomeModal initialData={welcomeModalContent} />
     </div>
   );
 }
