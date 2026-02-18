@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import NextImage from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { useIsAuthorized } from "@/lib/auth";
 import { WorkflowSectionData } from "@/types/workflow";
@@ -215,9 +216,11 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                       {step.image ? (
                         <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
                           <div className="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          <img
+                          <NextImage
                             src={step.image}
                             alt={step.title}
+                            fill
+                            unoptimized
                             className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
                           />
                           <div className="absolute bottom-4 right-4 z-20 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md flex items-center justify-center text-emerald-500 border border-emerald-500/30 shadow-lg">
@@ -269,9 +272,11 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                       {step.image ? (
                         <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
                           <div className="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          <img
+                          <NextImage
                             src={step.image}
                             alt={step.title}
+                            fill
+                            unoptimized
                             className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
                           />
                           <div className="absolute bottom-4 left-4 z-20 w-12 h-12 rounded-xl bg-black/80 backdrop-blur-md flex items-center justify-center text-emerald-500 border border-emerald-500/30 shadow-lg">

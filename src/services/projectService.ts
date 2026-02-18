@@ -15,6 +15,9 @@ export const projectService = {
         headers: {
           "Content-Type": "application/json",
         },
+        next: {
+          tags: ["projects"],
+        },
       });
 
       const data = await response.json();
@@ -40,6 +43,9 @@ export const projectService = {
         headers: {
           "Content-Type": "application/json",
         },
+        next: {
+          tags: ["projects"],
+        },
       });
 
       const data = await response.json();
@@ -64,6 +70,9 @@ export const projectService = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["projects"],
         },
       });
 

@@ -109,11 +109,9 @@ export const ProjectEditModal = ({
 
       if (mode === "edit" && projectId) {
         // Strip out IDs from the update payload as they go in URL params
-        const {
-          _id: _unused_id,
-          id: _unused_alt_id,
-          ...updatePayload
-        } = formData as Partial<Project>;
+        const updatePayload = { ...formData } as Partial<Project>;
+        delete updatePayload._id;
+        delete updatePayload.id;
         savedProject = await projectService.updateProject(
           projectId,
           updatePayload,

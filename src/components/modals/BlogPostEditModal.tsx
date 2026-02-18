@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import NextImage from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -83,7 +84,7 @@ export const BlogPostEditModal = ({
     setIsLoading(true);
 
     try {
-      console.log("form data", formData)
+      console.log("form data", formData);
       let result: BlogPost;
       if (mode === "edit" && post?._id) {
         result = await blogService.updateBlog(post._id, formData);
@@ -276,10 +277,12 @@ export const BlogPostEditModal = ({
                   />
                   {formData.image && (
                     <div className="mt-4 relative h-32 w-full rounded-lg overflow-hidden border border-white/10">
-                      <img
-                        src={formData.image}
+                      <NextImage
+                        src={formData.image || ""}
                         className="object-cover w-full h-full opacity-60"
                         alt="Preview"
+                        fill
+                        unoptimized
                       />
                     </div>
                   )}

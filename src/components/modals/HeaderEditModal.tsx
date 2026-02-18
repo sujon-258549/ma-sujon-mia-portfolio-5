@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import NextImage from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -177,11 +178,16 @@ export const HeaderEditModal = ({
                       Preview
                     </p>
                     <div className="relative group/preview mt-2 p-2 bg-white/5 rounded-xl border border-emerald-500/20">
-                      <img
+                      <NextImage
                         src={formData.logo}
                         alt="Logo Preview"
+                        width={200}
+                        height={50}
+                        unoptimized
                         className="max-w-full h-auto max-h-[80px] object-contain"
-                        onError={(e) => {
+                        onError={(
+                          e: React.SyntheticEvent<HTMLImageElement, Event>,
+                        ) => {
                           (e.target as HTMLImageElement).src =
                             "https://placehold.co/200x50?text=Invalid+Image+URL";
                         }}

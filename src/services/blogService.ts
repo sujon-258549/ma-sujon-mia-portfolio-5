@@ -4,6 +4,12 @@ import { authService } from "@/lib/authService";
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
 
+interface BlogHeader {
+  title: string;
+  subtitle: string;
+  description: string;
+}
+
 export const blogService = {
   /**
    * Get all blog posts
@@ -185,7 +191,7 @@ export const blogService = {
   /**
    * Get blog section header data
    */
-  getBlogHeader: async (): Promise<any> => {
+  getBlogHeader: async (): Promise<BlogHeader | null> => {
     try {
       const response = await fetch(`${BASE_URL}/blog-header`, {
         method: "GET",
@@ -213,7 +219,7 @@ export const blogService = {
   /**
    * Update blog section header data
    */
-  updateBlogHeader: async (data: any): Promise<any> => {
+  updateBlogHeader: async (data: BlogHeader): Promise<BlogHeader> => {
     try {
       const token = authService.getToken();
       const response = await fetch(`${BASE_URL}/blog-header`, {

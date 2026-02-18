@@ -57,9 +57,11 @@ export const ChangePasswordModal = ({
         setFormData({ oldPassword: "", newPassword: "", confirmPassword: "" });
         onClose();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      toast.error(error.message || "Failed to change password");
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to change password";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
