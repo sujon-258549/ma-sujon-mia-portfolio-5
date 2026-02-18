@@ -18,4 +18,5 @@ export interface EducationSectionData {
   titleColor: string;
   description: string;
   education: EducationItem[];
+  isActive?: boolean;
 }

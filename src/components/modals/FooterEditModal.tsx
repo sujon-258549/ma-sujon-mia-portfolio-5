@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { FooterData, SocialLink, QuickLink, ContactItem } from "@/types/footer";
 import Image from "next/image";
@@ -31,7 +32,10 @@ export const FooterEditModal = ({
   onSave,
 }: FooterEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<FooterData>(currentData);
+  const [formData, setFormData] = useState<FooterData>(() => ({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  }));
 
   useEffect(() => {
     if (isOpen) {
@@ -164,8 +168,29 @@ export const FooterEditModal = ({
               <div className="w-2 h-8 bg-emerald-500 rounded-full" />
               Customize Footer Layout
             </DialogTitle>
-            <div className="text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-widest font-medium">
-              Admin Interface
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 px-4 py-2 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
+                <div className="flex flex-col items-end">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
+                    Section Activity
+                  </span>
+                  <span className="text-[9px] text-slate-500 font-bold uppercase">
+                    {formData.isActive
+                      ? "Publicly Visible"
+                      : "Hidden from Public"}
+                  </span>
+                </div>
+                <Switch
+                  checked={formData.isActive}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, isActive: checked }))
+                  }
+                  className="data-[state=checked]:bg-emerald-500"
+                />
+              </div>
+              <div className="text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-widest font-medium">
+                Admin Interface
+              </div>
             </div>
           </div>
         </DialogHeader>

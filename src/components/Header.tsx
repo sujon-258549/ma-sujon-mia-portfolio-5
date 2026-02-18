@@ -31,7 +31,7 @@ const Header = ({ initialData }: HeaderProps) => {
       { text: "Experience", link: "#experience" },
       { text: "Projects", link: "#projects" },
       { text: "Contact", link: "#contact" },
-      { text: "Blog", link: "#blog" },
+      { text: "Chronicles", link: "#blog" },
     ],
     buttons: {
       primary: {

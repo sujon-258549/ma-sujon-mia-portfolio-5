@@ -143,9 +143,11 @@ const ProjectsSection = ({
     setCompletedCount(data.completedCount);
   };
 
-  const filteredProjects = isAuthorized
-    ? sectionData.projects
-    : sectionData.projects.filter((p) => p.isActive !== false);
+  const filteredProjects = (
+    isAuthorized
+      ? sectionData.projects
+      : sectionData.projects.filter((p) => p.isActive !== false)
+  ).sort((a, b) => (a.sl || 0) - (b.sl || 0));
 
   const displayedProjects = showAll
     ? filteredProjects
@@ -269,6 +271,14 @@ const ProjectsSection = ({
                 <div className="absolute top-4 left-4 z-40">
                   <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
                     Draft
+                  </Badge>
+                </div>
+              )}
+
+              {isAuthorized && project.sl !== undefined && (
+                <div className="absolute top-4 left-4 z-40">
+                  <Badge className="bg-emerald-500/80 backdrop-blur-md text-black border-none uppercase text-[9px] font-black tracking-widest">
+                    SL: {project.sl}
                   </Badge>
                 </div>
               )}

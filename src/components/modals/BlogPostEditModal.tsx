@@ -23,8 +23,6 @@ import {
   Clock,
   Tag,
   Link2,
-  Eye,
-  EyeOff,
 } from "lucide-react";
 import { BlogPost } from "@/types/blog";
 
@@ -85,11 +83,13 @@ export const BlogPostEditModal = ({
     setIsLoading(true);
 
     try {
+      console.log("form data", formData)
       let result: BlogPost;
       if (mode === "edit" && post?._id) {
         result = await blogService.updateBlog(post._id, formData);
         toast.success("Blog post updated!");
       } else {
+        console.log("blog data", formData);
         result = await blogService.createBlog(formData);
         toast.success("New chronicle published!");
       }

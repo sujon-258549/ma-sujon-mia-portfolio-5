@@ -35,6 +35,7 @@ export const ProjectEditModal = ({
   const [formData, setFormData] = useState<Project>(() => ({
     _id: project?._id,
     id: project?.id || Math.random().toString(36).substr(2, 9),
+    sl: project?.sl || 0,
     title: project?.title || "",
     shortDescription: project?.shortDescription || "",
     longDescription: project?.longDescription || "",
@@ -318,18 +319,31 @@ export const ProjectEditModal = ({
               <div className="p-8 border-b border-white/5 bg-linear-to-br from-emerald-500/5 to-transparent">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                   <div className="lg:col-span-8 space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="md:col-span-1 space-y-3">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
+                          SL (Serial)
+                        </Label>
+                        <Input
+                          type="number"
+                          value={formData.sl}
+                          onChange={(e) =>
+                            updateField("sl", parseInt(e.target.value) || 0)
+                          }
+                          className="bg-black/40 border-white/5 text-lg font-bold text-emerald-500 h-14 rounded-lg"
+                        />
+                      </div>
+                      <div className="md:col-span-1 space-y-3">
                         <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
                           Project Name
                         </Label>
                         <Input
                           value={formData.title}
                           onChange={(e) => updateField("title", e.target.value)}
-                          className="bg-black/40 border-white/5 text-xl font-bold text-white h-14 rounded-lg"
+                          className="bg-black/40 border-white/5 text-lg font-bold text-white h-14 rounded-lg"
                         />
                       </div>
-                      <div className="space-y-3">
+                      <div className="md:col-span-1 space-y-3">
                         <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest">
                           Category
                         </Label>

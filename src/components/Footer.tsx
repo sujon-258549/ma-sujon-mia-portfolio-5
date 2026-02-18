@@ -74,9 +74,10 @@ const Footer = ({ initialData }: FooterProps) => {
     ],
   };
 
-  const [footerData, setFooterData] = useState<FooterData>(
-    initialData || defaultData,
-  );
+  const [footerData, setFooterData] = useState<FooterData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -84,21 +85,32 @@ const Footer = ({ initialData }: FooterProps) => {
 
   const currentYear = new Date().getFullYear();
 
+  if (!footerData.isActive && !isAuthorized) return null;
+
   return (
-    <footer className="bg-[#0E1416] border-t border-emerald-500/20 relative overflow-hidden">
+    <footer
+      className={`bg-[#0E1416] border-t border-emerald-500/20 relative overflow-hidden transition-all duration-300 ${!footerData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
+    >
       {/* Background Decoration */}
       <div className="absolute inset-0 bg-linear-to-b from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Admin Edit Button - Positioned to the top right of the footer section */}
       {isAuthorized && (
-        <button
-          onClick={() => setIsEditModalOpen(true)}
-          className="absolute top-8 right-8 w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full shadow-lg shadow-emerald-500/5 backdrop-blur-md z-50 flex items-center justify-center transition-all cursor-pointer active:scale-95 group hover:bg-emerald-500 hover:text-[#0E1416]"
-          title="Edit Footer Content"
-        >
-          <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
-        </button>
+        <div className="absolute top-8 right-8 z-50 flex flex-col items-center gap-4">
+          {!footerData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
+          <button
+            onClick={() => setIsEditModalOpen(true)}
+            className="w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full shadow-lg shadow-emerald-500/5 backdrop-blur-md flex items-center justify-center transition-all cursor-pointer active:scale-95 group hover:bg-emerald-500 hover:text-[#0E1416]"
+            title="Edit Footer Content"
+          >
+            <i className="fa-solid fa-pen-to-square text-lg group-hover:scale-110 transition-transform"></i>
+          </button>
+        </div>
       )}
 
       <div className="main-container relative z-10">

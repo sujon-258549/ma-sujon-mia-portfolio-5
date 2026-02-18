@@ -20,4 +20,5 @@ export interface ExperienceSectionData {
   titleColor: string;
   description: string;
   experiences: Experience[];
+  isActive?: boolean;
 }

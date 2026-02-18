@@ -12,12 +12,16 @@ export interface BlogPost {
   content?: string;
 }
 
-export interface BlogSectionData {
+export interface BlogHeader {
   isActive?: boolean;
   badge: string;
   badgeIcon: string;
   title: string;
   titleHighlight: string;
   description: string;
+  type?: string;
+}
+
+export interface BlogSectionData extends BlogHeader {
   posts: BlogPost[];
 }

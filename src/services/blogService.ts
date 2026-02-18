@@ -182,4 +182,57 @@ export const blogService = {
       throw error;
     }
   },
+  /**
+   * Get blog section header data
+   */
+  getBlogHeader: async (): Promise<any> => {
+    try {
+      const response = await fetch(`${BASE_URL}/blog-header`, {
+        method: "GET",
+        next: {
+          tags: ["blog-header"],
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to fetch blog header");
+      }
+
+      return result.data;
+    } catch (error) {
+      console.error("Error fetching blog header:", error);
+      return null;
+    }
+  },
+
+  /**
+   * Update blog section header data
+   */
+  updateBlogHeader: async (data: any): Promise<any> => {
+    try {
+      const token = authService.getToken();
+      const response = await fetch(`${BASE_URL}/blog-header`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to update blog header");
+      }
+      return result.data;
+    } catch (error) {
+      console.error("Error updating blog header:", error);
+      throw error;
+    }
+  },
 };

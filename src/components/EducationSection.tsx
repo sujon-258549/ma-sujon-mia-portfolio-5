@@ -70,21 +70,29 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
     ],
   };
 
-  const [sectionData, setSectionData] = useState<EducationSectionData>(
-    initialData || defaultData,
-  );
+  const [sectionData, setSectionData] = useState<EducationSectionData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   const mainEducation = sectionData.education.filter((edu) => edu.isMain);
   const secondaryEducation = sectionData.education.filter((edu) => !edu.isMain);
 
+  if (!sectionData.isActive && !isAuthorized) return null;
+
   return (
     <section
       id="education"
-      className="section-spacing bg-[#121A1C] relative px-4 md:px-0"
+      className={`section-spacing bg-[#121A1C] relative px-4 md:px-0 transition-all duration-300 ${!sectionData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Admin Edit Trigger */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30">
+        <div className="absolute top-8 right-8 z-30 flex flex-col items-center gap-4">
+          {!sectionData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
           <Button
             onClick={() => setIsModalOpen(true)}
             variant="outline"

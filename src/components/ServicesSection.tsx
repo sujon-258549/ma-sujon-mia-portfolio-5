@@ -54,34 +54,44 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
     ],
   };
 
-  const [servicesData, setServicesData] = useState<ServicesSectionData>(
-    initialData || defaultData,
-  );
+  const [servicesData, setServicesData] = useState<ServicesSectionData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   const handleSave = (newData: ServicesSectionData) => {
     setServicesData(newData);
     setIsModalOpen(false);
   };
 
+  if (!servicesData.isActive && !isAuthorized) return null;
+
   return (
     <section
       id="services"
-      className="section-spacing bg-[#0E1416] relative overflow-hidden"
+      className={`section-spacing bg-[#0E1416] relative overflow-hidden transition-all duration-300 ${!servicesData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[100px] -z-10" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-[100px] -z-10" />
 
       {isAuthorized && (
-        <div className="absolute top-10 right-10 z-30 group">
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
-            title="Edit Services"
-          >
+        <div className="absolute top-10 right-10 z-30 flex flex-col items-center gap-4">
+          {!servicesData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
+          <div className="group relative">
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"
+              title="Edit Services"
+            >
               <i className="fa-solid fa-pen-to-square text-lg transition-transform"></i>
-          </Button>
-          <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur group-hover:bg-emerald-500/30 transition-all duration-500 -z-10" />
+            </Button>
+            <div className="absolute -inset-1 bg-emerald-500/20 rounded-full blur group-hover:bg-emerald-500/30 transition-all duration-500 -z-10" />
+          </div>
         </div>
       )}
 

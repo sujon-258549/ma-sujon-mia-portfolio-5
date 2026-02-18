@@ -77,9 +77,10 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
     ],
   };
 
-  const [heroData, setHeroData] = useState<HeroSectionData>(
-    initialData || defaultData,
-  );
+  const [heroData, setHeroData] = useState<HeroSectionData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   useEffect(() => {
     const tick = () => {
@@ -127,8 +128,12 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
     console.log("Saved Hero Data:", newData);
   };
 
+  if (!heroData.isActive && !isAuthorized) return null;
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#121A1C] pb-20 pt-40">
+    <section
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-[#121A1C] pb-20 pt-40 transition-all duration-300 ${!heroData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
+    >
       {/* Dynamic Background */}
       <div className="absolute inset-0 w-full h-full bg-[#121A1C]">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -139,7 +144,12 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
 
       {/* Admin Edit Button */}
       {isAuthorized && (
-        <div className="absolute top-32 right-8 z-30">
+        <div className="absolute top-32 right-8 z-30 flex flex-col items-center gap-4">
+          {!heroData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
           <Button
             onClick={() => setIsModalOpen(true)}
             className="w-12 h-12 min-w-[48px] min-h-[48px] rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center"

@@ -119,9 +119,10 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
       "Exploring the intersection of complex code, high-end design, and digital innovation through technical narratives.",
     posts: initialData?.posts || defaultPosts,
     isActive: initialData?.isActive ?? true,
+    type: initialData?.type || "blog_header",
   }));
 
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   // Filter posts based on active status if not authorized
   const filteredPosts = isAuthorized
@@ -136,7 +137,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
   };
 
   const handleHideMore = () => {
-    setVisibleCount((prev) => (prev > 6 ? prev - 3 : 6));
+    setVisibleCount((prev) => (prev > 3 ? prev - 3 : 3));
   };
 
   const openAddModal = () => {
@@ -340,45 +341,33 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16">
-          <Link
-            href="/blog"
-            className="group relative inline-flex items-center gap-4 px-10 py-4 bg-white/5 text-white font-black text-[11px] uppercase tracking-[0.3em] overflow-hidden rounded-xl transition-all hover:bg-white/10 border border-white/10 shadow-2xl h-14"
-          >
-            <span className="relative z-10">View All Insights</span>
-            <div className="relative z-10 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-          </Link>
+        {(hasMore || visibleCount > 3) && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16">
+            {hasMore && (
+              <button
+                onClick={handleShowMore}
+                className="group relative inline-flex items-center gap-4 px-12 py-4 bg-emerald-500 text-black font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:bg-emerald-400 shadow-2xl shadow-emerald-500/20 cursor-pointer active:scale-95 h-14"
+              >
+                <span>Show More Blog</span>
+                <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center transition-all">
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1" />
+                </div>
+              </button>
+            )}
 
-          {(hasMore || visibleCount > 6) && (
-            <div className="flex gap-4">
-              {hasMore && (
-                <button
-                  onClick={handleShowMore}
-                  className="group relative inline-flex items-center gap-4 px-8 py-4 bg-emerald-500 text-black font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:bg-emerald-400 shadow-2xl shadow-emerald-500/20 cursor-pointer active:scale-95 h-14"
-                >
-                  <span>Load More</span>
-                  <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center transition-all">
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1" />
-                  </div>
-                </button>
-              )}
-
-              {visibleCount > 6 && (
-                <button
-                  onClick={handleHideMore}
-                  className="group relative inline-flex items-center gap-4 px-8 py-4 bg-[#1A2426] text-slate-400 font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:text-white border border-white/10 cursor-pointer active:scale-95 h-14"
-                >
-                  <span>Collapse</span>
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all group-hover:bg-white/10">
-                    <ArrowRight className="w-4 h-4 rotate-270" />
-                  </div>
-                </button>
-              )}
-            </div>
-          )}
-        </div>
+            {visibleCount > 3 && (
+              <button
+                onClick={handleHideMore}
+                className="group relative inline-flex items-center gap-4 px-12 py-4 bg-[#1A2426] text-slate-400 font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:text-white border border-white/10 cursor-pointer active:scale-95 h-14"
+              >
+                <span>Hide More Blog</span>
+                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all group-hover:bg-white/10">
+                  <ArrowRight className="w-4 h-4 rotate-270" />
+                </div>
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <BlogSectionHeaderEditModal

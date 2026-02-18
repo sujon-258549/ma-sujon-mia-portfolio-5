@@ -15,6 +15,7 @@ import { ServiceItem, ServicesSectionData } from "@/types/service";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Edit, Loader2, Plus, Trash2, Wand2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 interface ServicesSectionEditModalProps {
   isOpen: boolean;
@@ -30,7 +31,10 @@ export const ServicesSectionEditModal = ({
   onSave,
 }: ServicesSectionEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<ServicesSectionData>(currentData);
+  const [formData, setFormData] = useState<ServicesSectionData>(() => ({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,10 +122,31 @@ export const ServicesSectionEditModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[1000px] w-[95vw] max-h-[90vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl rounded-lg outline-none">
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
-          <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
-            <Wand2 className="w-6 h-6" />
-            Manage Services Section
-          </DialogTitle>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
+              <Wand2 className="w-6 h-6" />
+              Manage Services Section
+            </DialogTitle>
+            <div className="flex items-center gap-3 px-4 py-2 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
+              <div className="flex flex-col items-end">
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
+                  Section Activity
+                </span>
+                <span className="text-[9px] text-slate-500 font-bold uppercase">
+                  {formData.isActive
+                    ? "Publicly Visible"
+                    : "Hidden from Public"}
+                </span>
+              </div>
+              <Switch
+                checked={formData.isActive}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, isActive: checked }))
+                }
+                className="data-[state=checked]:bg-emerald-500"
+              />
+            </div>
+          </div>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto px-6 py-8 space-y-10 scrollbar-hide">

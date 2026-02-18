@@ -1,6 +1,7 @@
 export interface Project {
   _id?: string;
   id?: string;
+  sl?: number;
   title: string;
   shortDescription: string;
   longDescription: string;

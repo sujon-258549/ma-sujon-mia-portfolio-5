@@ -31,4 +31,5 @@ export interface FooterData {
   socialLinks: SocialLink[];
   quickLinks: QuickLink[];
   contactItems: ContactItem[];
+  isActive?: boolean;
 }

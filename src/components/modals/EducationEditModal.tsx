@@ -31,7 +31,10 @@ export const EducationEditModal = ({
   onSave,
 }: EducationEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<EducationSectionData>(currentData);
+  const [formData, setFormData] = useState<EducationSectionData>(() => ({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,12 +138,33 @@ export const EducationEditModal = ({
               <div className="w-2 h-8 bg-emerald-500 rounded-full" />
               Educational Journey Editor
             </DialogTitle>
-            <Button
-              onClick={addEducation}
-              className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-6 h-10 rounded-lg cursor-pointer transition-all active:scale-95"
-            >
-              <Plus className="w-4 h-4 mr-2" /> Add Record
-            </Button>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 px-4 py-2 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
+                <div className="flex flex-col items-end">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
+                    Section Activity
+                  </span>
+                  <span className="text-[9px] text-slate-500 font-bold uppercase">
+                    {formData.isActive
+                      ? "Publicly Visible"
+                      : "Hidden from Public"}
+                  </span>
+                </div>
+                <Switch
+                  checked={formData.isActive}
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({ ...prev, isActive: checked }))
+                  }
+                  className="data-[state=checked]:bg-emerald-500"
+                />
+              </div>
+              <Button
+                onClick={addEducation}
+                className="bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-bold px-6 h-10 rounded-lg cursor-pointer transition-all active:scale-95"
+              >
+                <Plus className="w-4 h-4 mr-2" /> Add Record
+              </Button>
+            </div>
           </div>
         </DialogHeader>
 

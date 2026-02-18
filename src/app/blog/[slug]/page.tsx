@@ -4,19 +4,43 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { blogService } from "@/services/blogService";
 import { BlogPost } from "@/types/blog";
+import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Clock, Calendar, User, Share2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  Calendar,
+  User,
+  Share2,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Link as LinkIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+} from "next-share";
 
 export default function BlogDetailsPage() {
   const { slug } = useParams();
   const router = useRouter();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [shareUrl, setShareUrl] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShareUrl(window.location.href);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -151,9 +175,7 @@ export default function BlogDetailsPage() {
                     beatae vitae dicta sunt explicabo.
                   </p>
                   <blockquote className="bg-[#121A1C] p-8 rounded-lg border border-emerald-500/20 my-10 relative">
-                    <span className="absolute -top-4 -left-2 text-6xl text-emerald-500/20 italic font-serif">
-                      
-                    </span>
+                    <span className="absolute -top-4 -left-2 text-6xl text-emerald-500/20 italic font-serif"></span>
                     <p className="text-white text-xl italic relative z-10 leading-relaxed">
                       Real software engineering is not just about writing code;
                       it,s about solving problems elegantly while maintaining a
@@ -180,14 +202,44 @@ export default function BlogDetailsPage() {
                 Share This:
               </span>
               <div className="flex gap-2">
-                {[1, 2, 3].map((i) => (
-                  <button
-                    key={i}
-                    className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-emerald-500 hover:text-black transition-all cursor-pointer"
-                  >
-                    <Share2 className="w-4 h-4" />
-                  </button>
-                ))}
+                <FacebookShareButton url={shareUrl} quote={post.title}>
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all cursor-pointer">
+                    <Facebook className="w-4 h-4" />
+                  </div>
+                </FacebookShareButton>
+
+                <TwitterShareButton url={shareUrl} title={post.title}>
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all cursor-pointer">
+                    <Twitter className="w-4 h-4" />
+                  </div>
+                </TwitterShareButton>
+
+                <LinkedinShareButton url={shareUrl}>
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all cursor-pointer">
+                    <Linkedin className="w-4 h-4" />
+                  </div>
+                </LinkedinShareButton>
+
+                <WhatsappShareButton
+                  url={shareUrl}
+                  title={post.title}
+                  separator=":: "
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all cursor-pointer">
+                    <i className="fa-brands fa-whatsapp w-4 h-4 flex items-center justify-center" />
+                  </div>
+                </WhatsappShareButton>
+
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(shareUrl);
+                    toast.success("Link copied to clipboard!");
+                  }}
+                  className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-emerald-500 hover:text-black transition-all cursor-pointer"
+                  title="Copy Link"
+                >
+                  <LinkIcon className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>

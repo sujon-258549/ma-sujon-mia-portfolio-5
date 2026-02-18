@@ -11,4 +11,5 @@ export interface ServicesSectionData {
   title: string;
   titleHighlight: string;
   services: ServiceItem[];
+  isActive?: boolean;
 }

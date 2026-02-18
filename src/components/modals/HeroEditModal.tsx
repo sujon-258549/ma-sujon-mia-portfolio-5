@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
+import { Switch } from "@/components/ui/switch";
 
 interface HeroEditModalProps {
   isOpen: boolean;
@@ -40,7 +41,10 @@ export const HeroEditModal = ({
   onSave,
 }: HeroEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<HeroSectionData>(currentData);
+  const [formData, setFormData] = useState<HeroSectionData>(() => ({
+    ...currentData,
+    isActive: currentData.isActive ?? true,
+  }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -162,6 +166,25 @@ export const HeroEditModal = ({
               <Settings2 className="w-6 h-6 animate-spin-slow" />
               Customize Hero Section
             </DialogTitle>
+            <div className="flex items-center gap-3 px-4 py-2 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
+              <div className="flex flex-col items-end">
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
+                  Section Activity
+                </span>
+                <span className="text-[9px] text-slate-500 font-bold uppercase">
+                  {formData.isActive
+                    ? "Publicly Visible"
+                    : "Hidden from Public"}
+                </span>
+              </div>
+              <Switch
+                checked={formData.isActive}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, isActive: checked }))
+                }
+                className="data-[state=checked]:bg-emerald-500"
+              />
+            </div>
           </div>
         </DialogHeader>
 

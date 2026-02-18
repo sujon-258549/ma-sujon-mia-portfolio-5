@@ -12,15 +12,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import {
   Loader2,
   LayoutPanelLeft,
-  ToggleLeft,
-  ToggleRight,
 } from "lucide-react";
 import { BlogSectionData } from "@/types/blog";
+import { dynamicContentService } from "@/services/dynamicContentService";
 
 interface BlogSectionHeaderEditModalProps {
   isOpen: boolean;
@@ -46,20 +44,26 @@ export const BlogSectionHeaderEditModal = ({
     setIsLoading(true);
 
     const updateData = {
-      ...formData,
-      type: "blog", // The type handled by dynamicContentService for the blog section header
+      badge: formData.badge,
+      badgeIcon: formData.badgeIcon,
+      title: formData.title,
+      titleHighlight: formData.titleHighlight,
+      description: formData.description,
+      isActive: formData.isActive,
+      type: "blog_header",
     };
 
     try {
+      console.log("Saving blog header data:", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
-      if (res.success) {
-        toast.success("Blog Section updated successfully!");
+      if (res) {
+        toast.success("Blog Section header updated successfully!");
         onSave(formData);
         onClose();
       }
     } catch (error) {
-      console.error("Blog Section update failure:", error);
-      toast.error("Blog Section update failed!");
+      console.error("Blog Section header update failure:", error);
+      toast.error("Blog Section header update failed!");
     } finally {
       setIsLoading(false);
     }

@@ -44,9 +44,10 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
     ],
   };
 
-  const [contactData, setContactData] = useState<ContactSectionData>(
-    initialData || defaultData,
-  );
+  const [contactData, setContactData] = useState<ContactSectionData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
 
   const [formPayload, setFormPayload] = useState({
     name: "",
@@ -80,14 +81,21 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
     }
   };
 
+  if (!contactData.isActive && !isAuthorized) return null;
+
   return (
     <section
       id="contact"
-      className="section-spacing bg-[#121A1C] relative group"
+      className={`section-spacing bg-[#121A1C] relative group transition-all duration-300 ${!contactData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Admin Edit Trigger */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30 transition-all duration-500">
+        <div className="absolute top-8 right-8 z-30 flex flex-col items-center gap-4">
+          {!contactData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
           <Button
             onClick={() => setIsModalOpen(true)}
             variant="outline"

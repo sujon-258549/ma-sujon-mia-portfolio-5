@@ -11,6 +11,7 @@ import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
+import { blogService } from "@/services/blogService";
 
 export default async function Home() {
   const [
@@ -24,7 +25,7 @@ export default async function Home() {
     contactContent,
     footerContent,
     projectSectionHeaderContent,
-    blogContent,
+    blogHeaderData,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -38,10 +39,17 @@ export default async function Home() {
     dynamicContentService
       .getContent("project-section-header")
       .catch(() => null),
-    dynamicContentService.getContent("blog").catch(() => null),
+    dynamicContentService.getContent("blog_header").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
+  const blogPosts = await blogService.getAllPosts().catch(() => []);
+
+  // Merge header data and posts for BlogSection
+  const blogContent = {
+    ...blogHeaderData,
+    posts: blogPosts,
+  };
 
   return (
     <div className="min-h-screen bg-[#121A1C]">

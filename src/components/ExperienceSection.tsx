@@ -66,18 +66,26 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
     ],
   };
 
-  const [sectionData, setSectionData] = useState<ExperienceSectionData>(
-    initialData || defaultData,
-  );
+  const [sectionData, setSectionData] = useState<ExperienceSectionData>(() => ({
+    ...(initialData || defaultData),
+    isActive: initialData?.isActive ?? true,
+  }));
+
+  if (!sectionData.isActive && !isAuthorized) return null;
 
   return (
     <section
       id="experience"
-      className="section-spacing bg-[#121A1C] relative group"
+      className={`section-spacing bg-[#121A1C] relative group transition-all duration-300 ${!sectionData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Admin Edit Trigger */}
       {isAuthorized && (
-        <div className="absolute top-8 right-8 z-30 transition-all duration-500">
+        <div className="absolute top-8 right-8 z-30 flex flex-col items-center gap-4">
+          {!sectionData.isActive && (
+            <div className="bg-red-500 text-[8px] font-black px-2 py-1 rounded uppercase tracking-[0.2em] shadow-lg animate-pulse whitespace-nowrap">
+              Section Hidden from Public
+            </div>
+          )}
           <Button
             onClick={() => setIsModalOpen(true)}
             variant="outline"
