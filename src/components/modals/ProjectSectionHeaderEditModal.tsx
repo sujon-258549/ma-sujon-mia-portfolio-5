@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { revalidateData } from "@/app/actions";
 
 export interface ProjectSectionHeaderData {
   badge: string;
@@ -57,6 +58,8 @@ export const ProjectSectionHeaderEditModal = ({
       console.log("footer data", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Project Section Header updated successfully!");
         onSave(formData);
         onClose();

@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { Loader2, MessageSquare } from "lucide-react";
 import { ReviewSectionHeaderData } from "@/types/review";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { revalidateData } from "@/app/actions";
 
 interface ReviewSectionHeaderEditModalProps {
   isOpen: boolean;
@@ -63,6 +64,8 @@ export const ReviewSectionHeaderEditModal = ({
       console.log("Review section header update data:", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Review section header updated successfully!");
         onSave(formData);
         onClose();
