@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { HeaderData } from "@/types/header";
+import { HeaderData, NavLink } from "@/types/header";
 import {
   Settings2,
   Image as ImageIcon,
@@ -46,17 +46,20 @@ export const HeaderEditModal = ({
   const addNavLink = () => {
     setFormData({
       ...formData,
-      navLinks: [...(formData.navLinks || []), { text: "", link: "" }],
+      navLinks: [
+        ...(formData.navLinks || []),
+        { text: "", link: "", icon: "fa-solid fa-circle", showInHeader: true },
+      ],
     });
   };
 
   const updateNavLink = (
     index: number,
-    field: "text" | "link",
-    value: string,
+    field: keyof NavLink,
+    value: string | boolean,
   ) => {
     const newLinks = [...(formData.navLinks || [])];
-    newLinks[index] = { ...newLinks[index], [field]: value };
+    newLinks[index] = { ...newLinks[index], [field]: value } as NavLink;
     setFormData({ ...formData, navLinks: newLinks });
   };
 
@@ -395,31 +398,75 @@ export const HeaderEditModal = ({
                   key={idx}
                   className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4 relative group"
                 >
-                  <div className="space-y-2">
-                    <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                      Link Text
-                    </Label>
-                    <Input
-                      value={link.text}
-                      onChange={(e) =>
-                        updateNavLink(idx, "text", e.target.value)
-                      }
-                      className="bg-black/40 border-none h-10 text-xs text-white"
-                      placeholder="About"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
-                      URL / Anchor
-                    </Label>
-                    <Input
-                      value={link.link}
-                      onChange={(e) =>
-                        updateNavLink(idx, "link", e.target.value)
-                      }
-                      className="bg-black/40 border-none h-10 text-xs text-white"
-                      placeholder="#about"
-                    />
+                  <div className="space-y-4 md:col-span-2">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                          Link Text
+                        </Label>
+                        <Input
+                          value={link.text}
+                          onChange={(e) =>
+                            updateNavLink(idx, "text", e.target.value)
+                          }
+                          className="bg-black/40 border-none h-10 text-xs text-white"
+                          placeholder="About"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                          Icon (FontAwesome)
+                        </Label>
+                        <div className="flex gap-2">
+                          <Input
+                            value={link.icon || "fa-solid fa-circle"}
+                            onChange={(e) =>
+                              updateNavLink(idx, "icon", e.target.value)
+                            }
+                            className="bg-black/40 border-none h-10 text-xs text-white font-mono"
+                            placeholder="fa-solid fa-user"
+                          />
+                          <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                            <i
+                              className={`${link.icon || "fa-solid fa-circle"} text-[10px] text-emerald-500`}
+                            ></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
+                        URL / Anchor
+                      </Label>
+                      <Input
+                        value={link.link}
+                        onChange={(e) =>
+                          updateNavLink(idx, "link", e.target.value)
+                        }
+                        className="bg-black/40 border-none h-10 text-xs text-white"
+                        placeholder="#about"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2 px-1">
+                      <div className="flex flex-col">
+                        <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest leading-none">
+                          Show in Header
+                        </Label>
+                        <span className="text-[8px] text-slate-600 uppercase font-bold mt-0.5">
+                          {link.showInHeader !== false
+                            ? "Visible in Top Nav"
+                            : "Hidden from Top Nav"}
+                        </span>
+                      </div>
+                      <Switch
+                        checked={link.showInHeader !== false}
+                        onCheckedChange={(checked) =>
+                          updateNavLink(idx, "showInHeader", checked)
+                        }
+                        className="data-[state=checked]:bg-emerald-500 scale-75"
+                      />
+                    </div>
                   </div>
                   <button
                     onClick={() => removeNavLink(idx)}

@@ -7,6 +7,8 @@ export interface HeaderButton {
 export interface NavLink {
   text: string;
   link: string;
+  icon?: string; // Icon class or name
+  showInHeader?: boolean;
 }
 
 export interface HeaderData {
