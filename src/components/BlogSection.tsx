@@ -247,7 +247,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
             >
               {/* Image Area with Link */}
               <Link
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.slug || post.id || post._id}`}
                 className="block relative h-64 overflow-hidden rounded-t-lg"
               >
                 <Image
