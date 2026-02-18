@@ -1,7 +1,7 @@
 export interface Project {
   _id?: string;
   id?: string;
-  sl?: number;
+  sl?: string;
   title: string;
   shortDescription: string;
   longDescription: string;

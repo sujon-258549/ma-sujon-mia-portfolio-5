@@ -146,8 +146,13 @@ const ProjectsSection = ({
   const filteredProjects = (
     isAuthorized
       ? sectionData.projects
-      : sectionData.projects.filter((p) => p.isActive !== false)
-  ).sort((a, b) => (a.sl || 0) - (b.sl || 0));
+      : sectionData.projects.filter((p) => p.isActive)
+  ).sort((a, b) =>
+    (a.sl?.toString() || "").localeCompare(b.sl?.toString() || "", undefined, {
+      numeric: true,
+      sensitivity: "base",
+    }),
+  );
 
   const displayedProjects = showAll
     ? filteredProjects

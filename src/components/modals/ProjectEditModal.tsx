@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Project } from "@/types/project";
 import { projectService } from "@/services/projectService";
 import { toast } from "sonner";
@@ -35,7 +36,7 @@ export const ProjectEditModal = ({
   const [formData, setFormData] = useState<Project>(() => ({
     _id: project?._id,
     id: project?.id || Math.random().toString(36).substr(2, 9),
-    sl: project?.sl || 0,
+    sl: project?.sl || "",
     title: project?.title || "",
     shortDescription: project?.shortDescription || "",
     longDescription: project?.longDescription || "",
@@ -94,6 +95,7 @@ export const ProjectEditModal = ({
         ? project.stats
         : [{ label: "", value: "" }],
     detailedDescriptions: project?.detailedDescriptions || [],
+    isActive: project?.isActive ?? true,
   }));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -307,10 +309,32 @@ export const ProjectEditModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[95vw] w-[98vw] h-[95vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-lg">
         <DialogHeader className="p-6 border-b border-emerald-500/10 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
-          <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
-            <i className="fa-solid fa-code text-xl"></i>
-            {mode === "edit" ? "Update Project Details" : "Add New Project"}
-          </DialogTitle>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
+              <i className="fa-solid fa-code text-xl"></i>
+              {mode === "edit" ? "Update Project Details" : "Add New Project"}
+            </DialogTitle>
+
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                Status:
+              </span>
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={formData.isActive}
+                  onCheckedChange={(checked) =>
+                    setFormData({ ...formData, isActive: checked })
+                  }
+                  className="data-[state=checked]:bg-emerald-500 scale-75"
+                />
+                <span
+                  className={`text-[10px] font-black uppercase tracking-widest ${formData.isActive ? "text-emerald-500" : "text-slate-500"}`}
+                >
+                  {formData.isActive ? "Active" : "Hidden"}
+                </span>
+              </div>
+            </div>
+          </div>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
@@ -325,11 +349,9 @@ export const ProjectEditModal = ({
                           SL (Serial)
                         </Label>
                         <Input
-                          type="number"
+                          type="text"
                           value={formData.sl}
-                          onChange={(e) =>
-                            updateField("sl", parseInt(e.target.value) || 0)
-                          }
+                          onChange={(e) => updateField("sl", e.target.value)}
                           className="bg-black/40 border-white/5 text-lg font-bold text-emerald-500 h-14 rounded-lg"
                         />
                       </div>

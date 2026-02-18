@@ -243,7 +243,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
           {postsToShow.map((post) => (
             <div
               key={post.id || post._id}
-              className={`group bg-[#172023] rounded-lg overflow-hidden border border-white/[0.03] hover:border-emerald-500/20 transition-all duration-500 flex flex-col hover:shadow-2xl hover:shadow-black/40 relative ${!post.isActive ? "border-dashed border-red-500/30" : ""}`}
+              className={`group bg-[#172023] rounded-lg overflow-hidden border border-white/3 hover:border-emerald-500/20 transition-all duration-500 flex flex-col hover:shadow-2xl hover:shadow-black/40 relative ${!post.isActive ? "border-dashed border-red-500/30" : ""}`}
             >
               {/* Image Area with Link */}
               <Link
@@ -314,7 +314,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
                 </CardDescription>
 
                 {/* Minimalist Footer */}
-                <div className="flex items-center justify-between pt-5 border-t border-white/[0.05]">
+                <div className="flex items-center justify-between pt-5 border-t border-white/5">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-emerald-500/50">
                       <User className="w-4 h-4" />
