@@ -7,7 +7,6 @@ import ServicesSection from "@/components/ServicesSection";
 import EducationSection from "@/components/EducationSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import GithubStatsSection from "@/components/GithubStatsSection";
 import ContactSection from "@/components/ContactSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
@@ -68,7 +67,7 @@ export default async function Home() {
       <ExperienceSection initialData={experienceContent} />
 
       {/* GitHub Stats Section */}
-      <GithubStatsSection />
+      {/* <GithubStatsSection /> */}
 
       {/* Services Section */}
       <ServicesSection initialData={servicesContent} />

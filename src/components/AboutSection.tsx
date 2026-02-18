@@ -140,7 +140,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-10! md:mt-16! max-w-full  sm:max-w-xs md:max-w-sm lg:max-w-full mx-auto">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-6! md:mt-10! max-w-full  sm:max-w-xs md:max-w-sm lg:max-w-full mx-auto">
               {aboutData.stats.map((stat, i) => (
                 <div
                   key={i}
