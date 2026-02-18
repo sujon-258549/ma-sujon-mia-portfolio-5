@@ -7,7 +7,7 @@ import { revalidateTag } from "next/cache";
  */
 export async function revalidateData(tag: string) {
   try {
-    revalidateTag(tag);
+    revalidateTag(tag, "max");
     return { success: true };
   } catch (error) {
     console.error(`Failed to revalidate tag: ${tag}`, error);
