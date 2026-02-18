@@ -16,6 +16,7 @@ import { AddReviewModal } from "@/components/modals/AddReviewModal";
 import { ReviewSectionHeaderEditModal } from "@/components/modals/ReviewSectionHeaderEditModal";
 import { reviewService } from "@/services/reviewService";
 import { toast } from "sonner";
+import { revalidateData } from "@/app/actions";
 
 interface ReviewSectionProps {
   headerData?: ReviewSectionHeaderData | null;
@@ -176,6 +177,8 @@ const ReviewSection = ({
             r.id !== reviewId,
         ),
       );
+      // Revalidate the cache
+      await revalidateData("reviews");
       toast.success("Review deleted.");
     } catch {
       toast.error("Failed to delete review.");

@@ -16,6 +16,7 @@ import { Project } from "@/types/project";
 import { projectService } from "@/services/projectService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { revalidateData } from "@/app/actions";
 
 interface ProjectEditModalProps {
   isOpen: boolean;
@@ -123,6 +124,8 @@ export const ProjectEditModal = ({
       }
 
       onSuccess(savedProject, mode);
+      // Revalidate the cache
+      await revalidateData("projects");
       onClose();
     } catch (error) {
       console.error("Failed to save project:", error);

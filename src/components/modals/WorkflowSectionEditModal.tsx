@@ -61,6 +61,8 @@ export const WorkflowSectionEditModal = ({
       console.log("workflow", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Workflow Section updated successfully!");
         onSave(formData);
         onClose();

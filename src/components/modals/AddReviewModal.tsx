@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { reviewService } from "@/services/reviewService";
 import { Review } from "@/types/review";
+import { revalidateData } from "@/app/actions";
 import {
   Loader2,
   Star,
@@ -196,6 +197,8 @@ export const AddReviewModal = ({
         rating,
       };
       const result = await reviewService.createReview(payload);
+      // Revalidate the cache
+      await revalidateData("reviews");
       toast.success("Thank you for your review! 🎉");
       onSuccess(result);
       handleClose();

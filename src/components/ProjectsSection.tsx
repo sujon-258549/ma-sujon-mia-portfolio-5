@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { projectService } from "@/services/projectService";
 import { toast } from "sonner";
+import { revalidateData } from "@/app/actions";
 import { useIsAuthorized } from "@/lib/auth";
 import { ProjectsSectionData, Project } from "@/types/project";
 import { ProjectEditModal } from "./modals/ProjectEditModal";
@@ -90,6 +91,8 @@ const ProjectsSection = ({
         ...prev,
         projects: prev.projects.filter((p) => p._id !== id && p.id !== id),
       }));
+      // Revalidate the cache
+      await revalidateData("projects");
     } catch (error) {
       console.error("Failed to delete project:", error);
       const errorMessage =

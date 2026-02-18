@@ -26,6 +26,7 @@ import {
   Link2,
 } from "lucide-react";
 import { BlogPost } from "@/types/blog";
+import { revalidateData } from "@/app/actions";
 
 interface BlogPostEditModalProps {
   isOpen: boolean;
@@ -94,6 +95,7 @@ export const BlogPostEditModal = ({
         result = await blogService.createBlog(formData);
         toast.success("New chronicle published!");
       }
+      await revalidateData("blogs");
       onSuccess(result, mode);
       onClose();
     } catch (error) {
@@ -117,6 +119,7 @@ export const BlogPostEditModal = ({
     try {
       await blogService.deleteBlog(post._id);
       toast.success("Chronicle erased from archives.");
+      await revalidateData("blogs");
       onSuccess(post, "delete");
       onClose();
     } catch (error) {
