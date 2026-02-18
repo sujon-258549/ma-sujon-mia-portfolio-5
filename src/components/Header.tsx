@@ -131,9 +131,23 @@ const Header = ({ initialData }: HeaderProps) => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Hidden as requested */}
-            <div className="hidden md:flex items-center gap-8 invisible w-0 lg:visible lg:w-auto overflow-hidden opacity-0 pointer-events-none">
-              {/* Horizontal links hidden */}
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              {(headerData.navLinks || [])
+                .filter((item) => item.showInHeader !== false)
+                .map((item) => (
+                  <Link
+                    key={item.text}
+                    href={item.link}
+                    className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
+                      activeSection === item.link.replace("#", "")
+                        ? "text-emerald-500"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.text}
+                  </Link>
+                ))}
             </div>
 
             <div className="hidden md:flex items-center gap-4">
@@ -191,20 +205,22 @@ const Header = ({ initialData }: HeaderProps) => {
         {/* Mobile Menu Overlay */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-[#1C2629] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 shadow-xl">
-            {(headerData.navLinks || []).map((item) => (
-              <Link
-                key={item.text}
-                href={item.link}
-                className={`text-lg font-medium py-2 transition-colors ${
-                  activeSection === item.text.toLowerCase()
-                    ? "text-emerald-500"
-                    : "text-foreground hover:text-emerald-400"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.text}
-              </Link>
-            ))}
+            {(headerData.navLinks || [])
+              .filter((item) => item.showInHeader !== false)
+              .map((item) => (
+                <Link
+                  key={item.text}
+                  href={item.link}
+                  className={`text-lg font-medium py-2 transition-colors ${
+                    activeSection === item.link.replace("#", "")
+                      ? "text-emerald-500"
+                      : "text-foreground hover:text-emerald-400"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.text}
+                </Link>
+              ))}
             <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
               {/* Mobile User Options */}
               {(user || token) && (
