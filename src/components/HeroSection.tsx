@@ -182,7 +182,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
               onClick={() =>
                 (window.location.href = heroData.buttons.primary.link)
               }
-              className="h-10 px-8 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="h-10 px-8 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {heroData.buttons.primary.text}
               <i className={`${heroData.buttons.primary.icon} ml-2`}></i>
@@ -192,7 +192,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
               onClick={() =>
                 (window.location.href = heroData.buttons.secondary.link)
               }
-              className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-xl backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {heroData.buttons.secondary.text}
               <i className={`${heroData.buttons.secondary.icon} ml-2`}></i>

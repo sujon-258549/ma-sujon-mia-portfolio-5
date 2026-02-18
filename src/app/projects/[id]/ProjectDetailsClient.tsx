@@ -36,10 +36,10 @@ export default function ProjectDetailsClient({
   ];
 
   return (
-    <div className="min-h-screen bg-[#0E1416]  mt-20 text-white selection:bg-emerald-500/30">
+    <div className="min-h-screen bg-[#0E1416] pt-10 md:pt-16 text-white selection:bg-emerald-500/30">
       <Header />
 
-      <main className="pt-20 pb-20 px-4 md:px-0">
+      <main className="pt-10 md:pt-16 pb-20 px-4 md:px-0">
         <div className="main-container max-w-6xl mx-auto">
           {/* Back Navigation */}
           <button
@@ -57,7 +57,7 @@ export default function ProjectDetailsClient({
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 {project.category || "Project Case Study"}
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.05]">
+              <h1 className="text-3xl md:text-5xl py-3 font-bold tracking-tight text-white leading-[1.05]">
                 {project.title}
               </h1>
               <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-2xl">
@@ -88,14 +88,14 @@ export default function ProjectDetailsClient({
               <div className="absolute bottom-8 left-8 right-8 flex flex-wrap gap-4 items-center justify-between pointer-events-none">
                 <div className="flex gap-4 pointer-events-auto">
                   <Link href={project.liveUrl} target="_blank">
-                    <Button className="bg-white text-[#0E1416] hover:bg-emerald-500 hover:text-white font-black px-6 h-12 rounded-full shadow-2xl transition-all active:scale-95 cursor-pointer group/btn">
+                    <Button className="bg-white text-[#0E1416] hover:bg-emerald-500 hover:text-white font-black px-6 h-12 rounded-xl shadow-2xl transition-all active:scale-95 cursor-pointer group/btn">
                       <Globe className="w-4 h-4 mr-2" />
                       Live Experience
                       <ArrowLeft className="w-4 h-4 ml-2 rotate-180 opacity-60 group-hover/btn:rotate-225 transition-transform" />
                     </Button>
                   </Link>
                   <Link href={project.githubUrl} target="_blank">
-                    <Button className="bg-[#0E1416]/80 backdrop-blur-md text-white border border-white/10 hover:bg-white hover:text-[#0E1416] font-black px-6 h-12 rounded-full transition-all cursor-pointer">
+                    <Button className="bg-[#0E1416]/80 backdrop-blur-md text-white border border-white/10 hover:bg-white hover:text-[#0E1416] font-black px-6 h-12 rounded-xl transition-all cursor-pointer">
                       <Github className="w-4 h-4 mr-2" />
                       Repository
                     </Button>
@@ -115,7 +115,7 @@ export default function ProjectDetailsClient({
                   <div className="w-10 h-px bg-emerald-500/30" />
                   01. Project Narrative
                 </h3>
-                <div className="text-slate-100 text-lg md:text-xl leading-relaxed space-y-6 font-medium selection:bg-emerald-500/40">
+                <div className="text-slate-100 text-[12px] md:text-[16px] leading-relaxed space-y-3 selection:bg-emerald-500/40">
                   {project.longDescription?.split("\n").map((para, i) => (
                     <p key={i} className="last:mb-0">
                       {para}
@@ -315,7 +315,7 @@ export default function ProjectDetailsClient({
                       target="_blank"
                       className="block"
                     >
-                      <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-black h-12 rounded-lg group cursor-pointer transition-all">
+                      <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#0E1416] font-black h-12 rounded-xl group cursor-pointer transition-all">
                         View Live Site
                         <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform" />
                       </Button>
@@ -327,7 +327,7 @@ export default function ProjectDetailsClient({
                     >
                       <Button
                         variant="ghost"
-                        className="w-full text-slate-400 hover:text-white hover:bg-white/5 font-bold h-12 rounded-lg transition-all"
+                        className="w-full text-slate-400 hover:text-white hover:bg-white/5 font-bold h-12 rounded-xl transition-all"
                       >
                         <Github className="w-4 h-4 mr-2" />
                         Explore Source

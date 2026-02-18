@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { HeaderData } from "@/types/header";
 import { HeaderEditModal } from "./modals/HeaderEditModal";
 import { useAuth, useIsAuthorized } from "@/lib/auth";
@@ -90,7 +91,7 @@ const Header = ({ initialData }: HeaderProps) => {
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-300">
       <div className="main-container py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src={headerData.logo || "/logo.png"}
               alt={headerData.logoAlt}
@@ -102,12 +103,12 @@ const Header = ({ initialData }: HeaderProps) => {
               }}
               className="object-contain"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {(headerData.navLinks || []).map((item) => (
-              <a
+              <Link
                 key={item.text}
                 href={item.link}
                 className={`text-sm font-medium transition-colors hover:text-emerald-400 ${
@@ -117,7 +118,7 @@ const Header = ({ initialData }: HeaderProps) => {
                 }`}
               >
                 {item.text}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -187,7 +188,7 @@ const Header = ({ initialData }: HeaderProps) => {
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-[#1C2629] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 shadow-xl">
           {(headerData.navLinks || []).map((item) => (
-            <a
+            <Link
               key={item.text}
               href={item.link}
               className={`text-lg font-medium py-2 transition-colors ${
@@ -198,7 +199,7 @@ const Header = ({ initialData }: HeaderProps) => {
               onClick={() => setIsMenuOpen(false)}
             >
               {item.text}
-            </a>
+            </Link>
           ))}
           <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
             {/* Mobile Logout Button */}

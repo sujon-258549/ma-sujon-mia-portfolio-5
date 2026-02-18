@@ -266,7 +266,7 @@ const ProjectsSection = ({
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
                       <Link
                         href={`/projects/${project._id || project.id || index}`}
-                        className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
+                        className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
                       >
                         <i className="fa-solid fa-eye text-lg"></i>
                         View Case Study
@@ -311,7 +311,7 @@ const ProjectsSection = ({
                 <Link
                   href={project.liveUrl}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2 rounded-lg hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-2 rounded-xl hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
                 >
                   <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                   Live Demo
@@ -319,7 +319,7 @@ const ProjectsSection = ({
                 <Link
                   href={project.githubUrl}
                   target="_blank"
-                  className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-2.5 rounded-lg hover:bg-white/10 transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-2.5 rounded-xl hover:bg-white/10 transition-all active:scale-95"
                 >
                   <i className="fa-brands fa-github text-sm"></i>
                   View Code
@@ -333,7 +333,7 @@ const ProjectsSection = ({
           <div className="text-center mt-16">
             <Button
               onClick={() => setShowAll(!showAll)}
-              className="bg-[#172023] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white rounded-lg px-12 h-12 cursor-pointer font-bold shadow-xl transition-all group"
+              className="bg-[#172023] border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 text-white rounded-xl px-12 h-12 cursor-pointer font-bold shadow-xl transition-all group"
             >
               {showAll ? (
                 <>
