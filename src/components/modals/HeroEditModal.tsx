@@ -26,6 +26,7 @@ import {
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
+import { revalidateData } from "@/app/actions";
 
 interface HeroEditModalProps {
   isOpen: boolean;
@@ -58,6 +59,8 @@ export const HeroEditModal = ({
       console.log("update section", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Hero updated successfully!");
         onSave(formData);
         onClose();

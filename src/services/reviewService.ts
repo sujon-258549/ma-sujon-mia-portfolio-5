@@ -16,7 +16,7 @@ export const reviewService = {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["reviews"],
+          tags: ["reviews", "portfolio"],
         },
       });
 

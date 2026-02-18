@@ -49,7 +49,7 @@ export const dynamicContentService = {
       const response = await fetch(`${BASE_URL}/dynamic-content?type=${type}`, {
         method: "GET",
         next: {
-          tags: ["dynamic-content"],
+          tags: ["dynamic-content", "portfolio"],
         },
         headers: {
           "Content-Type": "application/json",

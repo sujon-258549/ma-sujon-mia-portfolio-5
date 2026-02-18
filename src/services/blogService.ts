@@ -19,7 +19,7 @@ export const blogService = {
       const response = await fetch(`${BASE_URL}/blogs`, {
         method: "GET",
         next: {
-          tags: ["blogs"],
+          tags: ["blogs", "portfolio"],
         },
         headers: {
           "Content-Type": "application/json",
@@ -84,6 +84,9 @@ export const blogService = {
     try {
       const response = await fetch(`${BASE_URL}/blogs/${slug}`, {
         method: "GET",
+        next: {
+          tags: ["blogs", "portfolio"],
+        },
         headers: {
           "Content-Type": "application/json",
         },
@@ -196,7 +199,7 @@ export const blogService = {
       const response = await fetch(`${BASE_URL}/blog-header`, {
         method: "GET",
         next: {
-          tags: ["blog-header"],
+          tags: ["blog-header", "portfolio"],
         },
         headers: {
           "Content-Type": "application/json",

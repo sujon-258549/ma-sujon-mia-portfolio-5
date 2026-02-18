@@ -16,7 +16,7 @@ export const projectService = {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["projects"],
+          tags: ["projects", "portfolio"],
         },
       });
 
@@ -44,7 +44,7 @@ export const projectService = {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["projects"],
+          tags: ["projects", "portfolio"],
         },
       });
 
@@ -72,7 +72,7 @@ export const projectService = {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["projects"],
+          tags: ["projects", "portfolio"],
         },
       });
 

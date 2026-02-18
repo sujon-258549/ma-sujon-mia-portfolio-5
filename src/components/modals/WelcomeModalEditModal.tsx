@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { WelcomeModalData } from "@/types/welcome";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { revalidateData } from "@/app/actions";
 
 interface WelcomeModalEditModalProps {
   isOpen: boolean;
@@ -51,6 +52,8 @@ export const WelcomeModalEditModal = ({
       const res = await dynamicContentService.upsertContent(updateData);
 
       if (res) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Welcome Modal updated successfully!");
         onSave(formData);
         onClose();
