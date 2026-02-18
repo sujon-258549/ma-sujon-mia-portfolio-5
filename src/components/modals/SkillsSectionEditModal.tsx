@@ -15,6 +15,7 @@ import { SkillCategory, SkillsSectionData } from "@/types/skill";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { revalidateData } from "@/app/actions";
 
 interface SkillsSectionEditModalProps {
   isOpen: boolean;
@@ -46,6 +47,8 @@ export const SkillsSectionEditModal = ({
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
+        // Revalidate the cache
+        await revalidateData("dynamic-content");
         toast.success("Skills section updated successfully!");
         onSave(formData);
         onClose();
