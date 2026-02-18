@@ -13,12 +13,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import {
-  Loader2,
-  LayoutPanelLeft,
-} from "lucide-react";
+import { Loader2, LayoutPanelLeft } from "lucide-react";
 import { BlogSectionData } from "@/types/blog";
 import { dynamicContentService } from "@/services/dynamicContentService";
+import { revalidateData } from "@/app/actions";
 
 interface BlogSectionHeaderEditModalProps {
   isOpen: boolean;
@@ -57,6 +55,8 @@ export const BlogSectionHeaderEditModal = ({
       console.log("Saving blog header data:", updateData);
       const res = await dynamicContentService.upsertContent(updateData);
       if (res) {
+        // Revalidate the cache
+        await revalidateData("blog-header");
         toast.success("Blog Section header updated successfully!");
         onSave(formData);
         onClose();

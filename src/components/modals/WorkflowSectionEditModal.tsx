@@ -16,6 +16,7 @@ import { dynamicContentService } from "@/services/dynamicContentService";
 import { toast } from "sonner";
 import { Loader2, LayoutPanelLeft } from "lucide-react";
 import { WorkflowSectionData, WorkflowStep } from "@/types/workflow";
+import { revalidateData } from "@/app/actions";
 
 interface WorkflowSectionEditModalProps {
   isOpen: boolean;
