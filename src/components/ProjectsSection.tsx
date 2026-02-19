@@ -201,7 +201,7 @@ const ProjectsSection = ({
       )}
 
       <div className="main-container">
-        <div className="text-center mb-16 relative group/header">
+        <div className="text-center mb-10 md:mb-16 relative group/header">
           {/* Admin Header Edit Button */}
           {isAuthorized && (
             <button
@@ -229,13 +229,13 @@ const ProjectsSection = ({
               {sectionData.badge}
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
             {sectionData.title}{" "}
             <span className="text-emerald-500">
               {sectionData.titleHighlight}
             </span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             {sectionData.description}
           </p>
         </div>
@@ -321,7 +321,7 @@ const ProjectsSection = ({
                 );
               })()}
 
-              <CardHeader className="p-6">
+              <CardHeader className="p-4 sm:p-6">
                 <div className="flex items-center gap-2 mb-3 text-[10px] uppercase font-black text-emerald-500 tracking-widest">
                   <i className="fa-solid fa-rocket text-xs"></i>
                   {project.category || "Development"}
@@ -334,7 +334,7 @@ const ProjectsSection = ({
                 </CardDescription>
               </CardHeader>
 
-              <div className="px-6 flex flex-wrap gap-2 mb-6">
+              <div className="px-4 sm:px-6 flex flex-wrap gap-2 mb-6">
                 {Array.isArray(project.tags) &&
                   project.tags
                     .filter(
@@ -352,7 +352,7 @@ const ProjectsSection = ({
                     ))}
               </div>
 
-              <CardFooter className="p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
+              <CardFooter className="p-4 sm:p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
                 <Link
                   href={project.liveUrl}
                   target="_blank"

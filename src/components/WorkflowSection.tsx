@@ -127,7 +127,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
 
       <div className="main-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto px-4">
+        <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -144,7 +144,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
             </span>
           </h2>
 
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed">
+          <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
             {sectionData.description}
           </p>
         </div>
@@ -171,7 +171,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                 </div>
 
                 {/* Card */}
-                <div className="flex-1 bg-[#121A1C] border border-white/5 rounded-xl p-4 hover:border-emerald-500/20 transition-all duration-300">
+                <div className="flex-1 bg-[#121A1C] border border-white/5 rounded-xl p-3.5 hover:border-emerald-500/20 transition-all duration-300">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-9 h-9 shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <i className={`${step.icon} text-emerald-500 text-sm`} />

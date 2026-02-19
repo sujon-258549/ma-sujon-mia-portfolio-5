@@ -98,7 +98,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
 
       <div className="main-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -107,11 +107,11 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
               {sectionData.badge}
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-4 font-inherit">
             {sectionData.title}{" "}
             <span className="text-emerald-500">{sectionData.titleColor}</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             {sectionData.description}
           </p>
         </div>
@@ -124,7 +124,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
               className="bg-[#172023] border border-emerald-500/15 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-500/50 group/item"
             >
               {/* Card Header */}
-              <div className="bg-linear-to-r from-emerald-500/5 via-transparent to-transparent p-6 md:p-8 border-b border-emerald-500/10">
+              <div className="bg-linear-to-r from-emerald-500/5 via-transparent to-transparent p-5 sm:p-6 md:p-8 border-b border-emerald-500/10">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-start gap-4 mb-4">
@@ -134,7 +134,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                         ></i>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
                           {exp.title}
                         </h3>
                         <p className="text-lg text-emerald-500 font-bold mb-1">
@@ -144,16 +144,16 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                           {exp.companyType}
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
-                          <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] sm:text-sm text-slate-400">
+                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/5">
                             <i className="fa-solid fa-location-dot text-xs text-emerald-500/70"></i>
                             <span>{exp.location}</span>
                           </div>
-                          <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/5">
                             <i className="fa-solid fa-calendar text-xs text-emerald-500/70"></i>
                             <span>{exp.period}</span>
                           </div>
-                          <div className="px-3 py-1 bg-emerald-500/5 text-emerald-500 rounded-full border border-emerald-500/10 font-medium">
+                          <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-emerald-500/5 text-emerald-500 rounded-full border border-emerald-500/10 font-medium">
                             {exp.duration}
                           </div>
                         </div>
@@ -172,7 +172,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
               </div>
 
               {/* Card Body */}
-              <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 bg-[#121A1C]/50">
+              <div className="p-5 sm:p-6 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 bg-[#121A1C]/50">
                 {/* Key Achievements */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 mb-2">

@@ -221,20 +221,20 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
       )}
 
       <div className="main-container relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
               {sectionData.badge}
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
             {sectionData.title}{" "}
             <span className="text-emerald-500">
               {sectionData.titleHighlight}
             </span>
           </h2>
-          <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             {sectionData.description}
           </p>
         </div>
@@ -290,7 +290,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
               )}
 
               {/* Content Area */}
-              <div className="p-6 flex flex-col flex-1">
+              <div className="p-4 sm:p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-4">
                   <Badge className="bg-emerald-500/10 text-emerald-500 border-none uppercase text-[9px] font-black tracking-widest px-3 py-1">
                     {post.category}

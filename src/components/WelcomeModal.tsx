@@ -100,7 +100,7 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
           return () => clearTimeout(closeTimer);
         }
       }
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(showTimer);
   }, [data.isActive, isAuthorized, isManuallyClosed, isEditOpen]);
@@ -180,7 +180,7 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="absolute top-3 right-3 z-10 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-500 hover:text-white transition-all cursor-pointer"
+                  className="absolute top-3 right-3 z-50 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-500 hover:text-white transition-all cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

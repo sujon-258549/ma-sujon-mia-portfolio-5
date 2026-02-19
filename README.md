@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Md. Sujon Mia - Portfolio
 
-## Getting Started
+A premium, dynamic portfolio website built with **Next.js 15**, **React 19**, and **Tailwind CSS 4**. This project features a fully dynamic administration system, allowing for real-time content updates through a professional admin interface.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Production:** [https://md-sujon-mia-5.vercel.app](https://md-sujon-mia-5.vercel.app)
+
+## ✨ Features
+
+- **Full-Stack Dynamic Content:** Manage almost every section of the portfolio directly from the admin interface.
+- **Modern Tech Stack:** Built with the latest versions of Next.js, React, and Tailwind CSS.
+- **Admin System:** Secure admin section with intuitive modals for content management.
+- **Project Showcase:** Detailed project listings with categories, descriptions, and dynamic data fetching.
+- **Blog System:** Clean blog layout with slug-based routing for articles.
+- **Section Visibility Control:** Toggle any section (About, Skills, Projects, Blog, etc.) on or off directly from the dashboard.
+- **Welcome Modal:** Interactive welcome experience for first-time visitors with a 10-second auto-close progress bar.
+- **Smooth Animations:** Integrated micro-animations and hover effects for a premium feel.
+- **Responsive Design:** Optimized for all screen sizes, from mobile to ultra-wide displays.
+- **Dark Mode Support:** Built-in theme switching system.
+- **SEO Optimized:** Meta tags, semantic HTML, and performant page loads.
+
+## 🛠️ Technology Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **UI Library:** [React 19](https://react.dev/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **State Management:** React Hooks & Session Storage
+- **Authentication:** JWT & Cookie-based server/client auth
+- **Animations:** CSS Transitions & Lucide animations
+- **Caching:** Next.js `revalidateTag` for on-demand cache clearing
+
+## 📁 Project Structure
+
+```text
+src/
+├── app/              # Next.js App Router (pages & actions)
+├── components/       # UI Components
+│   ├── modals/       # Admin editing modals
+│   └── ui/           # Reusable UI elements
+├── services/         # API integration services
+├── types/            # TypeScript interfaces
+├── lib/              # Utility functions and auth logic
+└── styles/           # Global styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Setup and Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   git clone https://github.com/sujon-258549/ma-sujon-mia-portfolio-5.git
+   ```
 
-## Learn More
+2. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Configure Environment Variables:**
+   Create a `.env` file in the root directory and add:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```env
+   NEXT_PUBLIC_API_BASE_URL=https://your-api-endpoint.com/api
+   ```
 
-## Deploy on Vercel
+4. **Run the development server:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 🔐 Administration
+
+To access the admin features, navigate to `/login` and authenticate. Once authorized, floating edit triggers and settings icons will appear throughout the site, allowing you to modify content in real-time.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+_Created with ❤️ by [Md. Sujon Mia](https://github.com/sujon-258549)_

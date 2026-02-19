@@ -120,9 +120,9 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
         </div>
       )}
       <div className="main-container">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h5>{skillsData.badge}</h5>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
             {skillsData.title}{" "}
             <span className="text-emerald-500">
               {skillsData.titleHighlight}
@@ -136,11 +136,11 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
               key={category.id}
               className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-emerald-500/10"
             >
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 p-4 sm:p-6">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="p-2 sm:p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
                     <i
-                      className={`${category.icon} text-3xl text-emerald-500`}
+                      className={`${category.icon} text-2xl sm:text-3xl text-emerald-500`}
                     ></i>
                   </div>
                   <h3>{category.title}</h3>
@@ -152,7 +152,7 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
                     <Badge
                       key={skill}
                       variant="secondary"
-                      className="bg-[#1C2629] text-slate-300 border border-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-400 px-3 py-1 text-sm transition-all"
+                      className="bg-[#1C2629] text-slate-300 border border-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-400 px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm transition-all"
                     >
                       {skill}
                     </Badge>

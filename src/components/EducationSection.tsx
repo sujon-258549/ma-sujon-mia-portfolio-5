@@ -105,7 +105,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
 
       <div className="main-container">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -114,11 +114,11 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
               {sectionData.badge}
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground mb-4 font-inherit">
             {sectionData.title}{" "}
             <span className="text-emerald-500">{sectionData.titleColor}</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             {sectionData.description}
           </p>
         </div>
@@ -132,23 +132,23 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
               className="bg-[#172023] border border-emerald-500/15 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-500/50 group/item"
             >
               {/* Header */}
-              <div className="bg-linear-to-r from-emerald-500/5 via-transparent to-transparent p-6 md:p-10 border-b border-emerald-500/10">
+              <div className="bg-linear-to-r from-emerald-500/5 via-transparent to-transparent p-5 sm:p-6 md:p-10 border-b border-emerald-500/10">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-start gap-4 mb-4">
-                      <div className="p-4 hidden md:flex bg-emerald-500/10 rounded-2xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform w-14 h-14 flex items-center justify-center">
+                      <div className="p-4 hidden md:flex bg-emerald-500/10 rounded-2xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform w-14 h-14 items-center justify-center">
                         <i
                           className={`${edu.icon || "fa-solid fa-graduation-cap"} text-2xl text-emerald-500`}
                         ></i>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
                           {edu.degree}
                         </h3>
-                        <p className="text-xl text-emerald-400 font-bold mb-3">
+                        <p className="text-lg sm:text-xl text-emerald-400 font-bold mb-3">
                           {edu.institution}
                         </p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
+                        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[10px] sm:text-sm text-slate-400">
                           <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
                             📍 {edu.location}
                           </span>
@@ -170,7 +170,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
               </div>
 
               {/* Body */}
-              <div className="p-6 md:p-10 flex flex-col gap-8 bg-[#121A1C]/50">
+              <div className="p-5 sm:p-6 md:p-10 flex flex-col gap-6 sm:gap-8 bg-[#121A1C]/50">
                 {edu.courses.length > 0 && (
                   <div>
                     <h4 className="flex items-center gap-2 text-sm font-black text-slate-200 uppercase tracking-widest mb-4">

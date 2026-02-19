@@ -96,9 +96,9 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
       )}
 
       <div className="main-container">
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 md:mb-16">
           <h5 className="mb-4">{servicesData.badge}</h5>
-          <h2 className="text-3xl md:text-5xl font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold">
             {servicesData.title}{" "}
             <span className="text-emerald-500">
               {servicesData.titleHighlight}
@@ -110,13 +110,13 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
           {servicesData.services.map((service) => (
             <div
               key={service.id}
-              className="group relative p-8 rounded-xl bg-[#121A1C] border border-emerald-500/10 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
+              className="group relative p-5 sm:p-8 rounded-xl bg-[#121A1C] border border-emerald-500/10 hover:border-emerald-500/30 transition-all duration-500 shadow-2xl hover:-translate-y-2"
             >
               <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
 
               <div className="relative z-10">
-                <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-[#0E1416] transition-all duration-500 shadow-lg shadow-emerald-500/5">
-                  <i className={`${service.icon} text-2xl`}></i>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-6 sm:mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-[#0E1416] transition-all duration-500 shadow-lg shadow-emerald-500/5">
+                  <i className={`${service.icon} text-xl sm:text-2xl`}></i>
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-4 transition-colors group-hover:text-emerald-400">

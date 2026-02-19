@@ -233,7 +233,7 @@ const ReviewSection = ({
 
       <div className="main-container relative z-10">
         {/* ── Section Header ── */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -250,7 +250,7 @@ const ReviewSection = ({
             </span>
           </h2>
 
-          <p className="text-slate-400 text-base md:text-lg leading-relaxed">
+          <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
             {sectionData.description}
           </p>
 
@@ -304,7 +304,7 @@ const ReviewSection = ({
                     style={{ width: "min(560px, 92vw)" }}
                   >
                     <div
-                      className={`relative bg-[#1A2325] border rounded-2xl p-8 flex flex-col transition-all duration-500 ${
+                      className={`relative bg-[#1A2325] border rounded-2xl p-5 sm:p-8 flex flex-col transition-all duration-500 ${
                         cardRole === "center"
                           ? "border-emerald-500/30 shadow-2xl shadow-emerald-500/10"
                           : "border-white/5 cursor-pointer"

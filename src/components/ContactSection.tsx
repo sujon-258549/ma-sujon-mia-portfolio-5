@@ -107,7 +107,7 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
       )}
 
       <div className="main-container">
-        <div className="flex flex-col lg:flex-row gap-12 max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto">
           {/* Left: Form */}
           <div className="w-full lg:w-[60%]">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
@@ -118,7 +118,7 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
                 {contactData.badge}
               </span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 text-white">
               {contactData.title}{" "}
               <span className="text-emerald-500">{contactData.titleColor}</span>
             </h2>
@@ -229,7 +229,7 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-6 text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full bg-emerald-500 hover:bg-emerald-600 text-[#121A1C] font-semibold py-5 sm:py-6 text-base sm:text-lg transition-all active:scale-95 shadow-xl shadow-emerald-500/10 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <i
                   className={`${isSubmitting ? "fa-solid fa-spinner animate-spin" : "fa-solid fa-paper-plane"} text-lg mr-3`}
@@ -247,8 +247,8 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
                 className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group/card"
               >
                 <CardContent className="flex items-center gap-4 p-4">
-                  <div className="w-12 h-12 shrink-0 flex items-center justify-center bg-emerald-500/10 rounded-full text-emerald-500 group-hover/card:scale-110 transition-transform shadow-lg shadow-emerald-500/5">
-                    <i className={`${card.icon} text-lg`}></i>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center bg-emerald-500/10 rounded-full text-emerald-500 group-hover/card:scale-110 transition-transform shadow-lg shadow-emerald-500/5">
+                    <i className={`${card.icon} text-base sm:text-lg`}></i>
                   </div>
                   <div>
                     <h4 className="text-slate-100 font-bold">{card.title}</h4>

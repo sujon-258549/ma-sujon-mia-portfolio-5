@@ -132,7 +132,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
 
   return (
     <section
-      className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-[#121A1C] pb-20 pt-40 transition-all duration-300 ${!heroData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
+      className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-[#121A1C] pb-12 pt-32 md:pb-20 md:pt-40 transition-all duration-300 ${!heroData.isActive ? "opacity-50 grayscale hover:opacity-100 transition-opacity" : ""}`}
     >
       {/* Dynamic Background */}
       <div className="absolute inset-0 w-full h-full bg-[#121A1C]">
@@ -163,18 +163,18 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
       <div className="main-container relative z-10 w-full">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-4">
           {/* Main Headline */}
-          <h1 className="animate-fade-in-up text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+          <h1 className="animate-fade-in-up text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 leading-tight">
             {heroData.greeting}{" "}
             <span className="text-emerald-500">{heroData.nameHighlight}</span>
             <br />
-            <span className="text-3xl md:text-5xl mt-2 block text-slate-300">
+            <span className="text-2xl sm:text-3xl md:text-5xl mt-2 block text-slate-300">
               {text}
               <span className="animate-pulse text-emerald-500">|</span>
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="animate-fade-in-up delay-100 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="animate-fade-in-up delay-100 text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
             {heroData.description}{" "}
             {heroData.techHighlights.map((tech, idx) => (
               <span key={idx}>

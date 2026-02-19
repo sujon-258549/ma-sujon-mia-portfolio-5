@@ -70,7 +70,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
   return (
     <section
       id="about"
-      className={`bg-[#121A1C] relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24 ${!aboutData.isActive ? "opacity-60 grayscale-[0.5]" : ""}`}
+      className={`bg-[#121A1C] relative overflow-hidden py-10 sm:py-12 md:py-16 lg:py-20 ${!aboutData.isActive ? "opacity-60 grayscale-[0.5]" : ""}`}
     >
       {/* ── Background Glows ── */}
       <div className="absolute top-0 right-0 w-60 h-60 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-emerald-500/5 rounded-full blur-[100px] md:blur-[120px] pointer-events-none" />
@@ -157,7 +157,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
               {aboutData.stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all duration-300 group/stat"
+                  className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl p-2.5 sm:p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all duration-300 group/stat"
                 >
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-1.5 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                     <i
@@ -188,7 +188,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
             </div>
 
             {/* Title */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 sm:mb-6 md:mb-8 leading-tight">
+            <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 sm:mb-6 md:mb-8 leading-tight">
               {aboutData.title}{" "}
               <span className="text-emerald-500">
                 {aboutData.titleHighlight}
@@ -202,7 +202,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
             </div>
 
             {/* Description Paragraphs */}
-            <div className="space-y-4 sm:space-y-5 md:space-y-6 text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10">
+            <div className="space-y-4 sm:space-y-5 md:space-y-6 text-slate-400 text-xs sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10">
               {aboutData.description.map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
