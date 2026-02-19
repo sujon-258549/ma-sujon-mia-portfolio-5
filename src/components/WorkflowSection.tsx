@@ -150,7 +150,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
         </div>
 
         {/* ── MOBILE: Vertical card list (< md) ── */}
-        <div className="block md:hidden relative px-4">
+        <div className="block md:hidden relative md:px-4">
           {/* Vertical line */}
           <div className="absolute left-[31px] top-0 bottom-0 w-0.5 bg-white/5 rounded-full overflow-hidden">
             <div className="absolute inset-0 bg-emerald-500 w-full h-full -translate-y-full animate-[flow_3s_infinite_linear] opacity-50" />

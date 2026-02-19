@@ -160,9 +160,9 @@ const Footer = ({ initialData }: FooterProps) => {
           <div className="space-y-4">
             <h4 className="text-base font-bold text-foreground flex items-center gap-2">
               <div className="w-1 h-5 bg-emerald-500 rounded-full" />
-              <i
+              {/* <i
                 className={`${footerData.linksTitleIcon || "fa-solid fa-link"} text-emerald-500 text-xs`}
-              ></i>
+              ></i> */}
               {footerData.linksTitle || "Quick Links"}
             </h4>
             <ul className="space-y-3">
@@ -189,9 +189,9 @@ const Footer = ({ initialData }: FooterProps) => {
           <div className="space-y-4">
             <h4 className="text-base font-bold text-foreground flex items-center gap-2">
               <div className="w-1 h-5 bg-emerald-500 rounded-full" />
-              <i
+              {/* <i
                 className={`${footerData.contactTitleIcon || "fa-solid fa-paper-plane"} text-emerald-500 text-xs`}
-              ></i>
+              ></i> */}
               {footerData.contactTitle || "Get In Touch"}
             </h4>
             <div className="space-y-4 text-sm">

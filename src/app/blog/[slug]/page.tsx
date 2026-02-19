@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { blogService } from "@/services/blogService";
 import { BlogPost } from "@/types/blog";
 import { toast } from "sonner";
@@ -14,7 +14,6 @@ import {
   Clock,
   Calendar,
   User,
-  Share2,
   Facebook,
   Twitter,
   Linkedin,
@@ -31,7 +30,6 @@ import {
 
 export default function BlogDetailsPage() {
   const { slug } = useParams();
-  const router = useRouter();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [shareUrl, setShareUrl] = useState("");

@@ -127,8 +127,8 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
               <div className="bg-linear-to-r from-emerald-500/5 via-transparent to-transparent p-5 sm:p-6 md:p-8 border-b border-emerald-500/10">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                   <div className="flex-1">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform flex items-center justify-center w-12 h-12">
+                    <div className="  md:flex items-start gap-4 mb-4">
+                      <div className="p-3 mb-5 md:mb-0 bg-emerald-500/10 rounded-xl border border-emerald-500/15 group-hover/item:scale-110 transition-transform flex items-center justify-center w-12 h-12">
                         <i
                           className={`${exp.icon || "fa-solid fa-briefcase"} text-lg text-emerald-500`}
                         ></i>

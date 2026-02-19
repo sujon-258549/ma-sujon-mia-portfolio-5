@@ -12,11 +12,13 @@ import ContactSection from "@/components/ContactSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import ReviewSection from "@/components/ReviewSection";
 import { WelcomeModal } from "@/components/WelcomeModal";
+import CreativeSection from "@/components/CreativeSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
 import { projectService } from "@/services/projectService";
 import { blogService } from "@/services/blogService";
 import { serverAuth } from "@/services/serverAuth";
 import { reviewService } from "@/services/reviewService";
+import { creativeService } from "@/services/creativeService";
 
 export default async function Home() {
   const [
@@ -35,6 +37,8 @@ export default async function Home() {
     reviewContent,
     reviews,
     welcomeModalContent,
+    creativeHeaderContent,
+    creativeItems,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -53,6 +57,8 @@ export default async function Home() {
     dynamicContentService.getContent("review_section_header").catch(() => null),
     reviewService.getAllReviews().catch(() => []),
     dynamicContentService.getContent("welcome_modal").catch(() => null),
+    dynamicContentService.getContent("creative_section").catch(() => null),
+    creativeService.getItems().catch(() => []),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -99,6 +105,14 @@ export default async function Home() {
 
       {(role || workflowContent?.isActive) && (
         <WorkflowSection initialData={workflowContent} />
+      )}
+
+      {/* Creative Section */}
+      {(role || creativeHeaderContent?.isActive) && (
+        <CreativeSection
+          headerData={creativeHeaderContent}
+          items={creativeItems}
+        />
       )}
       {/* Education Section */}
       {(role || educationContent?.isActive) && (
