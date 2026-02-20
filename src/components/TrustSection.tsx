@@ -147,7 +147,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
                 {sectionData.stats?.map((stat, idx) => (
                   <div
                     key={idx}
-                    className="relative group p-6 sm:p-8 rounded-xl bg-white/2 border border-emerald-500/15 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                    className="relative group p-6 sm:p-8 rounded-xl bg-white/2 border border-emerald-500/15 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 overflow-hidden!"
                   >
                     <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

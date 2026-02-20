@@ -116,17 +116,22 @@
 
   html {
     scroll-behavior: smooth;
+    /* Reserves space for the scrollbar always, preventing layout shifts */
     scrollbar-gutter: stable;
   }
 
   body {
     @apply bg-background text-foreground;
+    /* Prevent horizontal scroll issues */
+    overflow-x: hidden;
+    width: 100%;
   }
 
-  /* Robust fix for UI jumping when Shadcn/Radix modal opens */
+  /* Robust fix for UI jumping - allows scrollbar-gutter to handle the space instead of Radix adding padding */
   body[data-radix-scroll-lock] {
     margin-right: 0px !important;
     padding-right: 0px !important;
+    overflow: hidden !important;
   }
 
   h1 {
