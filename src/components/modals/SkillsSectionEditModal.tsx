@@ -133,7 +133,7 @@ export const SkillsSectionEditModal = ({
               <i className="fa-solid fa-gear text-xl"></i>
               Manage Skills Section
             </DialogTitle>
-            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
+            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15 mr-8">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Section Status:
               </span>
@@ -163,7 +163,7 @@ export const SkillsSectionEditModal = ({
               Section Header
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Section Badge
@@ -173,7 +173,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badge: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="e.g. My Skills"
                 />
               </div>
@@ -186,7 +186,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="e.g. Showcasing My"
                 />
               </div>
@@ -199,7 +199,7 @@ export const SkillsSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleHighlight: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
                   placeholder="e.g. Expertise"
                 />
               </div>
@@ -216,7 +216,7 @@ export const SkillsSectionEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -247,7 +247,7 @@ export const SkillsSectionEditModal = ({
               {formData.categories.map((category, catIndex) => (
                 <div
                   key={category.id}
-                  className="bg-[#121A1C] border border-white/5 rounded-lg p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300 shadow-xl"
+                  className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300 shadow-xl"
                 >
                   <button
                     type="button"
@@ -267,7 +267,7 @@ export const SkillsSectionEditModal = ({
                         onChange={(e) =>
                           updateCategory(catIndex, "title", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 h-11 rounded-lg focus:ring-emerald-500/20 text-sm font-bold"
+                        className="bg-black/40 border-emerald-500/15 h-11 rounded-lg focus:ring-emerald-500/20 text-sm font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -279,7 +279,7 @@ export const SkillsSectionEditModal = ({
                         onChange={(e) =>
                           updateCategory(catIndex, "icon", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 h-11 rounded-lg focus:ring-emerald-500/20 text-xs font-mono"
+                        className="bg-black/40 border-emerald-500/15 h-11 rounded-lg focus:ring-emerald-500/20 text-xs font-mono"
                         placeholder="fa-solid fa-code"
                       />
                     </div>
@@ -306,7 +306,7 @@ export const SkillsSectionEditModal = ({
                       {category.skills.map((skill, skillIndex) => (
                         <div
                           key={skillIndex}
-                          className="flex items-center gap-1 group/skill bg-black/40 rounded-lg p-1 pr-2 border border-white/5 hover:border-emerald-500/30 transition-all"
+                          className="flex items-center gap-1 group/skill bg-black/40 rounded-lg p-1 pr-2 border border-emerald-500/15 hover:border-emerald-500/30 transition-all"
                         >
                           <Input
                             value={skill}
@@ -342,7 +342,7 @@ export const SkillsSectionEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-6 h-11 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
+              className="px-6 h-11 rounded-lg font-bold border-emerald-500/15 hover:bg-white/5 cursor-pointer text-xs"
             >
               Discard
             </Button>

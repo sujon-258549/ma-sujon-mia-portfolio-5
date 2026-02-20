@@ -107,7 +107,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
       <div className="main-container">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/15 mb-4">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
             ></i>
@@ -150,10 +150,10 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                           {edu.institution}
                         </p>
                         <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[10px] sm:text-sm text-slate-400">
-                          <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                          <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-emerald-500/15">
                             📍 {edu.location}
                           </span>
-                          <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                          <span className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-full border border-emerald-500/15">
                             📅 {edu.period}
                           </span>
                         </div>
@@ -182,7 +182,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                       {edu.courses.map((course, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-2 bg-black/20 text-slate-400 text-xs font-bold rounded-lg border border-white/5"
+                          className="px-3 py-2 bg-black/20 text-slate-400 text-xs font-bold rounded-lg border border-emerald-500/15"
                         >
                           {course}
                         </span>
@@ -200,7 +200,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                     {edu.highlights.map((highlight, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5 h-full"
+                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-emerald-500/15 h-full"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
                         <span className="text-sm text-slate-300">
@@ -238,7 +238,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                    <span className="bg-white/5 px-2 py-1 rounded border border-white/5">
+                    <span className="bg-white/5 px-2 py-1 rounded border border-emerald-500/15">
                       {edu.period}
                     </span>
                     <span className="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded border border-emerald-500/10">

@@ -191,7 +191,7 @@ export const FooterEditModal = ({
                   className="data-[state=checked]:bg-emerald-500"
                 />
               </div>
-              <div className="text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10 uppercase tracking-widest font-medium">
+              <div className="text-xs text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-emerald-500/15 uppercase tracking-widest font-medium">
                 Admin Interface
               </div>
             </div>
@@ -208,7 +208,7 @@ export const FooterEditModal = ({
                   <span>Column 1: Brand & Socials</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl">
+                <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 space-y-6 shadow-xl">
                   {/* Logo */}
                   <div className="space-y-4">
                     <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
@@ -216,7 +216,7 @@ export const FooterEditModal = ({
                       Brand Logo
                     </Label>
                     <div className="flex flex-col gap-4">
-                      <div className="relative w-full h-32 bg-black/40 rounded-lg border border-white/10 flex items-center justify-center overflow-hidden p-4 group">
+                      <div className="relative w-full h-32 bg-black/40 rounded-lg border border-emerald-500/15 flex items-center justify-center overflow-hidden p-4 group">
                         <Image
                           src={formData.logo}
                           alt="Preview"
@@ -231,7 +231,7 @@ export const FooterEditModal = ({
                           type="file"
                           accept="image/*"
                           onChange={handleLogoUpload}
-                          className="bg-white/5 border-white/10 text-white cursor-pointer file:bg-emerald-500 file:border-none file:text-white file:rounded file:px-2 file:mr-4 file:text-[10px] h-10 text-xs"
+                          className="bg-white/5 border-emerald-500/15 text-white cursor-pointer file:bg-emerald-500 file:border-none file:text-white file:rounded file:px-2 file:mr-4 file:text-[10px] h-10 text-xs"
                         />
                         <Input
                           value={formData.logo}
@@ -239,14 +239,14 @@ export const FooterEditModal = ({
                             setFormData({ ...formData, logo: e.target.value })
                           }
                           placeholder="Or paste image URL here..."
-                          className="bg-white/5 border-white/10 text-white text-xs h-10"
+                          className="bg-white/5 border-emerald-500/15 text-white text-xs h-10"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <div className="space-y-2 pt-4 border-t border-white/5">
+                  <div className="space-y-2 pt-4 border-t border-emerald-500/15">
                     <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
                       <i className="fa-solid fa-align-left text-emerald-500/70"></i>{" "}
                       Footer Description
@@ -259,13 +259,13 @@ export const FooterEditModal = ({
                           description: e.target.value,
                         })
                       }
-                      className="bg-white/5 border-white/10 text-white min-h-[120px] focus:ring-emerald-500/20 text-sm leading-relaxed"
+                      className="bg-white/5 border-emerald-500/15 text-white min-h-[120px] focus:ring-emerald-500/20 text-sm leading-relaxed"
                       placeholder="Enter brand description..."
                     />
                   </div>
 
                   {/* Socials Group */}
-                  <div className="space-y-4 pt-6 border-t border-white/5">
+                  <div className="space-y-4 pt-6 border-t border-emerald-500/15">
                     <div className="flex items-center justify-between">
                       <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
                         <i className="fa-solid fa-share-nodes text-emerald-500/70"></i>{" "}
@@ -285,7 +285,7 @@ export const FooterEditModal = ({
                       {formData.socialLinks.map((social, index) => (
                         <div
                           key={`social-${index}`}
-                          className="flex flex-col gap-4 p-4 bg-white/5 rounded-lg border border-white/5 hover:border-emerald-500/30 transition-all duration-300 relative group/social"
+                          className="flex flex-col gap-4 p-4 bg-white/5 rounded-lg border border-emerald-500/15 hover:border-emerald-500/30 transition-all duration-300 relative group/social"
                         >
                           <button
                             type="button"
@@ -303,7 +303,7 @@ export const FooterEditModal = ({
                               onChange={(e) =>
                                 updateSocialLink(index, "label", e.target.value)
                               }
-                              className="h-10 text-sm bg-black/20 border-white/5 focus:border-emerald-500/50"
+                              className="h-10 text-sm bg-black/20 border-emerald-500/15 focus:border-emerald-500/50"
                               placeholder="e.g. GitHub"
                             />
                           </div>
@@ -320,7 +320,7 @@ export const FooterEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="h-10 text-[11px] bg-black/40 border-white/10 focus:border-emerald-500/50 font-mono"
+                              className="h-10 text-[11px] bg-black/40 border-emerald-500/15 focus:border-emerald-500/50 font-mono"
                               placeholder="fa-brands fa-github"
                             />
                           </div>
@@ -333,7 +333,7 @@ export const FooterEditModal = ({
                               onChange={(e) =>
                                 updateSocialLink(index, "href", e.target.value)
                               }
-                              className="h-10 text-[11px] bg-black/40 border-white/10 focus:border-emerald-500/50 font-mono"
+                              className="h-10 text-[11px] bg-black/40 border-emerald-500/15 focus:border-emerald-500/50 font-mono"
                               placeholder="https://github.com/..."
                             />
                           </div>
@@ -351,7 +351,7 @@ export const FooterEditModal = ({
                   <span>Column 2: Resources</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl flex-1">
+                <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 space-y-6 shadow-xl flex-1">
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
@@ -365,7 +365,7 @@ export const FooterEditModal = ({
                             linksTitle: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 text-emerald-500 font-bold"
+                        className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -380,13 +380,13 @@ export const FooterEditModal = ({
                             linksTitleIcon: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs"
+                        className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono text-xs"
                         placeholder="fa-solid fa-link"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-4 pt-6 border-t border-white/5">
+                  <div className="space-y-4 pt-6 border-t border-emerald-500/15">
                     <div className="flex items-center justify-between">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
                         Navigation Links
@@ -405,7 +405,7 @@ export const FooterEditModal = ({
                       {formData.quickLinks.map((link, index) => (
                         <div
                           key={`link-${index}`}
-                          className="p-4 bg-white/5 rounded-lg border border-white/5 space-y-3 hover:border-emerald-500/30 transition-colors relative group/link"
+                          className="p-4 bg-white/5 rounded-lg border border-emerald-500/15 space-y-3 hover:border-emerald-500/30 transition-colors relative group/link"
                         >
                           <button
                             type="button"
@@ -424,7 +424,7 @@ export const FooterEditModal = ({
                                 onChange={(e) =>
                                   updateQuickLink(index, "name", e.target.value)
                                 }
-                                className="h-9 text-sm bg-black/20 border-white/5"
+                                className="h-9 text-sm bg-black/20 border-emerald-500/15"
                                 placeholder="Link Title..."
                               />
                             </div>
@@ -437,7 +437,7 @@ export const FooterEditModal = ({
                                 onChange={(e) =>
                                   updateQuickLink(index, "icon", e.target.value)
                                 }
-                                className="h-9 text-[11px] bg-black/20 border-white/5 font-mono"
+                                className="h-9 text-[11px] bg-black/20 border-emerald-500/15 font-mono"
                                 placeholder="fa-solid fa-link"
                               />
                             </div>
@@ -451,7 +451,7 @@ export const FooterEditModal = ({
                               onChange={(e) =>
                                 updateQuickLink(index, "href", e.target.value)
                               }
-                              className="h-9 text-[11px] bg-black/20 border-white/5 font-mono"
+                              className="h-9 text-[11px] bg-black/20 border-emerald-500/15 font-mono"
                               placeholder="Link URL..."
                             />
                           </div>
@@ -469,7 +469,7 @@ export const FooterEditModal = ({
                   <span>Column 3: Contact Details</span>
                 </div>
 
-                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl flex-1">
+                <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 space-y-6 shadow-xl flex-1">
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
@@ -483,7 +483,7 @@ export const FooterEditModal = ({
                             contactTitle: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 text-emerald-500 font-bold"
+                        className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -498,13 +498,13 @@ export const FooterEditModal = ({
                             contactTitleIcon: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs"
+                        className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono text-xs"
                         placeholder="fa-solid fa-paper-plane"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-8 pt-8 border-t border-white/5">
+                  <div className="space-y-8 pt-8 border-t border-emerald-500/15">
                     <div className="flex items-center justify-between">
                       <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
                         Contact Items
@@ -524,7 +524,7 @@ export const FooterEditModal = ({
                       {formData.contactItems.map((item, index) => (
                         <div
                           key={`contact-${index}`}
-                          className="space-y-4 p-4 bg-white/5 rounded-lg border border-white/5 relative group/contact"
+                          className="space-y-4 p-4 bg-white/5 rounded-lg border border-emerald-500/15 relative group/contact"
                         >
                           <button
                             type="button"
@@ -578,7 +578,7 @@ export const FooterEditModal = ({
                                     e.target.value,
                                   )
                                 }
-                                className="bg-white/5 border-white/10 h-10 text-xs font-mono text-emerald-400"
+                                className="bg-white/5 border-emerald-500/15 h-10 text-xs font-mono text-emerald-400"
                                 placeholder="e.g. fa-solid fa-envelope"
                               />
                             </div>
@@ -595,7 +595,7 @@ export const FooterEditModal = ({
                                     e.target.value,
                                   )
                                 }
-                                className="bg-white/5 border-white/10 h-10 text-emerald-400 font-medium"
+                                className="bg-white/5 border-emerald-500/15 h-10 text-emerald-400 font-medium"
                                 placeholder="Content..."
                               />
                             </div>
@@ -609,7 +609,7 @@ export const FooterEditModal = ({
                               onChange={(e) =>
                                 updateContactItem(index, "href", e.target.value)
                               }
-                              className="bg-white/5 border-white/10 h-10 text-xs font-mono"
+                              className="bg-white/5 border-emerald-500/15 h-10 text-xs font-mono"
                               placeholder="mailto:... or tel:..."
                             />
                           </div>
@@ -637,7 +637,7 @@ export const FooterEditModal = ({
                 <i className="fa-solid fa-window-minimize"></i>
                 <span>Bottom Bar: Legal & Credits</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest opacity-60">
@@ -655,7 +655,7 @@ export const FooterEditModal = ({
                             copyrightText: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 pl-16"
+                        className="bg-white/5 border-emerald-500/15 pl-16"
                         placeholder="Your site name..."
                       />
                     </div>
@@ -669,7 +669,7 @@ export const FooterEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, craftedBy: e.target.value })
                       }
-                      className="bg-white/5 border-white/10"
+                      className="bg-white/5 border-emerald-500/15"
                       placeholder="Crafted with..."
                     />
                   </div>
@@ -684,7 +684,7 @@ export const FooterEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1 cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1 cursor-pointer"
             >
               Discard Changes
             </Button>

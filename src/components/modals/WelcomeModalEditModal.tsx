@@ -85,7 +85,7 @@ export const WelcomeModalEditModal = ({
               <Sparkles className="w-5 h-5" />
               Welcome Modal Settings
             </DialogTitle>
-            <div className="flex items-center gap-3 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-3 bg-white/5 px-3 py-1.5 rounded-full border border-emerald-500/15">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Status:
               </span>
@@ -113,7 +113,7 @@ export const WelcomeModalEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, welcomeBadge: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 h-9 text-xs"
+                  className="bg-white/5 border-emerald-500/15 h-9 text-xs"
                 />
               </div>
               <div className="space-y-2">
@@ -125,7 +125,7 @@ export const WelcomeModalEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, ctaText: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 h-9 text-xs font-bold text-emerald-500"
+                  className="bg-white/5 border-emerald-500/15 h-9 text-xs font-bold text-emerald-500"
                 />
               </div>
             </div>
@@ -141,7 +141,7 @@ export const WelcomeModalEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 h-10 font-bold"
+                  className="bg-white/5 border-emerald-500/15 h-10 font-bold"
                 />
               </div>
               <div className="space-y-2">
@@ -153,7 +153,7 @@ export const WelcomeModalEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleHighlight: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 h-10 font-bold text-emerald-500"
+                  className="bg-white/5 border-emerald-500/15 h-10 font-bold text-emerald-500"
                 />
               </div>
             </div>
@@ -168,12 +168,12 @@ export const WelcomeModalEditModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="bg-white/5 border-white/10 min-h-[80px] text-sm"
+                className="bg-white/5 border-emerald-500/15 min-h-[80px] text-sm"
               />
             </div>
 
             {/* Quick Links */}
-            <div className="space-y-3 pt-2 border-t border-white/5">
+            <div className="space-y-3 pt-2 border-t border-emerald-500/15">
               <div className="flex items-center justify-between">
                 <Label className="uppercase text-[10px] tracking-widest text-emerald-500 font-bold">
                   Quick Links (Max 4)
@@ -184,7 +184,7 @@ export const WelcomeModalEditModal = ({
                 {formData.quickLinks.map((link, idx) => (
                   <div
                     key={idx}
-                    className="flex gap-2 items-center bg-white/3 p-2 rounded-lg border border-white/5"
+                    className="flex gap-2 items-center bg-white/3 p-2 rounded-lg border border-emerald-500/15"
                   >
                     <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center shrink-0">
                       <i className={`${link.icon} text-xs text-slate-400`} />

@@ -59,7 +59,7 @@ const GithubStatsSection = () => {
             <Link
               href={`https://github.com/${username}`}
               target="_blank"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white font-medium hover:bg-emerald-500 hover:text-black hover:border-emerald-500 transition-all active:scale-95 group"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-emerald-500/15 text-white font-medium hover:bg-emerald-500 hover:text-black hover:border-emerald-500 transition-all active:scale-95 group"
             >
               <Github className="w-5 h-5" />
               <span>@{username}</span>
@@ -68,7 +68,7 @@ const GithubStatsSection = () => {
           </div>
 
           {/* Contribution Graph */}
-          <div className="mb-10 p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-emerald-500/20 transition-all group">
+          <div className="mb-10 p-6 rounded-2xl bg-white/2 border border-emerald-500/15 hover:border-emerald-500/20 transition-all group">
             <h3 className="text-white font-medium mb-6 flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Contributions Calendar
@@ -87,7 +87,7 @@ const GithubStatsSection = () => {
             {statCards.map((card, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl overflow-hidden bg-white/2 border border-white/5 hover:border-emerald-500/20 transition-all p-2 flex justify-center items-center h-full"
+                className="rounded-2xl overflow-hidden bg-white/2 border border-emerald-500/15 hover:border-emerald-500/20 transition-all p-2 flex justify-center items-center h-full"
               >
                 <img
                   src={card.url}

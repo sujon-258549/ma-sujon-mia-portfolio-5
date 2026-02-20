@@ -119,7 +119,7 @@ export const WorkflowSectionEditModal = ({
               <LayoutPanelLeft className="w-6 h-6" />
               Workflow Section Configuration
             </DialogTitle>
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Status:
               </span>
@@ -149,7 +149,7 @@ export const WorkflowSectionEditModal = ({
                 <i className="fa-solid fa-heading"></i>
                 <span>Section Header</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
@@ -160,7 +160,7 @@ export const WorkflowSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, badge: e.target.value })
                       }
-                      className="bg-white/5 border-white/10"
+                      className="bg-white/5 border-emerald-500/15"
                     />
                   </div>
                   <div className="space-y-2">
@@ -172,7 +172,7 @@ export const WorkflowSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, badgeIcon: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 font-mono text-emerald-400"
+                      className="bg-white/5 border-emerald-500/15 font-mono text-emerald-400"
                     />
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export const WorkflowSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 font-bold text-lg"
+                      className="bg-white/5 border-emerald-500/15 font-bold text-lg"
                     />
                   </div>
                   <div className="space-y-2">
@@ -201,7 +201,7 @@ export const WorkflowSectionEditModal = ({
                           titleHighlight: e.target.value,
                         })
                       }
-                      className="bg-white/5 border-white/10 font-bold text-lg text-emerald-500"
+                      className="bg-white/5 border-emerald-500/15 font-bold text-lg text-emerald-500"
                     />
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export const WorkflowSectionEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, description: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 min-h-[100px]"
+                    className="bg-white/5 border-emerald-500/15 min-h-[100px]"
                   />
                 </div>
                 <div className="space-y-2">
@@ -230,7 +230,7 @@ export const WorkflowSectionEditModal = ({
                         slNumber: parseInt(e.target.value) || 0,
                       })
                     }
-                    className="bg-white/5 border-white/10 font-mono text-emerald-400 w-24 h-10"
+                    className="bg-white/5 border-emerald-500/15 font-mono text-emerald-400 w-24 h-10"
                   />
                   <p className="text-[10px] text-slate-500 italic">
                     Lower numbers appear first on the home page.
@@ -260,7 +260,7 @@ export const WorkflowSectionEditModal = ({
                 {formData.steps.map((step, index) => (
                   <div
                     key={index}
-                    className="bg-[#121A1C] border border-white/5 rounded-lg p-6 relative group"
+                    className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 relative group"
                   >
                     <div className="absolute top-4 right-4 flex items-center gap-2">
                       <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest px-2 py-1 bg-black/20 rounded">
@@ -287,7 +287,7 @@ export const WorkflowSectionEditModal = ({
                           onChange={(e) =>
                             updateStep(index, "title", e.target.value)
                           }
-                          className="bg-white/5 border-white/10 h-9 text-sm font-bold"
+                          className="bg-white/5 border-emerald-500/15 h-9 text-sm font-bold"
                           placeholder="e.g. Discovery"
                         />
                       </div>
@@ -304,7 +304,7 @@ export const WorkflowSectionEditModal = ({
                             onChange={(e) =>
                               updateStep(index, "icon", e.target.value)
                             }
-                            className="bg-white/5 border-white/10 h-9 text-xs font-mono pl-9 text-emerald-400"
+                            className="bg-white/5 border-emerald-500/15 h-9 text-xs font-mono pl-9 text-emerald-400"
                             placeholder="fa-solid fa-..."
                           />
                         </div>
@@ -318,7 +318,7 @@ export const WorkflowSectionEditModal = ({
                           onChange={(e) =>
                             updateStep(index, "image", e.target.value)
                           }
-                          className="bg-white/5 border-white/10 h-9 text-sm text-sky-400 font-mono"
+                          className="bg-white/5 border-emerald-500/15 h-9 text-sm text-sky-400 font-mono"
                           placeholder="https://..."
                         />
                       </div>
@@ -331,7 +331,7 @@ export const WorkflowSectionEditModal = ({
                           onChange={(e) =>
                             updateStep(index, "description", e.target.value)
                           }
-                          className="bg-white/5 border-white/10 min-h-[80px] text-sm"
+                          className="bg-white/5 border-emerald-500/15 min-h-[80px] text-sm"
                           placeholder="Describe what happens in this step..."
                         />
                       </div>
@@ -347,7 +347,7 @@ export const WorkflowSectionEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-6 h-10 rounded-lg font-bold border-white/10 text-slate-300 hover:text-white hover:bg-white/5"
+              className="px-6 h-10 rounded-lg font-bold border-emerald-500/15 text-slate-300 hover:text-white hover:bg-white/5"
             >
               Discard
             </Button>

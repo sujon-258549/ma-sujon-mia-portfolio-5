@@ -123,7 +123,7 @@ export const CreativeEditModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[95vw] w-[98vw] h-[75vh] flex flex-col bg-[#0E1416] border-emerald-500/20 text-white p-0 overflow-hidden shadow-2xl focus:outline-none rounded-lg">
         {/* Header */}
-        <DialogHeader className="p-6 pb-4 border-b border-white/5 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
+        <DialogHeader className="p-6 pb-4 border-b border-emerald-500/15 bg-[#121A1C]/50 backdrop-blur-xl sticky top-0 z-20">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold flex items-center gap-3 text-emerald-500">
               <div className="w-2 h-8 bg-emerald-500 rounded-full" />
@@ -155,14 +155,14 @@ export const CreativeEditModal = ({
         {/* Content - Two Column Layout */}
         <div className="flex-1 overflow-hidden flex flex-col lg:flex-row">
           {/* Left Column: Global Settings */}
-          <div className="w-full lg:w-[400px] border-r border-white/5 bg-[#121A1C]/30 overflow-y-auto p-6 space-y-8 custom-scrollbar">
+          <div className="w-full lg:w-[400px] border-r border-emerald-500/15 bg-[#121A1C]/30 overflow-y-auto p-6 space-y-8 custom-scrollbar">
             <div className="space-y-6">
               <div className="flex items-center gap-2 mb-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
                 <i className="fa-solid fa-sliders"></i>
                 <span>Section Configuration</span>
               </div>
 
-              <div className="space-y-4 bg-white/5 p-4 rounded-lg border border-white/5">
+              <div className="space-y-4 bg-white/5 p-4 rounded-lg border border-emerald-500/15">
                 <div className="space-y-2">
                   <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
                     Badge Text
@@ -172,7 +172,7 @@ export const CreativeEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, badge: e.target.value })
                     }
-                    className="bg-[#0E1416] border-white/10"
+                    className="bg-[#0E1416] border-emerald-500/15"
                   />
                 </div>
                 <div className="space-y-2">
@@ -184,12 +184,12 @@ export const CreativeEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, badgeIcon: e.target.value })
                     }
-                    className="bg-[#0E1416] border-white/10 font-mono text-xs text-emerald-400"
+                    className="bg-[#0E1416] border-emerald-500/15 font-mono text-xs text-emerald-400"
                   />
                 </div>
               </div>
 
-              <div className="space-y-4 bg-white/5 p-4 rounded-lg border border-white/5">
+              <div className="space-y-4 bg-white/5 p-4 rounded-lg border border-emerald-500/15">
                 <div className="space-y-2">
                   <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
                     Main Title
@@ -199,7 +199,7 @@ export const CreativeEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    className="bg-[#0E1416] border-white/10 font-bold text-lg"
+                    className="bg-[#0E1416] border-emerald-500/15 font-bold text-lg"
                   />
                 </div>
                 <div className="space-y-2">
@@ -214,12 +214,12 @@ export const CreativeEditModal = ({
                         titleHighlight: e.target.value,
                       })
                     }
-                    className="bg-[#0E1416] border-white/10 font-bold text-lg text-emerald-500"
+                    className="bg-[#0E1416] border-emerald-500/15 font-bold text-lg text-emerald-500"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2 bg-white/5 p-4 rounded-lg border border-white/5">
+              <div className="space-y-2 bg-white/5 p-4 rounded-lg border border-emerald-500/15">
                 <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
                   Description
                 </Label>
@@ -228,11 +228,11 @@ export const CreativeEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="bg-[#0E1416] border-white/10 min-h-[100px] text-sm"
+                  className="bg-[#0E1416] border-emerald-500/15 min-h-[100px] text-sm"
                 />
               </div>
 
-              <div className="space-y-2 bg-white/5 p-4 rounded-lg border border-white/5">
+              <div className="space-y-2 bg-white/5 p-4 rounded-lg border border-emerald-500/15">
                 <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
                   Sorting Number (Serial)
                 </Label>
@@ -245,7 +245,7 @@ export const CreativeEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-[#0E1416] border-white/10 h-10 w-24 font-mono text-emerald-500"
+                  className="bg-[#0E1416] border-emerald-500/15 h-10 w-24 font-mono text-emerald-500"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -276,7 +276,7 @@ export const CreativeEditModal = ({
                   return (
                     <div
                       key={item.id || index}
-                      className={`bg-[#121A1C] border transition-all duration-300 rounded-lg overflow-hidden ${isExpanded ? "border-emerald-500/30 ring-1 ring-emerald-500/10 shadow-2xl" : "border-white/5 hover:border-white/10"}`}
+                      className={`bg-[#121A1C] border transition-all duration-300 rounded-lg overflow-hidden ${isExpanded ? "border-emerald-500/30 ring-1 ring-emerald-500/10 shadow-2xl" : "border-emerald-500/15 hover:border-emerald-500/15"}`}
                     >
                       {/* Item Header / Bar */}
                       <div
@@ -287,7 +287,7 @@ export const CreativeEditModal = ({
                           <GripVertical className="w-5 h-5" />
                         </div>
 
-                        <div className="w-12 h-12 rounded bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 rounded bg-black/40 border border-emerald-500/15 flex items-center justify-center overflow-hidden">
                           {item.image ? (
                             <Image
                               src={item.image}
@@ -335,7 +335,7 @@ export const CreativeEditModal = ({
 
                       {/* Expanded Edit Form */}
                       {isExpanded && (
-                        <div className="p-6 pt-0 border-t border-white/5 bg-black/20 grid grid-cols-1 md:grid-cols-2 gap-6 animate-in slide-in-from-top-2 duration-200">
+                        <div className="p-6 pt-0 border-t border-emerald-500/15 bg-black/20 grid grid-cols-1 md:grid-cols-2 gap-6 animate-in slide-in-from-top-2 duration-200">
                           <div className="md:col-span-2 pt-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div className="space-y-2">
@@ -351,7 +351,7 @@ export const CreativeEditModal = ({
                                       e.target.value,
                                     )
                                   }
-                                  className="bg-[#0E1416] border-white/10"
+                                  className="bg-[#0E1416] border-emerald-500/15"
                                 />
                               </div>
                               <div className="space-y-2">
@@ -371,7 +371,7 @@ export const CreativeEditModal = ({
                                         e.target.value,
                                       )
                                     }
-                                    className="bg-[#0E1416] border-white/10 pl-9 font-mono text-xs text-emerald-400"
+                                    className="bg-[#0E1416] border-emerald-500/15 pl-9 font-mono text-xs text-emerald-400"
                                   />
                                 </div>
                               </div>
@@ -393,11 +393,11 @@ export const CreativeEditModal = ({
                                       e.target.value,
                                     )
                                   }
-                                  className="bg-[#0E1416] border-white/10 font-mono text-xs text-sky-400"
+                                  className="bg-[#0E1416] border-emerald-500/15 font-mono text-xs text-sky-400"
                                   placeholder="https://..."
                                 />
                               </div>
-                              <div className="w-20 h-14 bg-black/40 rounded border border-white/10 overflow-hidden shrink-0">
+                              <div className="w-20 h-14 bg-black/40 rounded border border-emerald-500/15 overflow-hidden shrink-0">
                                 {item.image && (
                                   <Image
                                     src={item.image}
@@ -421,7 +421,7 @@ export const CreativeEditModal = ({
                               onChange={(e) =>
                                 updateItem(item.id!, "link", e.target.value)
                               }
-                              className="bg-[#0E1416] border-white/10 font-mono text-xs text-emerald-400"
+                              className="bg-[#0E1416] border-emerald-500/15 font-mono text-xs text-emerald-400"
                               placeholder="https://..."
                             />
                           </div>
@@ -439,7 +439,7 @@ export const CreativeEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-[#0E1416] border-white/10 min-h-[100px] text-sm leading-relaxed"
+                              className="bg-[#0E1416] border-emerald-500/15 min-h-[100px] text-sm leading-relaxed"
                             />
                           </div>
                         </div>
@@ -453,12 +453,12 @@ export const CreativeEditModal = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-6 border-t border-white/5 bg-[#121A1C] flex justify-end gap-3 z-30">
+        <div className="p-6 border-t border-emerald-500/15 bg-[#121A1C] flex justify-end gap-3 z-30">
           <Button
             type="button"
             variant="ghost"
             onClick={onClose}
-            className="bg-transparent border-white/10 text-slate-400 hover:text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold"
+            className="bg-transparent border-emerald-500/15 text-slate-400 hover:text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold"
           >
             Discard
           </Button>

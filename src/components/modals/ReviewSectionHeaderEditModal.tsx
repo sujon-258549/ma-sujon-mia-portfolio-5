@@ -91,7 +91,7 @@ export const ReviewSectionHeaderEditModal = ({
               <MessageSquare className="w-6 h-6" />
               Review Section Configuration
             </DialogTitle>
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Section Status:
               </span>
@@ -128,7 +128,7 @@ export const ReviewSectionHeaderEditModal = ({
                 <i className="fa-solid fa-tag" />
                 <span>Section Badge</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest">
@@ -139,7 +139,7 @@ export const ReviewSectionHeaderEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, badge: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white h-10 text-sm"
+                      className="bg-white/5 border-emerald-500/15 text-white h-10 text-sm"
                       placeholder="Testimonials"
                     />
                   </div>
@@ -156,7 +156,7 @@ export const ReviewSectionHeaderEditModal = ({
                             badgeIcon: e.target.value,
                           })
                         }
-                        className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs h-10"
+                        className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono text-xs h-10"
                         placeholder="fa-solid fa-comments"
                       />
                       {/* Live preview */}
@@ -181,7 +181,7 @@ export const ReviewSectionHeaderEditModal = ({
                         slNumber: parseInt(e.target.value) || 0,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-500 font-mono h-10 w-24"
                   />
                   <p className="text-[10px] text-slate-500 italic">
                     Lower numbers appear first on the home page.
@@ -196,7 +196,7 @@ export const ReviewSectionHeaderEditModal = ({
                 <i className="fa-solid fa-heading" />
                 <span>Section Title</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest">
@@ -207,7 +207,7 @@ export const ReviewSectionHeaderEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white font-bold h-12 text-lg"
+                      className="bg-white/5 border-emerald-500/15 text-white font-bold h-12 text-lg"
                       placeholder="What People"
                     />
                   </div>
@@ -223,13 +223,13 @@ export const ReviewSectionHeaderEditModal = ({
                           titleHighlight: e.target.value,
                         })
                       }
-                      className="bg-white/5 border-white/10 text-emerald-500 font-bold h-12 text-lg"
+                      className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold h-12 text-lg"
                       placeholder="Say"
                     />
                   </div>
                 </div>
                 {/* Live preview */}
-                <div className="mt-2 p-3 rounded-lg bg-black/20 border border-white/5 text-center">
+                <div className="mt-2 p-3 rounded-lg bg-black/20 border border-emerald-500/15 text-center">
                   <span className="text-white font-bold text-xl">
                     {formData.title}{" "}
                   </span>
@@ -246,13 +246,13 @@ export const ReviewSectionHeaderEditModal = ({
                 <i className="fa-solid fa-align-left" />
                 <span>Section Description</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl">
                 <Textarea
                   value={formData.description}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white min-h-[100px] focus:ring-emerald-500/20 text-sm leading-relaxed"
+                  className="bg-white/5 border-emerald-500/15 text-white min-h-[100px] focus:ring-emerald-500/20 text-sm leading-relaxed"
                   placeholder="Feedback from clients, colleagues, and companies I've had the pleasure of working with."
                 />
               </div>
@@ -265,7 +265,7 @@ export const ReviewSectionHeaderEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
             >
               Discard
             </Button>

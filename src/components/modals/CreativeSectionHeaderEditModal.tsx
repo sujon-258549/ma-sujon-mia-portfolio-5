@@ -75,8 +75,8 @@ export const CreativeSectionHeaderEditModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[90%] w-[90%] h-[90%] flex flex-col bg-[#0E1416] border border-white/10 text-white p-0 overflow-hidden shadow-2xl rounded-2xl">
-        <DialogHeader className="p-6 border-b border-white/5 bg-[#121A1C]">
+      <DialogContent className="max-w-[90%] w-[90%] h-[90%] flex flex-col bg-[#0E1416] border border-emerald-500/15 text-white p-0 overflow-hidden shadow-2xl rounded-2xl">
+        <DialogHeader className="p-6 border-b border-emerald-500/15 bg-[#121A1C]">
           <DialogTitle className="text-xl font-bold flex items-center gap-2 text-white">
             <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
               <Settings2 className="w-5 h-5" />
@@ -87,7 +87,7 @@ export const CreativeSectionHeaderEditModal = ({
 
         <div className="flex-1 overflow-y-auto px-6 py-6 scrollbar-hide">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex items-center justify-between p-4 bg-[#121A1C] border border-white/5 rounded-xl">
+            <div className="flex items-center justify-between p-4 bg-[#121A1C] border border-emerald-500/15 rounded-xl">
               <div className="space-y-1">
                 <span className="text-sm font-bold text-white block">
                   Section Visibility
@@ -124,7 +124,7 @@ export const CreativeSectionHeaderEditModal = ({
                         onChange={(e) =>
                           setFormData({ ...formData, badge: e.target.value })
                         }
-                        className="bg-[#121A1C] border-white/10 h-10 font-bold focus:border-emerald-500/50"
+                        className="bg-[#121A1C] border-emerald-500/15 h-10 font-bold focus:border-emerald-500/50"
                       />
                     </div>
                     <div className="space-y-2">
@@ -143,7 +143,7 @@ export const CreativeSectionHeaderEditModal = ({
                               badgeIcon: e.target.value,
                             })
                           }
-                          className="bg-[#121A1C] border-white/10 pl-9 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
+                          className="bg-[#121A1C] border-emerald-500/15 pl-9 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
                         />
                       </div>
                     </div>
@@ -160,7 +160,7 @@ export const CreativeSectionHeaderEditModal = ({
                             slNumber: parseInt(e.target.value) || 0,
                           })
                         }
-                        className="bg-[#121A1C] border-white/10 h-10 font-mono text-emerald-500 w-24 focus:border-emerald-500/50"
+                        className="bg-[#121A1C] border-emerald-500/15 h-10 font-mono text-emerald-500 w-24 focus:border-emerald-500/50"
                       />
                       <p className="text-[10px] text-slate-500 italic">
                         Lower numbers appear first on the home page.
@@ -185,7 +185,7 @@ export const CreativeSectionHeaderEditModal = ({
                         onChange={(e) =>
                           setFormData({ ...formData, title: e.target.value })
                         }
-                        className="bg-[#121A1C] border-white/10 h-10 font-bold text-lg focus:border-emerald-500/50"
+                        className="bg-[#121A1C] border-emerald-500/15 h-10 font-bold text-lg focus:border-emerald-500/50"
                       />
                     </div>
                     <div className="space-y-2">
@@ -200,7 +200,7 @@ export const CreativeSectionHeaderEditModal = ({
                             titleHighlight: e.target.value,
                           })
                         }
-                        className="bg-[#121A1C] border-white/10 h-10 font-bold text-lg text-emerald-500 focus:border-emerald-500/50"
+                        className="bg-[#121A1C] border-emerald-500/15 h-10 font-bold text-lg text-emerald-500 focus:border-emerald-500/50"
                       />
                     </div>
                   </div>
@@ -216,14 +216,14 @@ export const CreativeSectionHeaderEditModal = ({
                           description: e.target.value,
                         })
                       }
-                      className="bg-[#121A1C] border-white/10 min-h-[100px] text-sm leading-relaxed focus:border-emerald-500/50 resize-none"
+                      className="bg-[#121A1C] border-emerald-500/15 min-h-[100px] text-sm leading-relaxed focus:border-emerald-500/50 resize-none"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 flex justify-end gap-3 border-t border-white/5">
+            <div className="pt-4 flex justify-end gap-3 border-t border-emerald-500/15">
               <Button
                 type="button"
                 variant="ghost"

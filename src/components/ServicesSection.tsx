@@ -129,7 +129,7 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
                 </p>
 
                 {service.features && (
-                  <ul className="space-y-3 pt-6 border-t border-white/5">
+                  <ul className="space-y-3 pt-6 border-t border-emerald-500/15">
                     {service.features.map((feature, i) => (
                       <li
                         key={i}

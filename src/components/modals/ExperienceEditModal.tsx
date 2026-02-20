@@ -190,7 +190,7 @@ export const ExperienceEditModal = ({
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
           <form onSubmit={handleSubmit} className="py-8 space-y-12">
             {/* --- SECTION HEADER --- */}
-            <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 space-y-6 shadow-xl">
+            <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 space-y-6 shadow-xl">
               <div className="flex items-center gap-2 mb-2 text-emerald-500 font-bold uppercase text-xs tracking-[0.2em]">
                 <TrendingUp className="w-4 h-4" />
                 <span>Section Information</span>
@@ -205,7 +205,7 @@ export const ExperienceEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, badge: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white h-10"
+                    className="bg-white/5 border-emerald-500/15 text-white h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -217,7 +217,7 @@ export const ExperienceEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, badgeIcon: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-400 font-mono h-10"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -229,7 +229,7 @@ export const ExperienceEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white h-10"
+                    className="bg-white/5 border-emerald-500/15 text-white h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -241,7 +241,7 @@ export const ExperienceEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, titleColor: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-bold h-10"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold h-10"
                   />
                 </div>
                 <div className="space-y-2">
@@ -257,7 +257,7 @@ export const ExperienceEditModal = ({
                         slNumber: parseInt(e.target.value) || 0,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-500 font-mono h-10 w-24"
                   />
                   <p className="text-[10px] text-slate-500 italic">
                     Lower numbers appear first on the home page.
@@ -273,7 +273,7 @@ export const ExperienceEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-slate-300 resize-none"
+                  className="bg-white/5 border-emerald-500/15 text-slate-300 resize-none"
                   rows={2}
                 />
               </div>
@@ -284,7 +284,7 @@ export const ExperienceEditModal = ({
               {formData.experiences.map((exp, expIdx) => (
                 <div
                   key={expIdx}
-                  className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden shadow-2xl relative group/card"
+                  className="bg-[#121A1C] border border-emerald-500/15 rounded-lg overflow-hidden shadow-2xl relative group/card"
                 >
                   <button
                     type="button"
@@ -294,7 +294,7 @@ export const ExperienceEditModal = ({
                     <X className="w-5 h-5" />
                   </button>
 
-                  <div className="p-8 border-b border-white/5 bg-linear-to-r from-emerald-500/5 to-transparent">
+                  <div className="p-8 border-b border-emerald-500/15 bg-linear-to-r from-emerald-500/5 to-transparent">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       <div className="space-y-2 lg:col-span-2">
                         <Label className="text-[10px] text-slate-500 uppercase font-black">
@@ -305,7 +305,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "title", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-lg font-bold text-white h-11"
+                          className="bg-black/20 border-emerald-500/15 text-lg font-bold text-white h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -317,7 +317,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "company", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-emerald-500 font-bold h-11"
+                          className="bg-black/20 border-emerald-500/15 text-emerald-500 font-bold h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -329,7 +329,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "type", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-white h-11"
+                          className="bg-black/20 border-emerald-500/15 text-white h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -341,7 +341,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "location", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-white h-11"
+                          className="bg-black/20 border-emerald-500/15 text-white h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -353,7 +353,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "period", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-white h-11"
+                          className="bg-black/20 border-emerald-500/15 text-white h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -365,7 +365,7 @@ export const ExperienceEditModal = ({
                           onChange={(e) =>
                             updateExperience(expIdx, "duration", e.target.value)
                           }
-                          className="bg-black/20 border-white/5 text-white h-11"
+                          className="bg-black/20 border-emerald-500/15 text-white h-11"
                         />
                       </div>
                       <div className="space-y-2">
@@ -381,7 +381,7 @@ export const ExperienceEditModal = ({
                               e.target.value,
                             )
                           }
-                          className="bg-black/20 border-white/5 text-slate-400 h-11 rounded-lg"
+                          className="bg-black/20 border-emerald-500/15 text-slate-400 h-11 rounded-lg"
                         />
                       </div>
                     </div>
@@ -398,7 +398,7 @@ export const ExperienceEditModal = ({
                             e.target.value,
                           )
                         }
-                        className="bg-black/20 border-white/5 text-slate-300 resize-none h-20 rounded-lg"
+                        className="bg-black/20 border-emerald-500/15 text-slate-300 resize-none h-20 rounded-lg"
                       />
                     </div>
                   </div>
@@ -434,7 +434,7 @@ export const ExperienceEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-white/5 border-white/5 text-sm h-9"
+                              className="bg-white/5 border-emerald-500/15 text-sm h-9"
                             />
                             <Button
                               type="button"
@@ -484,7 +484,7 @@ export const ExperienceEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-white/5 border-white/5 text-sm h-9"
+                              className="bg-white/5 border-emerald-500/15 text-sm h-9"
                             />
                             <Button
                               type="button"
@@ -519,7 +519,7 @@ export const ExperienceEditModal = ({
                           <Plus className="w-3 h-3 mr-1" /> Add Tech
                         </Button>
                       </div>
-                      <div className="flex flex-wrap gap-3 p-4 bg-white/5 rounded-lg border border-white/5">
+                      <div className="flex flex-wrap gap-3 p-4 bg-white/5 rounded-lg border border-emerald-500/15">
                         {exp.technologies.map((item, idx) => (
                           <div key={idx} className="relative group/tech">
                             <Input
@@ -532,7 +532,7 @@ export const ExperienceEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-black/20 border-white/10 text-xs w-28 h-8 rounded-md pr-6"
+                              className="bg-black/20 border-emerald-500/15 text-xs w-28 h-8 rounded-md pr-6"
                             />
                             <button
                               type="button"
@@ -553,12 +553,12 @@ export const ExperienceEditModal = ({
             </div>
           </form>
 
-          <div className="mt-12 p-8 border-t border-white/5 flex flex-col sm:flex-row justify-end gap-3 pb-12">
+          <div className="mt-12 p-8 border-t border-emerald-500/15 flex flex-col sm:flex-row justify-end gap-3 pb-12">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-10 h-12 rounded-lg font-semibold transition-all cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-10 h-12 rounded-lg font-semibold transition-all cursor-pointer"
             >
               Discard Changes
             </Button>

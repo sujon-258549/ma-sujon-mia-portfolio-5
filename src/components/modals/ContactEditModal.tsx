@@ -144,7 +144,7 @@ export const ContactEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badge: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white"
+                  className="bg-white/5 border-emerald-500/15 text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -156,7 +156,7 @@ export const ContactEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badgeIcon: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-emerald-400 font-mono"
+                  className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono"
                   placeholder="fa-solid fa-paper-plane"
                 />
               </div>
@@ -169,7 +169,7 @@ export const ContactEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white"
+                  className="bg-white/5 border-emerald-500/15 text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -181,7 +181,7 @@ export const ContactEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleColor: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white"
+                  className="bg-white/5 border-emerald-500/15 text-white"
                 />
               </div>
               <div className="space-y-2">
@@ -197,7 +197,7 @@ export const ContactEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                  className="bg-white/5 border-emerald-500/15 text-emerald-500 font-mono h-10 w-24"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -225,7 +225,7 @@ export const ContactEditModal = ({
                 {formData.contactCards.map((card, index) => (
                   <div
                     key={index}
-                    className="bg-[#121A1C] border border-white/5 rounded-lg p-5 space-y-4 relative group/card"
+                    className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-5 space-y-4 relative group/card"
                   >
                     <button
                       type="button"
@@ -234,7 +234,7 @@ export const ContactEditModal = ({
                     >
                       <i className="fa-solid fa-xmark text-[10px]"></i>
                     </button>
-                    <div className="flex items-center gap-3 border-b border-white/5 pb-3">
+                    <div className="flex items-center gap-3 border-b border-emerald-500/15 pb-3">
                       <div className="w-10 h-10 shrink-0 flex items-center justify-center rounded-lg bg-emerald-500/10">
                         <i className={`${card.icon} text-emerald-500`}></i>
                       </div>
@@ -258,7 +258,7 @@ export const ContactEditModal = ({
                           onChange={(e) =>
                             updateCard(index, "title", e.target.value)
                           }
-                          className="h-9 bg-black/20 border-white/5 text-sm"
+                          className="h-9 bg-black/20 border-emerald-500/15 text-sm"
                           placeholder="e.g. Phone, Email, Address"
                         />
                       </div>
@@ -271,7 +271,7 @@ export const ContactEditModal = ({
                           onChange={(e) =>
                             updateCard(index, "value", e.target.value)
                           }
-                          className="h-9 bg-black/20 border-white/5 text-sm"
+                          className="h-9 bg-black/20 border-emerald-500/15 text-sm"
                           placeholder="e.g. +123 456 789"
                         />
                       </div>
@@ -285,7 +285,7 @@ export const ContactEditModal = ({
                           onChange={(e) =>
                             updateCard(index, "icon", e.target.value)
                           }
-                          className="h-9 bg-black/40 border-white/10 text-[10px] font-mono text-emerald-400"
+                          className="h-9 bg-black/40 border-emerald-500/15 text-[10px] font-mono text-emerald-400"
                           placeholder="fa-solid fa-phone"
                         />
                       </div>
@@ -301,7 +301,7 @@ export const ContactEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all cursor-pointer"
             >
               Discard Changes
             </Button>

@@ -203,7 +203,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
               onClick={() =>
                 (window.location.href = heroData.buttons.secondary.link)
               }
-              className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-xl backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="h-10 px-8 bg-white/5 border border-emerald-500/15 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-xl backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               {heroData.buttons.secondary.text}
               <i className={`${heroData.buttons.secondary.icon} ml-2`}></i>
@@ -211,7 +211,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
           </div>
 
           {/* Tech Stack Indicators */}
-          <div className="animate-fade-in-up delay-300 mt-12 pt-8 border-t border-white/5 w-full max-w-2xl">
+          <div className="animate-fade-in-up delay-300 mt-12 pt-8 border-t border-emerald-500/15 w-full max-w-2xl">
             <p className="text-sm text-slate-500 mb-4 tracking-wider font-medium">
               Tech Stack
             </p>
@@ -221,7 +221,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
                   key={idx}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
+                  <div className="p-3 rounded-xl bg-white/5 border border-emerald-500/15 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-all">
                     <i
                       className={`${stack.icon} text-xl text-slate-300 group-hover:text-emerald-400`}
                     ></i>
@@ -248,7 +248,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-emerald-500/15 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all transform hover:scale-110 hover:translate-x-1"
                 title={link.platform}
               >
                 <i className={`${link.icon} text-base`}></i>

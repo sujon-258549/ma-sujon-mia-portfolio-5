@@ -210,7 +210,7 @@ export const HeroEditModal = ({
               Personal Info
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Greeting
@@ -220,7 +220,7 @@ export const HeroEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, greeting: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="Hi, I'm"
                 />
               </div>
@@ -233,7 +233,7 @@ export const HeroEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2 md:col-span-2">
@@ -245,7 +245,7 @@ export const HeroEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, nameHighlight: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
                   placeholder="Same as name or different"
                 />
               </div>
@@ -262,7 +262,7 @@ export const HeroEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -277,13 +277,13 @@ export const HeroEditModal = ({
               <Type className="w-4 h-4" />
               Description
             </div>
-            <div className="bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <Textarea
                 value={formData.description}
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="bg-black/40 border-white/5 min-h-[120px] rounded-lg focus:ring-emerald-500/20 text-sm leading-relaxed"
+                className="bg-black/40 border-emerald-500/15 min-h-[120px] rounded-lg focus:ring-emerald-500/20 text-sm leading-relaxed"
               />
             </div>
           </div>
@@ -310,7 +310,7 @@ export const HeroEditModal = ({
                   <Input
                     value={text}
                     onChange={(e) => updateRotatingText(idx, e.target.value)}
-                    className="bg-[#121A1C] border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                    className="bg-[#121A1C] border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                     placeholder="e.g., Full Stack Developer"
                   />
                   <button
@@ -346,7 +346,7 @@ export const HeroEditModal = ({
                   <Input
                     value={tech}
                     onChange={(e) => updateTechHighlight(idx, e.target.value)}
-                    className="bg-[#121A1C] border-white/5 h-10 rounded-lg focus:ring-emerald-500/20 text-xs"
+                    className="bg-[#121A1C] border-emerald-500/15 h-10 rounded-lg focus:ring-emerald-500/20 text-xs"
                     placeholder="React"
                   />
                   <button
@@ -366,7 +366,7 @@ export const HeroEditModal = ({
               <LinkIcon className="w-4 h-4" />
               Action Buttons
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <div className="space-y-4">
                 <h4 className="text-sm font-bold text-emerald-500">
                   Primary Button
@@ -528,7 +528,7 @@ export const HeroEditModal = ({
               {formData.techStack.map((stack, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-2 gap-4 relative group"
+                  className="bg-[#121A1C] p-4 rounded-lg border border-emerald-500/15 grid grid-cols-2 gap-4 relative group"
                 >
                   <div className="space-y-2">
                     <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
@@ -586,7 +586,7 @@ export const HeroEditModal = ({
               {formData.socialLinks.map((link, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-3 gap-4 relative group"
+                  className="bg-[#121A1C] p-4 rounded-lg border border-emerald-500/15 grid grid-cols-3 gap-4 relative group"
                 >
                   <div className="space-y-2">
                     <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
@@ -644,7 +644,7 @@ export const HeroEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-8 h-12 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer"
+              className="px-8 h-12 rounded-lg font-bold border-emerald-500/15 hover:bg-white/5 cursor-pointer"
             >
               Discard
             </Button>

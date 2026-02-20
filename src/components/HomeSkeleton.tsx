@@ -27,16 +27,16 @@ export default function HomeSkeleton() {
             {/* Buttons Skeleton */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <div className="h-12 w-40 bg-emerald-500/20 rounded-xl"></div>
-              <div className="h-12 w-40 bg-white/5 rounded-xl border border-white/10"></div>
+              <div className="h-12 w-40 bg-white/5 rounded-xl border border-emerald-500/15"></div>
             </div>
 
             {/* Tech Stack Skeleton */}
-            <div className="mt-12 pt-8 border-t border-white/5 w-full max-w-2xl">
+            <div className="mt-12 pt-8 border-t border-emerald-500/15 w-full max-w-2xl">
               <div className="h-3 w-24 bg-white/5 rounded-full mx-auto mb-6"></div>
               <div className="flex justify-center gap-8">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10"></div>
+                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-emerald-500/15"></div>
                     <div className="h-2 w-12 bg-white/5 rounded-full"></div>
                   </div>
                 ))}
@@ -58,7 +58,7 @@ export default function HomeSkeleton() {
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="h-48 bg-[#172023] rounded-3xl border border-white/5 p-8 space-y-6"
+                className="h-48 bg-[#172023] rounded-3xl border border-emerald-500/15 p-8 space-y-6"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-white/5"></div>
@@ -87,7 +87,7 @@ export default function HomeSkeleton() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-80 bg-[#121A1C] rounded-3xl border border-white/5 p-8 space-y-8"
+                className="h-80 bg-[#121A1C] rounded-3xl border border-emerald-500/15 p-8 space-y-8"
               >
                 <div className="w-16 h-16 rounded-2xl bg-white/5"></div>
                 <div className="space-y-4">
@@ -113,7 +113,7 @@ export default function HomeSkeleton() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-[450px] bg-[#172023] rounded-3xl border border-white/5 overflow-hidden flex flex-col"
+                className="h-[450px] bg-[#172023] rounded-3xl border border-emerald-500/15 overflow-hidden flex flex-col"
               >
                 <div className="h-56 bg-white/5"></div>
                 <div className="p-8 space-y-4 flex-1">

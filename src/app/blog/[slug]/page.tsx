@@ -108,7 +108,7 @@ export default function BlogDetailsPage() {
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm border-b border-white/5 pb-8">
+            <div className="flex flex-wrap items-center gap-6 text-slate-400 text-sm border-b border-emerald-500/15 pb-8">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-emerald-500" />
                 <span className="font-bold uppercase tracking-widest text-[10px]">
@@ -131,7 +131,7 @@ export default function BlogDetailsPage() {
           </div>
 
           {/* Feature Image */}
-          <div className="relative h-[400px] md:h-[600px] w-full mb-16 rounded-lg overflow-hidden border border-white/5">
+          <div className="relative h-[400px] md:h-[600px] w-full mb-16 rounded-lg overflow-hidden border border-emerald-500/15">
             <Image
               src={post.image}
               alt={post.title}
@@ -194,26 +194,26 @@ export default function BlogDetailsPage() {
           </div>
 
           {/* Footer of the article */}
-          <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="mt-20 pt-10 border-t border-emerald-500/15 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-4">
               <span className="text-xs font-black uppercase tracking-widest text-slate-500">
                 Share This:
               </span>
               <div className="flex gap-2">
                 <FacebookShareButton url={shareUrl} quote={post.title}>
-                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all cursor-pointer">
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all cursor-pointer">
                     <Facebook className="w-4 h-4" />
                   </div>
                 </FacebookShareButton>
 
                 <TwitterShareButton url={shareUrl} title={post.title}>
-                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all cursor-pointer">
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all cursor-pointer">
                     <Twitter className="w-4 h-4" />
                   </div>
                 </TwitterShareButton>
 
                 <LinkedinShareButton url={shareUrl}>
-                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all cursor-pointer">
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all cursor-pointer">
                     <Linkedin className="w-4 h-4" />
                   </div>
                 </LinkedinShareButton>
@@ -223,7 +223,7 @@ export default function BlogDetailsPage() {
                   title={post.title}
                   separator=":: "
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all cursor-pointer">
+                  <div className="w-10 h-10 rounded-lg bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all cursor-pointer">
                     <i className="fa-brands fa-whatsapp w-4 h-4 flex items-center justify-center" />
                   </div>
                 </WhatsappShareButton>
@@ -233,7 +233,7 @@ export default function BlogDetailsPage() {
                     navigator.clipboard.writeText(shareUrl);
                     toast.success("Link copied to clipboard!");
                   }}
-                  className="w-10 h-10 rounded-lg bg-[#121A1C] border border-white/5 flex items-center justify-center hover:bg-emerald-500 hover:text-black transition-all cursor-pointer"
+                  className="w-10 h-10 rounded-lg bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center hover:bg-emerald-500 hover:text-black transition-all cursor-pointer"
                   title="Copy Link"
                 >
                   <LinkIcon className="w-4 h-4" />

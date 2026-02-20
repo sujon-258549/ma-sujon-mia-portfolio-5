@@ -208,7 +208,7 @@ const ProjectsSection = ({
           {isAuthorized && (
             <button
               onClick={() => setIsHeaderModalOpen(true)}
-              className="absolute top-0 right-0 z-20 w-9 h-9 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90 opacity-0 group-hover/header:opacity-100"
+              className="absolute top-0 right-0 z-20 w-9 h-9 bg-black/50 backdrop-blur-md rounded-lg border border-emerald-500/15 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90 opacity-0 group-hover/header:opacity-100"
             >
               <i className="fa-solid fa-pen-to-square text-xs"></i>
             </button>
@@ -223,7 +223,7 @@ const ProjectsSection = ({
             </span>
           </div> */}
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/15 mb-4">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
             ></i>
@@ -247,7 +247,7 @@ const ProjectsSection = ({
             {displayedProjects.map((project, index) => (
               <Card
                 key={index}
-                className={`bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0 ${project.isActive === false ? "border-dashed border-red-500/30" : ""}`}
+                className={`bg-[#121A1C] border border-emerald-500/15 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0 ${project.isActive === false ? "border-dashed border-red-500/30" : ""}`}
               >
                 {/* Admin Individual Edit/Delete Buttons */}
                 {isAuthorized && (
@@ -259,7 +259,7 @@ const ProjectsSection = ({
                         setEditingProject(project);
                         setIsModalOpen(true);
                       }}
-                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-emerald-500/15 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
                       title="Edit Project"
                     >
                       <i className="fa-solid fa-pen-to-square text-xs"></i>
@@ -270,7 +270,7 @@ const ProjectsSection = ({
                         const projectId = project._id || project.id;
                         if (projectId) handleDeleteProject(projectId);
                       }}
-                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-emerald-500/15 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
                       title="Delete Project"
                     >
                       <i className="fa-solid fa-trash-can text-xs"></i>
@@ -280,7 +280,7 @@ const ProjectsSection = ({
 
                 {project.isActive === false && isAuthorized && (
                   <div className="absolute top-4 left-4 z-40">
-                    <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
+                    <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-emerald-500/15 uppercase text-[8px] font-black tracking-widest">
                       Draft
                     </Badge>
                   </div>
@@ -314,7 +314,7 @@ const ProjectsSection = ({
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
                         <Link
                           href={`/projects/${project.slug || project._id || project.id || index}`}
-                          className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
+                          className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-emerald-500/15 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
                         >
                           <i className="fa-solid fa-eye text-lg"></i>
                           View Case Study
@@ -348,14 +348,14 @@ const ProjectsSection = ({
                         <Badge
                           key={`${tag}-${idx}`}
                           variant="outline"
-                          className="bg-white/5 border-white/5 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
+                          className="bg-white/5 border-emerald-500/15 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
                         >
                           {tag}
                         </Badge>
                       ))}
                 </div>
 
-                <CardFooter className="p-4 sm:p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
+                <CardFooter className="p-4 sm:p-6 mt-auto border-t border-emerald-500/15 bg-black/20 grid grid-cols-2 gap-3">
                   <Link
                     href={project.liveUrl}
                     target="_blank"
@@ -367,7 +367,7 @@ const ProjectsSection = ({
                   <Link
                     href={project.githubUrl}
                     target="_blank"
-                    className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-[11px] rounded-md hover:bg-white/10 transition-all active:scale-95"
+                    className="flex items-center justify-center gap-2 bg-white/5 border border-emerald-500/15 text-white font-bold text-xs py-[11px] rounded-md hover:bg-white/10 transition-all active:scale-95"
                   >
                     <i className="fa-brands fa-github text-sm"></i>
                     View Code
@@ -381,7 +381,7 @@ const ProjectsSection = ({
             type="empty"
             title="No Projects Found"
             description="I haven't added any projects yet, or they are currently hidden."
-            className="bg-white/5 border-white/10"
+            className="bg-white/5 border-emerald-500/15"
           />
         )}
 

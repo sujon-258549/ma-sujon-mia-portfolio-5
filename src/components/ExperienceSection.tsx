@@ -100,7 +100,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
       <div className="main-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/15 mb-4">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
             ></i>
@@ -146,11 +146,11 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                         </p>
 
                         <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] sm:text-sm text-slate-400">
-                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/5">
+                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-emerald-500/15">
                             <i className="fa-solid fa-location-dot text-xs text-emerald-500/70"></i>
                             <span>{exp.location}</span>
                           </div>
-                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/5">
+                          <div className="flex items-center gap-1.5 bg-white/5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-emerald-500/15">
                             <i className="fa-solid fa-calendar text-xs text-emerald-500/70"></i>
                             <span>{exp.period}</span>
                           </div>
@@ -186,7 +186,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                     {exp.achievements.map((achievement, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-emerald-500/5 hover:border-emerald-500/20 transition-all group/ach"
+                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-emerald-500/15 hover:bg-emerald-500/5 hover:border-emerald-500/20 transition-all group/ach"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0 group-hover/ach:scale-125 transition-transform" />
                         <span className="text-sm text-slate-300 leading-relaxed">
@@ -209,7 +209,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                     {exp.responsibilities.map((responsibility, idx) => (
                       <div
                         key={idx}
-                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-white/5 hover:bg-sky-500/5 hover:border-sky-500/20 transition-all group/res"
+                        className="flex items-start gap-3 bg-white/5 p-4 rounded-xl border border-emerald-500/15 hover:bg-sky-500/5 hover:border-sky-500/20 transition-all group/res"
                       >
                         <div className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-2 shrink-0 group-hover/res:scale-125 transition-transform" />
                         <span className="text-sm text-slate-400 leading-relaxed">
@@ -221,7 +221,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                 </div>
 
                 {/* Technologies */}
-                <div className="lg:col-span-2 space-y-4 pt-4 border-t border-white/5">
+                <div className="lg:col-span-2 space-y-4 pt-4 border-t border-emerald-500/15">
                   <div className="flex items-center gap-2 mb-2">
                     <i className="fa-solid fa-code text-base text-amber-500"></i>
                     <h4 className="text-sm font-black text-slate-200 uppercase tracking-widest">
@@ -232,7 +232,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
                     {exp.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-4 py-2 bg-black/20 text-slate-300 text-xs font-bold rounded-lg border border-white/5 hover:border-amber-500/30 hover:text-amber-500 hover:bg-amber-500/5 transition-all cursor-default"
+                        className="px-4 py-2 bg-black/20 text-slate-300 text-xs font-bold rounded-lg border border-emerald-500/15 hover:border-amber-500/30 hover:text-amber-500 hover:bg-amber-500/5 transition-all cursor-default"
                       >
                         {tech}
                       </span>

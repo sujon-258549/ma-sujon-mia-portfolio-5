@@ -163,7 +163,7 @@ export const AboutEditModal = ({
               <Settings2 className="w-6 h-6 animate-spin-slow" />
               Customize About Section
             </DialogTitle>
-            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
+            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15 mr-8">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Section Status:
               </span>
@@ -193,7 +193,7 @@ export const AboutEditModal = ({
               Main Content
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Badge Text
@@ -205,7 +205,7 @@ export const AboutEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, badge: e.target.value })
                     }
-                    className="bg-black/40 border-white/5 h-12 rounded-lg pl-12 focus:ring-emerald-500/20 text-sm"
+                    className="bg-black/40 border-emerald-500/15 h-12 rounded-lg pl-12 focus:ring-emerald-500/20 text-sm"
                   />
                 </div>
               </div>
@@ -218,7 +218,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badgeIcon: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm font-mono"
                 />
               </div>
               <div className="space-y-2">
@@ -230,7 +230,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -242,7 +242,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleHighlight: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
                 />
               </div>
               <div className="space-y-2">
@@ -258,7 +258,7 @@ export const AboutEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -273,7 +273,7 @@ export const AboutEditModal = ({
               <User className="w-4 h-4" />
               Profile Card
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Full Name
@@ -283,7 +283,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -295,7 +295,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, role: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2 md:col-span-2">
@@ -307,7 +307,7 @@ export const AboutEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, image: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="https://example.com/image.png"
                 />
               </div>
@@ -336,7 +336,7 @@ export const AboutEditModal = ({
                   <Textarea
                     value={para}
                     onChange={(e) => updateParagraph(idx, e.target.value)}
-                    className="bg-[#121A1C] border-white/5 min-h-[100px] rounded-lg focus:ring-emerald-500/20 text-sm leading-relaxed"
+                    className="bg-[#121A1C] border-emerald-500/15 min-h-[100px] rounded-lg focus:ring-emerald-500/20 text-sm leading-relaxed"
                   />
                   <button
                     onClick={() => removeParagraph(idx)}
@@ -360,7 +360,7 @@ export const AboutEditModal = ({
                 {formData.stats.map((stat, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-2 gap-4"
+                    className="bg-[#121A1C] p-4 rounded-lg border border-emerald-500/15 grid grid-cols-2 gap-4"
                   >
                     <div className="space-y-2">
                       <Label className="text-[10px] text-slate-500 uppercase font-black ml-1">
@@ -428,7 +428,7 @@ export const AboutEditModal = ({
                 {formData.highlights.map((item, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#121A1C] p-4 rounded-lg border border-white/5 space-y-4 relative group"
+                    className="bg-[#121A1C] p-4 rounded-lg border border-emerald-500/15 space-y-4 relative group"
                   >
                     <button
                       type="button"
@@ -490,7 +490,7 @@ export const AboutEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-8 h-12 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer"
+              className="px-8 h-12 rounded-lg font-bold border-emerald-500/15 hover:bg-white/5 cursor-pointer"
             >
               Discard
             </Button>

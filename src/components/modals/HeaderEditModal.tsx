@@ -109,7 +109,7 @@ export const HeaderEditModal = ({
               Customize Header
             </DialogTitle>
             <div className="flex items-center gap-6 mr-8">
-              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                   Side Nav:
                 </span>
@@ -129,7 +129,7 @@ export const HeaderEditModal = ({
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+              <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                   Header:
                 </span>
@@ -160,7 +160,7 @@ export const HeaderEditModal = ({
               Logo Configuration
             </div>
 
-            <div className="bg-[#121A1C] p-6 rounded-lg border border-white/5 space-y-4">
+            <div className="bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15 space-y-4">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Logo URL
@@ -170,13 +170,13 @@ export const HeaderEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, logo: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="/logo.png or https://..."
                 />
 
                 {/* Logo Preview */}
                 {formData.logo && (
-                  <div className="mt-4 p-4 bg-black/30 rounded-lg border border-white/5 flex flex-col items-center gap-2">
+                  <div className="mt-4 p-4 bg-black/30 rounded-lg border border-emerald-500/15 flex flex-col items-center gap-2">
                     <p className="text-[10px] text-slate-500 uppercase font-black self-start tracking-widest">
                       Preview
                     </p>
@@ -209,7 +209,7 @@ export const HeaderEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, logoAlt: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   placeholder="Sujon Logo"
                 />
               </div>
@@ -228,7 +228,7 @@ export const HeaderEditModal = ({
                         logoWidth: parseInt(e.target.value) || 200,
                       })
                     }
-                    className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                    className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   />
                 </div>
                 <div className="space-y-2">
@@ -244,7 +244,7 @@ export const HeaderEditModal = ({
                         logoHeight: parseInt(e.target.value) || 50,
                       })
                     }
-                    className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                    className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                   />
                 </div>
               </div>
@@ -260,7 +260,7 @@ export const HeaderEditModal = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Primary Button */}
-              <div className="bg-[#121A1C] p-6 rounded-lg border border-white/5 space-y-4">
+              <div className="bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15 space-y-4">
                 <h4 className="text-sm font-bold text-emerald-500 uppercase tracking-wider">
                   Primary Button
                 </h4>
@@ -333,7 +333,7 @@ export const HeaderEditModal = ({
               </div>
 
               {/* Secondary Button */}
-              <div className="bg-[#121A1C] p-6 rounded-lg border border-white/5 space-y-4">
+              <div className="bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15 space-y-4">
                 <h4 className="text-sm font-bold text-sky-500 uppercase tracking-wider">
                   Secondary Button
                 </h4>
@@ -428,7 +428,7 @@ export const HeaderEditModal = ({
               {(formData.navLinks || []).map((link, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#121A1C] p-4 rounded-lg border border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4 relative group"
+                  className="bg-[#121A1C] p-4 rounded-lg border border-emerald-500/15 grid grid-cols-1 md:grid-cols-2 gap-4 relative group"
                 >
                   <div className="space-y-4 md:col-span-2">
                     <div className="grid grid-cols-2 gap-4">
@@ -517,7 +517,7 @@ export const HeaderEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-8 h-12 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer"
+              className="px-8 h-12 rounded-lg font-bold border-emerald-500/15 hover:bg-white/5 cursor-pointer"
             >
               Discard
             </Button>

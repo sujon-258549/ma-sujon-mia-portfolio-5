@@ -292,7 +292,7 @@ export const AddReviewModal = ({
                     onChange={(e) =>
                       setIdentity({ ...identity, name: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-300"
+                    className="bg-white/5 border-emerald-500/15 text-white placeholder:text-gray-300"
                     placeholder="John Doe"
                     required
                   />
@@ -307,7 +307,7 @@ export const AddReviewModal = ({
                     onChange={(e) =>
                       setIdentity({ ...identity, email: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-300"
+                    className="bg-white/5 border-emerald-500/15 text-white placeholder:text-gray-300"
                     placeholder="you@example.com"
                     required
                   />
@@ -319,7 +319,7 @@ export const AddReviewModal = ({
                   type="button"
                   variant="outline"
                   onClick={handleClose}
-                  className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
+                  className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </Button>
@@ -391,7 +391,7 @@ export const AddReviewModal = ({
                     className={`w-12 h-14 text-center text-2xl font-black rounded-xl border-2 bg-white/5 text-white outline-none transition-all duration-200 caret-emerald-500 ${
                       digit
                         ? "border-emerald-500 bg-emerald-500/10"
-                        : "border-white/10 focus:border-emerald-500/50"
+                        : "border-emerald-500/15 focus:border-emerald-500/50"
                     }`}
                   />
                 ))}
@@ -423,7 +423,7 @@ export const AddReviewModal = ({
                   type="button"
                   variant="outline"
                   onClick={() => setStep("identity")}
-                  className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
+                  className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
                 >
                   Back
                 </Button>
@@ -508,7 +508,7 @@ export const AddReviewModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, content: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white min-h-[120px] resize-none placeholder:text-gray-300"
+                  className="bg-white/5 border-emerald-500/15 text-white min-h-[120px] resize-none placeholder:text-gray-300"
                   placeholder="Share your honest experience working together..."
                   required
                 />
@@ -525,7 +525,7 @@ export const AddReviewModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, role: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-300"
+                    className="bg-white/5 border-emerald-500/15 text-white placeholder:text-gray-300"
                     placeholder="CEO, Developer, Designer..."
                   />
                 </div>
@@ -538,7 +538,7 @@ export const AddReviewModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, company: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-300"
+                    className="bg-white/5 border-emerald-500/15 text-white placeholder:text-gray-300"
                     placeholder="Your company name"
                   />
                 </div>
@@ -555,13 +555,13 @@ export const AddReviewModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-300"
+                  className="bg-white/5 border-emerald-500/15 text-white placeholder:text-gray-300"
                   placeholder="+880 1xxx-xxxxxx"
                 />
               </div>
 
               {/* Privacy note */}
-              <div className="flex items-start gap-3 p-4 rounded-lg bg-white/3 border border-white/5">
+              <div className="flex items-start gap-3 p-4 rounded-lg bg-white/3 border border-emerald-500/15">
                 <i className="fa-solid fa-lock text-slate-500 text-xs mt-0.5" />
                 <p className="text-[11px] text-slate-500 leading-relaxed">
                   Your email and phone are private and will never be shown
@@ -575,7 +575,7 @@ export const AddReviewModal = ({
                   type="button"
                   variant="outline"
                   onClick={handleClose}
-                  className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
+                  className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
                 >
                   Cancel
                 </Button>

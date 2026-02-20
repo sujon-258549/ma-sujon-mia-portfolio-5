@@ -102,8 +102,8 @@ export const ProfileModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-2xl bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
-        <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
+      <DialogContent className="sm:max-w-2xl bg-[#0E1416] border-emerald-500/15 text-white p-0 gap-0 overflow-hidden">
+        <DialogHeader className="px-6 py-4 border-b border-emerald-500/15 bg-white/5">
           <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-white">
             <UserIcon className="w-5 h-5 text-emerald-500" />
             Edit Profile
@@ -149,7 +149,7 @@ export const ProfileModal = ({
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Your Name"
                 required
               />
@@ -165,7 +165,7 @@ export const ProfileModal = ({
                 name="photo"
                 value={formData.photo}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                 placeholder="https://example.com/avatar.jpg"
               />
               <p className="text-xs text-slate-500">
@@ -182,13 +182,13 @@ export const ProfileModal = ({
                 name="bio"
                 value={formData.bio}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50 min-h-[100px]"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50 min-h-[100px]"
                 placeholder="Tell something about yourself..."
               />
             </div>
           </div>
 
-          <DialogFooter className="border-t border-white/10 pt-4 gap-2 sm:gap-0">
+          <DialogFooter className="border-t border-emerald-500/15 pt-4 gap-2 sm:gap-0">
             <Button
               type="button"
               variant="ghost"

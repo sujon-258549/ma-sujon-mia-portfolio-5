@@ -66,7 +66,7 @@ export default function ProjectDetailsClient({
             </div>
 
             {/* Smart Hero Image */}
-            <div className="relative aspect-21/9 w-full rounded-lg overflow-hidden border border-white/5 shadow-3xl group bg-[#121A1C]">
+            <div className="relative aspect-21/9 w-full rounded-lg overflow-hidden border border-emerald-500/15 shadow-3xl group bg-[#121A1C]">
               {project.image && !project.image.startsWith("bg-") ? (
                 <Image
                   src={project.image}
@@ -95,7 +95,7 @@ export default function ProjectDetailsClient({
                     </Button>
                   </Link>
                   <Link href={project.githubUrl} target="_blank">
-                    <Button className="bg-[#0E1416]/80 backdrop-blur-md text-white border border-white/10 hover:bg-white hover:text-[#0E1416] font-black px-6 h-12 rounded-xl transition-all cursor-pointer">
+                    <Button className="bg-[#0E1416]/80 backdrop-blur-md text-white border border-emerald-500/15 hover:bg-white hover:text-[#0E1416] font-black px-6 h-12 rounded-xl transition-all cursor-pointer">
                       <Github className="w-4 h-4 mr-2" />
                       Repository
                     </Button>
@@ -133,7 +133,7 @@ export default function ProjectDetailsClient({
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-medium">
                     {project.problem && (
-                      <div className="p-5 rounded-lg bg-[#121A1C] border border-white/5 space-y-2">
+                      <div className="p-5 rounded-lg bg-[#121A1C] border border-emerald-500/15 space-y-2">
                         <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
                           <Target className="w-5 h-5" />
                         </div>
@@ -144,7 +144,7 @@ export default function ProjectDetailsClient({
                       </div>
                     )}
                     {project.plan && (
-                      <div className="p-8 rounded-lg bg-[#121A1C] border border-white/5 space-y-4">
+                      <div className="p-8 rounded-lg bg-[#121A1C] border border-emerald-500/15 space-y-4">
                         <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
                           <Rocket className="w-5 h-5" />
                         </div>
@@ -169,7 +169,7 @@ export default function ProjectDetailsClient({
                     {project.features.map((feature, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-4 bg-[#121A1C] border border-white/5 rounded-lg hover:border-emerald-500/30 transition-all group/feat"
+                        className="flex items-center gap-3 p-4 bg-[#121A1C] border border-emerald-500/15 rounded-lg hover:border-emerald-500/30 transition-all group/feat"
                       >
                         <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                         <span className="text-slate-300 text-sm font-bold tracking-tight">
@@ -191,7 +191,7 @@ export default function ProjectDetailsClient({
                   {[1, 2].map((i) => (
                     <div
                       key={i}
-                      className="relative aspect-video rounded-lg overflow-hidden border border-white/5 group/gallery bg-[#121A1C]"
+                      className="relative aspect-video rounded-lg overflow-hidden border border-emerald-500/15 group/gallery bg-[#121A1C]"
                     >
                       {project.image && !project.image.startsWith("bg-") ? (
                         <Image
@@ -216,8 +216,8 @@ export default function ProjectDetailsClient({
             <div className="lg:col-span-4 space-y-4">
               <aside className="sticky top-24 space-y-4">
                 {/* Project Brief Card */}
-                <div className="bg-[#121A1C] border border-white/5 rounded-lg p-5 space-y-5 shadow-2xl">
-                  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 border-b border-white/5 pb-3">
+                <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-5 space-y-5 shadow-2xl">
+                  <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 border-b border-emerald-500/15 pb-3">
                     Project Intel
                   </h4>
 
@@ -255,7 +255,7 @@ export default function ProjectDetailsClient({
                         {allTechTags.map((tech, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1.5 bg-white/5 text-white border border-white/5 rounded-lg text-[10px] font-black uppercase tracking-wider"
+                            className="px-3 py-1.5 bg-white/5 text-white border border-emerald-500/15 rounded-lg text-[10px] font-black uppercase tracking-wider"
                           >
                             {tech}
                           </span>
@@ -266,7 +266,7 @@ export default function ProjectDetailsClient({
 
                   {/* Impact Stats */}
                   {project.stats && project.stats.length > 0 && (
-                    <div className="space-y-4 pt-4 border-t border-white/5">
+                    <div className="space-y-4 pt-4 border-t border-emerald-500/15">
                       <p className="text-[9px] font-black uppercase tracking-widest text-emerald-500">
                         Key Metrics
                       </p>
@@ -274,7 +274,7 @@ export default function ProjectDetailsClient({
                         {project.stats.map((stat, i) => (
                           <div
                             key={i}
-                            className="flex justify-between items-center p-3 bg-white/2 rounded-lg border border-white/5"
+                            className="flex justify-between items-center p-3 bg-white/2 rounded-lg border border-emerald-500/15"
                           >
                             <span className="text-[11px] font-bold text-slate-400">
                               {stat.label}
@@ -290,7 +290,7 @@ export default function ProjectDetailsClient({
 
                   {/* Team */}
                   {project.teamMembers && project.teamMembers.length > 0 && (
-                    <div className="space-y-4 pt-4 border-t border-white/5">
+                    <div className="space-y-4 pt-4 border-t border-emerald-500/15">
                       <p className="text-[9px] font-black uppercase tracking-widest text-slate-500">
                         Collaboration
                       </p>

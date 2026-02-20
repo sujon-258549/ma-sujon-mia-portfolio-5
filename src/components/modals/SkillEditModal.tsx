@@ -98,7 +98,7 @@ export const SkillEditModal = ({
                     setFormData({ ...formData, title: e.target.value })
                   }
                   placeholder="e.g. Frontend Development"
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -111,7 +111,7 @@ export const SkillEditModal = ({
                     setFormData({ ...formData, icon: e.target.value })
                   }
                   placeholder="Code2, Server, etc."
-                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-12 rounded-lg focus:ring-emerald-500/20 text-sm font-mono"
                 />
               </div>
             </div>
@@ -139,7 +139,7 @@ export const SkillEditModal = ({
                       value={skill}
                       onChange={(e) => updateSkill(index, e.target.value)}
                       placeholder="e.g. React"
-                      className="bg-white/5 border-white/5 h-10 rounded-lg text-xs"
+                      className="bg-white/5 border-emerald-500/15 h-10 rounded-lg text-xs"
                     />
                     <Button
                       type="button"
@@ -153,7 +153,7 @@ export const SkillEditModal = ({
                   </div>
                 ))}
                 {formData.skills.length === 0 && (
-                  <div className="text-center py-8 border-2 border-dashed border-white/5 rounded-lg text-slate-500 text-xs italic">
+                  <div className="text-center py-8 border-2 border-dashed border-emerald-500/15 rounded-lg text-slate-500 text-xs italic">
                     No skills added yet. Add your first skill!
                   </div>
                 )}
@@ -161,12 +161,12 @@ export const SkillEditModal = ({
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/5">
+          <div className="flex justify-end gap-3 pt-4 border-t border-emerald-500/15">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="px-6 h-11 rounded-lg font-bold border-white/10 hover:bg-white/5 cursor-pointer text-xs"
+              className="px-6 h-11 rounded-lg font-bold border-emerald-500/15 hover:bg-white/5 cursor-pointer text-xs"
             >
               Discard
             </Button>

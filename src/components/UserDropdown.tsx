@@ -44,10 +44,10 @@ export const UserDropdown = () => {
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-center p-1.5 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10 transition-all group"
+          className="flex items-center justify-center p-1.5 rounded-full hover:bg-white/5 border border-transparent hover:border-emerald-500/15 transition-all group"
           title={user.name}
         >
-          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/10 group-hover:border-emerald-500/50 transition-colors bg-emerald-500/5">
+          <div className="relative w-9 h-9 rounded-full overflow-hidden border border-emerald-500/15 group-hover:border-emerald-500/50 transition-colors bg-emerald-500/5">
             {user.photo ? (
               <Image
                 src={user.photo}
@@ -66,8 +66,8 @@ export const UserDropdown = () => {
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute right-0 top-full mt-2 w-56 bg-[#1C2629] border border-white/10 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
-            <div className="px-4 py-3 border-b border-white/5">
+          <div className="absolute right-0 top-full mt-2 w-56 bg-[#1C2629] border border-emerald-500/15 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
+            <div className="px-4 py-3 border-b border-emerald-500/15">
               <p className="text-sm font-bold text-white truncate">
                 {user.name}
               </p>
@@ -109,7 +109,7 @@ export const UserDropdown = () => {
               </button>
             </div>
 
-            <div className="border-t border-white/5 p-1">
+            <div className="border-t border-emerald-500/15 p-1">
               <button
                 onClick={handleLogout}
                 className="w-full text-left flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"

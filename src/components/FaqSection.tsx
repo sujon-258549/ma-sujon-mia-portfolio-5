@@ -122,9 +122,9 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
               <div
                 key={faq.id}
                 className={cn(
-                  "border border-white/5 rounded-2xl transition-all duration-300 overflow-hidden",
+                  "border border-emerald-500/15 rounded-2xl transition-all duration-300 overflow-hidden",
                   openId === faq.id
-                    ? "bg-white/5 border-white/10 ring-1 ring-white/10"
+                    ? "bg-white/5 border-emerald-500/15 ring-1 ring-white/10"
                     : "bg-white/2 hover:bg-white/4",
                 )}
               >
@@ -160,7 +160,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
                       : "max-h-0 opacity-0",
                   )}
                 >
-                  <p className="text-slate-400 text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                  <p className="text-slate-400 text-sm md:text-base leading-relaxed border-t border-emerald-500/15 pt-4">
                     {faq.answer}
                   </p>
                 </div>

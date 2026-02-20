@@ -317,7 +317,7 @@ export const ProjectEditModal = ({
               {mode === "edit" ? "Update Project Details" : "Add New Project"}
             </DialogTitle>
 
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Status:
               </span>
@@ -341,8 +341,8 @@ export const ProjectEditModal = ({
 
         <div className="flex-1 overflow-y-auto px-6 scrollbar-hide bg-[#0E1416]/50">
           <form onSubmit={handleSubmit} className="py-8 space-y-10 pb-24">
-            <div className="bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden shadow-2xl">
-              <div className="p-8 border-b border-white/5 bg-linear-to-br from-emerald-500/5 to-transparent">
+            <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg overflow-hidden shadow-2xl">
+              <div className="p-8 border-b border-emerald-500/15 bg-linear-to-br from-emerald-500/5 to-transparent">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                   <div className="lg:col-span-8 space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -354,7 +354,7 @@ export const ProjectEditModal = ({
                           type="text"
                           value={formData.sl}
                           onChange={(e) => updateField("sl", e.target.value)}
-                          className="bg-black/40 border-white/5 text-lg font-bold text-emerald-500 h-14 rounded-lg"
+                          className="bg-black/40 border-emerald-500/15 text-lg font-bold text-emerald-500 h-14 rounded-lg"
                         />
                       </div>
                       <div className="md:col-span-1 space-y-3">
@@ -375,7 +375,7 @@ export const ProjectEditModal = ({
                               updateField("slug", slug);
                             }
                           }}
-                          className="bg-black/40 border-white/5 text-lg font-bold text-white h-14 rounded-lg"
+                          className="bg-black/40 border-emerald-500/15 text-lg font-bold text-white h-14 rounded-lg"
                         />
                       </div>
                       <div className="md:col-span-1 space-y-3">
@@ -387,7 +387,7 @@ export const ProjectEditModal = ({
                           onChange={(e) =>
                             updateField("category", e.target.value)
                           }
-                          className="bg-black/40 border-white/5 text-emerald-500 font-bold h-14 rounded-lg"
+                          className="bg-black/40 border-emerald-500/15 text-emerald-500 font-bold h-14 rounded-lg"
                         />
                       </div>
                     </div>
@@ -399,7 +399,7 @@ export const ProjectEditModal = ({
                       <Input
                         value={formData.slug || ""}
                         onChange={(e) => updateField("slug", e.target.value)}
-                        className="bg-black/40 border-white/5 text-slate-400 font-mono h-14 rounded-lg"
+                        className="bg-black/40 border-emerald-500/15 text-slate-400 font-mono h-14 rounded-lg"
                         placeholder="project-title-slug"
                       />
                     </div>
@@ -416,7 +416,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               updateField("duration", e.target.value)
                             }
-                            className="bg-black/40 border-white/5 pl-12 h-14 rounded-lg"
+                            className="bg-black/40 border-emerald-500/15 pl-12 h-14 rounded-lg"
                             placeholder="e.g. 3 Months"
                           />
                         </div>
@@ -428,7 +428,7 @@ export const ProjectEditModal = ({
                         <Input
                           value={formData.role || ""}
                           onChange={(e) => updateField("role", e.target.value)}
-                          className="bg-black/40 border-white/5 text-sky-400 h-14 rounded-lg"
+                          className="bg-black/40 border-emerald-500/15 text-sky-400 h-14 rounded-lg"
                           placeholder="e.g. Lead Designer"
                         />
                       </div>
@@ -443,7 +443,7 @@ export const ProjectEditModal = ({
                         onChange={(e) =>
                           updateField("shortDescription", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 text-slate-300 min-h-[80px] rounded-lg"
+                        className="bg-black/40 border-emerald-500/15 text-slate-300 min-h-[80px] rounded-lg"
                         placeholder="Brief one-liner about the project..."
                       />
                     </div>
@@ -457,7 +457,7 @@ export const ProjectEditModal = ({
                         onChange={(e) =>
                           updateField("longDescription", e.target.value)
                         }
-                        className="bg-black/40 border-white/5 text-slate-300 min-h-[120px] rounded-lg"
+                        className="bg-black/40 border-emerald-500/15 text-slate-300 min-h-[120px] rounded-lg"
                         placeholder="Detailed description of the project..."
                       />
                     </div>
@@ -469,7 +469,7 @@ export const ProjectEditModal = ({
                       <Textarea
                         value={formData.problem}
                         onChange={(e) => updateField("problem", e.target.value)}
-                        className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                        className="bg-black/40 border-emerald-500/15 text-slate-300 min-h-[100px] rounded-lg"
                         placeholder="What problem does this project solve?"
                       />
                     </div>
@@ -481,14 +481,14 @@ export const ProjectEditModal = ({
                       <Textarea
                         value={formData.plan}
                         onChange={(e) => updateField("plan", e.target.value)}
-                        className="bg-black/40 border-white/5 text-slate-300 min-h-[100px] rounded-lg"
+                        className="bg-black/40 border-emerald-500/15 text-slate-300 min-h-[100px] rounded-lg"
                         placeholder="How was the project planned and executed?"
                       />
                     </div>
                   </div>
 
                   <div className="lg:col-span-4 space-y-6">
-                    <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-6">
+                    <div className="bg-black/40 p-6 rounded-lg border border-emerald-500/15 space-y-6">
                       <div className="space-y-3">
                         <Label className="flex items-center gap-2 text-[10px] text-slate-500 uppercase font-black tracking-widest">
                           <i className="fa-solid fa-globe text-xs"></i> Live
@@ -499,7 +499,7 @@ export const ProjectEditModal = ({
                           onChange={(e) =>
                             updateField("liveUrl", e.target.value)
                           }
-                          className="bg-white/5 border-white/5 text-sky-400 font-mono"
+                          className="bg-white/5 border-emerald-500/15 text-sky-400 font-mono"
                         />
                       </div>
                       <div className="space-y-3">
@@ -512,7 +512,7 @@ export const ProjectEditModal = ({
                           onChange={(e) =>
                             updateField("githubUrl", e.target.value)
                           }
-                          className="bg-white/5 border-white/5 text-slate-400 font-mono"
+                          className="bg-white/5 border-emerald-500/15 text-slate-400 font-mono"
                         />
                       </div>
                       <div className="space-y-3">
@@ -524,7 +524,7 @@ export const ProjectEditModal = ({
                           onChange={(e) =>
                             updateField("imageName", e.target.value)
                           }
-                          className="bg-white/5 border-white/5 text-white"
+                          className="bg-white/5 border-emerald-500/15 text-white"
                           placeholder="e.g. E-Commerce Dashboard Preview"
                         />
                       </div>
@@ -535,7 +535,7 @@ export const ProjectEditModal = ({
                         <Input
                           value={formData.image}
                           onChange={(e) => updateField("image", e.target.value)}
-                          className="bg-white/5 border-white/5 text-emerald-400 font-mono"
+                          className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono"
                           placeholder="bg-gradient-to-br from-... or image URL"
                         />
                       </div>
@@ -548,13 +548,13 @@ export const ProjectEditModal = ({
                           onChange={(e) =>
                             updateField("thumbnail", e.target.value)
                           }
-                          className="bg-white/5 border-white/5 text-sky-400 font-mono"
+                          className="bg-white/5 border-emerald-500/15 text-sky-400 font-mono"
                           placeholder="https://... thumbnail image"
                         />
                       </div>
                     </div>
 
-                    <div className="bg-black/40 p-6 rounded-lg border border-white/5 space-y-4">
+                    <div className="bg-black/40 p-6 rounded-lg border border-emerald-500/15 space-y-4">
                       <div className="flex items-center justify-between">
                         <Label className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[10px] tracking-widest">
                           <i className="fa-solid fa-users text-base"></i> Team
@@ -582,7 +582,7 @@ export const ProjectEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-white/5 border-white/5 h-9 text-xs"
+                              className="bg-white/5 border-emerald-500/15 h-9 text-xs"
                             />
                             <Button
                               type="button"
@@ -602,7 +602,7 @@ export const ProjectEditModal = ({
               </div>
 
               {/* Technologies Section - Many Options */}
-              <div className="p-8 border-b border-white/5 bg-black/10">
+              <div className="p-8 border-b border-emerald-500/15 bg-black/10">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="h-10 w-1 bg-emerald-500 rounded-full" />
                   <h3 className="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
@@ -636,7 +636,7 @@ export const ProjectEditModal = ({
                   ].map((cat) => (
                     <div
                       key={cat.id}
-                      className="bg-black/30 p-5 rounded-lg border border-white/5 space-y-4"
+                      className="bg-black/30 p-5 rounded-lg border border-emerald-500/15 space-y-4"
                     >
                       <div className="flex items-center justify-between">
                         <Label
@@ -683,7 +683,7 @@ export const ProjectEditModal = ({
                                   e.target.value,
                                 )
                               }
-                              className="bg-white/5 border-white/5 h-8 text-[10px]"
+                              className="bg-white/5 border-emerald-500/15 h-8 text-[10px]"
                               placeholder={`${cat.label} item...`}
                             />
                             <Button
@@ -731,7 +731,7 @@ export const ProjectEditModal = ({
                     {formData.detailedDescriptions?.map((desc, i) => (
                       <div
                         key={i}
-                        className="bg-black/30 p-6 rounded-lg border border-white/5 relative group"
+                        className="bg-black/30 p-6 rounded-lg border border-emerald-500/15 relative group"
                       >
                         <Button
                           type="button"
@@ -748,7 +748,7 @@ export const ProjectEditModal = ({
                               updateDetailedDesc(i, "title", e.target.value)
                             }
                             placeholder="Section Title..."
-                            className="bg-white/5 border-white/5 font-bold"
+                            className="bg-white/5 border-emerald-500/15 font-bold"
                           />
                           <Textarea
                             value={desc.content}
@@ -756,7 +756,7 @@ export const ProjectEditModal = ({
                               updateDetailedDesc(i, "content", e.target.value)
                             }
                             placeholder="Enter details..."
-                            className="bg-white/5 border-white/5 min-h-[120px]"
+                            className="bg-white/5 border-emerald-500/15 min-h-[120px]"
                           />
                         </div>
                       </div>
@@ -781,7 +781,7 @@ export const ProjectEditModal = ({
                         + Add
                       </Button>
                     </div>
-                    <div className="flex flex-wrap gap-2 p-4 bg-black/20 rounded-lg border border-white/5 min-h-[120px]">
+                    <div className="flex flex-wrap gap-2 p-4 bg-black/20 rounded-lg border border-emerald-500/15 min-h-[120px]">
                       {formData.tags.map((tag, idx) => (
                         <div key={idx} className="relative group/tag">
                           <Input
@@ -789,7 +789,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               handleArrayUpdate("tags", idx, e.target.value)
                             }
-                            className="bg-white/5 border-white/10 text-[10px] w-20 h-7 rounded-full text-center pr-6"
+                            className="bg-white/5 border-emerald-500/15 text-[10px] w-20 h-7 rounded-full text-center pr-6"
                           />
                           <button
                             type="button"
@@ -827,7 +827,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               handleArrayUpdate("challenges", i, e.target.value)
                             }
-                            className="bg-black/20 text-xs border-white/5"
+                            className="bg-black/20 text-xs border-emerald-500/15"
                           />
                           <Button
                             type="button"
@@ -867,7 +867,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               handleArrayUpdate("features", i, e.target.value)
                             }
-                            className="bg-black/20 text-xs border-white/5"
+                            className="bg-black/20 text-xs border-emerald-500/15"
                           />
                           <Button
                             type="button"
@@ -905,7 +905,7 @@ export const ProjectEditModal = ({
                     {formData.solutions?.map((sol, i) => (
                       <div
                         key={i}
-                        className="bg-black/30 p-4 rounded-lg border border-white/5 space-y-3 relative group/sol hover:border-green-500/20 transition-all"
+                        className="bg-black/30 p-4 rounded-lg border border-emerald-500/15 space-y-3 relative group/sol hover:border-green-500/20 transition-all"
                       >
                         <Button
                           type="button"
@@ -924,7 +924,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               updateSolution(i, "text", e.target.value)
                             }
-                            className="bg-white/5 border-white/5 h-9 text-xs"
+                            className="bg-white/5 border-emerald-500/15 h-9 text-xs"
                             placeholder="Solution description..."
                           />
                         </div>
@@ -938,7 +938,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               updateSolution(i, "image", e.target.value)
                             }
-                            className="bg-white/5 border-white/5 h-9 text-xs font-mono text-green-400"
+                            className="bg-white/5 border-emerald-500/15 h-9 text-xs font-mono text-green-400"
                             placeholder="https://... solution image"
                           />
                         </div>
@@ -970,7 +970,7 @@ export const ProjectEditModal = ({
                         <Input
                           value={img}
                           onChange={(e) => updateGalleryItem(i, e.target.value)}
-                          className="bg-black/20 text-xs border-white/5 font-mono"
+                          className="bg-black/20 text-xs border-emerald-500/15 font-mono"
                           placeholder="Image URL..."
                         />
                         <Button
@@ -1008,7 +1008,7 @@ export const ProjectEditModal = ({
                     {formData.stats?.map((stat, i) => (
                       <div
                         key={i}
-                        className="bg-black/30 p-4 rounded-lg border border-white/5 space-y-3 relative group/stat"
+                        className="bg-black/30 p-4 rounded-lg border border-emerald-500/15 space-y-3 relative group/stat"
                       >
                         <Button
                           type="button"
@@ -1027,7 +1027,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               updateStat(i, "label", e.target.value)
                             }
-                            className="bg-white/5 border-white/5 h-9 text-xs"
+                            className="bg-white/5 border-emerald-500/15 h-9 text-xs"
                             placeholder="e.g. Users, Downloads"
                           />
                         </div>
@@ -1040,7 +1040,7 @@ export const ProjectEditModal = ({
                             onChange={(e) =>
                               updateStat(i, "value", e.target.value)
                             }
-                            className="bg-white/5 border-white/5 h-9 text-xs text-rose-400 font-bold"
+                            className="bg-white/5 border-emerald-500/15 h-9 text-xs text-rose-400 font-bold"
                             placeholder="e.g. 10K+, 99%"
                           />
                         </div>
@@ -1051,12 +1051,12 @@ export const ProjectEditModal = ({
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-6 border-t border-white/5">
+            <div className="flex justify-end gap-3 pt-6 border-t border-emerald-500/15">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="px-8 h-12 rounded-lg font-bold border-white/10 cursor-pointer"
+                className="px-8 h-12 rounded-lg font-bold border-emerald-500/15 cursor-pointer"
               >
                 Discard
               </Button>

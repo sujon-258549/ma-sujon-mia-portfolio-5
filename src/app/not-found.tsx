@@ -55,7 +55,7 @@ export default function NotFound() {
 
           <button
             onClick={() => window.history.back()}
-            className="group px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg transition-all duration-300 border border-white/10 hover:border-emerald-500/50 active:scale-95 flex items-center gap-3"
+            className="group px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg transition-all duration-300 border border-emerald-500/15 hover:border-emerald-500/50 active:scale-95 flex items-center gap-3"
           >
             <i className="fa-solid fa-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i>
             <span>Go Back</span>
@@ -63,7 +63,7 @@ export default function NotFound() {
         </div>
 
         {/* Helpful Links */}
-        <div className="mt-12 pt-8 border-t border-white/5">
+        <div className="mt-12 pt-8 border-t border-emerald-500/15">
           <p className="text-slate-500 text-sm mb-4">
             You might be looking for:
           </p>
@@ -84,7 +84,7 @@ export default function NotFound() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 bg-white/5 hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-500 rounded-lg text-sm transition-all duration-300 border border-white/5 hover:border-emerald-500/30 flex items-center gap-2"
+                className="px-4 py-2 bg-white/5 hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-500 rounded-lg text-sm transition-all duration-300 border border-emerald-500/15 hover:border-emerald-500/30 flex items-center gap-2"
               >
                 <i className={`${link.icon} text-xs`}></i>
                 {link.name}

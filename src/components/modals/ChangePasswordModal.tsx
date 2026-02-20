@@ -69,8 +69,8 @@ export const ChangePasswordModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-lg bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
-        <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
+      <DialogContent className="sm:max-w-lg bg-[#0E1416] border-emerald-500/15 text-white p-0 gap-0 overflow-hidden">
+        <DialogHeader className="px-6 py-4 border-b border-emerald-500/15 bg-white/5">
           <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-emerald-500">
             <Lock className="w-5 h-5" />
             Change Password
@@ -89,7 +89,7 @@ export const ChangePasswordModal = ({
                 name="oldPassword"
                 value={formData.oldPassword}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Enter current password"
                 required
               />
@@ -105,7 +105,7 @@ export const ChangePasswordModal = ({
                 name="newPassword"
                 value={formData.newPassword}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Enter new password"
                 required
                 minLength={6}
@@ -122,7 +122,7 @@ export const ChangePasswordModal = ({
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                 placeholder="Confirm new password"
                 required
                 minLength={6}
@@ -137,7 +137,7 @@ export const ChangePasswordModal = ({
             </p>
           </div>
 
-          <DialogFooter className="border-t border-white/10 pt-4 gap-2 sm:gap-0">
+          <DialogFooter className="border-t border-emerald-500/15 pt-4 gap-2 sm:gap-0">
             <Button
               type="button"
               variant="ghost"

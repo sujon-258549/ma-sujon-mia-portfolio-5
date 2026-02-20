@@ -111,7 +111,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
       {isAuthorized && (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="absolute top-4 right-4 sm:top-10 sm:right-10 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-white/10"
+          className="absolute top-4 right-4 sm:top-10 sm:right-10 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-emerald-500/15"
           title="Edit Section"
         >
           <Settings2 className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -172,7 +172,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                 </div>
 
                 {/* Card */}
-                <div className="flex-1 bg-[#121A1C] border border-white/5 rounded-xl p-3.5 hover:border-emerald-500/20 transition-all duration-300">
+                <div className="flex-1 bg-[#121A1C] border border-emerald-500/15 rounded-xl p-3.5 hover:border-emerald-500/20 transition-all duration-300">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-9 h-9 shrink-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <i className={`${step.icon} text-emerald-500 text-sm`} />
@@ -215,7 +215,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                     // Even: Visual on left
                     <div className="w-full relative group">
                       {step.image ? (
-                        <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
+                        <div className="relative h-64 rounded-2xl overflow-hidden border border-emerald-500/15 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
                           <div className="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           <NextImage
                             src={step.image}
@@ -229,7 +229,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                           </div>
                         </div>
                       ) : (
-                        <div className="h-64 rounded-2xl bg-[#121A1C] border border-white/5 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
+                        <div className="h-64 rounded-2xl bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
                           <div className="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors duration-500" />
                           <i
                             className={`${step.icon} text-8xl text-emerald-500/10 group-hover:text-emerald-500/20 transition-all duration-500 transform group-hover:scale-110`}
@@ -271,7 +271,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                     // Odd: Visual on right
                     <div className="w-full relative group">
                       {step.image ? (
-                        <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
+                        <div className="relative h-64 rounded-2xl overflow-hidden border border-emerald-500/15 shadow-2xl group-hover:border-emerald-500/50 transition-all duration-500 group-hover:-translate-y-2">
                           <div className="absolute inset-0 bg-emerald-500/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           <NextImage
                             src={step.image}
@@ -285,7 +285,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
                           </div>
                         </div>
                       ) : (
-                        <div className="h-64 rounded-2xl bg-[#121A1C] border border-white/5 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
+                        <div className="h-64 rounded-2xl bg-[#121A1C] border border-emerald-500/15 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-all duration-500">
                           <div className="absolute inset-0 bg-emerald-500/5 group-hover:bg-emerald-500/10 transition-colors duration-500" />
                           <i
                             className={`${step.icon} text-8xl text-emerald-500/10 group-hover:text-emerald-500/20 transition-all duration-500 transform group-hover:scale-110`}

@@ -76,7 +76,7 @@ export default function BlogPageClient({
           </div>
 
           <div className="bg-[#172023] p-1.5 rounded-lg border border-white/3 flex items-center shadow-2xl">
-            <div className="flex items-center px-4 py-3 gap-3 border-r border-white/5">
+            <div className="flex items-center px-4 py-3 gap-3 border-r border-emerald-500/15">
               <SlidersHorizontal className="w-4 h-4 text-emerald-500" />
               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
                 Filters
@@ -129,7 +129,7 @@ export default function BlogPageClient({
                 >
                   {post.isActive === false && isAuthorized && (
                     <div className="absolute top-4 left-4 z-40">
-                      <Badge className="bg-black/60 backdrop-blur-md text-slate-500 border-white/10 uppercase text-[8px] font-black tracking-widest">
+                      <Badge className="bg-black/60 backdrop-blur-md text-slate-500 border-emerald-500/15 uppercase text-[8px] font-black tracking-widest">
                         Draft Archive
                       </Badge>
                     </div>
@@ -188,9 +188,9 @@ export default function BlogPageClient({
                     </CardDescription>
 
                     {/* Minimalist Action Bar */}
-                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div className="flex items-center justify-between pt-6 border-t border-emerald-500/15">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-emerald-500/60 border border-white/5">
+                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-emerald-500/60 border border-emerald-500/15">
                           <User className="w-5 h-5" />
                         </div>
                         <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
@@ -205,7 +205,7 @@ export default function BlogPageClient({
                         <span className="text-[10px] uppercase tracking-[0.2em]">
                           Read More
                         </span>
-                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all border border-white/10 group-hover:border-emerald-500 shadow-xl">
+                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all border border-emerald-500/15 group-hover:border-emerald-500 shadow-xl">
                           <ArrowRight className="w-5 h-5" />
                         </div>
                       </Link>

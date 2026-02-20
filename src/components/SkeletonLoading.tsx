@@ -1,6 +1,6 @@
 export function SkeletonCard() {
   return (
-    <div className="bg-[#172023] border border-white/5 rounded-lg p-6 animate-pulse">
+    <div className="bg-[#172023] border border-emerald-500/15 rounded-lg p-6 animate-pulse">
       {/* Header */}
       <div className="flex items-center gap-4 mb-4">
         <div className="w-12 h-12 bg-white/5 rounded-lg" />
@@ -102,7 +102,7 @@ export function SkeletonList() {
       {[1, 2, 3, 4].map((i) => (
         <div
           key={i}
-          className="bg-[#172023] border border-white/5 rounded-lg p-6 animate-pulse"
+          className="bg-[#172023] border border-emerald-500/15 rounded-lg p-6 animate-pulse"
         >
           <div className="flex items-start gap-4">
             <div className="w-16 h-16 bg-white/5 rounded-lg flex-shrink-0" />

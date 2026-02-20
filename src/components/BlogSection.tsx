@@ -197,7 +197,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
           {/* Section Settings Toggle */}
           <button
             onClick={() => setIsHeaderModalOpen(true)}
-            className="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-white/10"
+            className="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-emerald-500/15"
             title="Section Settings"
           >
             <Settings2 className="w-5 h-5" />
@@ -206,7 +206,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
           {/* Add Post Button */}
           <button
             onClick={openAddModal}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg font-black text-[10px] uppercase tracking-widest shadow-2xl hover:bg-emerald-500 transition-all cursor-pointer border-2 border-white/10"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg font-black text-[10px] uppercase tracking-widest shadow-2xl hover:bg-emerald-500 transition-all cursor-pointer border-2 border-emerald-500/15"
           >
             <Plus className="w-4 h-4" /> Add Chronicle
           </button>
@@ -276,7 +276,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
               {isAuthorized && (
                 <button
                   onClick={() => openEditModal(post)}
-                  className="absolute top-4 right-4 z-40 w-8 h-8 rounded-lg bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-emerald-500 hover:text-black cursor-pointer border border-white/10"
+                  className="absolute top-4 right-4 z-40 w-8 h-8 rounded-lg bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-emerald-500 hover:text-black cursor-pointer border border-emerald-500/15"
                 >
                   <Edit3 className="w-4 h-4" />
                 </button>
@@ -284,7 +284,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
 
               {!post.isActive && isAuthorized && (
                 <div className="absolute top-4 left-4 z-40">
-                  <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
+                  <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-emerald-500/15 uppercase text-[8px] font-black tracking-widest">
                     Draft
                   </Badge>
                 </div>
@@ -315,7 +315,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
                 </CardDescription>
 
                 {/* Minimalist Footer */}
-                <div className="flex items-center justify-between pt-5 border-t border-white/5">
+                <div className="flex items-center justify-between pt-5 border-t border-emerald-500/15">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-emerald-500/50">
                       <User className="w-4 h-4" />
@@ -359,7 +359,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
             {visibleCount > 3 && (
               <button
                 onClick={handleHideMore}
-                className="group relative inline-flex items-center gap-4 px-12 py-4 bg-[#1A2426] text-slate-400 font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:text-white border border-white/10 cursor-pointer active:scale-95 h-14"
+                className="group relative inline-flex items-center gap-4 px-12 py-4 bg-[#1A2426] text-slate-400 font-black text-[11px] uppercase tracking-[0.2em] overflow-hidden rounded-xl transition-all hover:text-white border border-emerald-500/15 cursor-pointer active:scale-95 h-14"
               >
                 <span>Hide More Blog</span>
                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all group-hover:bg-white/10">

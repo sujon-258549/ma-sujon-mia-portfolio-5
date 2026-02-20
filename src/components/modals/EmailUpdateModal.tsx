@@ -70,8 +70,8 @@ export const EmailUpdateModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-lg bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
-        <DialogHeader className="px-6 py-4 border-b border-white/10 bg-white/5">
+      <DialogContent className="sm:max-w-lg bg-[#0E1416] border-emerald-500/15 text-white p-0 gap-0 overflow-hidden">
+        <DialogHeader className="px-6 py-4 border-b border-emerald-500/15 bg-white/5">
           <DialogTitle className="text-lg font-semibold flex items-center gap-2 text-emerald-500">
             <Mail className="w-5 h-5" />
             Update Email Address
@@ -118,7 +118,7 @@ export const EmailUpdateModal = ({
                   type="email"
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
-                  className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50"
+                  className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50"
                   placeholder="Enter new email"
                   required
                 />
@@ -153,7 +153,7 @@ export const EmailUpdateModal = ({
                   type="text"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
-                  className="bg-black/40 border-white/10 text-white focus-visible:ring-emerald-500/50 text-center tracking-widest text-lg font-mono"
+                  className="bg-black/40 border-emerald-500/15 text-white focus-visible:ring-emerald-500/50 text-center tracking-widest text-lg font-mono"
                   placeholder="000000"
                   required
                   maxLength={6}

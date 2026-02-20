@@ -120,7 +120,7 @@ export const FaqSectionEditModal = ({
               <HelpCircle className="w-6 h-6" />
               FAQ Section Configuration
             </DialogTitle>
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15 mr-8">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Section Status:
               </span>
@@ -157,7 +157,7 @@ export const FaqSectionEditModal = ({
                 <div className="w-1 h-4 bg-emerald-500 rounded-full" />
                 Section Header
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest">
@@ -168,7 +168,7 @@ export const FaqSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white h-11"
+                      className="bg-white/5 border-emerald-500/15 text-white h-11"
                       placeholder="Common Questions"
                     />
                   </div>
@@ -181,7 +181,7 @@ export const FaqSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, subtitle: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white h-11"
+                      className="bg-white/5 border-emerald-500/15 text-white h-11"
                       placeholder="FAQ"
                     />
                   </div>
@@ -195,7 +195,7 @@ export const FaqSectionEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, description: e.target.value })
                     }
-                    className="bg-white/5 border-white/10 text-white min-h-[80px]"
+                    className="bg-white/5 border-emerald-500/15 text-white min-h-[80px]"
                     placeholder="Find answers to some of the most common questions..."
                   />
                 </div>
@@ -212,7 +212,7 @@ export const FaqSectionEditModal = ({
                         slNumber: parseInt(e.target.value) || 0,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-400 h-10 w-24 font-mono font-bold"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-400 h-10 w-24 font-mono font-bold"
                   />
                   <p className="text-[10px] text-slate-500 italic">
                     Lower numbers appear first on the home page.
@@ -242,7 +242,7 @@ export const FaqSectionEditModal = ({
 
               <div className="space-y-4">
                 {formData.faqs?.length === 0 && (
-                  <div className="text-center py-10 bg-[#121A1C] border border-dashed border-white/10 rounded-xl">
+                  <div className="text-center py-10 bg-[#121A1C] border border-dashed border-emerald-500/15 rounded-xl">
                     <p className="text-slate-500 text-sm">
                       No FAQ items added yet.
                     </p>
@@ -251,7 +251,7 @@ export const FaqSectionEditModal = ({
                 {formData.faqs?.map((faq, index) => (
                   <div
                     key={faq.id}
-                    className="bg-[#121A1C] border border-white/5 rounded-xl overflow-hidden group hover:border-emerald-500/30 transition-all shadow-xl"
+                    className="bg-[#121A1C] border border-emerald-500/15 rounded-xl overflow-hidden group hover:border-emerald-500/30 transition-all shadow-xl"
                   >
                     <div
                       className="p-4 flex items-center justify-between cursor-pointer bg-white/2"
@@ -291,7 +291,7 @@ export const FaqSectionEditModal = ({
                     </div>
 
                     {expandedIndex === index && (
-                      <div className="p-6 border-t border-white/5 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                      <div className="p-6 border-t border-emerald-500/15 space-y-4 animate-in slide-in-from-top-2 duration-300">
                         <div className="space-y-2">
                           <Label className="text-slate-400 font-bold uppercase text-[9px] tracking-[0.2em]">
                             Question
@@ -301,7 +301,7 @@ export const FaqSectionEditModal = ({
                             onChange={(e) =>
                               updateFaq(index, "question", e.target.value)
                             }
-                            className="bg-black/20 border-white/10 text-white"
+                            className="bg-black/20 border-emerald-500/15 text-white"
                             placeholder="e.g. How long does it take for a project?"
                           />
                         </div>
@@ -314,7 +314,7 @@ export const FaqSectionEditModal = ({
                             onChange={(e) =>
                               updateFaq(index, "answer", e.target.value)
                             }
-                            className="bg-black/20 border-white/10 text-white min-h-[100px]"
+                            className="bg-black/20 border-emerald-500/15 text-white min-h-[100px]"
                             placeholder="Provide a detailed answer here..."
                           />
                         </div>
@@ -332,7 +332,7 @@ export const FaqSectionEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold cursor-pointer"
             >
               Discard
             </Button>

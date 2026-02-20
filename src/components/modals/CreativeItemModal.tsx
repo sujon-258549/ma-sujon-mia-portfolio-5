@@ -75,7 +75,7 @@ export const CreativeItemModal = ({
       } else {
         // Add mode
 
-        console.log('item', formData)
+        console.log("item", formData);
         res = await creativeService.createItem(formData);
       }
 
@@ -101,8 +101,8 @@ export const CreativeItemModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[90%] w-[90%] h-[90%] flex flex-col bg-[#0E1416] border border-white/10 text-white p-0 overflow-hidden shadow-2xl rounded-2xl">
-        <DialogHeader className="p-6 border-b border-white/5 bg-[#121A1C]">
+      <DialogContent className="max-w-[90%] w-[90%] h-[90%] flex flex-col bg-[#0E1416] border border-emerald-500/15 text-white p-0 overflow-hidden shadow-2xl rounded-2xl">
+        <DialogHeader className="p-6 border-b border-emerald-500/15 bg-[#121A1C]">
           <DialogTitle className="text-xl font-bold flex items-center gap-2 text-white">
             <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
               {currentItem ? (
@@ -128,7 +128,7 @@ export const CreativeItemModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-[#121A1C] border-white/10 h-10 focus:border-emerald-500/50"
+                  className="bg-[#121A1C] border-emerald-500/15 h-10 focus:border-emerald-500/50"
                   placeholder="e.g. Neon Horizon"
                 />
               </div>
@@ -145,7 +145,7 @@ export const CreativeItemModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, icon: e.target.value })
                     }
-                    className="bg-[#121A1C] border-white/10 h-10 pl-9 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
+                    className="bg-[#121A1C] border-emerald-500/15 h-10 pl-9 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
                     placeholder="fa-solid fa-star"
                   />
                 </div>
@@ -163,7 +163,7 @@ export const CreativeItemModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, image: e.target.value })
                     }
-                    className="bg-[#121A1C] border-white/10 font-mono text-xs text-sky-400 focus:border-emerald-500/50"
+                    className="bg-[#121A1C] border-emerald-500/15 font-mono text-xs text-sky-400 focus:border-emerald-500/50"
                     placeholder="https://images.unsplash.com/..."
                   />
                   <div className="flex items-center gap-2 text-[10px] text-slate-500">
@@ -171,7 +171,7 @@ export const CreativeItemModal = ({
                     <span>Recommended size: 800x600px or larger</span>
                   </div>
                 </div>
-                <div className="w-24 h-16 bg-[#121A1C] border border-white/10 rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
+                <div className="w-24 h-16 bg-[#121A1C] border border-emerald-500/15 rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
                   {formData.image ? (
                     <Image
                       src={formData.image}
@@ -197,7 +197,7 @@ export const CreativeItemModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, link: e.target.value })
                 }
-                className="bg-[#121A1C] border-white/10 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
+                className="bg-[#121A1C] border-emerald-500/15 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
                 placeholder="https://..."
               />
             </div>
@@ -211,12 +211,12 @@ export const CreativeItemModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                className="bg-[#121A1C] border-white/10 min-h-[120px] text-sm leading-relaxed focus:border-emerald-500/50 resize-none"
+                className="bg-[#121A1C] border-emerald-500/15 min-h-[120px] text-sm leading-relaxed focus:border-emerald-500/50 resize-none"
                 placeholder="Describe your creative process..."
               />
             </div>
 
-            <div className="pt-4 flex justify-end gap-3 border-t border-white/5">
+            <div className="pt-4 flex justify-end gap-3 border-t border-emerald-500/15">
               <Button
                 type="button"
                 variant="ghost"

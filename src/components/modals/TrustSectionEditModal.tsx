@@ -137,7 +137,7 @@ export const TrustSectionEditModal = ({
               <ShieldCheck className="w-6 h-6" />
               Trust & Impact Control
             </DialogTitle>
-            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 mr-8">
+            <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15 mr-8">
               <Switch
                 checked={formData.isActive}
                 onCheckedChange={(checked) =>
@@ -175,7 +175,7 @@ export const TrustSectionEditModal = ({
           <form id="trust-edit-form" onSubmit={handleSubmit}>
             {activeTab === "general" && (
               <div className="space-y-6 animate-in fade-in duration-300">
-                <div className="bg-[#121A1C] border border-white/5 rounded-xl p-6 space-y-4 shadow-xl">
+                <div className="bg-[#121A1C] border border-emerald-500/15 rounded-xl p-6 space-y-4 shadow-xl">
                   <div className="space-y-2">
                     <Label className="text-slate-400 uppercase text-[10px] font-black">
                       Section Title
@@ -185,7 +185,7 @@ export const TrustSectionEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                       }
-                      className="bg-black/20 border-white/10 h-12 text-lg font-bold"
+                      className="bg-black/20 border-emerald-500/15 h-12 text-lg font-bold"
                     />
                   </div>
                   <div className="space-y-2">
@@ -200,7 +200,7 @@ export const TrustSectionEditModal = ({
                           description: e.target.value,
                         })
                       }
-                      className="bg-black/20 border-white/10 min-h-[100px]"
+                      className="bg-black/20 border-emerald-500/15 min-h-[100px]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -216,7 +216,7 @@ export const TrustSectionEditModal = ({
                           slNumber: parseInt(e.target.value) || 0,
                         })
                       }
-                      className="bg-black/20 border-white/10 h-10 w-24 font-mono text-emerald-500"
+                      className="bg-black/20 border-emerald-500/15 h-10 w-24 font-mono text-emerald-500"
                     />
                     <p className="text-[10px] text-slate-500 italic">
                       Lower numbers appear first on the home page.
@@ -245,7 +245,7 @@ export const TrustSectionEditModal = ({
                   {formData.brands?.map((brand, idx) => (
                     <div
                       key={idx}
-                      className="bg-[#121A1C] border border-white/5 rounded-xl p-4 relative group hover:border-emerald-500/30 transition-all"
+                      className="bg-[#121A1C] border border-emerald-500/15 rounded-xl p-4 relative group hover:border-emerald-500/30 transition-all"
                     >
                       <button
                         type="button"
@@ -261,7 +261,7 @@ export const TrustSectionEditModal = ({
                           onChange={(e) =>
                             updateBrand(idx, "name", e.target.value)
                           }
-                          className="bg-black/20 border-white/10 h-9 text-xs"
+                          className="bg-black/20 border-emerald-500/15 h-9 text-xs"
                         />
                         <Input
                           placeholder="Logo URL"
@@ -269,7 +269,7 @@ export const TrustSectionEditModal = ({
                           onChange={(e) =>
                             updateBrand(idx, "image", e.target.value)
                           }
-                          className="bg-black/20 border-white/10 h-9 text-[10px] font-mono"
+                          className="bg-black/20 border-emerald-500/15 h-9 text-[10px] font-mono"
                         />
                         {brand.image && (
                           <div className="h-12 w-full bg-white/5 rounded flex items-center justify-center p-2 invert brightness-0">
@@ -296,7 +296,7 @@ export const TrustSectionEditModal = ({
                   {formData.stats?.map((stat, idx) => (
                     <div
                       key={idx}
-                      className="bg-[#121A1C] border border-white/5 rounded-xl p-6 space-y-4"
+                      className="bg-[#121A1C] border border-emerald-500/15 rounded-xl p-6 space-y-4"
                     >
                       <div className="flex items-center gap-3 mb-2">
                         <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
@@ -319,7 +319,7 @@ export const TrustSectionEditModal = ({
                             onChange={(e) =>
                               updateStat(idx, "value", e.target.value)
                             }
-                            className="bg-black/20 border-white/10"
+                            className="bg-black/20 border-emerald-500/15"
                           />
                         </div>
                         <div className="space-y-2">
@@ -331,7 +331,7 @@ export const TrustSectionEditModal = ({
                             onChange={(e) =>
                               updateStat(idx, "label", e.target.value)
                             }
-                            className="bg-black/20 border-white/10"
+                            className="bg-black/20 border-emerald-500/15"
                           />
                         </div>
                       </div>
@@ -347,7 +347,7 @@ export const TrustSectionEditModal = ({
           <Button
             variant="outline"
             onClick={onClose}
-            className="border-white/10 text-white hover:bg-white/5"
+            className="border-emerald-500/15 text-white hover:bg-white/5"
           >
             Discard
           </Button>

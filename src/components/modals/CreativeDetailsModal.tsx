@@ -53,7 +53,7 @@ export const CreativeDetailsModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-6xl!  h-[95%] p-0 bg-[#0E1416] border border-white/10 text-white overflow-hidden shadow-2xl rounded-2xl outline-none flex flex-col md:flex-row">
+      <DialogContent className="max-w-6xl!  h-[95%] p-0 bg-[#0E1416] border border-emerald-500/15 text-white overflow-hidden shadow-2xl rounded-2xl outline-none flex flex-col md:flex-row">
         {/* Close Button - Simple & Accessible */}
         <button
           onClick={handleClose}
@@ -63,7 +63,7 @@ export const CreativeDetailsModal = ({
         </button>
 
         {/* Left Side - Large Visual */}
-        <div className="w-full md:w-1/2 h-[40%] md:h-full relative bg-[#121A1C] border-r border-white/5">
+        <div className="w-full md:w-1/2 h-[40%] md:h-full relative bg-[#121A1C] border-r border-emerald-500/15">
           {item.image ? (
             <Image
               src={item.image}
@@ -104,7 +104,7 @@ export const CreativeDetailsModal = ({
                 {item.description}
               </p>
 
-              <div className="p-6 rounded-xl bg-white/5 border border-white/5 space-y-2">
+              <div className="p-6 rounded-xl bg-white/5 border border-emerald-500/15 space-y-2">
                 <h4 className="text-sm font-bold text-white uppercase tracking-wider">
                   About this piece
                 </h4>
@@ -118,7 +118,7 @@ export const CreativeDetailsModal = ({
           </div>
 
           {/* Footer Actions */}
-          <div className="p-8 border-t border-white/10 bg-[#121A1C] min-h-[110px] flex items-center">
+          <div className="p-8 border-t border-emerald-500/15 bg-[#121A1C] min-h-[110px] flex items-center">
             {isSharing ? (
               <div className="w-full flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-2">
                 <div className="flex items-center justify-between">
@@ -209,7 +209,7 @@ export const CreativeDetailsModal = ({
                 ) : (
                   <Button
                     disabled
-                    className="flex-1 bg-white/5 text-slate-500 h-12 rounded-lg border border-white/5"
+                    className="flex-1 bg-white/5 text-slate-500 h-12 rounded-lg border border-emerald-500/15"
                   >
                     No Link Available
                   </Button>
@@ -217,7 +217,7 @@ export const CreativeDetailsModal = ({
 
                 <Button
                   variant="outline"
-                  className="h-12 w-12 p-0 rounded-lg border-white/10 bg-transparent hover:bg-white/5 text-white"
+                  className="h-12 w-12 p-0 rounded-lg border-emerald-500/15 bg-transparent hover:bg-white/5 text-white"
                   onClick={() => setIsSharing(true)}
                   title="Share"
                 >

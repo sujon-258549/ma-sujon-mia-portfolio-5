@@ -127,7 +127,7 @@ export default function Error({
 
           <Link
             href="/"
-            className="group px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg transition-all duration-300 border border-white/10 hover:border-emerald-500/50 active:scale-95 flex items-center gap-3 min-w-[200px]"
+            className="group px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg transition-all duration-300 border border-emerald-500/15 hover:border-emerald-500/50 active:scale-95 flex items-center gap-3 min-w-[200px]"
           >
             <i className="fa-solid fa-house text-lg group-hover:scale-110 transition-transform"></i>
             <span>Go Home</span>
@@ -135,7 +135,7 @@ export default function Error({
         </div>
 
         {/* Auto-refresh Countdown */}
-        <div className="mb-8 p-4 bg-white/5 border border-white/10 rounded-lg">
+        <div className="mb-8 p-4 bg-white/5 border border-emerald-500/15 rounded-lg">
           <div className="flex items-center justify-center gap-3">
             <i className="fa-solid fa-clock text-emerald-500"></i>
             <p className="text-slate-400 text-sm">
@@ -175,7 +175,7 @@ export default function Error({
           ].map((tip, i) => (
             <div
               key={i}
-              className="p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all"
+              className="p-4 bg-white/5 border border-emerald-500/15 rounded-lg hover:bg-white/10 transition-all"
             >
               <i className={`${tip.icon} text-2xl text-emerald-500 mb-2`}></i>
               <h4 className="text-sm font-bold text-white mb-1">{tip.title}</h4>
@@ -185,7 +185,7 @@ export default function Error({
         </div>
 
         {/* Help Section */}
-        <div className="pt-8 border-t border-white/5">
+        <div className="pt-8 border-t border-emerald-500/15">
           <p className="text-slate-500 text-sm mb-4">
             Still having issues? We&apos;re here to help!
           </p>
@@ -206,7 +206,7 @@ export default function Error({
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 bg-white/5 hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-500 rounded-lg text-sm transition-all duration-300 border border-white/5 hover:border-emerald-500/30 flex items-center gap-2"
+                className="px-4 py-2 bg-white/5 hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-500 rounded-lg text-sm transition-all duration-300 border border-emerald-500/15 hover:border-emerald-500/30 flex items-center gap-2"
               >
                 <i className={`${link.icon} text-xs`}></i>
                 {link.name}

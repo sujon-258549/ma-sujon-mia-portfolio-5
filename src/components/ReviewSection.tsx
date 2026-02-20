@@ -177,7 +177,7 @@ const ReviewSection = ({
         <button
           type="button"
           onClick={() => setIsEditHeaderOpen(true)}
-          className="absolute top-4 right-4 sm:top-10 sm:right-10 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-white/10"
+          className="absolute top-4 right-4 sm:top-10 sm:right-10 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 transition-all cursor-pointer border-2 border-emerald-500/15"
           title="Edit Section Header"
         >
           <Settings2 className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -260,7 +260,7 @@ const ReviewSection = ({
                       className={`relative bg-[#1A2325] border rounded-2xl p-5 sm:p-8 flex flex-col transition-all duration-500 ${
                         cardRole === "center"
                           ? "border-emerald-500/30 shadow-2xl shadow-emerald-500/10"
-                          : "border-white/5 cursor-pointer"
+                          : "border-emerald-500/15 cursor-pointer"
                       }`}
                       onClick={() => cardRole !== "center" && goTo(idx)}
                     >
@@ -272,7 +272,7 @@ const ReviewSection = ({
                             e.stopPropagation();
                             handleDeleteReview(review);
                           }}
-                          className="absolute top-4 right-4 z-20 w-8 h-8 bg-black/50 rounded-lg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer"
+                          className="absolute top-4 right-4 z-20 w-8 h-8 bg-black/50 rounded-lg border border-emerald-500/15 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer"
                           title="Delete Review"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -314,7 +314,7 @@ const ReviewSection = ({
                       </div>
 
                       {/* Reviewer */}
-                      <div className="flex items-center gap-4 pt-5 border-t border-white/5">
+                      <div className="flex items-center gap-4 pt-5 border-t border-emerald-500/15">
                         <div className="w-12 h-12 rounded-full shrink-0 bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-lg">
                           {review.name.charAt(0).toUpperCase()}
                         </div>
@@ -341,7 +341,7 @@ const ReviewSection = ({
               <button
                 type="button"
                 onClick={prev}
-                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500 hover:border-emerald-500 hover:text-black text-slate-400 flex items-center justify-center transition-all duration-300 cursor-pointer active:scale-90"
+                className="w-11 h-11 rounded-full bg-white/5 border border-emerald-500/15 hover:bg-emerald-500 hover:border-emerald-500 hover:text-black text-slate-400 flex items-center justify-center transition-all duration-300 cursor-pointer active:scale-90"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -366,7 +366,7 @@ const ReviewSection = ({
               <button
                 type="button"
                 onClick={next}
-                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:bg-emerald-500 hover:border-emerald-500 hover:text-black text-slate-400 flex items-center justify-center transition-all duration-300 cursor-pointer active:scale-90"
+                className="w-11 h-11 rounded-full bg-white/5 border border-emerald-500/15 hover:bg-emerald-500 hover:border-emerald-500 hover:text-black text-slate-400 flex items-center justify-center transition-all duration-300 cursor-pointer active:scale-90"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

@@ -171,7 +171,7 @@ export const ServicesSectionEditModal = ({
               Section Branding
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-2xl border border-white/5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#121A1C] p-6 rounded-2xl border border-emerald-500/15">
               <div className="space-y-2">
                 <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
                   Badge
@@ -181,7 +181,7 @@ export const ServicesSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, badge: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-11"
+                  className="bg-black/40 border-emerald-500/15 h-11"
                 />
               </div>
               <div className="space-y-2">
@@ -193,7 +193,7 @@ export const ServicesSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-11"
+                  className="bg-black/40 border-emerald-500/15 h-11"
                 />
               </div>
               <div className="space-y-2">
@@ -205,7 +205,7 @@ export const ServicesSectionEditModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, titleHighlight: e.target.value })
                   }
-                  className="bg-black/40 border-white/5 h-11 text-emerald-500 font-bold"
+                  className="bg-black/40 border-emerald-500/15 h-11 text-emerald-500 font-bold"
                 />
               </div>
               <div className="space-y-2">
@@ -221,7 +221,7 @@ export const ServicesSectionEditModal = ({
                       slNumber: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="bg-black/40 border-white/5 h-11 text-emerald-500 font-mono"
+                  className="bg-black/40 border-emerald-500/15 h-11 text-emerald-500 font-mono"
                 />
                 <p className="text-[10px] text-slate-500 italic">
                   Lower numbers appear first on the home page.
@@ -250,7 +250,7 @@ export const ServicesSectionEditModal = ({
               {formData.services.map((service, idx) => (
                 <div
                   key={service.id}
-                  className="bg-[#121A1C] border border-white/5 rounded-2xl p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300"
+                  className="bg-[#121A1C] border border-emerald-500/15 rounded-2xl p-6 relative group border-t-4 border-t-emerald-500/20 hover:border-t-emerald-500 transition-all duration-300"
                 >
                   <button
                     onClick={() => removeService(idx)}
@@ -269,7 +269,7 @@ export const ServicesSectionEditModal = ({
                         onChange={(e) =>
                           updateService(idx, "title", e.target.value)
                         }
-                        className="bg-black/20 border-white/5 h-10 text-sm font-bold"
+                        className="bg-black/20 border-emerald-500/15 h-10 text-sm font-bold"
                       />
                     </div>
                     <div className="space-y-2">
@@ -281,7 +281,7 @@ export const ServicesSectionEditModal = ({
                         onChange={(e) =>
                           updateService(idx, "icon", e.target.value)
                         }
-                        className="bg-black/20 border-white/5 h-10 text-xs font-mono"
+                        className="bg-black/20 border-emerald-500/15 h-10 text-xs font-mono"
                       />
                     </div>
                   </div>
@@ -295,7 +295,7 @@ export const ServicesSectionEditModal = ({
                       onChange={(e) =>
                         updateService(idx, "description", e.target.value)
                       }
-                      className="bg-black/20 border-white/5 min-h-[80px] text-xs resize-none"
+                      className="bg-black/20 border-emerald-500/15 min-h-[80px] text-xs resize-none"
                     />
                   </div>
 
@@ -318,7 +318,7 @@ export const ServicesSectionEditModal = ({
                       {service.features?.map((feature, fIdx) => (
                         <div
                           key={fIdx}
-                          className="flex items-center gap-2 bg-black/40 rounded-lg p-1 px-3 border border-white/5"
+                          className="flex items-center gap-2 bg-black/40 rounded-lg p-1 px-3 border border-emerald-500/15"
                         >
                           <input
                             value={feature}
@@ -347,7 +347,7 @@ export const ServicesSectionEditModal = ({
           <Button
             variant="outline"
             onClick={onClose}
-            className="h-11 px-8 rounded-xl border-white/10 hover:bg-white/5 text-xs font-bold transition-all"
+            className="h-11 px-8 rounded-xl border-emerald-500/15 hover:bg-white/5 text-xs font-bold transition-all"
           >
             Discard Changes
           </Button>

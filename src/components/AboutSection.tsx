@@ -157,7 +157,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
               {aboutData.stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-lg sm:rounded-xl p-2.5 sm:p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all duration-300 group/stat"
+                  className="bg-white/5 border border-emerald-500/15 rounded-lg sm:rounded-xl p-2.5 sm:p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/40 hover:bg-white/[0.07] transition-all duration-300 group/stat"
                 >
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mb-1.5 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300">
                     <i
@@ -209,7 +209,7 @@ const AboutSection = ({ initialData }: AboutSectionProps) => {
             </div>
 
             {/* Highlights Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-5 sm:pt-6 border-t border-white/10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-5 sm:pt-6 border-t border-emerald-500/15">
               {aboutData.highlights.map((item, idx) => (
                 <div
                   key={idx}

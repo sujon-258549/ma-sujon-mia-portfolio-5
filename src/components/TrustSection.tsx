@@ -187,7 +187,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
                 </p>
               </div>
 
-              <div className="pt-8 sm:pt-12 border-t border-white/5">
+              <div className="pt-8 sm:pt-12 border-t border-emerald-500/15">
                 <p className="text-slate-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] mb-8 text-center lg:text-left">
                   Premium Brand Partners
                 </p>

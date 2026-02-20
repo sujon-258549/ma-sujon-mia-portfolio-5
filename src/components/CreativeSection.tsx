@@ -136,7 +136,7 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
               setEditingItem(null);
               setIsItemModalOpen(true);
             }}
-            className="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all border border-white/10 group"
+            className="w-12 h-12 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-lg hover:bg-emerald-400 hover:scale-105 transition-all border border-emerald-500/15 group"
             title="Add New Project"
           >
             <Plus className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
@@ -250,7 +250,7 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
                         </div>
 
                         {/* Icon Bubble - overlapping */}
-                        <div className="absolute top-[50%] md:top-[55%] left-6 md:left-8 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#0E1416] border border-white/10 flex items-center justify-center z-20 shadow-xl group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-500">
+                        <div className="absolute top-[50%] md:top-[55%] left-6 md:left-8 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#0E1416] border border-emerald-500/15 flex items-center justify-center z-20 shadow-xl group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-500">
                           <i
                             className={`${item.icon || "fa-solid fa-star"} text-base md:text-lg text-emerald-500 group-hover:rotate-12 transition-transform duration-500`}
                           />
@@ -278,14 +278,14 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
                               setEditingItem(item);
                               setIsItemModalOpen(true);
                             }}
-                            className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-white flex items-center justify-center hover:bg-emerald-500 hover:text-[#0E1416] transition-all border border-white/10 shadow-lg"
+                            className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-white flex items-center justify-center hover:bg-emerald-500 hover:text-[#0E1416] transition-all border border-emerald-500/15 shadow-lg"
                             title="Edit Project"
                           >
                             <PenSquare className="w-4 h-4" />
                           </button>
                           <button
                             onClick={(e) => handleDeleteItem(e, item.id!)}
-                            className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-white/10 shadow-lg"
+                            className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-emerald-500/15 shadow-lg"
                             title="Delete Project"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -301,7 +301,7 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
                 type="empty"
                 title="No Creative Items Found"
                 description="There are currently no creative items to display. Check back later!"
-                className="min-h-[400px] bg-white/5 border-white/10"
+                className="min-h-[400px] bg-white/5 border-emerald-500/15"
               />
             )}
           </div>

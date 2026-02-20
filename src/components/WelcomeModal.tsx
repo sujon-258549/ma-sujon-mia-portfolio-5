@@ -128,7 +128,7 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
             setIsManuallyClosed(false);
             setProgress(100);
           }}
-          className="fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 hover:scale-110 transition-all border-2 border-white/10"
+          className="fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-2xl hover:bg-emerald-400 hover:scale-110 transition-all border-2 border-emerald-500/15"
           title="Show Welcome Modal Settings"
         >
           <Settings2 className="w-5 h-5 animate-spin-slow" />
@@ -158,7 +158,7 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
                     setIsVisible(false);
                     setIsEditOpen(true);
                   }}
-                  className="absolute -top-3 -right-3 z-50 w-8 h-8 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-xl hover:scale-110 transition-transform cursor-pointer border-2 border-white/10 opacity-0 group-hover/modal:opacity-100"
+                  className="absolute -top-3 -right-3 z-50 w-8 h-8 rounded-full bg-emerald-500 text-black flex items-center justify-center shadow-xl hover:scale-110 transition-transform cursor-pointer border-2 border-emerald-500/15 opacity-0 group-hover/modal:opacity-100"
                   title="Edit Content"
                 >
                   <Settings2 className="w-4 h-4" />
@@ -180,7 +180,7 @@ export const WelcomeModal = ({ initialData }: WelcomeModalProps) => {
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="absolute top-3 right-3 z-50 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-500 hover:text-white transition-all cursor-pointer"
+                  className="absolute top-3 right-3 z-50 w-7 h-7 rounded-full bg-white/5 hover:bg-white/10 border border-emerald-500/15 flex items-center justify-center text-slate-500 hover:text-white transition-all cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

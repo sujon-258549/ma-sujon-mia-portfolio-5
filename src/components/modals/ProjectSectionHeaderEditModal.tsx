@@ -93,7 +93,7 @@ export const ProjectSectionHeaderEditModal = ({
               <div className="w-2 h-8 bg-emerald-500 rounded-full" />
               Edit Project Section Header
             </DialogTitle>
-            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-emerald-500/15">
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Visibility:
               </span>
@@ -123,7 +123,7 @@ export const ProjectSectionHeaderEditModal = ({
                 <i className="fa-solid fa-trophy"></i>
                 <span>Counter Badge</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="space-y-2">
                   <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
                     <i className="fa-solid fa-hashtag text-emerald-500/70"></i>
@@ -137,7 +137,7 @@ export const ProjectSectionHeaderEditModal = ({
                         completedCount: e.target.value,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-bold text-lg h-12"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold text-lg h-12"
                     placeholder="90+"
                   />
                 </div>
@@ -155,7 +155,7 @@ export const ProjectSectionHeaderEditModal = ({
                         slNumber: parseInt(e.target.value) || 0,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                    className="bg-white/5 border-emerald-500/15 text-emerald-500 font-mono h-10 w-24"
                   />
                   <p className="text-[10px] text-slate-500 italic">
                     Lower numbers appear first on the home page.
@@ -163,7 +163,7 @@ export const ProjectSectionHeaderEditModal = ({
                 </div>
 
                 {/* Live Preview */}
-                <div className="mt-4 p-4 bg-black/30 rounded-lg border border-white/5">
+                <div className="mt-4 p-4 bg-black/30 rounded-lg border border-emerald-500/15">
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-3">
                     Live Preview
                   </p>
@@ -188,7 +188,7 @@ export const ProjectSectionHeaderEditModal = ({
                 <i className="fa-solid fa-tag"></i>
                 <span>Section Badge</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
@@ -200,7 +200,7 @@ export const ProjectSectionHeaderEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, badge: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white h-10 text-sm"
+                      className="bg-white/5 border-emerald-500/15 text-white h-10 text-sm"
                       placeholder="Featured Projects"
                     />
                   </div>
@@ -214,19 +214,19 @@ export const ProjectSectionHeaderEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, badgeIcon: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-emerald-400 font-mono text-xs h-10"
+                      className="bg-white/5 border-emerald-500/15 text-emerald-400 font-mono text-xs h-10"
                       placeholder="fa-solid fa-rocket"
                     />
                   </div>
                 </div>
 
                 {/* Live Preview */}
-                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-white/5">
+                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-emerald-500/15">
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-3">
                     Live Preview
                   </p>
                   <div className="flex items-center justify-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/15">
                       <i
                         className={`${formData.badgeIcon} text-xs text-emerald-500`}
                       ></i>
@@ -245,7 +245,7 @@ export const ProjectSectionHeaderEditModal = ({
                 <i className="fa-solid fa-heading"></i>
                 <span>Section Title</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
@@ -257,7 +257,7 @@ export const ProjectSectionHeaderEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, title: e.target.value })
                       }
-                      className="bg-white/5 border-white/10 text-white font-bold h-12 text-lg"
+                      className="bg-white/5 border-emerald-500/15 text-white font-bold h-12 text-lg"
                       placeholder="My Creative"
                     />
                   </div>
@@ -274,14 +274,14 @@ export const ProjectSectionHeaderEditModal = ({
                           titleHighlight: e.target.value,
                         })
                       }
-                      className="bg-white/5 border-white/10 text-emerald-500 font-bold h-12 text-lg"
+                      className="bg-white/5 border-emerald-500/15 text-emerald-500 font-bold h-12 text-lg"
                       placeholder="Works"
                     />
                   </div>
                 </div>
 
                 {/* Live Preview */}
-                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-white/5">
+                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-emerald-500/15">
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-3">
                     Live Preview
                   </p>
@@ -303,7 +303,7 @@ export const ProjectSectionHeaderEditModal = ({
                 <i className="fa-solid fa-align-left"></i>
                 <span>Section Description</span>
               </div>
-              <div className="bg-[#121A1C] border border-white/5 rounded-lg p-6 shadow-xl space-y-4">
+              <div className="bg-[#121A1C] border border-emerald-500/15 rounded-lg p-6 shadow-xl space-y-4">
                 <div className="space-y-2">
                   <Label className="text-slate-300 font-semibold flex items-center gap-2 uppercase text-[10px] tracking-widest">
                     <i className="fa-solid fa-paragraph text-emerald-500/70"></i>
@@ -317,13 +317,13 @@ export const ProjectSectionHeaderEditModal = ({
                         description: e.target.value,
                       })
                     }
-                    className="bg-white/5 border-white/10 text-white min-h-[120px] focus:ring-emerald-500/20 text-sm leading-relaxed"
+                    className="bg-white/5 border-emerald-500/15 text-white min-h-[120px] focus:ring-emerald-500/20 text-sm leading-relaxed"
                     placeholder="Explore a selection of my recently completed projects..."
                   />
                 </div>
 
                 {/* Live Preview */}
-                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-white/5">
+                <div className="mt-2 p-4 bg-black/30 rounded-lg border border-emerald-500/15">
                   <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-3">
                     Live Preview
                   </p>
@@ -352,7 +352,7 @@ export const ProjectSectionHeaderEditModal = ({
               type="button"
               variant="outline"
               onClick={onClose}
-              className="bg-transparent border-white/10 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1 cursor-pointer"
+              className="bg-transparent border-emerald-500/15 text-white hover:bg-white/5 px-8 h-11 rounded-lg font-semibold transition-all hover:border-white/20 active:scale-95 order-2 sm:order-1 cursor-pointer"
             >
               Discard Changes
             </Button>

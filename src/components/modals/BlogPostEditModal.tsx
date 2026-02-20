@@ -146,7 +146,7 @@ export const BlogPostEditModal = ({
             </DialogTitle>
 
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
+              <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg border border-emerald-500/15">
                 <Switch
                   checked={formData.isActive}
                   onCheckedChange={(checked) =>
@@ -191,7 +191,7 @@ export const BlogPostEditModal = ({
                   <Input
                     value={formData.title}
                     onChange={handleTitleChange}
-                    className="bg-black/40 border-white/10 text-xl font-bold h-14 rounded-lg focus:ring-emerald-500/20"
+                    className="bg-black/40 border-emerald-500/15 text-xl font-bold h-14 rounded-lg focus:ring-emerald-500/20"
                     placeholder="E.g. The Quantum Leap in React Architecture"
                     required
                   />
@@ -208,7 +208,7 @@ export const BlogPostEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, slug: e.target.value })
                       }
-                      className="bg-black/40 border-white/10 font-mono text-xs h-12 text-slate-400"
+                      className="bg-black/40 border-emerald-500/15 font-mono text-xs h-12 text-slate-400"
                     />
                   </div>
                   <div className="space-y-3">
@@ -220,7 +220,7 @@ export const BlogPostEditModal = ({
                       onChange={(e) =>
                         setFormData({ ...formData, category: e.target.value })
                       }
-                      className="bg-black/40 border-white/10 text-emerald-500 font-bold h-12"
+                      className="bg-black/40 border-emerald-500/15 text-emerald-500 font-bold h-12"
                     />
                   </div>
                 </div>
@@ -234,13 +234,13 @@ export const BlogPostEditModal = ({
                     onChange={(e) =>
                       setFormData({ ...formData, excerpt: e.target.value })
                     }
-                    className="bg-black/40 border-white/10 min-h-[100px] rounded-lg text-slate-300 italic"
+                    className="bg-black/40 border-emerald-500/15 min-h-[100px] rounded-lg text-slate-300 italic"
                     placeholder="A brief teaser to pull readers in..."
                   />
                 </div>
               </div>
 
-              <div className="md:col-span-4 space-y-8 bg-[#121A1C] p-6 rounded-lg border border-white/5">
+              <div className="md:col-span-4 space-y-8 bg-[#121A1C] p-6 rounded-lg border border-emerald-500/15">
                 <div className="space-y-3">
                   <Label className="text-[10px] text-slate-500 uppercase font-black tracking-[0.2em] flex items-center gap-2">
                     <Calendar className="w-3 h-3" /> Timestamp
@@ -284,7 +284,7 @@ export const BlogPostEditModal = ({
                   />
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-white/5">
+                <div className="space-y-3 pt-4 border-t border-emerald-500/15">
                   <Label className="text-[10px] text-slate-500 uppercase font-black tracking-[0.2em]">
                     Visual Archive URL
                   </Label>
@@ -297,7 +297,7 @@ export const BlogPostEditModal = ({
                     placeholder="https://images.unsplash.com/..."
                   />
                   {formData.image && (
-                    <div className="mt-4 relative h-32 w-full rounded-lg overflow-hidden border border-white/10">
+                    <div className="mt-4 relative h-32 w-full rounded-lg overflow-hidden border border-emerald-500/15">
                       <NextImage
                         src={formData.image || ""}
                         className="object-cover w-full h-full opacity-60"
@@ -326,7 +326,7 @@ export const BlogPostEditModal = ({
                 onChange={(e) =>
                   setFormData({ ...formData, content: e.target.value })
                 }
-                className="bg-black/60 border-white/10 min-h-[400px] font-mono text-sm leading-relaxed text-slate-200 p-8 rounded-lg"
+                className="bg-black/60 border-emerald-500/15 min-h-[400px] font-mono text-sm leading-relaxed text-slate-200 p-8 rounded-lg"
                 placeholder="Once upon a pixel..."
               />
             </div>

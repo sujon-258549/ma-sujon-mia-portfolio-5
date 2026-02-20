@@ -56,7 +56,7 @@ export const FloatingNav = ({
       {/* Toggle Button (Modern UI) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-9 h-9 flex items-center justify-center bg-[#0A0F11]/80 backdrop-blur-xl border border-white/10 rounded-sm shadow-2xl transition-all duration-300 hover:bg-[#121A1C] hover:border-emerald-500/30 group z-[110] ${
+        className={`w-9 h-9 flex items-center justify-center bg-[#0A0F11]/80 backdrop-blur-xl border border-emerald-500/15 rounded-sm shadow-2xl transition-all duration-300 hover:bg-[#121A1C] hover:border-emerald-500/30 group z-[110] ${
           isOpen ? "text-emerald-500" : "text-slate-400"
         }`}
       >
@@ -69,7 +69,7 @@ export const FloatingNav = ({
 
       {/* Smart Dock Container */}
       <div
-        className={`relative flex flex-col items-center py-4 bg-[#0A0F11]/60 backdrop-blur-2xl border border-white/10 rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.6)] group/dock transition-all duration-500 hover:border-emerald-500/20 px-1.5 gap-3 origin-top ${
+        className={`relative flex flex-col items-center py-4 bg-[#0A0F11]/60 backdrop-blur-2xl border border-emerald-500/15 rounded-sm shadow-[0_20px_60px_rgba(0,0,0,0.6)] group/dock transition-all duration-500 hover:border-emerald-500/20 px-1.5 gap-3 origin-top ${
           isOpen
             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
             : "opacity-0 scale-90 -translate-y-4 pointer-events-none h-0 py-0 border-none overflow-hidden"
@@ -93,10 +93,10 @@ export const FloatingNav = ({
               className="group relative flex items-center justify-center w-8 h-8 focus:outline-none"
             >
               {/* Intelligent Tooltip */}
-              <div className="absolute right-full mr-5 px-3 py-1.5 rounded-sm bg-black/95 backdrop-blur-2xl border border-white/10 text-white text-[9px] font-bold uppercase tracking-[0.2em] whitespace-nowrap opacity-0 translate-x-4 pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-hover:mr-7 flex items-center gap-2 z-[120]">
+              <div className="absolute right-full mr-5 px-3 py-1.5 rounded-sm bg-black/95 backdrop-blur-2xl border border-emerald-500/15 text-white text-[9px] font-bold uppercase tracking-[0.2em] whitespace-nowrap opacity-0 translate-x-4 pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-hover:mr-7 flex items-center gap-2 z-[120]">
                 <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
                 {item.text}
-                <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-black/95 border-r border-t border-white/10 rotate-45" />
+                <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-black/95 border-r border-t border-emerald-500/15 rotate-45" />
               </div>
 
               {/* Icon Container (Minimal Box) */}

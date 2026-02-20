@@ -176,7 +176,7 @@ const Header = ({ initialData }: HeaderProps) => {
                   onClick={() =>
                     (window.location.href = headerData.buttons.secondary.link)
                   }
-                  className="h-10 px-8 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                  className="h-10 px-8 bg-white/5 border border-emerald-500/15 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg backdrop-blur-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
                 >
                   {headerData.buttons.secondary.text}
                   <i
@@ -211,7 +211,7 @@ const Header = ({ initialData }: HeaderProps) => {
 
           {/* Mobile Menu Overlay */}
           {isMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 w-full bg-[#1C2629] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 shadow-xl">
+            <div className="md:hidden absolute top-full left-0 w-full bg-[#1C2629] border-b border-emerald-500/15 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 shadow-xl">
               {(headerData.navLinks || [])
                 .filter((item) => item.showInHeader !== false)
                 .map((item) => (
@@ -228,11 +228,11 @@ const Header = ({ initialData }: HeaderProps) => {
                     {item.text}
                   </Link>
                 ))}
-              <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+              <div className="flex flex-col gap-3 pt-4 border-t border-emerald-500/15">
                 {/* Mobile User Options */}
                 {(user || token) && (
                   <>
-                    <div className="py-2 px-1 border-b border-white/5 mb-2">
+                    <div className="py-2 px-1 border-b border-emerald-500/15 mb-2">
                       <p className="text-sm font-bold text-white">
                         {user?.name}
                       </p>
@@ -258,7 +258,7 @@ const Header = ({ initialData }: HeaderProps) => {
                     setIsMenuOpen(false);
                     window.location.href = headerData.buttons.secondary.link;
                   }}
-                  className="w-full h-10 bg-white/5 border border-white/10 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg transition-all active:scale-95 cursor-pointer"
+                  className="w-full h-10 bg-white/5 border border-emerald-500/15 text-emerald-500 hover:bg-emerald-500/10 hover:border-emerald-500/50 hover:text-emerald-400 font-medium rounded-lg transition-all active:scale-95 cursor-pointer"
                 >
                   {headerData.buttons.secondary.text}
                   <i

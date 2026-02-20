@@ -80,7 +80,7 @@ const EducationExperienceSection = () => {
       <div className="main-container">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/15 mb-4">
             <GraduationCap className="w-4 h-4 text-emerald-500" />
             <span className="text-sm font-medium text-emerald-500">
               Education & Experience
@@ -99,14 +99,14 @@ const EducationExperienceSection = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="bg-card border border-white/5 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:border-white/10"
+              className="bg-card border border-emerald-500/15 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-500/15"
             >
               {/* Card Header */}
-              <div className="bg-linear-to-r from-emerald-500/10 via-emerald-500/5 to-transparent p-6 md:p-8 border-b border-white/5">
+              <div className="bg-linear-to-r from-emerald-500/10 via-emerald-500/5 to-transparent p-6 md:p-8 border-b border-emerald-500/15">
                 <div className="flex flex-col gap-4">
                   <div className="flex-1">
                     <div className="flex items-start gap-3 mb-3">
-                      <div className="p-2 bg-emerald-500/10 rounded-lg border border-white/10">
+                      <div className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/15">
                         {item.type === "education" ? (
                           <GraduationCap className="w-6 h-6 text-emerald-500" />
                         ) : (
@@ -195,7 +195,7 @@ const EducationExperienceSection = () => {
                       (text, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-3 bg-muted/50 p-3 rounded-lg border border-white/5 hover:bg-muted transition-colors"
+                          className="flex items-start gap-3 bg-muted/50 p-3 rounded-lg border border-emerald-500/15 hover:bg-muted transition-colors"
                         >
                           <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
                           <span className="text-sm text-foreground leading-relaxed">
@@ -220,7 +220,7 @@ const EducationExperienceSection = () => {
                       {item.responsibilities.map((responsibility, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-3 bg-muted/50 p-3 rounded-lg border border-white/5 hover:bg-muted transition-colors"
+                          className="flex items-start gap-3 bg-muted/50 p-3 rounded-lg border border-emerald-500/15 hover:bg-muted transition-colors"
                         >
                           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
                           <span className="text-sm text-muted-foreground leading-relaxed">
@@ -259,7 +259,7 @@ const EducationExperienceSection = () => {
                       {(item.courses || item.technologies)?.map((tech, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1.5 bg-muted text-foreground text-xs rounded-lg border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all cursor-default"
+                          className="px-3 py-1.5 bg-muted text-foreground text-xs rounded-lg border border-emerald-500/15 hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all cursor-default"
                         >
                           {tech}
                         </span>
