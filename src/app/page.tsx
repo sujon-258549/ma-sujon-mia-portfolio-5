@@ -11,6 +11,7 @@ import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import ReviewSection from "@/components/ReviewSection";
+import FaqSection from "@/components/FaqSection";
 import { WelcomeModal } from "@/components/WelcomeModal";
 import CreativeSection from "@/components/CreativeSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
@@ -39,6 +40,7 @@ export default async function Home() {
     welcomeModalContent,
     creativeHeaderContent,
     creativeItems,
+    faqContent,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -59,6 +61,7 @@ export default async function Home() {
     dynamicContentService.getContent("welcome_modal").catch(() => null),
     dynamicContentService.getContent("creative_section").catch(() => null),
     creativeService.getItems().catch(() => []),
+    dynamicContentService.getContent("faq").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -145,6 +148,11 @@ export default async function Home() {
       {/* Contact Section */}
       {(role || contactContent?.isActive) && (
         <ContactSection initialData={contactContent} />
+      )}
+
+      {/* FAQ Section */}
+      {(role || faqContent?.isActive) && (
+        <FaqSection initialData={faqContent} />
       )}
 
       {/* Footer */}

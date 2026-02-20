@@ -58,51 +58,7 @@ const ReviewSection = ({
     initialReviews && initialReviews.length > 0
       ? initialReviews
       : [
-          {
-            id: "1",
-            name: "Sarah Jenkins",
-            role: "Product Manager",
-            company: "TechFlow Inc.",
-            content:
-              "An exceptional developer who brings both technical expertise and creative problem-solving to the table. Delivered our project ahead of schedule with outstanding quality and attention to detail that truly impressed our entire team.",
-            rating: 5,
-          },
-          {
-            id: "2",
-            name: "David Chen",
-            role: "CTO",
-            company: "StartupX",
-            content:
-              "The attention to detail and code quality is outstanding. Highly recommended for any complex web application development. Will definitely work together again on future projects.",
-            rating: 5,
-          },
-          {
-            id: "3",
-            name: "Emily Rodriguez",
-            role: "Founder",
-            company: "Creative Studio",
-            content:
-              "Transformed our vision into a stunning reality. The animations and user experience are exactly what we were looking for. The project was delivered on time and exceeded all our expectations.",
-            rating: 5,
-          },
-          {
-            id: "4",
-            name: "James Wilson",
-            role: "Lead Designer",
-            company: "PixelCraft",
-            content:
-              "Working with this developer was an absolute pleasure. The communication was clear, the code was clean, and the final product was polished beyond what we imagined possible.",
-            rating: 5,
-          },
-          {
-            id: "5",
-            name: "Aisha Patel",
-            role: "CEO",
-            company: "NovaTech",
-            content:
-              "Incredible work ethic and technical skills. Our platform performance improved by 60% after the optimization work. I would not hesitate to recommend this developer to anyone.",
-            rating: 5,
-          },
+         
         ],
   );
 
@@ -233,7 +189,7 @@ const ReviewSection = ({
 
       <div className="main-container relative z-10">
         {/* ── Section Header ── */}
-        <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-7 md:mb-10 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mb-6">
             <i
               className={`${sectionData.badgeIcon} text-xs text-emerald-500`}
@@ -277,7 +233,7 @@ const ReviewSection = ({
             <div
               ref={trackRef}
               className="relative flex items-center justify-center overflow-hidden"
-              style={{ minHeight: "clamp(320px, 55vw, 420px)" }}
+              style={{ minHeight: "clamp(280px, 50vw, 380px)" }}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
             >
