@@ -11,6 +11,7 @@ export interface CreativeItem {
 
 export interface CreativeSectionData {
   isActive?: boolean;
+  slNumber?: number;
   badge: string;
   badgeIcon: string;
   title: string;

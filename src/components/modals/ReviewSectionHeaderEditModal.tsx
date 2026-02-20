@@ -35,6 +35,7 @@ export const ReviewSectionHeaderEditModal = ({
   const [formData, setFormData] = useState<ReviewSectionHeaderData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
   });
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export const ReviewSectionHeaderEditModal = ({
       setFormData({
         ...currentData,
         isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
       });
     }
   }, [isOpen, currentData]);
@@ -57,6 +59,7 @@ export const ReviewSectionHeaderEditModal = ({
       titleHighlight: formData.titleHighlight,
       description: formData.description,
       isActive: formData.isActive,
+      slNumber: formData.slNumber,
       type: "review_section_header",
     };
 
@@ -164,6 +167,25 @@ export const ReviewSectionHeaderEditModal = ({
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest">
+                    Sorting Number (Serial)
+                  </Label>
+                  <Input
+                    type="number"
+                    value={formData.slNumber}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        slNumber: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                  />
+                  <p className="text-[10px] text-slate-500 italic">
+                    Lower numbers appear first on the home page.
+                  </p>
                 </div>
               </div>
             </div>

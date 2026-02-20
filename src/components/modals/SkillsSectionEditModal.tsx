@@ -34,6 +34,7 @@ export const SkillsSectionEditModal = ({
   const [formData, setFormData] = useState<SkillsSectionData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -191,6 +192,25 @@ export const SkillsSectionEditModal = ({
                   className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-bold"
                   placeholder="e.g. Expertise"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-[10px] text-slate-500 uppercase font-black tracking-widest ml-1">
+                  Sorting Number (Serial)
+                </Label>
+                <Input
+                  type="number"
+                  value={formData.slNumber}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      slNumber: parseInt(e.target.value) || 0,
+                    })
+                  }
+                  className="bg-black/40 border-white/5 h-12 rounded-lg focus:ring-emerald-500/20 text-sm text-emerald-500 font-mono"
+                />
+                <p className="text-[10px] text-slate-500 italic">
+                  Lower numbers appear first on the home page.
+                </p>
               </div>
             </div>
           </div>

@@ -9,5 +9,6 @@ export interface FaqSectionData {
   subtitle?: string;
   description?: string;
   isActive?: boolean;
+  slNumber?: number;
   faqs?: FaqItem[];
 }

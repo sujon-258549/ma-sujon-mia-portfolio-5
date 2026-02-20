@@ -44,6 +44,7 @@ export interface Project {
 
 export interface ProjectsSectionData {
   isActive?: boolean;
+  slNumber?: number;
   badge: string;
   badgeIcon: string;
   title: string;

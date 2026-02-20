@@ -34,6 +34,7 @@ export const ContactEditModal = ({
   const [formData, setFormData] = useState<ContactSectionData>(() => ({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
   }));
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -172,6 +173,25 @@ export const ContactEditModal = ({
                   }
                   className="bg-white/5 border-white/10 text-white"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-slate-400 uppercase text-[10px] tracking-widest font-bold">
+                  Sorting Number (Serial)
+                </Label>
+                <Input
+                  type="number"
+                  value={formData.slNumber}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      slNumber: parseInt(e.target.value) || 0,
+                    })
+                  }
+                  className="bg-white/5 border-white/10 text-emerald-500 font-mono h-10 w-24"
+                />
+                <p className="text-[10px] text-slate-500 italic">
+                  Lower numbers appear first on the home page.
+                </p>
               </div>
             </div>
 

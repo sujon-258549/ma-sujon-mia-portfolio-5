@@ -19,6 +19,7 @@ export interface ReviewSectionHeaderData {
   titleHighlight: string;
   description: string;
   isActive?: boolean;
+  slNumber?: number;
 }
 
 // Interface for the combined data (if needed by some components)

@@ -71,98 +71,117 @@ export default async function Home() {
   const projects = await projectService.getAllProjects().catch(() => []);
   const blogPosts = await blogService.getAllPosts().catch(() => []);
 
-  // Merge header data and posts for BlogSection
-  const blogContent = {
-    ...blogHeaderData,
-    posts: blogPosts,
-  };
-
   const authData = await serverAuth.getUser();
   const role = authData?.role === "admin";
 
-  return (
-    <div className="min-h-screen bg-[#121A1C]">
-      {/* Navigation */}
-      <Header initialData={headerContent} />
-
-      {/* Hero Section */}
-      {(role || heroContent?.isActive) && (
-        <HeroSection initialData={heroContent} />
-      )}
-
-      {/* About Section */}
-      {(role || aboutContent?.isActive) && (
-        <AboutSection initialData={aboutContent} />
-      )}
-
-      {/* SkillsSection */}
-      {(role || skillsContent?.isActive) && (
-        <SkillsSection initialData={skillsContent} />
-      )}
-
-      {/* Workflow Section */}
-
-      {/* Projects Section */}
-      {(role || projectSectionHeaderContent?.isActive) && (
+  // Define sortable sections configuration
+  const sectionConfigs = [
+    {
+      id: "hero",
+      content: heroContent,
+      render: () => <HeroSection initialData={heroContent} />,
+    },
+    {
+      id: "about",
+      content: aboutContent,
+      render: () => <AboutSection initialData={aboutContent} />,
+    },
+    {
+      id: "skills",
+      content: skillsContent,
+      render: () => <SkillsSection initialData={skillsContent} />,
+    },
+    {
+      id: "workflow",
+      content: workflowContent,
+      render: () => <WorkflowSection initialData={workflowContent} />,
+    },
+    {
+      id: "projects",
+      content: projectSectionHeaderContent,
+      render: () => (
         <ProjectsSection
           projects={projects}
           initialData={projectSectionHeaderContent}
         />
-      )}
-
-      {(role || workflowContent?.isActive) && (
-        <WorkflowSection initialData={workflowContent} />
-      )}
-
-      {/* Creative Section */}
-      {(role || creativeHeaderContent?.isActive) && (
+      ),
+    },
+    {
+      id: "creative",
+      content: creativeHeaderContent,
+      render: () => (
         <CreativeSection
           headerData={creativeHeaderContent}
           items={creativeItems}
         />
-      )}
-      {/* Education Section */}
-      {(role || educationContent?.isActive) && (
-        <EducationSection initialData={educationContent} />
-      )}
-
-      {/* Experience Section */}
-      {(role || experienceContent?.isActive) && (
-        <ExperienceSection initialData={experienceContent} />
-      )}
-
-      {/* GitHub Stats Section */}
-      {/* <GithubStatsSection /> */}
-
-      {/* Services Section */}
-      {(role || servicesContent?.isActive) && (
-        <ServicesSection initialData={servicesContent} />
-      )}
-
-      {/* Blog Section */}
-      {(role || blogHeaderData?.isActive) && (
-        <BlogSection initialData={blogContent} />
-      )}
-
-      {/* Review Section */}
-      {(role || reviewContent?.isActive) && (
+      ),
+    },
+    {
+      id: "education",
+      content: educationContent,
+      render: () => <EducationSection initialData={educationContent} />,
+    },
+    {
+      id: "experience",
+      content: experienceContent,
+      render: () => <ExperienceSection initialData={experienceContent} />,
+    },
+    {
+      id: "services",
+      content: servicesContent,
+      render: () => <ServicesSection initialData={servicesContent} />,
+    },
+    {
+      id: "blog",
+      content: blogHeaderData,
+      render: () => (
+        <BlogSection initialData={{ ...blogHeaderData, posts: blogPosts }} />
+      ),
+    },
+    {
+      id: "reviews",
+      content: reviewContent,
+      render: () => (
         <ReviewSection headerData={reviewContent} reviews={reviews} />
-      )}
+      ),
+    },
+    {
+      id: "contact",
+      content: contactContent,
+      render: () => <ContactSection initialData={contactContent} />,
+    },
+    {
+      id: "faq",
+      content: faqContent,
+      render: () => <FaqSection initialData={faqContent} />,
+    },
+    {
+      id: "trust",
+      content: trustContent,
+      render: () => <TrustSection initialData={trustContent} />,
+    },
+  ];
 
-      {/* Contact Section */}
-      {(role || contactContent?.isActive) && (
-        <ContactSection initialData={contactContent} />
-      )}
+  // Filter based on isActive or Role, then sort by slNumber
+  const sortedSections = sectionConfigs
+    .filter((section) => role || section.content?.isActive)
+    .sort((a, b) => {
+      const slA = a.content?.slNumber ?? 999;
+      const slB = b.content?.slNumber ?? 999;
+      return slA - slB;
+    });
 
-      {/* FAQ Section */}
-      {(role || faqContent?.isActive) && (
-        <FaqSection initialData={faqContent} />
-      )}
+  return (
+    <div className="min-h-screen bg-[#121A1C]">
+      {/* Navigation - Fixed at top */}
+      <Header initialData={headerContent} />
 
-      {/* Trust & Impact Section */}
-      <TrustSection initialData={trustContent} />
+      {/* Render Dynamic Sorted Sections */}
+      {sortedSections.map((section) => (
+        <div key={section.id}>{section.render()}</div>
+      ))}
 
-      {/* Footer */}
+      {/* Footer - Fixed at bottom */}
       <Footer initialData={footerContent} />
 
       {/* Welcome Modal — shows 2s after load, once per session */}

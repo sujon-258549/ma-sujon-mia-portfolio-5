@@ -108,7 +108,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
     <section
       id="trust"
       className={cn(
-        "py-16 md:py-28 bg-[#0E1416] relative overflow-x-hidden overflow-y-clip transition-all duration-300",
+        "py-12 md:py-20 bg-[#0E1416] relative overflow-x-hidden overflow-y-clip transition-all duration-300",
         !sectionData.isActive && "opacity-60 grayscale-[0.5]",
       )}
     >

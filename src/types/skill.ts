@@ -11,4 +11,5 @@ export interface SkillsSectionData {
   badge: string;
   categories: SkillCategory[];
   isActive?: boolean;
+  slNumber?: number;
 }

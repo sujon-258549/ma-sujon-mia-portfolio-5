@@ -35,6 +35,7 @@ export const WorkflowSectionEditModal = ({
   const [formData, setFormData] = useState<WorkflowSectionData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
     steps: currentData.steps || [],
   });
 
@@ -43,6 +44,7 @@ export const WorkflowSectionEditModal = ({
       setFormData({
         ...currentData,
         isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
         steps: currentData.steps || [],
       });
     }
@@ -214,6 +216,25 @@ export const WorkflowSectionEditModal = ({
                     }
                     className="bg-white/5 border-white/10 min-h-[100px]"
                   />
+                </div>
+                <div className="space-y-2">
+                  <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
+                    Sorting Number (Serial)
+                  </Label>
+                  <Input
+                    type="number"
+                    value={formData.slNumber}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        slNumber: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    className="bg-white/5 border-white/10 font-mono text-emerald-400 w-24 h-10"
+                  />
+                  <p className="text-[10px] text-slate-500 italic">
+                    Lower numbers appear first on the home page.
+                  </p>
                 </div>
               </div>
             </div>

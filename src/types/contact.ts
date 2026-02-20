@@ -11,4 +11,5 @@ export interface ContactSectionData {
   titleColor: string;
   contactCards: ContactInfo[];
   isActive?: boolean;
+  slNumber?: number;
 }

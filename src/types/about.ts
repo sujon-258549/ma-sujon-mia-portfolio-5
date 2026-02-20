@@ -22,4 +22,5 @@ export interface AboutSectionData {
   highlights: AboutHighlight[];
   stats: AboutStat[];
   isActive?: boolean;
+  slNumber?: number;
 }

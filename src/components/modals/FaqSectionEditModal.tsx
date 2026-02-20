@@ -42,6 +42,7 @@ export const FaqSectionEditModal = ({
   const [formData, setFormData] = useState<FaqSectionData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
     faqs: currentData.faqs || [],
   });
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
@@ -51,6 +52,7 @@ export const FaqSectionEditModal = ({
       setFormData({
         ...currentData,
         isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
         faqs: currentData.faqs || [],
       });
     }
@@ -196,6 +198,25 @@ export const FaqSectionEditModal = ({
                     className="bg-white/5 border-white/10 text-white min-h-[80px]"
                     placeholder="Find answers to some of the most common questions..."
                   />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-slate-300 font-semibold uppercase text-[10px] tracking-widest">
+                    Sorting Number (Serial)
+                  </Label>
+                  <Input
+                    type="number"
+                    value={formData.slNumber}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        slNumber: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    className="bg-white/5 border-white/10 text-emerald-400 h-10 w-24 font-mono font-bold"
+                  />
+                  <p className="text-[10px] text-slate-500 italic">
+                    Lower numbers appear first on the home page.
+                  </p>
                 </div>
               </div>
             </div>

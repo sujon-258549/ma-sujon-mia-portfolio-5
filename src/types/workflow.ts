@@ -9,6 +9,7 @@ export interface WorkflowStep {
 
 export interface WorkflowSectionData {
   isActive?: boolean;
+  slNumber?: number;
   badge: string;
   badgeIcon: string;
   title: string;

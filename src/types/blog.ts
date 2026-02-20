@@ -9,11 +9,13 @@ export interface BlogPost {
   readTime: string;
   slug: string;
   isActive?: boolean;
+  slNumber?: number;
   content?: string;
 }
 
 export interface BlogHeader {
   isActive?: boolean;
+  slNumber?: number;
   badge: string;
   badgeIcon: string;
   title: string;

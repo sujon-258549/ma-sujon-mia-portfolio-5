@@ -15,6 +15,7 @@ export interface TrustSectionData {
   subtitle?: string;
   description?: string;
   isActive?: boolean;
+  slNumber?: number;
   brands?: BrandLogo[];
   stats?: TrustStats[];
 }

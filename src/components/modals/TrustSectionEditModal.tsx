@@ -44,6 +44,7 @@ export const TrustSectionEditModal = ({
   const [formData, setFormData] = useState<TrustSectionData>({
     ...currentData,
     isActive: currentData.isActive ?? true,
+    slNumber: currentData.slNumber ?? 0,
     brands: currentData.brands || [],
     stats: currentData.stats || [],
   });
@@ -56,6 +57,7 @@ export const TrustSectionEditModal = ({
       setFormData({
         ...currentData,
         isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
         brands: currentData.brands || [],
         stats: currentData.stats || [],
       });
@@ -70,6 +72,8 @@ export const TrustSectionEditModal = ({
       ...formData,
       type: "trust_section",
     };
+
+    console.log("updateData", updateData);
 
     try {
       const res = await dynamicContentService.upsertContent(updateData);
@@ -198,6 +202,25 @@ export const TrustSectionEditModal = ({
                       }
                       className="bg-black/20 border-white/10 min-h-[100px]"
                     />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-slate-400 uppercase text-[10px] font-black">
+                      Sorting Number (Serial)
+                    </Label>
+                    <Input
+                      type="number"
+                      value={formData.slNumber}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          slNumber: parseInt(e.target.value) || 0,
+                        })
+                      }
+                      className="bg-black/20 border-white/10 h-10 w-24 font-mono text-emerald-500"
+                    />
+                    <p className="text-[10px] text-slate-500 italic">
+                      Lower numbers appear first on the home page.
+                    </p>
                   </div>
                 </div>
               </div>

@@ -31,4 +31,5 @@ export interface HeroSectionData {
   techStack: TechStackItem[];
   socialLinks: SocialLink[];
   isActive?: boolean;
+  slNumber?: number;
 }

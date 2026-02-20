@@ -21,4 +21,5 @@ export interface ExperienceSectionData {
   description: string;
   experiences: Experience[];
   isActive?: boolean;
+  slNumber?: number;
 }

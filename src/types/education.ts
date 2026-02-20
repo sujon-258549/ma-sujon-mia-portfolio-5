@@ -19,4 +19,5 @@ export interface EducationSectionData {
   description: string;
   education: EducationItem[];
   isActive?: boolean;
+  slNumber?: number;
 }

@@ -32,11 +32,17 @@ export const CreativeSectionHeaderEditModal = ({
   onSave,
 }: CreativeSectionHeaderEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<CreativeSectionData>(currentData);
+  const [formData, setFormData] = useState<CreativeSectionData>({
+    ...currentData,
+    slNumber: currentData.slNumber ?? 0,
+  });
 
   useEffect(() => {
     if (isOpen) {
-      setFormData(currentData);
+      setFormData({
+        ...currentData,
+        slNumber: currentData.slNumber ?? 0,
+      });
     }
   }, [isOpen, currentData]);
 
@@ -48,7 +54,7 @@ export const CreativeSectionHeaderEditModal = ({
       ...formData,
       type: "creative_section", // Unified type for the header
     };
-console.log("data", updateData)
+    console.log("data", updateData);
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
@@ -140,6 +146,25 @@ console.log("data", updateData)
                           className="bg-[#121A1C] border-white/10 pl-9 font-mono text-xs text-emerald-400 focus:border-emerald-500/50"
                         />
                       </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="uppercase text-[10px] tracking-widest text-slate-500 font-bold">
+                        Sorting Number (Serial)
+                      </Label>
+                      <Input
+                        type="number"
+                        value={formData.slNumber}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            slNumber: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="bg-[#121A1C] border-white/10 h-10 font-mono text-emerald-500 w-24 focus:border-emerald-500/50"
+                      />
+                      <p className="text-[10px] text-slate-500 italic">
+                        Lower numbers appear first on the home page.
+                      </p>
                     </div>
                   </div>
                 </div>
