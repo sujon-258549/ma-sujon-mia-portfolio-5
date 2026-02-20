@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
+import Marquee from "react-fast-marquee";
 import {
   BadgeCheck,
   Globe,
@@ -106,7 +108,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
     <section
       id="trust"
       className={cn(
-        "py-16 md:py-28 bg-[#0E1416] relative overflow-hidden transition-all duration-300",
+        "py-16 md:py-28 bg-[#0E1416] relative overflow-x-hidden overflow-y-clip transition-all duration-300",
         !sectionData.isActive && "opacity-60 grayscale-[0.5]",
       )}
     >
@@ -139,15 +141,14 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
       <div className="main-container">
         <div className=" relative z-10">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-            {/* ─────────── Right Column: Stats Grid (Premium Glassmorphism) ─────────── */}
+            {/* ─────────── Stats Grid ─────────── */}
             <div className="w-full lg:w-1/2 order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-3 sm:gap-5">
                 {sectionData.stats?.map((stat, idx) => (
                   <div
                     key={idx}
-                    className="relative group p-6 sm:p-8 rounded-xl bg-white/[0.03] border border-emerald-500/15 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                    className="relative group p-6 sm:p-8 rounded-xl bg-white/2 border border-emerald-500/15 hover:border-emerald-500/30 transition-all duration-500 hover:-translate-y-2 overflow-hidden"
                   >
-                    {/* Subtle hover glow */}
                     <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <div className="relative z-10">
@@ -162,7 +163,6 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
                       </div>
                     </div>
 
-                    {/* Decorative corner element */}
                     <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-30 transition-opacity">
                       <TrendingUp className="w-4 h-4 text-emerald-500" />
                     </div>
@@ -171,7 +171,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
               </div>
             </div>
 
-            {/* ─────────── Left Column: Content & Brands ─────────── */}
+            {/* ─────────── Content & Brands ─────────── */}
             <div className="w-full lg:w-1/2 order-1 lg:order-2 space-y-8 sm:space-y-12">
               <div className="space-y-4 sm:space-y-6 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-inner">
@@ -191,26 +191,33 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
                   Premium Brand Partners
                 </p>
 
-                {/* ── Logo Slider (Marquee) ── */}
-                <div className="relative overflow-hidden group/marquee">
-                  {/* Faded edges */}
-                  <div className="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-[#0E1416] to-transparent z-10" />
-                  <div className="absolute right-0 top-0 bottom-0 w-12 bg-linear-to-l from-[#0E1416] to-transparent z-10" />
-                  
-                  <div className="flex animate-marquee whitespace-nowrap gap-12 py-2 items-center">
-                    {[...sectionData.brands!, ...sectionData.brands!].map((brand, idx) => (
+                {/* ── React Fast Marquee ── */}
+                <div className="relative group/marquee bg-black/10 rounded-xl overflow-hidden py-8 h-auto max-h-[200px]">
+                  <Marquee
+                    gradient={true}
+                    gradientColor="#0E1416"
+                    gradientWidth={40}
+                    speed={35}
+                    pauseOnHover={true}
+                  >
+                    {sectionData.brands?.map((brand, idx) => (
                       <div
                         key={idx}
-                        className="flex-shrink-0 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                        className="mx-6 md:mx-10 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center group/brand relative h-8 md:h-12 w-20 md:w-28"
                       >
-                        <img
+                        <Image
                           src={brand.image}
                           alt={brand.name}
-                          className="h-6 md:h-8 w-auto object-contain invert brightness-0 hover:brightness-100 group-hover/marquee:pause"
+                          fill
+                          className="object-contain invert brightness-0 hover:brightness-100 group-hover/brand:invert-0 group-hover/brand:brightness-100"
+                          sizes="(max-width: 768px) 80px, 120px"
                         />
+                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-emerald-500 text-black text-[7px] font-bold rounded opacity-0 group-hover/brand:opacity-100 transition-all duration-300 translate-y-1 group-hover/brand:translate-y-0 uppercase tracking-widest whitespace-nowrap z-20">
+                          {brand.name}
+                        </div>
                       </div>
                     ))}
-                  </div>
+                  </Marquee>
                 </div>
               </div>
             </div>
@@ -224,17 +231,16 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
         currentData={sectionData}
         onSave={handleSave}
       />
-
       <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        .group\/marquee :global(.rfm-marquee-container) {
+          overflow-x: hidden !important;
         }
-        .animate-marquee {
-          animation: marquee 25s linear infinite;
+        .group\/marquee::-webkit-scrollbar {
+          display: none;
         }
-        .animate-marquee:hover {
-          animation-play-state: paused;
+        .group\/marquee {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
