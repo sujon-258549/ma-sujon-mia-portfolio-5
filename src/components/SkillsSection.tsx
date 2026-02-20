@@ -146,30 +146,31 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
                 }`}
               >
                 <CardHeader className="flex flex-row items-center justify-between pb-2 p-4 sm:p-6 text-left">
-                  <div className="flex items-center gap-3 sm:gap-4">            
-                        <div className="p-2 sm:p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                    <i
-                      className={`${category.icon} text-2xl sm:text-3xl text-emerald-500`}
-                    ></i>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+                      <i
+                        className={`${category.icon} text-2xl sm:text-3xl text-emerald-500`}
+                      ></i>
+                    </div>
+                    <h3>{category.title}</h3>
                   </div>
-                  <h3>{category.title}</h3>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-4">
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <Badge
-                      key={skill}
-                      variant="secondary"
-                      className="bg-[#1C2629] text-slate-300 border border-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-400 px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm transition-all"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardHeader>
+                <CardContent className="pt-4">
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <Badge
+                        key={skill}
+                        variant="secondary"
+                        className="bg-[#1C2629] text-slate-300 border border-emerald-500/15 hover:border-emerald-500/50 hover:text-emerald-400 px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm transition-all"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
       <SkillsSectionEditModal
