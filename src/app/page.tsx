@@ -90,9 +90,6 @@ export default async function Home() {
         <HeroSection initialData={heroContent} />
       )}
 
-      {/* Trust & Impact Section */}
-      <TrustSection initialData={trustContent} />
-
       {/* About Section */}
       {(role || aboutContent?.isActive) && (
         <AboutSection initialData={aboutContent} />
@@ -161,6 +158,9 @@ export default async function Home() {
       {(role || faqContent?.isActive) && (
         <FaqSection initialData={faqContent} />
       )}
+
+      {/* Trust & Impact Section */}
+      <TrustSection initialData={trustContent} />
 
       {/* Footer */}
       <Footer initialData={footerContent} />
