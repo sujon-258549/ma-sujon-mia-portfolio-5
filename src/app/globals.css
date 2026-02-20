@@ -114,25 +114,36 @@
     cursor: pointer;
   }
 
+  /* --- MODAL OPEN HOLE UI KAPA BONDHO KORAR JONNO CSS START --- */
   html {
     scroll-behavior: smooth;
-    /* Reserves space for the scrollbar always, preventing layout shifts */
-    scrollbar-gutter: stable;
+    /* Scrollbar thakuk ba na thakuk, jayga dhore rakhbe jate layout shift na hoy */
+    scrollbar-gutter: stable both-edges;
+    overflow-y: scroll;
   }
 
   body {
     @apply bg-background text-foreground;
-    /* Prevent horizontal scroll issues */
+    /* Horizontal scrollbar bondho korar jonno */
     overflow-x: hidden;
     width: 100%;
+    /* Modaling open hole jate body dane na shore jay */
+    padding-right: 0 !important;
   }
 
-  /* Robust fix for UI jumping - allows scrollbar-gutter to handle the space instead of Radix adding padding */
-  body[data-radix-scroll-lock] {
-    margin-right: 0px !important;
-    padding-right: 0px !important;
+  /* Radix UI (Shadcn) modal khulle jate kono padding/margin jog na hoy */
+  [data-radix-scroll-lock] {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
     overflow: hidden !important;
   }
+
+  /* Fixed Header/Nav modal khulle jate dane na shore jay */
+  nav.fixed {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+  }
+  /* --- MODAL OPEN HOLE UI KAPA BONDHO KORAR JONNO CSS END --- */
 
   h1 {
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 md:mb-6;
