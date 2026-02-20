@@ -40,12 +40,18 @@ export const CreativeEditModal = ({
   onSave,
 }: CreativeEditModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<CreativeSectionData>(currentData);
+  const [formData, setFormData] = useState<CreativeSectionData>(() => ({
+    ...currentData,
+    slNumber: currentData.slNumber ?? 0,
+  }));
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
     if (isOpen) {
-      setFormData(currentData);
+      setFormData({
+        ...currentData,
+        slNumber: currentData.slNumber ?? 0,
+      });
     }
   }, [isOpen, currentData]);
 
@@ -57,7 +63,7 @@ export const CreativeEditModal = ({
       ...formData,
       type: "creative",
     };
-console.log('blog', updateData)
+    console.log("blog", updateData);
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
@@ -225,6 +231,26 @@ console.log('blog', updateData)
                   }
                   className="bg-[#0E1416] border-white/10 min-h-[100px] text-sm"
                 />
+              </div>
+
+              <div className="space-y-2 bg-white/5 p-4 rounded-lg border border-white/5">
+                <Label className="uppercase text-[10px] tracking-widest text-slate-400 font-bold">
+                  Sorting Number (Serial)
+                </Label>
+                <Input
+                  type="number"
+                  value={formData.slNumber}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      slNumber: parseInt(e.target.value) || 0,
+                    })
+                  }
+                  className="bg-[#0E1416] border-white/10 h-10 w-24 font-mono text-emerald-500"
+                />
+                <p className="text-[10px] text-slate-500 italic">
+                  Lower numbers appear first on the home page.
+                </p>
               </div>
             </div>
           </div>
