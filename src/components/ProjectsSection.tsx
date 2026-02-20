@@ -214,13 +214,13 @@ const ProjectsSection = ({
           )}
 
           {/* 90+ Projects Completed Badge */}
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#172023] border border-emerald-500/20 px-4 py-2 rounded-full shadow-2xl">
+          {/* <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-[#172023] border border-emerald-500/20 px-4 py-2 rounded-full shadow-2xl">
             <i className="fa-solid fa-trophy text-base text-emerald-500"></i>
             <span className="text-xs font-semibold text-white uppercase tracking-tighter">
               <span className="text-emerald-500">{completedCount}</span>{" "}
               Projects Completed
             </span>
-          </div>
+          </div> */}
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-white/10 mb-4">
             <i

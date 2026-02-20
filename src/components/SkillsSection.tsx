@@ -131,14 +131,23 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-6xl mx-auto">
-          {skillsData.categories.map((category) => (
-            <Card
-              key={category.id}
-              className="bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-emerald-500/10"
-            >
-              <CardHeader className="flex flex-row items-center justify-between pb-2 p-4 sm:p-6">
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="p-2 sm:p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+          {skillsData.categories.map((category, index) => {
+            const isLastOdd =
+              skillsData.categories.length % 2 !== 0 &&
+              index === skillsData.categories.length - 1;
+
+            return (
+              <Card
+                key={category.id}
+                className={`bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-emerald-500/10 ${
+                  isLastOdd
+                    ? "md:col-span-2 md:w-[calc(50%-12px)] md:mx-auto"
+                    : ""
+                }`}
+              >
+                <CardHeader className="flex flex-row items-center justify-between pb-2 p-4 sm:p-6 text-left">
+                  <div className="flex items-center gap-3 sm:gap-4">            
+                        <div className="p-2 sm:p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
                     <i
                       className={`${category.icon} text-2xl sm:text-3xl text-emerald-500`}
                     ></i>
