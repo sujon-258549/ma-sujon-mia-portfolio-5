@@ -12,6 +12,8 @@ import ContactSection from "@/components/ContactSection";
 import WorkflowSection from "@/components/WorkflowSection";
 import ReviewSection from "@/components/ReviewSection";
 import FaqSection from "@/components/FaqSection";
+import GithubStatsSection from "@/components/GithubStatsSection";
+import TrustSection from "@/components/TrustSection";
 import { WelcomeModal } from "@/components/WelcomeModal";
 import CreativeSection from "@/components/CreativeSection";
 import { dynamicContentService } from "@/services/dynamicContentService";
@@ -41,6 +43,7 @@ export default async function Home() {
     creativeHeaderContent,
     creativeItems,
     faqContent,
+    trustContent,
   ] = await Promise.all([
     dynamicContentService.getContent("header").catch(() => null),
     dynamicContentService.getContent("hero").catch(() => null),
@@ -62,6 +65,7 @@ export default async function Home() {
     dynamicContentService.getContent("creative_section").catch(() => null),
     creativeService.getItems().catch(() => []),
     dynamicContentService.getContent("faq").catch(() => null),
+    dynamicContentService.getContent("trust_section").catch(() => null),
   ]);
 
   const projects = await projectService.getAllProjects().catch(() => []);
@@ -85,6 +89,9 @@ export default async function Home() {
       {(role || heroContent?.isActive) && (
         <HeroSection initialData={heroContent} />
       )}
+
+      {/* Trust & Impact Section */}
+      <TrustSection initialData={trustContent} />
 
       {/* About Section */}
       {(role || aboutContent?.isActive) && (

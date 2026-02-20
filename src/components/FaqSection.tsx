@@ -1,25 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, PencilLine } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-interface FaqItem {
-  id: number;
-  question: string;
-  answer: string;
-}
-
-interface FaqSectionData {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  isActive?: boolean;
-  faqs?: FaqItem[];
-}
+import { useIsAuthorized } from "@/lib/auth";
+import { FaqSectionData, FaqItem } from "@/types/faq";
+import { FaqSectionEditModal } from "./modals/FaqSectionEditModal";
+import { Badge } from "@/components/ui/badge";
 
 interface FaqSectionProps {
-  initialData?: FaqSectionData;
+  initialData?: FaqSectionData | null;
 }
 
 const defaultFaqs: FaqItem[] = [
@@ -50,47 +40,84 @@ const defaultFaqs: FaqItem[] = [
 ];
 
 const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
-  const [openId, setOpenId] = useState<number | null>(null);
+  const isAuthorized = useIsAuthorized();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openId, setOpenId] = useState<number | string | null>(null);
 
-  const toggleAccordion = (id: number) => {
+  const [sectionData, setSectionData] = useState<FaqSectionData>(() => ({
+    title: initialData?.title || "Common Questions",
+    subtitle: initialData?.subtitle || "FAQ",
+    description:
+      initialData?.description ||
+      "Find answers to some of the most common questions about my workflow, pricing, and services.",
+    isActive: initialData?.isActive ?? true,
+    faqs: initialData?.faqs || defaultFaqs,
+  }));
+
+  const toggleAccordion = (id: number | string) => {
     setOpenId(openId === id ? null : id);
   };
 
-  const sectionData = initialData || {
-    title: "Common Questions",
-    subtitle: "Frequently Asked Questions",
-    description:
-      "Find answers to some of the most common questions about my workflow, pricing, and services.",
+  const handleSave = (newData: FaqSectionData) => {
+    setSectionData(newData);
   };
+
+  // If section is inactive and not admin, hide entirely
+  if (!sectionData.isActive && !isAuthorized) return null;
 
   return (
     <section
       id="faq"
-      className="pb-12 md:pb-20 mt-5 md:mt-10 bg-[#121A1C] relative overflow-hidden"
+      className={cn(
+        "pb-12 md:pb-20 mt-5 md:mt-10 bg-[#121A1C] relative overflow-hidden transition-all duration-300",
+        !sectionData.isActive && "opacity-60 grayscale-[0.5]",
+      )}
     >
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+
+      {/* Admin Indicators */}
+      {!sectionData.isActive && isAuthorized && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
+          <Badge className="bg-red-500/20 text-red-500 border-red-500/50 uppercase text-[9px] font-black tracking-widest px-4 py-1">
+            FAQ Section Hidden from Public
+          </Badge>
+        </div>
+      )}
+
+      {/* Admin Edit Button */}
+      {isAuthorized && (
+        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-30">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-[#0E1416] p-0 shadow-2xl transition-all duration-500 cursor-pointer border-2 border-emerald-400/50 flex items-center justify-center group"
+            title="Edit FAQ Section"
+          >
+            <PencilLine className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+          </button>
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium uppercase tracking-wider mb-4">
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>FAQ</span>
+              <span>{sectionData.subtitle}</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               {sectionData.title}
             </h2>
-            <p className="text-gray-400 text-base md:text-lg">
+            <p className="text-slate-400 text-base md:text-lg">
               {sectionData.description}
             </p>
           </div>
 
           {/* Accordion List */}
           <div className="space-y-4">
-            {(sectionData.faqs || defaultFaqs).map((faq: FaqItem) => (
+            {sectionData.faqs?.map((faq: FaqItem) => (
               <div
                 key={faq.id}
                 className={cn(
@@ -107,7 +134,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
                   <span
                     className={cn(
                       "text-base md:text-lg font-medium transition-colors",
-                      openId === faq.id ? "text-cyan-400" : "text-white/80",
+                      openId === faq.id ? "text-emerald-400" : "text-white/80",
                     )}
                   >
                     {faq.question}
@@ -116,8 +143,8 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
                     className={cn(
                       "w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center transition-all duration-300",
                       openId === faq.id
-                        ? "bg-cyan-500/20 text-cyan-400 rotate-180"
-                        : "bg-white/5 text-gray-500",
+                        ? "bg-emerald-500/20 text-emerald-400 rotate-180"
+                        : "bg-white/5 text-slate-500",
                     )}
                   >
                     <ChevronDown className="w-5 h-5" />
@@ -132,7 +159,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
                       : "max-h-0 opacity-0",
                   )}
                 >
-                  <p className="text-gray-400 text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                  <p className="text-slate-400 text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
                     {faq.answer}
                   </p>
                 </div>
@@ -141,6 +168,13 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
           </div>
         </div>
       </div>
+
+      <FaqSectionEditModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        currentData={sectionData}
+        onSave={handleSave}
+      />
     </section>
   );
 };
