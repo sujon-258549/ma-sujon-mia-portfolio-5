@@ -63,7 +63,6 @@ export const CreativeEditModal = ({
       ...formData,
       type: "creative",
     };
-    console.log("blog", updateData);
     try {
       const res = await dynamicContentService.upsertContent(updateData);
       if (res.success) {
