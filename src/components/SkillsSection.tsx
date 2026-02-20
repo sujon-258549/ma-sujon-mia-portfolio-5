@@ -141,7 +141,7 @@ const SkillsSection = ({ initialData }: SkillsSectionProps) => {
                 key={category.id}
                 className={`bg-[#172023] border border-emerald-500/15 hover:border-emerald-500/50 transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-emerald-500/10 ${
                   isLastOdd
-                    ? "md:col-span-2 md:w-[calc(50%-12px)] md:mx-auto"
+                    ? "md:col-span-2 md:w-[calc(50%_-_12px)] md:mx-auto"
                     : ""
                 }`}
               >
