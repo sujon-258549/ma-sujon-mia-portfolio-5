@@ -1,5 +1,5 @@
-import HomeSkeleton from "@/components/HomeSkeleton";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 
 export default function Loading() {
-  return <HomeSkeleton />;
+  return <LoadingScreen />;
 }

@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { FallbackCard } from "@/components/ui/FallbackCard";
 import { projectService } from "@/services/projectService";
 import { toast } from "sonner";
 import { revalidateData } from "@/app/actions";
@@ -241,139 +242,148 @@ const ProjectsSection = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {displayedProjects.map((project, index) => (
-            <Card
-              key={index}
-              className={`bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0 ${project.isActive === false ? "border-dashed border-red-500/30" : ""}`}
-            >
-              {/* Admin Individual Edit/Delete Buttons */}
-              {isAuthorized && (
-                <div className="absolute top-4 right-4 z-20 flex gap-2">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setModalMode("edit");
-                      setEditingProject(project);
-                      setIsModalOpen(true);
-                    }}
-                    className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
-                    title="Edit Project"
-                  >
-                    <i className="fa-solid fa-pen-to-square text-xs"></i>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const projectId = project._id || project.id;
-                      if (projectId) handleDeleteProject(projectId);
-                    }}
-                    className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
-                    title="Delete Project"
-                  >
-                    <i className="fa-solid fa-trash-can text-xs"></i>
-                  </button>
-                </div>
-              )}
-
-              {project.isActive === false && isAuthorized && (
-                <div className="absolute top-4 left-4 z-40">
-                  <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
-                    Draft
-                  </Badge>
-                </div>
-              )}
-
-              {isAuthorized && project.sl !== undefined && (
-                <div className="absolute top-4 left-4 z-40">
-                  <Badge className="bg-emerald-500/80 backdrop-blur-md text-black border-none uppercase text-[9px] font-black tracking-widest">
-                    SL: {project.sl}
-                  </Badge>
-                </div>
-              )}
-
-              {/* Image Container */}
-              {(() => {
-                const imgUrl = getProjectImage(project);
-                return (
-                  <div className="h-64 relative overflow-hidden bg-[#172023]">
-                    {imgUrl ? (
-                      <img
-                        src={imgUrl}
-                        alt={project.title}
-                        className="w-full h-[200%] object-cover object-top group-hover:translate-y-[-50%] transition-transform duration-[3s] ease-in-out"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-linear-to-br from-emerald-900 to-slate-900 flex items-center justify-center">
-                        <i className="fa-solid fa-code text-4xl text-white/20"></i>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
-                      <Link
-                        href={`/projects/${project.slug || project._id || project.id || index}`}
-                        className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
-                      >
-                        <i className="fa-solid fa-eye text-lg"></i>
-                        View Case Study
-                      </Link>
-                    </div>
+        {displayedProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {displayedProjects.map((project, index) => (
+              <Card
+                key={index}
+                className={`bg-[#121A1C] border border-white/5 rounded-lg overflow-hidden group hover:border-emerald-500/20 transition-all duration-500 flex flex-col relative gap-0 py-0 ${project.isActive === false ? "border-dashed border-red-500/30" : ""}`}
+              >
+                {/* Admin Individual Edit/Delete Buttons */}
+                {isAuthorized && (
+                  <div className="absolute top-4 right-4 z-20 flex gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setModalMode("edit");
+                        setEditingProject(project);
+                        setIsModalOpen(true);
+                      }}
+                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                      title="Edit Project"
+                    >
+                      <i className="fa-solid fa-pen-to-square text-xs"></i>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const projectId = project._id || project.id;
+                        if (projectId) handleDeleteProject(projectId);
+                      }}
+                      className="w-8 h-8 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center cursor-pointer active:scale-90"
+                      title="Delete Project"
+                    >
+                      <i className="fa-solid fa-trash-can text-xs"></i>
+                    </button>
                   </div>
-                );
-              })()}
+                )}
 
-              <CardHeader className="p-4 sm:p-6">
-                <div className="flex items-center gap-2 mb-3 text-[10px] uppercase font-black text-emerald-500 tracking-widest">
-                  <i className="fa-solid fa-rocket text-xs"></i>
-                  {project.category || "Development"}
+                {project.isActive === false && isAuthorized && (
+                  <div className="absolute top-4 left-4 z-40">
+                    <Badge className="bg-black/60 backdrop-blur-md text-slate-400 border-white/10 uppercase text-[8px] font-black tracking-widest">
+                      Draft
+                    </Badge>
+                  </div>
+                )}
+
+                {isAuthorized && project.sl !== undefined && (
+                  <div className="absolute top-4 left-4 z-40">
+                    <Badge className="bg-emerald-500/80 backdrop-blur-md text-black border-none uppercase text-[9px] font-black tracking-widest">
+                      SL: {project.sl}
+                    </Badge>
+                  </div>
+                )}
+
+                {/* Image Container */}
+                {(() => {
+                  const imgUrl = getProjectImage(project);
+                  return (
+                    <div className="h-64 relative overflow-hidden bg-[#172023]">
+                      {imgUrl ? (
+                        <img
+                          src={imgUrl}
+                          alt={project.title}
+                          className="w-full h-[200%] object-cover object-top group-hover:translate-y-[-50%] transition-transform duration-[3s] ease-in-out"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-linear-to-br from-emerald-900 to-slate-900 flex items-center justify-center">
+                          <i className="fa-solid fa-code text-4xl text-white/20"></i>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 p-8">
+                        <Link
+                          href={`/projects/${project.slug || project._id || project.id || index}`}
+                          className="w-full h-full flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-white font-bold gap-2 hover:bg-[#121A1C]/70 hover:border-emerald-500 hover:text-emerald-500 transition-all"
+                        >
+                          <i className="fa-solid fa-eye text-lg"></i>
+                          View Case Study
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })()}
+
+                <CardHeader className="p-4 sm:p-6">
+                  <div className="flex items-center gap-2 mb-3 text-[10px] uppercase font-black text-emerald-500 tracking-widest">
+                    <i className="fa-solid fa-rocket text-xs"></i>
+                    {project.category || "Development"}
+                  </div>
+                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                    {project.title}
+                  </h3>
+                  <CardDescription className="text-slate-400 line-clamp-2 text-sm">
+                    {project.shortDescription}
+                  </CardDescription>
+                </CardHeader>
+
+                <div className="px-4 sm:px-6 flex flex-wrap gap-2 mb-6">
+                  {Array.isArray(project.tags) &&
+                    project.tags
+                      .filter(
+                        (tag) => typeof tag === "string" && tag.trim() !== "",
+                      )
+                      .slice(0, 9)
+                      .map((tag, idx) => (
+                        <Badge
+                          key={`${tag}-${idx}`}
+                          variant="outline"
+                          className="bg-white/5 border-white/5 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
                 </div>
-                <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
-                  {project.title}
-                </h3>
-                <CardDescription className="text-slate-400 line-clamp-2 text-sm">
-                  {project.shortDescription}
-                </CardDescription>
-              </CardHeader>
 
-              <div className="px-4 sm:px-6 flex flex-wrap gap-2 mb-6">
-                {Array.isArray(project.tags) &&
-                  project.tags
-                    .filter(
-                      (tag) => typeof tag === "string" && tag.trim() !== "",
-                    )
-                    .slice(0, 9)
-                    .map((tag, idx) => (
-                      <Badge
-                        key={`${tag}-${idx}`}
-                        variant="outline"
-                        className="bg-white/5 border-white/5 text-[10px] text-slate-400 py-0 h-6 px-2 font-bold"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-              </div>
-
-              <CardFooter className="p-4 sm:p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
-                <Link
-                  href={project.liveUrl}
-                  target="_blank"
-                  className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-[11px] rounded-md hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
-                >
-                  <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                  Live Demo
-                </Link>
-                <Link
-                  href={project.githubUrl}
-                  target="_blank"
-                  className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-[11px] rounded-md hover:bg-white/10 transition-all active:scale-95"
-                >
-                  <i className="fa-brands fa-github text-sm"></i>
-                  View Code
-                </Link>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+                <CardFooter className="p-4 sm:p-6 mt-auto border-t border-white/5 bg-black/20 grid grid-cols-2 gap-3">
+                  <Link
+                    href={project.liveUrl}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 bg-emerald-500 text-black font-bold text-xs py-[11px] rounded-md hover:bg-[#121A1C] hover:text-white transition-all active:scale-95"
+                  >
+                    <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    Live Demo
+                  </Link>
+                  <Link
+                    href={project.githubUrl}
+                    target="_blank"
+                    className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold text-xs py-[11px] rounded-md hover:bg-white/10 transition-all active:scale-95"
+                  >
+                    <i className="fa-brands fa-github text-sm"></i>
+                    View Code
+                  </Link>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <FallbackCard
+            type="empty"
+            title="No Projects Found"
+            description="I haven't added any projects yet, or they are currently hidden."
+            className="bg-white/5 border-white/10"
+          />
+        )}
 
         {(filteredProjects.length > 6 || showAll) && (
           <div className="flex items-center justify-center gap-6 mt-16">
