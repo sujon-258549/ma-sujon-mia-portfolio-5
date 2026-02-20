@@ -145,6 +145,47 @@
   }
   /* --- MODAL OPEN HOLE UI KAPA BONDHO KORAR JONNO CSS END --- */
 
+  /* --- GLOBAL SMOOTH MODAL ANIMATIONS (Aggressive Fix) --- */
+  /* Overlay - Pechoner kalo screen ta jate smothly ase */
+  [data-radix-portal] [data-state="open"] {
+    animation: none !important; /* Tailwind default gulu bondho kori */
+  }
+
+  div[data-state="open"].fixed.inset-0.bg-black\/80 {
+    animation: modal-overlay-show 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  /* Content - Modaler bhetorer box ta jate smothly scalup hoye ase */
+  div[role="dialog"][data-state="open"] {
+    animation: modal-content-show 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  }
+
+  @keyframes modal-overlay-show {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  @keyframes modal-content-show {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.95);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      filter: blur(0px);
+    }
+  }
+  /* --- GLOBAL SMOOTH MODAL ANIMATIONS END --- */
+
   h1 {
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 md:mb-6;
   }
