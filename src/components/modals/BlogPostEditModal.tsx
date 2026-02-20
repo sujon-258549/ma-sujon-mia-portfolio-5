@@ -61,6 +61,7 @@ export const BlogPostEditModal = ({
     readTime: post?.readTime || "5 min",
     slug: post?.slug || "",
     isActive: post?.isActive ?? true,
+    slNumber: post?.slNumber ?? 0,
   }));
 
   const generateSlug = (title: string) => {
@@ -263,6 +264,23 @@ export const BlogPostEditModal = ({
                       setFormData({ ...formData, readTime: e.target.value })
                     }
                     className="bg-white/5 border-none h-10 text-xs text-sky-400"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-[10px] text-slate-500 uppercase font-black tracking-[0.2em] flex items-center gap-2">
+                    Sorting Number (Serial)
+                  </Label>
+                  <Input
+                    type="number"
+                    value={formData.slNumber}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        slNumber: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    className="bg-white/5 border-none h-10 text-xs text-emerald-500 font-mono"
                   />
                 </div>
 
