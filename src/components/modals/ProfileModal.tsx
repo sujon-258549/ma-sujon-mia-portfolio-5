@@ -100,8 +100,6 @@ export const ProfileModal = ({
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-2xl bg-[#0E1416] border-white/10 text-white p-0 gap-0 overflow-hidden">
