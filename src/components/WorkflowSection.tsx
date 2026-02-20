@@ -68,6 +68,7 @@ const WorkflowSection = ({ initialData }: WorkflowSectionProps) => {
       },
     ],
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   // Intersection Observer for animation on scroll

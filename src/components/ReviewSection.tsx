@@ -51,15 +51,12 @@ const ReviewSection = ({
         headerData?.description ||
         "Feedback from clients, colleagues, and companies I've had the pleasure of working with.",
       isActive: headerData?.isActive ?? true,
+      slNumber: headerData?.slNumber ?? 0,
     }),
   );
 
   const [reviews, setReviews] = useState<Review[]>(
-    initialReviews && initialReviews.length > 0
-      ? initialReviews
-      : [
-         
-        ],
+    initialReviews && initialReviews.length > 0 ? initialReviews : [],
   );
 
   const total = reviews.length;

@@ -13,7 +13,7 @@ interface FloatingNavProps {
 
 export const FloatingNav = ({
   navLinks,
-  isSideOpen = true,
+  isSideOpen = false,
   isAuthorized = false,
 }: FloatingNavProps) => {
   const [scrollProgress, setScrollProgress] = useState(0);

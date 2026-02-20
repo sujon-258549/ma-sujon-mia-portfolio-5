@@ -47,6 +47,7 @@ const ContactSection = ({ initialData }: ContactSectionProps) => {
   const [contactData, setContactData] = useState<ContactSectionData>(() => ({
     ...(initialData || defaultData),
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   const [formPayload, setFormPayload] = useState({

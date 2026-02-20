@@ -73,6 +73,7 @@ const EducationSection = ({ initialData }: EducationSectionProps) => {
   const [sectionData, setSectionData] = useState<EducationSectionData>(() => ({
     ...(initialData || defaultData),
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   const mainEducation = sectionData.education.filter((edu) => edu.isMain);

@@ -119,6 +119,7 @@ const BlogSection = ({ initialData }: BlogSectionProps) => {
       "Exploring the intersection of complex code, high-end design, and digital innovation through technical narratives.",
     posts: initialData?.posts || defaultPosts,
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
     type: initialData?.type || "blog_header",
   }));
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +38,16 @@ export const BlogSectionHeaderEditModal = ({
     slNumber: currentData.slNumber ?? 0,
   });
 
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...currentData,
+        isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
+      });
+    }
+  }, [isOpen, currentData]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -58,7 +68,7 @@ export const BlogSectionHeaderEditModal = ({
       const res = await dynamicContentService.upsertContent(updateData);
       if (res) {
         // Revalidate the cache
-        await revalidateData("blog-header");
+        await revalidateData("dynamic-content");
         toast.success("Blog Section header updated successfully!");
         onSave(formData);
         onClose();
@@ -142,7 +152,7 @@ export const BlogSectionHeaderEditModal = ({
                     </Label>
                     <Input
                       type="number"
-                      value={formData.slNumber}
+                      value={formData.slNumber ?? 0}
                       onChange={(e) =>
                         setFormData({
                           ...formData,

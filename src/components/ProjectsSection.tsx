@@ -78,6 +78,7 @@ const ProjectsSection = ({
       "Explore a selection of my recently completed projects, ranging from focused experiments to full-scale applications.",
     projects: initialProjects || [],
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   const handleDeleteProject = async (id: string) => {

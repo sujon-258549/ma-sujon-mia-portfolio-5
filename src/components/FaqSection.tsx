@@ -51,6 +51,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ initialData }) => {
       initialData?.description ||
       "Find answers to some of the most common questions about my workflow, pricing, and services.",
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
     faqs: initialData?.faqs || defaultFaqs,
   }));
 

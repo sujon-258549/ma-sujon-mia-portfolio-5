@@ -57,6 +57,7 @@ const ServicesSection = ({ initialData }: ServicesSectionProps) => {
   const [servicesData, setServicesData] = useState<ServicesSectionData>(() => ({
     ...(initialData || defaultData),
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   const handleSave = (newData: ServicesSectionData) => {

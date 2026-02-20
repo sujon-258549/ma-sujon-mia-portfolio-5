@@ -250,7 +250,7 @@ export const ExperienceEditModal = ({
                   </Label>
                   <Input
                     type="number"
-                    value={formData.slNumber}
+                    value={formData.slNumber ?? 0}
                     onChange={(e) =>
                       setFormData({
                         ...formData,

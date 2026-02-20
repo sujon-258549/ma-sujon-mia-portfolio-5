@@ -69,6 +69,7 @@ const ExperienceSection = ({ initialData }: ExperienceSectionProps) => {
   const [sectionData, setSectionData] = useState<ExperienceSectionData>(() => ({
     ...(initialData || defaultData),
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   if (!sectionData.isActive && !isAuthorized) return null;

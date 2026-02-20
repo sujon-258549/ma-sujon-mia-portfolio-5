@@ -79,6 +79,7 @@ const TrustSection: React.FC<TrustSectionProps> = ({ initialData }) => {
       initialData?.description ||
       "Empowering world-class companies with precision-engineered digital solutions and high-performance applications.",
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
     brands: initialData?.brands || defaultBrands,
     stats: initialData?.stats || defaultStats,
   }));

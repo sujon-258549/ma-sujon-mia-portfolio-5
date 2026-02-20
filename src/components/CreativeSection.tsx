@@ -49,6 +49,7 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
       headerData?.description ||
       "A showcase of selected creative works, UI experiments, and visual explorations.",
     isActive: headerData?.isActive ?? true,
+    slNumber: headerData?.slNumber ?? 0,
   }));
 
   const [currentItems, setCurrentItems] = useState<CreativeItem[]>(items);
@@ -158,144 +159,144 @@ const CreativeSection = ({ headerData, items = [] }: CreativeSectionProps) => {
         </div>
       )}
 
-     <section className="main-container">
-         <div className=" relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-10 md:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
-            <i
-              className={`${sectionData.badgeIcon} text-[10px] text-emerald-500`}
-            ></i>
-            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-500">
-              {sectionData.badge}
-            </span>
+      <section className="main-container">
+        <div className=" relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-10 md:mb-20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
+              <i
+                className={`${sectionData.badgeIcon} text-[10px] text-emerald-500`}
+              ></i>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-500">
+                {sectionData.badge}
+              </span>
+            </div>
+
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              {sectionData.title}{" "}
+              <span className="text-emerald-500">
+                {sectionData.titleHighlight}
+              </span>
+            </h2>
+
+            <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+              {sectionData.description}
+            </p>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            {sectionData.title}{" "}
-            <span className="text-emerald-500">
-              {sectionData.titleHighlight}
-            </span>
-          </h2>
-
-          <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-            {sectionData.description}
-          </p>
-        </div>
-
-        {/* Unique Slider Carousel */}
-        <div className="relative">
-          <Swiper
-            modules={[Autoplay, Pagination, Navigation, EffectCreative]}
-            spaceBetween={24}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{
-              delay: 3500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 24,
-              },
-            }}
-            className="pb-12"
-          >
-            {currentItems.map((item) => (
-              <SwiperSlide key={item.id} className="pt-2 pb-2">
-                <div
-                  onClick={() => handleCardClick(item)}
-                  className={`group relative h-[400px] md:h-[500px] w-full overflow-hidden cursor-pointer bg-transparent perspective-1000 transition-all duration-500`}
-                >
-                  {/* Glassmorphism Card Wrapper */}
-                  <div className="relative h-full w-full rounded-xl bg-[#121A1C]/60 backdrop-blur-xl border border-emerald-500/15 group-hover:border-emerald-500/30 transition-all duration-500 overflow-hidden shadow-2xl">
-                    {/* Image Area - Floating Effect */}
-                    <div className="absolute top-3 left-3 right-3 h-[55%] md:h-[60%] rounded-lg overflow-hidden shadow-lg group-hover:shadow-emerald-500/10 transition-shadow duration-500">
-                      {item.image ? (
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          unoptimized
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-[#172023] flex items-center justify-center">
-                          <i
-                            className={`${item.icon || "fa-solid fa-image"} text-6xl text-white/5 group-hover:text-white/10 transition-colors`}
+          {/* Unique Slider Carousel */}
+          <div className="relative">
+            <Swiper
+              modules={[Autoplay, Pagination, Navigation, EffectCreative]}
+              spaceBetween={24}
+              slidesPerView={1}
+              loop={true}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{
+                clickable: true,
+                dynamicBullets: true,
+              }}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 24,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+              }}
+              className="pb-12"
+            >
+              {currentItems.map((item) => (
+                <SwiperSlide key={item.id} className="pt-2 pb-2">
+                  <div
+                    onClick={() => handleCardClick(item)}
+                    className={`group relative h-[400px] md:h-[500px] w-full overflow-hidden cursor-pointer bg-transparent perspective-1000 transition-all duration-500`}
+                  >
+                    {/* Glassmorphism Card Wrapper */}
+                    <div className="relative h-full w-full rounded-xl bg-[#121A1C]/60 backdrop-blur-xl border border-emerald-500/15 group-hover:border-emerald-500/30 transition-all duration-500 overflow-hidden shadow-2xl">
+                      {/* Image Area - Floating Effect */}
+                      <div className="absolute top-3 left-3 right-3 h-[55%] md:h-[60%] rounded-lg overflow-hidden shadow-lg group-hover:shadow-emerald-500/10 transition-shadow duration-500">
+                        {item.image ? (
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            unoptimized
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
                           />
+                        ) : (
+                          <div className="w-full h-full bg-[#172023] flex items-center justify-center">
+                            <i
+                              className={`${item.icon || "fa-solid fa-image"} text-6xl text-white/5 group-hover:text-white/10 transition-colors`}
+                            />
+                          </div>
+                        )}
+
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1416]/80 via-transparent to-transparent opacity-80" />
+
+                        {/* Floating Action Button on Image */}
+                        <div className="absolute bottom-4 right-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                          <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 group-hover:text-emerald-400 transition-colors" />
                         </div>
-                      )}
+                      </div>
 
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0E1416]/80 via-transparent to-transparent opacity-80" />
+                      {/* Icon Bubble - overlapping */}
+                      <div className="absolute top-[50%] md:top-[55%] left-6 md:left-8 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#0E1416] border border-white/10 flex items-center justify-center z-20 shadow-xl group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-500">
+                        <i
+                          className={`${item.icon || "fa-solid fa-star"} text-base md:text-lg text-emerald-500 group-hover:rotate-12 transition-transform duration-500`}
+                        />
+                      </div>
 
-                      {/* Floating Action Button on Image */}
-                      <div className="absolute bottom-4 right-4 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                        <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 group-hover:text-emerald-400 transition-colors" />
+                      {/* Content Area - Clean Typography */}
+                      <div className="absolute bottom-0 inset-x-0 h-[45%] md:h-[40%] p-6 md:p-8 pt-8 md:pt-10 flex flex-col justify-center">
+                        <div className="space-y-2 md:space-y-3">
+                          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors tracking-tight line-clamp-1">
+                            {item.title}
+                          </h3>
+                          <p className="text-slate-400 text-xs md:text-sm leading-relaxed line-clamp-3 group-hover:text-slate-300 transition-colors">
+                            {item.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Icon Bubble - overlapping */}
-                    <div className="absolute top-[50%] md:top-[55%] left-6 md:left-8 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-[#0E1416] border border-white/10 flex items-center justify-center z-20 shadow-xl group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-500">
-                      <i
-                        className={`${item.icon || "fa-solid fa-star"} text-base md:text-lg text-emerald-500 group-hover:rotate-12 transition-transform duration-500`}
-                      />
-                    </div>
-
-                    {/* Content Area - Clean Typography */}
-                    <div className="absolute bottom-0 inset-x-0 h-[45%] md:h-[40%] p-6 md:p-8 pt-8 md:pt-10 flex flex-col justify-center">
-                      <div className="space-y-2 md:space-y-3">
-                        <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors tracking-tight line-clamp-1">
-                          {item.title}
-                        </h3>
-                        <p className="text-slate-400 text-xs md:text-sm leading-relaxed line-clamp-3 group-hover:text-slate-300 transition-colors">
-                          {item.description}
-                        </p>
+                    {/* Authorized Admin Controls - Card Level */}
+                    {isAuthorized && (
+                      <div className="absolute top-6 left-6 z-30 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setEditingItem(item);
+                            setIsItemModalOpen(true);
+                          }}
+                          className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-white flex items-center justify-center hover:bg-emerald-500 hover:text-[#0E1416] transition-all border border-white/10 shadow-lg"
+                          title="Edit Project"
+                        >
+                          <PenSquare className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={(e) => handleDeleteItem(e, item.id!)}
+                          className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-white/10 shadow-lg"
+                          title="Delete Project"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
-                    </div>
+                    )}
                   </div>
-
-                  {/* Authorized Admin Controls - Card Level */}
-                  {isAuthorized && (
-                    <div className="absolute top-6 left-6 z-30 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setEditingItem(item);
-                          setIsItemModalOpen(true);
-                        }}
-                        className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-white flex items-center justify-center hover:bg-emerald-500 hover:text-[#0E1416] transition-all border border-white/10 shadow-lg"
-                        title="Edit Project"
-                      >
-                        <PenSquare className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={(e) => handleDeleteItem(e, item.id!)}
-                        className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-white/10 shadow-lg"
-                        title="Delete Project"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
-      </div>
-     </section>
+      </section>
 
       <CreativeSectionHeaderEditModal
         isOpen={isHeaderModalOpen}

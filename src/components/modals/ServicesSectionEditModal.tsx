@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +37,16 @@ export const ServicesSectionEditModal = ({
     isActive: currentData.isActive ?? true,
     slNumber: currentData.slNumber ?? 0,
   }));
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...currentData,
+        isActive: currentData.isActive ?? true,
+        slNumber: currentData.slNumber ?? 0,
+      });
+    }
+  }, [isOpen, currentData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,7 +214,7 @@ export const ServicesSectionEditModal = ({
                 </Label>
                 <Input
                   type="number"
-                  value={formData.slNumber}
+                  value={formData.slNumber ?? 0}
                   onChange={(e) =>
                     setFormData({
                       ...formData,

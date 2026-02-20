@@ -80,6 +80,7 @@ const HeroSection = ({ initialData }: HeroSectionProps) => {
   const [heroData, setHeroData] = useState<HeroSectionData>(() => ({
     ...(initialData || defaultData),
     isActive: initialData?.isActive ?? true,
+    slNumber: initialData?.slNumber ?? 0,
   }));
 
   useEffect(() => {
